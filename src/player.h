@@ -1,5 +1,6 @@
 #ifndef PLAYER_H
 
+int playerZ;
 int playerX;
 int playerY;
 

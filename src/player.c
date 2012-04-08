@@ -1,6 +1,7 @@
 #include "player.h"
 #include "globals.h"
 
+extern int playerZ;
 extern int playerX;
 extern int playerY;
 
