@@ -20,12 +20,19 @@ void mapRender(void){
 	for(z = 0;z < MAP_MAX_DEPTH;z++){
 		for(x = 0;x < MAP_MAX_WIDTH;x++){
 			for(y = 0;y < MAP_MAX_HEIGHT;y++){
-				if(mapContent[z][x][y] == 0){
-					printxy(x,y,".");
-				}else{
-					printxy(x,y,"#");
-				}
+				printIntxy(x,y,mapGetContentChar(mapContent[z][x][y]));
 			}
 		}
 	}
+}
+
+int mapGetContentChar(int code){
+    switch(code){
+		case 0:
+			return ' ';
+		case 1:
+			return '.';
+	}
+
+	return '0';
 }

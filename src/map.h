@@ -8,4 +8,6 @@ int mapContent[MAP_MAX_DEPTH][MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
 void mapInit(void);
 void mapRender(void);
 
+int mapGetContentChar(int code);
+
 #endif
