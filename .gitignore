@@ -2,3 +2,5 @@ Makefile
 game
 game.make
 obj/
+cscope.out
+tags

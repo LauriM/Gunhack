@@ -1,14 +1,19 @@
 #include <stdio.h>
 #include <ncurses.h>
 
+#include "render.h"
+
 //int main(int argc, const char *argv[]){
 int main(){
-	initscr();		   
+	renderInit();
 
 	printw("hello world!");
 
+	printxy(20,20,"a");
+	printxy(30,30,"@");
+
 	getch();
 
-	endwin();
+	renderUnInit();
 	return 0;
 }
