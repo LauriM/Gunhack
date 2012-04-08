@@ -35,6 +35,8 @@ int main(){
 				movePlayer(DIR_N);
 				break;
 		}
+
+		clear();
 	}
 
 	renderUnInit();
