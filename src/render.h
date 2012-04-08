@@ -1,5 +1,5 @@
 #ifndef RENDER_H
-#include <ncurses.h>
+#define RENDER_H
 
 extern void renderInit(void);
 extern void renderUnInit(void);

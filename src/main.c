@@ -7,13 +7,9 @@
 int main(){
 	renderInit();
 
-	printw("hello world!");
+	int key = getch();
 
-	printxy(20,20,"a");
-	printxy(30,30,"@");
-
-	getch();
-
+	printf("%i",key);
 	renderUnInit();
 	return 0;
 }
