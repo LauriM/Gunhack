@@ -1,5 +1,8 @@
 #include "map.h"
 #include "render.h"
+#include "globals.h"
+
+extern struct tile_s tileInfo[TILE_COUNT];
 
 void mapInit(void){
 	int z,x,y;
@@ -11,6 +14,14 @@ void mapInit(void){
 			}
 		}
 	}
+
+	tileInfo[0].symbol    = ' ';
+	tileInfo[0].visBlock  = 0;
+	tileInfo[0].moveBlock = 0;
+
+	tileInfo[1].symbol    = '#';
+	tileInfo[1].visBlock  = 0;
+	tileInfo[1].moveBlock = 0;
 }
 
 void mapRender(void){
@@ -27,12 +38,5 @@ void mapRender(void){
 }
 
 int mapGetContentChar(int code){
-    switch(code){
-		case 0:
-			return ' ';
-		case 1:
-			return '.';
-	}
-
-	return '0';
+	return tileInfo[code].symbol;
 }

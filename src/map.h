@@ -3,7 +3,16 @@
 
 #include "globals.h"
 
-int mapContent[MAP_MAX_DEPTH][MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
+struct tile_s{
+	char symbol;
+	int visBlock;
+	int moveBlock;
+};
+
+struct tile_s tileInfo[TILE_COUNT];
+
+int mapData[MAP_MAX_DEPTH][MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
+int mapContent[MAP_MAX_DEPTH][MAP_MAX_WIDTH][MAP_MAX_HEIGHT]; //TO BE DEPRACRATED
 
 void mapInit(void);
 void mapRender(void);
