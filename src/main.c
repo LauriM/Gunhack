@@ -4,6 +4,7 @@
 #include "render.h"
 #include "player.h"
 #include "globals.h"
+#include "input.h"
 
 extern int playerX,playerY;
 int key;
@@ -25,16 +26,8 @@ int main(){
 	//==========================================================//          
 	while(1){
 		printxy(playerX,playerY,"@");
-		key = getch();
 
-		switch(key){
-			case 106:  
-				movePlayer(DIR_S);
-				break;
-			case 107:
-				movePlayer(DIR_N);
-				break;
-		}
+		inputHandle();
 
 		clear();
 	}

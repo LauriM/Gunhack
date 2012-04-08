@@ -12,5 +12,11 @@ void movePlayer(int direction){
 		case DIR_S:
 			playerY = playerY + 1;
 			break;
+		case DIR_W:
+			playerX = playerX - 1;
+			break;
+		case DIR_E:
+			playerX = playerX + 1;
+			break;
 	}
 }
