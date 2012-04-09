@@ -14,6 +14,7 @@ int key;
 int main(){
 	mapInit();
 	renderInit();
+	playerInit();
 
 	#ifdef DEBUG_GETCH_KEY
 	while(1){

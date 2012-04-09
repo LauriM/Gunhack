@@ -8,8 +8,9 @@ extern int playerY;
 
 extern struct tile_s tileInfo[TILE_COUNT];
 
-void movePlayer(int direction){
-	int newX,newY;
+void playerMove(int direction){
+	int newX = playerX;
+	int newY = playerY;
 
 	switch(direction){
 		case DIR_N:
@@ -27,10 +28,14 @@ void movePlayer(int direction){
 	}
 
 	//Check if the new position is ok
-	/*
-	int nextCode = mapGetCodeByxy(playerZ,newX,newY);
-
-	if(mapget)
+	if(mapGetTileByPos(playerZ,newX,newY).moveBlock == 0){
+		playerX = newX;
+		playerY = newY;
 	}
-	*/
+}
+
+void playerInit(void){
+	playerZ = 0;
+	playerZ = 0;
+	playerZ = 0;
 }

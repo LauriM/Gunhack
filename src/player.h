@@ -4,6 +4,7 @@ int playerZ;
 int playerX;
 int playerY;
 
-extern void movePlayer(int direction);
+extern void playerMove(int direction);
+extern void playerInit(void);
 
 #endif

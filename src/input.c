@@ -14,16 +14,16 @@ void inputHandle(){
 	int key = getch();
 	switch(key){
 		case 106:  
-			movePlayer(DIR_S);
+			playerMove(DIR_S);
 			break;
 		case 107:
-			movePlayer(DIR_N);
+			playerMove(DIR_N);
 			break;
 		case 108:
-			movePlayer(DIR_E);
+			playerMove(DIR_E);
 			break;
 		case 104:
-			movePlayer(DIR_W);
+			playerMove(DIR_W);
 			break;
 	}
 
