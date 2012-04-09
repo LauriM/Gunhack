@@ -1,4 +1,5 @@
 #!/bin/bash
+echo Automatic tagdb updater
 
 while true; do
 	echo Building tags...
@@ -11,6 +12,10 @@ while true; do
 	endTime=$(date +%s)
 	diff=$(($endTime - $startTime))
 
-	echo "done in $diff seconds. Sleeping."
+	echo "Tags generated in $diff seconds."
+
+	cloc --quiet --no3 --yaml src/ | tail -4
+
+	echo "----"
 	sleep 1m
 done
