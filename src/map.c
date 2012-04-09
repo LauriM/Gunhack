@@ -2,6 +2,7 @@
 #include "render.h"
 #include "globals.h"
 #include "player.h"
+#include "math.h"
 
 extern struct tile_s tileInfo[TILE_COUNT];
 
@@ -48,7 +49,15 @@ void mapCreateRoom(int z){
 		}
 	}
 
-	mapEditBox(z,2,2,8,8,0);
+	int roomX      = 0;
+	int roomY      = 0;
+	//int roomWidth  = 0;
+	//int roomHeight = 0;
+
+	roomX = playerX - 1;
+	roomY = playerY - 1; 
+
+	mapEditBox(z,roomX,roomY,3,3,0);
 }
 
 void mapEditBox(int z,int boxX,int boxY,int width,int height,int tileType){

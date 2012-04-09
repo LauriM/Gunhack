@@ -36,6 +36,6 @@ void playerMove(int direction){
 
 void playerInit(void){
 	playerZ = 0;
-	playerZ = 0;
-	playerZ = 0;
+	playerX = 0;
+	playerY = 0;
 }

@@ -29,10 +29,10 @@ int main(){
 	#endif
 
 	//Setup the first level and player
-	mapCreateRoom(0);
-
 	playerX = 10;
 	playerY = 10;
+
+	mapCreateRoom(0);
 
 	//==========================================================//
 	//  Main loop
