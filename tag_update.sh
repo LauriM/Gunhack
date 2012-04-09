@@ -1,11 +1,13 @@
 #!/bin/bash
-echo Automatic tagdb updater
+echo "Automatic tagdb updater"
+echo "#######################"
 
 while true; do
-	echo Building tags...
+	echo Building tags and premake...
 
 	startTime=$(date +%s)
 
+	~/premake/premake4 gmake
 	cscope -R -b
 	ctags -R --c-kinds=+p --fields=+iaS --extra=+q -R .
 
