@@ -1,23 +1,36 @@
 #include "player.h"
 #include "globals.h"
+#include "map.h"
 
 extern int playerZ;
 extern int playerX;
 extern int playerY;
 
+extern struct tile_s tileInfo[TILE_COUNT];
+
 void movePlayer(int direction){
+	int newX,newY;
+
 	switch(direction){
 		case DIR_N:
-			playerY = playerY - 1;
+			newY = playerY - 1;
 			break;
 		case DIR_S:
-			playerY = playerY + 1;
+			newY = playerY + 1;
 			break;
 		case DIR_W:
-			playerX = playerX - 1;
+			newX = playerX - 1;
 			break;
 		case DIR_E:
-			playerX = playerX + 1;
+			newX = playerX + 1;
 			break;
 	}
+
+	//Check if the new position is ok
+	/*
+	int nextCode = mapGetCodeByxy(playerZ,newX,newY);
+
+	if(mapget)
+	}
+	*/
 }

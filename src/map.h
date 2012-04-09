@@ -12,11 +12,11 @@ struct tile_s{
 struct tile_s tileInfo[TILE_COUNT];
 
 int mapData[MAP_MAX_DEPTH][MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
-int mapContent[MAP_MAX_DEPTH][MAP_MAX_WIDTH][MAP_MAX_HEIGHT]; //TO BE DEPRACRATED
 
 void mapInit(void);
 void mapRender(void);
 
-int mapGetContentChar(int code);
+//Tile code to data
+struct tile_s mapGetTileByPos(int z,int x,int y);
 
 #endif
