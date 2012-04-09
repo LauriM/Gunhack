@@ -6,7 +6,7 @@
 
 //settings
 #define MAP_MAX_DEPTH  10
-#define MAP_MAX_WIDTH  30
-#define MAP_MAX_HEIGHT 30
+#define MAP_MAX_WIDTH  80
+#define MAP_MAX_HEIGHT 21
 
 #define TILE_COUNT 1

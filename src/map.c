@@ -23,13 +23,8 @@ void mapInit(void){
 	tileInfo[0].moveBlock = 0;
 
 	tileInfo[1].symbol    = '#';
-	tileInfo[1].visBlock  = 0;
-	tileInfo[1].moveBlock = 0;
-
-	mapData[0][10][10] = 1;
-	mapData[0][11][10] = 1;
-	mapData[0][10][11] = 1;
-	mapData[0][10][12] = 1;
+	tileInfo[1].visBlock  = 1;
+	tileInfo[1].moveBlock = 1;
 }
 
 void mapRender(void){
