@@ -38,6 +38,27 @@ void mapRender(void){
 	}
 }
 
+void mapCreateRoom(int z){
+	int x,y;
+
+	//First, lets add the concrete
+	for(x = 0;x < MAP_MAX_WIDTH;x++){
+		for(y = 0;y < MAP_MAX_HEIGHT;y++){
+			mapData[z][x][y] = 1;
+		}
+	}
+
+	mapEditBox(z,2,2,8,8,0);
+}
+
+void mapEditBox(int z,int boxX,int boxY,int width,int height,int tileType){
+	for(int y = boxY;y < boxY + height;y++){
+		for(int x = boxX;x < boxX + width;x++){
+			mapData[z][x][y] = tileType;
+		}
+	}
+}
+
 struct tile_s mapGetTileByPos(int z,int x,int y){
 	return tileInfo[mapData[z][x][y]];
 }

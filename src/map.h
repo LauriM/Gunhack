@@ -16,6 +16,10 @@ int mapData[MAP_MAX_DEPTH][MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
 void mapInit(void);
 void mapRender(void);
 
+void mapCreateRoom(int z);
+
+void mapEditBox(int z,int boxX,int boxY,int width,int height,int tileType);
+
 //Tile code to data
 struct tile_s mapGetTileByPos(int z,int x,int y);
 
