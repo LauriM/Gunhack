@@ -68,7 +68,7 @@ void mapCreateRoom(int z){
 		roomY = random(MAP_MAX_HEIGHT-roomHeight-1);
 
 		//Check if the box exists
-		if(mapSearchTileCoords(z,roomX,roomY,roomWidth,roomHeight,0) == 0){
+		if(mapCheckTileCoords(z,roomX,roomY,roomWidth,roomHeight,0) == 1){
 			mapEditBox(z,roomX,roomY,roomWidth,roomHeight,0);
 		}
 	}
@@ -96,6 +96,21 @@ int mapSearchTileCoords(int z,int boxX,int boxY,int width,int height,int tileTyp
 		}
 	}
 	return count;
+}
+
+/**
+ * Check area that it only contains given tile type
+ * Returns bool. 1 when ok, 0 when not true
+ */
+int mapCheckTileCoords(int z,int boxX,int boxY,int width,int height,int tileType){
+	for(int y = boxY;y < boxY + height;y++){
+		for(int x = boxX;x < boxX + width;x++){
+			if((mapData[z][x][y] == tileType)){
+				return 0;
+			}
+		}
+	}
+	return 1;
 }
 
 struct tile_s mapGetTileByPos(int z,int x,int y){

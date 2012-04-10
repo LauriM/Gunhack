@@ -22,6 +22,7 @@ void mapCreateRoom(int z);
 void mapEditBox(int z,int boxX,int boxY,int width,int height,int tileType);
 
 int mapSearchTileCoords(int z,int boxX,int boxY,int width,int height,int tileType);
+int mapCheckTileCoords(int z,int boxX,int boxY,int width,int height,int tileType);
 
 //Tile code to data
 struct tile_s mapGetTileByPos(int z,int x,int y);
