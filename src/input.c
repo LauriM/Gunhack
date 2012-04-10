@@ -16,7 +16,7 @@ void inputHandle(){
 	int key = getch();
 	switch(key){
 		case 106:  
-			playerMove(DIR_S);
+			//playerMove(DIR_S);
 			mapCreateRoom(0);//QQQ
 			break;
 		case 107:

@@ -18,8 +18,10 @@ void mapRender(void);
 
 void mapCreateRoom(int z);
 
-//Consider linked-list, then z would be changed to a pointer
+//TODO:Consider linked-list, then z would be changed to a pointer
 void mapEditBox(int z,int boxX,int boxY,int width,int height,int tileType);
+
+int mapSearchTileCoords(int z,int boxX,int boxY,int width,int height,int tileType);
 
 //Tile code to data
 struct tile_s mapGetTileByPos(int z,int x,int y);
