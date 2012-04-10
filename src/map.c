@@ -71,7 +71,7 @@ void mapCreateRoom(int z){
 		roomY = random(MAP_MAX_HEIGHT-roomHeight-1);
 
 		//Check if the box exists (+- are to make sure rooms wont hit)
-		if(mapCheckTileCoords(z,roomX-1,roomY-1,roomWidth+1,roomHeight+1,0) == 1){
+		if(mapCheckTileCoords(z,roomX-1,roomY-1,roomWidth+2,roomHeight+2,0) == 1){
 			mapEditBox(z,roomX,roomY,roomWidth,roomHeight,0);
 			i++;
 		}
