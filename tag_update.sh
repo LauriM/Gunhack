@@ -3,6 +3,7 @@ echo "Automatic tagdb updater"
 echo "#######################"
 
 #TODO: Consider before/after stats
+#TODO: Git commit counts
 
 while true; do
 	echo Building tags and premake...

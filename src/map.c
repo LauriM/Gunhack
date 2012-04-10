@@ -59,17 +59,21 @@ void mapCreateRoom(int z){
 
 	mapEditBox(z,roomX,roomY,3,3,0);
 
-	int roomCount = (random(5)+2);
+	int roomCount = (random(GEN_ROOM_MAX_COUNT)+GEN_ROOM_MIN_COUNT);
 
-	for(int i = 0;i < roomCount;i++){
+	//TODO: Make sure to limit max tries to 200+ or something 
+
+	int i = 0;
+	while(i < roomCount){
 		roomWidth = (random(8) + 3);//TODO: change 5 to max size
 		roomHeight = (random(8) + 3);
 		roomX = random(MAP_MAX_WIDTH-roomWidth-1);
 		roomY = random(MAP_MAX_HEIGHT-roomHeight-1);
 
-		//Check if the box exists
-		if(mapCheckTileCoords(z,roomX,roomY,roomWidth,roomHeight,0) == 1){
+		//Check if the box exists (+- are to make sure rooms wont hit)
+		if(mapCheckTileCoords(z,roomX-1,roomY-1,roomWidth+1,roomHeight+1,0) == 1){
 			mapEditBox(z,roomX,roomY,roomWidth,roomHeight,0);
+			i++;
 		}
 	}
 }

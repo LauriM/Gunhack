@@ -13,3 +13,4 @@
 
 //Room generator settings
 #define GEN_ROOM_MAX_COUNT 5
+#define GEN_ROOM_MIN_COUNT 5
