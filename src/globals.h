@@ -10,3 +10,6 @@
 #define MAP_MAX_HEIGHT 21
 
 #define TILE_COUNT 1
+
+//Room generator settings
+#define GEN_ROOM_MAX_COUNT 5

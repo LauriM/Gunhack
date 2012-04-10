@@ -51,13 +51,24 @@ void mapCreateRoom(int z){
 
 	int roomX      = 0;
 	int roomY      = 0;
-	//int roomWidth  = 0;
-	//int roomHeight = 0;
+	int roomWidth  = 0;
+	int roomHeight = 0;
 
 	roomX = playerX - 1;
 	roomY = playerY - 1; 
 
 	mapEditBox(z,roomX,roomY,3,3,0);
+
+	int roomCount = (random(5)+2);
+
+	for(int i = 0;i < roomCount;i++){
+		roomWidth = (random(8) + 3);//TODO: change 5 to max size
+		roomHeight = (random(8) + 3);
+		roomX = random(MAP_MAX_WIDTH-roomWidth-1);
+		roomY = random(MAP_MAX_HEIGHT-roomHeight-1);
+
+		mapEditBox(z,roomX,roomY,roomWidth,roomHeight,0);
+	}
 }
 
 void mapEditBox(int z,int boxX,int boxY,int width,int height,int tileType){

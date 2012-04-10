@@ -2,5 +2,5 @@
 #include <stdlib.h>
 
 int random(int max){
-	return rand() % 20;
+	return rand() % max;
 }

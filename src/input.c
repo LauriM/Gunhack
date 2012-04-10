@@ -4,6 +4,8 @@
 #include "globals.h"
 #include "player.h"
 
+#include "map.h" //QQQ
+
 //Key codes
 //j = 106
 //l = 108
@@ -15,6 +17,7 @@ void inputHandle(){
 	switch(key){
 		case 106:  
 			playerMove(DIR_S);
+			mapCreateRoom(0);//QQQ
 			break;
 		case 107:
 			playerMove(DIR_N);
