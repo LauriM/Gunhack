@@ -13,8 +13,7 @@ extern int playerZ,playerX,playerY;
 extern int currentRoom;
 int key;
 
-//int main(int argc, const char *argv[]){
-int main(){
+int main(int argc, const char *argv[]){
 	worldInit();
 	renderInit();
 	playerInit();
