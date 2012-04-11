@@ -17,7 +17,7 @@ while true; do
 	endTime=$(date +%s)
 	diff=$(($endTime - $startTime))
 
-	echo "Tags generated in $diff seconds."
+	echo "-->Tags generated in $diff seconds."
 
 	cloc --quiet --no3 --yaml src/ | tail -4
 
