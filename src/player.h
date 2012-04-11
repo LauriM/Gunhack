@@ -1,6 +1,6 @@
 #ifndef PLAYER_H
 
-int playerZ;
+int playerZ; //TODO: remove
 int playerX;
 int playerY;
 

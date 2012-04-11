@@ -3,18 +3,30 @@
 
 #include "globals.h"
 
+int currentRoom;
+
 struct tile_s{
 	char symbol;
 	int visBlock;
 	int moveBlock;
 };
 
+struct room_s{
+	int mapData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
+	int roomType;
+};
+
+//---
 struct tile_s tileInfo[TILE_COUNT];
 
-int mapData[MAP_MAX_DEPTH][MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
+int world[WORLD_SIZE_Z][WORLD_SIZE_X][WORLD_SIZE_Y]; //Contains RoomId
+struct room_s room[WORLD_ROOM_COUNT]; //Room list
+//---
 
-void mapInit(void);
+void worldInit(void);
+void roomInit(int id);
 void mapRender(void);
+void tileInit(void);
 
 void mapCreateRoom(int z);
 

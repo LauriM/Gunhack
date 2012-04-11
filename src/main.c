@@ -10,13 +10,15 @@
 #include "map.h"
 
 extern int playerZ,playerX,playerY;
+extern int currentRoom;
 int key;
 
 //int main(int argc, const char *argv[]){
 int main(){
-	mapInit();
+	worldInit();
 	renderInit();
 	playerInit();
+	tileInit();
 
 	srand(time(NULL));
 
@@ -33,6 +35,8 @@ int main(){
 	playerY = 10;
 
 	mapCreateRoom(0);
+	roomInit(0);
+	currentRoom = 0;
 
 	//==========================================================//
 	//  Main loop

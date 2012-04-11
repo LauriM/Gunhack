@@ -5,20 +5,11 @@
 #include "math.h"
 
 extern struct tile_s tileInfo[TILE_COUNT];
+extern int world[WORLD_SIZE_Z][WORLD_SIZE_X][WORLD_SIZE_Y];
 
 extern int playerZ;
 
-void mapInit(void){
-	int z,x,y;
-
-	for(z = 0;z < MAP_MAX_DEPTH;z++){
-		for(x = 0;x < MAP_MAX_WIDTH;x++){
-			for(y = 0;y < MAP_MAX_HEIGHT;y++){
-				mapData[z][x][y] = 0;
-			}
-		}
-	}
-
+void tileInit(void){
 	tileInfo[0].symbol    = ' ';
 	tileInfo[0].visBlock  = 0;
 	tileInfo[0].moveBlock = 0;
@@ -28,8 +19,35 @@ void mapInit(void){
 	tileInfo[1].moveBlock = 1;
 }
 
-void mapRender(void){
+/**
+ * Setup the world array with 0's
+ * Some functionality may be added
+ */
+void worldInit(void){
+	int z,x,y;
+	int i = 0;
 
+	for(z = 0;z < WORLD_SIZE_Z;z++){
+		for(x = 0;x < WORLD_SIZE_X;x++){
+			for(y = 0;y < WORLD_SIZE_Y;y++){
+				world[z][x][y] = i;
+				i++;
+			}
+		}
+	}
+}
+
+void roomInit(int id){
+	int x,y;
+
+	for(x = 0;x < MAP_MAX_WIDTH;x++){
+		for(y = 0;y < MAP_MAX_HEIGHT;y++){
+			room[id].mapData[x][y] = 0;
+		}
+	}
+}
+
+void mapRender(void){
 	int x,y;
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
@@ -39,13 +57,13 @@ void mapRender(void){
 	}
 }
 
-void mapCreateRoom(int z){
+void mapCreateRoom(int id){
 	int x,y;
 
 	//First, lets add the concrete
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
-			mapData[z][x][y] = 1;
+			room[id].mapData[x][y] = 1;
 		}
 	}
 
@@ -57,7 +75,7 @@ void mapCreateRoom(int z){
 	roomX = playerX - 1;
 	roomY = playerY - 1; 
 
-	mapEditBox(z,roomX,roomY,3,3,0);
+	mapEditBox(id,roomX,roomY,3,3,0);
 
 	int roomCount = (random(GEN_ROOM_MAX_COUNT)+GEN_ROOM_MIN_COUNT);
 
@@ -71,17 +89,17 @@ void mapCreateRoom(int z){
 		roomY = random(MAP_MAX_HEIGHT-roomHeight-1);
 
 		//Check if the box exists (+- are to make sure rooms wont hit)
-		if(mapCheckTileCoords(z,roomX-1,roomY-1,roomWidth+2,roomHeight+2,0) == 1){
-			mapEditBox(z,roomX,roomY,roomWidth,roomHeight,0);
+		if(mapCheckTileCoords(id,roomX-1,roomY-1,roomWidth+2,roomHeight+2,0) == 1){
+			mapEditBox(id,roomX,roomY,roomWidth,roomHeight,0);
 			i++;
 		}
 	}
 }
 
-void mapEditBox(int z,int boxX,int boxY,int width,int height,int tileType){
+void mapEditBox(int id,int boxX,int boxY,int width,int height,int tileType){
 	for(int y = boxY;y < boxY + height;y++){
 		for(int x = boxX;x < boxX + width;x++){
-			mapData[z][x][y] = tileType;
+			room[id].mapData[x][y] = tileType;
 		}
 	}
 }
@@ -90,11 +108,11 @@ void mapEditBox(int z,int boxX,int boxY,int width,int height,int tileType){
  * Returns count of certain tileType in the area
  * Used to check if area is clear
  */
-int mapSearchTileCoords(int z,int boxX,int boxY,int width,int height,int tileType){
+int mapSearchTileCoords(int id,int boxX,int boxY,int width,int height,int tileType){
 	int count = 0;
 	for(int y = boxY;y < boxY + height;y++){
 		for(int x = boxX;x < boxX + width;x++){
-			if(mapData[z][x][y] == tileType){
+			if(room[id].mapData[x][y] == tileType){
 				count++;
 			}
 		}
@@ -106,10 +124,10 @@ int mapSearchTileCoords(int z,int boxX,int boxY,int width,int height,int tileTyp
  * Check area that it only contains given tile type
  * Returns bool. 1 when ok, 0 when not true
  */
-int mapCheckTileCoords(int z,int boxX,int boxY,int width,int height,int tileType){
+int mapCheckTileCoords(int id,int boxX,int boxY,int width,int height,int tileType){
 	for(int y = boxY;y < boxY + height;y++){
 		for(int x = boxX;x < boxX + width;x++){
-			if((mapData[z][x][y] == tileType)){
+			if(room[id].mapData[x][y] == tileType){
 				return 0;
 			}
 		}
@@ -117,6 +135,6 @@ int mapCheckTileCoords(int z,int boxX,int boxY,int width,int height,int tileType
 	return 1;
 }
 
-struct tile_s mapGetTileByPos(int z,int x,int y){
-	return tileInfo[mapData[z][x][y]];
+struct tile_s mapGetTileByPos(int id,int x,int y){
+	return tileInfo[room[id].mapData[x][y]];
 }
