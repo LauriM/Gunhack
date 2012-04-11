@@ -4,11 +4,6 @@
 #include "player.h"
 #include "math.h"
 
-extern struct tile_s tileInfo[TILE_COUNT];
-extern int world[WORLD_SIZE_Z][WORLD_SIZE_X][WORLD_SIZE_Y];
-
-extern int playerZ;
-
 void tileInit(void){
 	tileInfo[0].symbol    = ' ';
 	tileInfo[0].visBlock  = 0;
@@ -52,7 +47,7 @@ void mapRender(void){
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
-			printIntxy(x,y,mapGetTileByPos(playerZ,x,y).symbol);
+			printIntxy(x,y,mapGetTileByPos(currentRoom,x,y).symbol);
 		}
 	}
 }
@@ -97,6 +92,9 @@ void mapCreateRoom(int id){
 }
 
 void mapEditBox(int id,int boxX,int boxY,int width,int height,int tileType){
+	assert(tileType >= 0);
+	assert(tileType < TILE_COUNT);
+
 	for(int y = boxY;y < boxY + height;y++){
 		for(int x = boxX;x < boxX + width;x++){
 			room[id].mapData[x][y] = tileType;
@@ -136,5 +134,10 @@ int mapCheckTileCoords(int id,int boxX,int boxY,int width,int height,int tileTyp
 }
 
 struct tile_s mapGetTileByPos(int id,int x,int y){
+	assert(x < MAP_MAX_WIDTH);
+	assert(y < MAP_MAX_HEIGHT);
+	assert(id >= 0);
+	assert(id < WORLD_ROOM_COUNT);
+
 	return tileInfo[room[id].mapData[x][y]];
 }

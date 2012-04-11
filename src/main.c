@@ -34,8 +34,8 @@ int main(){
 	playerX = 10;
 	playerY = 10;
 
-	mapCreateRoom(0);
 	roomInit(0);
+	mapCreateRoom(0);
 	currentRoom = 0;
 
 	//==========================================================//

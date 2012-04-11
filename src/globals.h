@@ -1,3 +1,5 @@
+#include <assert.h>
+
 //directions
 #define DIR_N 0
 #define DIR_S 1
@@ -11,9 +13,9 @@
 #define WORLD_SIZE_Z 10
 #define WORLD_SIZE_X 50
 #define WORLD_SIZE_Y 50
-#define WORLD_ROOM_COUNT WORLD_SIZE_Z * WORLD_SIZE_X * WORLD_SIZE_Y
+#define WORLD_ROOM_COUNT (WORLD_SIZE_Z * WORLD_SIZE_X * WORLD_SIZE_Y)
 
 #define MAP_MAX_WIDTH  80
 #define MAP_MAX_HEIGHT 21
 
-#define TILE_COUNT 1
+#define TILE_COUNT 2
