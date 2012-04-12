@@ -1,6 +1,6 @@
+#include "globals.h"
 #include "map.h"
 #include "render.h"
-#include "globals.h"
 #include "player.h"
 #include "math.h"
 
@@ -10,13 +10,13 @@ int world[WORLD_SIZE_Z][WORLD_SIZE_X][WORLD_SIZE_Y]; //Contains RoomId
 struct room_s room[WORLD_ROOM_COUNT]; //Room list
 
 void tileInit(void){
-	tileInfo[0].symbol    = ' ';
-	tileInfo[0].visBlock  = 0;
-	tileInfo[0].moveBlock = 0;
+	tileInfo[TILE_EMPTY].symbol    = ' ';
+	tileInfo[TILE_EMPTY].visBlock  = 0;
+	tileInfo[TILE_EMPTY].moveBlock = 0;
 
-	tileInfo[1].symbol    = '#';
-	tileInfo[1].visBlock  = 1;
-	tileInfo[1].moveBlock = 1;
+	tileInfo[TILE_ROCK].symbol    = '#';
+	tileInfo[TILE_ROCK].visBlock  = 1;
+	tileInfo[TILE_ROCK].moveBlock = 1;
 }
 
 /**

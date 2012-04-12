@@ -18,6 +18,4 @@
 #define MAP_MAX_WIDTH  80
 #define MAP_MAX_HEIGHT 21
 
-#define TILE_COUNT 2
-
 #define GEN_MAX_TRIES 200

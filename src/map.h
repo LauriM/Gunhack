@@ -6,6 +6,12 @@
 //TODO: getcurrentroom, etc
 //TODO: Fix rest of the extern bs
 
+enum{
+	TILE_EMPTY = 0,
+	TILE_ROCK,
+	TILE_COUNT
+};
+
 struct tile_s{
 	char symbol;
 	int visBlock;
