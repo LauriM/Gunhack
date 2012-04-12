@@ -4,6 +4,11 @@
 #include "player.h"
 #include "math.h"
 
+int currentRoom;
+struct tile_s tileInfo[TILE_COUNT];
+int world[WORLD_SIZE_Z][WORLD_SIZE_X][WORLD_SIZE_Y]; //Contains RoomId
+struct room_s room[WORLD_ROOM_COUNT]; //Room list
+
 void tileInit(void){
 	tileInfo[0].symbol    = ' ';
 	tileInfo[0].visBlock  = 0;
@@ -76,6 +81,7 @@ void mapCreateRoom(int id){
 
 	//TODO: Make sure to limit max tries to 200+ or something 
 
+	int triesCount = 0;
 	int i = 0;
 	while(i < roomCount){
 		roomWidth = (random(8) + 3);//TODO: change 5 to max size
@@ -87,6 +93,12 @@ void mapCreateRoom(int id){
 		if(mapCheckTileCoords(id,roomX-1,roomY-1,roomWidth+2,roomHeight+2,0) == 1){
 			mapEditBox(id,roomX,roomY,roomWidth,roomHeight,0);
 			i++;
+		}else{
+			triesCount++;
+			if(triesCount > GEN_MAX_TRIES){
+				//hit the generator max size count, won't create the room
+				i++;
+			}
 		}
 	}
 }
