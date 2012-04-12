@@ -6,12 +6,6 @@
 //TODO: getcurrentroom, etc
 //TODO: Fix rest of the extern bs
 
-typedef enum{
-	TILE_EMPTY = 0,
-	TILE_ROCK,
-	TILE_COUNT
-} tile_id_t;
-
 struct tile_s{
 	char symbol;
 	int visBlock;
@@ -27,6 +21,7 @@ struct room_s{
 extern int currentRoom;
 extern int world[WORLD_SIZE_Z][WORLD_SIZE_X][WORLD_SIZE_Y]; //Contains RoomId
 extern struct room_s room[WORLD_ROOM_COUNT]; //Room list
+extern struct tile_s tileInfo[TILE_COUNT];
 //---
 
 void worldInit(void);

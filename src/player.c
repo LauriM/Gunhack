@@ -2,12 +2,6 @@
 #include "globals.h"
 #include "map.h"
 
-extern int playerZ;
-extern int playerX;
-extern int playerY;
-
-extern struct tile_s tileInfo[TILE_COUNT];
-
 void playerMove(int direction){
 	int newX = playerX;
 	int newY = playerY;
@@ -28,14 +22,14 @@ void playerMove(int direction){
 	}
 
 	//Check if the new position is ok
-	if(mapGetTileByPos(playerZ,newX,newY).moveBlock == 0){
+	if(mapGetTileByPos(currentRoom,newX,newY).moveBlock == 0){
 		playerX = newX;
 		playerY = newY;
 	}
 }
 
 void playerInit(void){
-	playerZ = 0;
-	playerX = 0;
-	playerY = 0;
+	currentRoom = 0;
+	playerX     = 0;
+	playerY     = 0;
 }
