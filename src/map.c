@@ -52,6 +52,7 @@ void mapRender(void){
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
+			setColor(room[currentRoom].colorData[x][y]);
 			printIntxy(x,y,mapGetTileByPos(currentRoom,x,y).symbol);
 		}
 	}
@@ -153,6 +154,13 @@ void mapCreateRoom(int id){
 	mapEditBox(id , 0               , MAP_MAX_HEIGHT-1 , MAP_MAX_WIDTH , 1              , TILE_ROCK);//bottom
 	mapEditBox(id , 0               , 0              , 1             , MAP_MAX_HEIGHT , TILE_ROCK); //Left
 	mapEditBox(id , MAP_MAX_WIDTH-1 , 0              , 1             , MAP_MAX_HEIGHT , TILE_ROCK); //Right
+
+	//Now that the room is generated, lets setup the color layer
+	for(x = 0;x < MAP_MAX_WIDTH;x++){
+		for(y = 0;y < MAP_MAX_HEIGHT;y++){
+			room[id].colorData[x][y] = TERM_COLOR_DEFAULT;
+		}
+	}
 }
 
 void mapEditPoint(int id,int x,int y,int tileType){

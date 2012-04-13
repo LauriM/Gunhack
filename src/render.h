@@ -1,10 +1,26 @@
 #ifndef RENDER_H
 #define RENDER_H
 
+enum{
+	TERM_COLOR_DEFAULT = 0,
+	TERM_COLOR_RED,
+	TERM_COLOR_GREEN,
+	TERM_COLOR_YELLOW,
+	TERM_COLOR_BLUE,
+	TERM_COLOR_MAGENTA,
+	TERM_COLOR_CYAN,
+	TERM_COLOR_WHITE_RED,
+	TERM_COLOR_WHITE_GREEN
+	//TODO: rest...
+};
+
 extern void renderInit(void);
 extern void renderUnInit(void);
 
 extern void printxy(int x,int y,char* ch);
 extern void printIntxy(int x,int y,int i);
+
+extern void setColor(int colorCode);
+extern void setColorOff(int colorCode);
 
 #endif

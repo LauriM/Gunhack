@@ -20,6 +20,7 @@ struct tile_s{
 
 struct room_s{
 	int mapData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
+	int colorData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
 	int roomType;
 };
 
