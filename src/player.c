@@ -1,6 +1,12 @@
-#include "player.h"
 #include "globals.h"
+#include "player.h"
+#include "render.h"
 #include "map.h"
+
+void playerRender(){
+	setColor(TERM_COLOR_DEFAULT);
+	printxy(playerX,playerY,"@");
+}
 
 void playerMove(int direction){
 	int newX = playerX;

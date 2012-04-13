@@ -54,6 +54,7 @@ void mapRender(void){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
 			setColor(room[currentRoom].colorData[x][y]);
 			printIntxy(x,y,mapGetTileByPos(currentRoom,x,y).symbol);
+			setColorOff(room[currentRoom].colorData[x][y]);
 		}
 	}
 }
