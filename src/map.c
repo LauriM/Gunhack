@@ -63,7 +63,7 @@ void mapCreateRoom(int id){
 	//First, lets add the concrete
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
-			room[id].mapData[x][y] = 1;
+			room[id].mapData[x][y] = TILE_ROCK;
 		}
 	}
 
@@ -90,7 +90,7 @@ void mapCreateRoom(int id){
 
 		//Check if the box exists (+- are to make sure rooms wont hit)
 		if(mapCheckTileCoords(id,roomX-1,roomY-1,roomWidth+2,roomHeight+2,0) == 1){
-			mapEditBox(id,roomX,roomY,roomWidth,roomHeight,0);
+			mapEditBox(id,roomX,roomY,roomWidth,roomHeight,TILE_EMPTY);
 			i++;
 		}else{
 			triesCount++;
@@ -120,7 +120,7 @@ void mapCreateRoom(int id){
 		setMinMax(digLeft,GEN_TUNNEL_MIN_ROTATE,GEN_TUNNEL_MAX_ROTATE);
 
 		while(digLeft > 0){
-			mapEditPoint(id,digX,digY,0);
+			mapEditPoint(id,digX,digY,TILE_EMPTY);
 			digLeft--;
 			digLeftRotate--;
 
@@ -145,6 +145,14 @@ void mapCreateRoom(int id){
 		}
 		i++;//One tunnel done
 	}
+
+	//Finally, setup the "borders" of the map as solid rock
+	//TODO: Consider more world after the sides(?)
+	//TODO: Consider indestructible walls at borders(?)
+	mapEditBox(id , 0               , 0              , MAP_MAX_WIDTH , 1              , TILE_ROCK);//Top
+	mapEditBox(id , 0               , MAP_MAX_HEIGHT-1 , MAP_MAX_WIDTH , 1              , TILE_ROCK);//bottom
+	mapEditBox(id , 0               , 0              , 1             , MAP_MAX_HEIGHT , TILE_ROCK); //Left
+	mapEditBox(id , MAP_MAX_WIDTH-1 , 0              , 1             , MAP_MAX_HEIGHT , TILE_ROCK); //Right
 }
 
 void mapEditPoint(int id,int x,int y,int tileType){
