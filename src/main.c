@@ -20,13 +20,13 @@ int main(int argc, const char *argv[]){
 
 	srand(time(NULL));
 
-	#ifdef DEBUG_GETCH_KEY
+	/*
 	while(1){
 		key = getch();
 
 		printf("%i",key);
 	}
-	#endif
+	*/
 
 	//Setup the first level and player
 	playerX = 10;
