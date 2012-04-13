@@ -1,7 +1,6 @@
 TODO
 ====
 
-* Tunnels
 * LineOfSight
 * Colors
 * Save system
