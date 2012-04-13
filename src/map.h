@@ -37,8 +37,8 @@ void tileInit(void);
 
 void mapCreateRoom(int z);
 
-//TODO:Consider linked-list, then z would be changed to a pointer
-void mapEditBox(int z,int boxX,int boxY,int width,int height,int tileType);
+void mapEditPoint(int id,int x,int y,int tileType);
+void mapEditBox(int id,int boxX,int boxY,int width,int height,int tileType);
 
 int mapSearchTileCoords(int z,int boxX,int boxY,int width,int height,int tileType);
 int mapCheckTileCoords(int z,int boxX,int boxY,int width,int height,int tileType);

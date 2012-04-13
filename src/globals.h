@@ -9,6 +9,11 @@
 //Room generator settings
 #define GEN_ROOM_MAX_COUNT 5
 #define GEN_ROOM_MIN_COUNT 5
+#define GEN_TUNNEL_EXTRA 10
+#define GEN_TUNNEL_MAX_LENGTH 20
+#define GEN_TUNNEL_MAX_ROTATE_STEP 8
+#define GEN_TUNNEL_MIN_ROTATE 5
+#define GEN_TUNNEL_MAX_ROTATE 20
 
 #define WORLD_SIZE_Z 10
 #define WORLD_SIZE_X 50

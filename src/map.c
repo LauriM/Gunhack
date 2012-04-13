@@ -77,9 +77,8 @@ void mapCreateRoom(int id){
 
 	mapEditBox(id,roomX,roomY,3,3,0);
 
+	//Create the rooms
 	int roomCount = (random(GEN_ROOM_MAX_COUNT)+GEN_ROOM_MIN_COUNT);
-
-	//TODO: Make sure to limit max tries to 200+ or something 
 
 	int triesCount = 0;
 	int i = 0;
@@ -101,11 +100,61 @@ void mapCreateRoom(int id){
 			}
 		}
 	}
+
+	//Create the tunnels between the rooms
+	int digX;
+	int digY;
+	int digDir;
+	int digLeft;
+	int digLeftRotate;
+
+	int tunnelCount = roomCount + random(GEN_TUNNEL_EXTRA);
+	i = 0;
+	digX = playerX;
+	digY = playerY;
+
+	while(i < tunnelCount){
+		digLeft       = random(GEN_TUNNEL_MAX_LENGTH);
+		digLeftRotate = random(GEN_TUNNEL_MAX_ROTATE_STEP);
+		digDir        = random(3);
+		setMinMax(digLeft,GEN_TUNNEL_MIN_ROTATE,GEN_TUNNEL_MAX_ROTATE);
+
+		while(digLeft > 0){
+			mapEditPoint(id,digX,digY,0);
+			digLeft--;
+			digLeftRotate--;
+
+			switch(digDir){
+				case DIR_N:
+					digY = digY - 1;
+					break;
+				case DIR_S:
+					digY = digY + 1;
+					break;
+				case DIR_W:
+					digX = digX - 1;
+					break;
+				case DIR_E:
+					digX = digX + 1;
+					break;
+			}
+
+			if(digLeftRotate < 0){
+				digDir = random(3);
+			}
+		}
+		i++;//One tunnel done
+	}
+}
+
+void mapEditPoint(int id,int x,int y,int tileType){
+	assert(tileType >= 0);
+	assert(tileType < TILE_COUNT);
+
+	room[id].mapData[x][y] = tileType;
 }
 
 void mapEditBox(int id,int boxX,int boxY,int width,int height,int tileType){
-	assert(tileType >= 0);
-	assert(tileType < TILE_COUNT);
 
 	for(int y = boxY;y < boxY + height;y++){
 		for(int x = boxX;x < boxX + width;x++){
