@@ -175,10 +175,10 @@ void mapCreateRoom(int id){
 	//Finally, setup the "borders" of the map as solid rock
 	//TODO: Consider more world after the sides(?)
 	//TODO: Consider indestructible walls at borders(?)
-	mapEditBox(id , 0               , 0              , MAP_MAX_WIDTH , 1              , TILE_ROCK);//Top
-	mapEditBox(id , 0               , MAP_MAX_HEIGHT-1 , MAP_MAX_WIDTH , 1              , TILE_ROCK);//bottom
-	mapEditBox(id , 0               , 0              , 1             , MAP_MAX_HEIGHT , TILE_ROCK); //Left
-	mapEditBox(id , MAP_MAX_WIDTH-1 , 0              , 1             , MAP_MAX_HEIGHT , TILE_ROCK); //Right
+	mapEditBox(id , 0               , 0              , MAP_MAX_WIDTH-1 , 1              , TILE_ROCK);//Top
+	mapEditBox(id , 0               , MAP_MAX_HEIGHT-1 , MAP_MAX_WIDTH-1 , 1              , TILE_ROCK);//bottom
+	mapEditBox(id , 0               , 0              , 1             , MAP_MAX_HEIGHT-1 , TILE_ROCK); //Left
+	mapEditBox(id , MAP_MAX_WIDTH-1 , 0              , 1             , MAP_MAX_HEIGHT-1 , TILE_ROCK); //Right
 
 	//Now that the room is generated, lets setup the color layer
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
@@ -232,8 +232,10 @@ void mapEditBox(int id,int boxX,int boxY,int width,int height,int tileType){
 	assert(boxX < MAP_MAX_WIDTH);
 	assert(boxY >= 0);
 	assert(boxY < MAP_MAX_HEIGHT);
- //   assert((boxX + width) >= 0);
-//	assert((boxY + height) < MAP_MAX_HEIGHT);
+    assert((boxX + width) >= 0);
+	assert((boxX + width) < MAP_MAX_WIDTH + 1);//+1 because width starts from 1, not from 0. Causing issues on this calculation
+	assert((boxY + height) >= 0);
+	assert((boxY + height) < MAP_MAX_HEIGHT + 1);
 
 	for(int y = boxY;y < boxY + height;y++){
 		for(int x = boxX;x < boxX + width;x++){
@@ -347,7 +349,7 @@ int mapLosCheck(int x1, int y1, int x2, int y2) {
 
 void mapScanFov(void){
 	int x,y;
-	assert(mapGetTileByPos(currentRoom, playerX, playerY)->visBlock != 1);
+	assert(mapGetTileByPos(currentRoom, playerX, playerY)->visBlock != 1);//Player should not be in the visblock thing
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){

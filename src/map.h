@@ -3,9 +3,6 @@
 
 #include "globals.h"
 
-//TODO: getcurrentroom, etc
-//TODO: Fix rest of the extern bs
-
 enum{
 	TILE_VOID = 0,
 	TILE_EMPTY,
@@ -19,6 +16,7 @@ struct tile_s{
 	char symbol;
 	int visBlock;
 	int moveBlock;
+	//TODO: Combine visblock and moveblock!
 };
 
 struct room_s{
