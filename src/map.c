@@ -275,7 +275,9 @@ int mapCheckTileCoords(int id,int boxX,int boxY,int width,int height,int tileTyp
 
 struct tile_s* mapGetTileByPos(int id,int x,int y){
 	assert(x < MAP_MAX_WIDTH);
+	assert(x >= 0);
 	assert(y < MAP_MAX_HEIGHT);
+	assert(y >= 0);
 	assert(id >= 0);
 	assert(id < WORLD_ROOM_COUNT);
 
@@ -284,7 +286,9 @@ struct tile_s* mapGetTileByPos(int id,int x,int y){
 
 struct tile_s* mapGetVisByPos(int id,int x,int y){
 	assert(x < MAP_MAX_WIDTH);
+	assert(x >= 0);
 	assert(y < MAP_MAX_HEIGHT);
+	assert(y >= 0);
 	assert(id >= 0);
 	assert(id < WORLD_ROOM_COUNT);
 
@@ -292,46 +296,53 @@ struct tile_s* mapGetVisByPos(int id,int x,int y){
 }
 
 int mapLosCheck(int x1, int y1, int x2, int y2) {
-        float x_mul;
-        float y_mul;
-        int len;
-        int dx = x2 - x1;
-        int dy = y2 - y1;
-       
-        if(x1 == x2 && y1 == y2)
-                return true;
-       
-        // Check which delta axis is longer
-        if(abs(dx) > abs(dy))
-        {
-                x_mul = 1.0f;
-                y_mul = dy/((float)dx);
-                len = dx;
-        }
-        else
-        {
-                x_mul = dx/((float)dy);
-                y_mul = 1.0f;
-                len = dy;
-        }
-       
-        // Raycast
-        for(int i=0; i != len; len < 0 ? --i : ++i)
-        {
-               
-			//int x = x1 + ceil(i*x_mul);
-			//int y = y1 + ceil(i*y_mul);
+	assert(x1 < MAP_MAX_WIDTH);
+	assert(x1 >= 0);
+	assert(y1 < MAP_MAX_HEIGHT);
+	assert(y1 >= 0);
 
-			int x = x1 + ((dx < 0) ? ceil(i*x_mul) : i*x_mul);
-			int y = y1 + ((dy < 0) ? ceil(i*y_mul) : i*y_mul);
+	assert(x2 < MAP_MAX_WIDTH);
+	assert(x2 >= 0);
+	assert(y2 < MAP_MAX_HEIGHT);
+	assert(y2 >= 0);
+
+	float x_mul;
+	float y_mul;
+	int len;
+	int dx = x2 - x1;
+	int dy = y2 - y1;
+
+	if(x1 == x2 && y1 == y2)
+	return true;
+
+	// Check which delta axis is longer
+	if(abs(dx) > abs(dy)){
+		x_mul = 1.0f;
+		y_mul = dy/((float)dx);
+		len = dx;
+	}else{
+		x_mul = dx/((float)dy);
+		y_mul = 1.0f;
+		len = dy;
+	}
+
+	// Raycast
+	for(int i=0; i != len; len < 0 ? --i : ++i){
+
+		//int x = x1 + ceil(i*x_mul);
+		//int y = y1 + ceil(i*y_mul);
+
+		int x = x1 + ((dx < 0) ? ceil(i*x_mul) : i*x_mul);
+		int y = y1 + ((dy < 0) ? ceil(i*y_mul) : i*y_mul);
 
 
-                if(mapGetTileByPos(currentRoom, x, y)->visBlock == 1)
-                        return false;
-        }
-       
-        // Nothing was hit in the raycast
-        return true;
+		if(mapGetTileByPos(currentRoom, x, y)->visBlock == 1){
+			return false;
+		}
+	}
+
+	// Nothing was hit in the raycast
+	return true;
 }
 
 void mapScanFov(void){
