@@ -10,7 +10,7 @@ int world[WORLD_SIZE_Z][WORLD_SIZE_X][WORLD_SIZE_Y]; //Contains RoomId
 struct room_s room[WORLD_ROOM_COUNT]; //Room list
 
 void tileInit(void){
-	tileInfo[TILE_EMPTY].symbol    = ' ';
+	tileInfo[TILE_EMPTY].symbol    = '.';
 	tileInfo[TILE_EMPTY].visBlock  = 0;
 	tileInfo[TILE_EMPTY].moveBlock = 0;
 

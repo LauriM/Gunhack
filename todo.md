@@ -2,7 +2,6 @@ TODO
 ====
 
 * LineOfSight
-* Colors
 * Save system
 
 Plan
