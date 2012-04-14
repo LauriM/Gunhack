@@ -141,7 +141,12 @@ void mapCreateRoom(int id){
 		setMinMax(digLeft,GEN_TUNNEL_MIN_ROTATE,GEN_TUNNEL_MAX_ROTATE);
 
 		while(digLeft > 0){
-			mapEditPoint(id,digX,digY,TILE_EMPTY);
+			if(digX >= 0 && digX < MAP_MAX_WIDTH && digY >= 0 && digY < MAP_MAX_HEIGHT){
+				mapEditPoint(id,digX,digY,TILE_EMPTY);
+			}else{
+				digLeft       = 0;
+				digLeftRotate = 0;
+			}
 			digLeft--;
 			digLeftRotate--;
 
@@ -212,11 +217,23 @@ void mapCreateRoom(int id){
 void mapEditPoint(int id,int x,int y,int tileType){
 	assert(tileType >= 0);
 	assert(tileType < TILE_COUNT);
+	assert(x >= 0);
+	assert(x < MAP_MAX_WIDTH);
+	assert(y >= 0);
+	assert(y < MAP_MAX_HEIGHT);
 
 	room[id].mapData[x][y] = tileType;
 }
 
 void mapEditBox(int id,int boxX,int boxY,int width,int height,int tileType){
+	assert(tileType >= 0);
+	assert(tileType < TILE_COUNT);
+	assert(boxX >= 0);
+	assert(boxX < MAP_MAX_WIDTH);
+	assert(boxY >= 0);
+	assert(boxY < MAP_MAX_HEIGHT);
+ //   assert((boxX + width) >= 0);
+//	assert((boxY + height) < MAP_MAX_HEIGHT);
 
 	for(int y = boxY;y < boxY + height;y++){
 		for(int x = boxX;x < boxX + width;x++){
