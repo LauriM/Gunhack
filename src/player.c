@@ -2,6 +2,7 @@
 #include "player.h"
 #include "render.h"
 #include "map.h"
+#include "math.h"
 
 void playerRender(){
 	setColor(TERM_COLOR_DEFAULT);
@@ -39,4 +40,9 @@ void playerInit(void){
 	currentRoom = 0;
 	playerX     = 0;
 	playerY     = 0;
+}
+
+void playerRandomPosition(void){
+	playerX = (random(MAP_MAX_WIDTH  - 4) + 2);
+	playerY = (random(MAP_MAX_HEIGHT - 4) + 2);
 }

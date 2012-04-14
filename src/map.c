@@ -105,7 +105,7 @@ void mapCreateRoom(int id){
 	int i = 0;
 	while(i < roomCount){
 		roomWidth = (random(8) + 3);//TODO: change 5 to max size
-		roomHeight = (random(8) + 3);
+		roomHeight = (random(8) + 3);   //TODO: Move these to globals
 		roomX = random(MAP_MAX_WIDTH-roomWidth-1);
 		roomY = random(MAP_MAX_HEIGHT-roomHeight-1);
 

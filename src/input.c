@@ -4,18 +4,26 @@
 #include "globals.h"
 #include "player.h"
 #include "math.h"//QQQ
-#include "map.h"//QQQ
-
-extern int currentRoom;//QQQ
+#include "map.h"
 
 void inputHandle(){
 	int key = getch();
 	switch(key){
-		case 116://t
-			playerX = random(MAP_MAX_WIDTH);
-			playerY = random(MAP_MAX_HEIGHT);
-			mapCreateRoom(currentRoom);//QQQ
+		case 60://<
+			break;
+		case 62://>
+			if(room[currentRoom].mapData[playerX][playerY] == TILE_STAIRS_DOWN){
+				currentRoom = currentRoom + 1;
+				playerRandomPosition();
+				mapCreateRoom(currentRoom);//QQQ
+			}
+			break;
+		case 114://r
 			mapCheatSeeAll();
+			break;
+		case 116://t
+			playerRandomPosition();
+			mapCreateRoom(currentRoom);//QQQ
 			break;
 		case 106:  
 			playerMove(DIR_S);
