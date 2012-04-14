@@ -21,6 +21,7 @@ struct tile_s{
 struct room_s{
 	int mapData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
 	int colorData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
+	int visData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];//Contains the data that player has seen
 	int roomType;
 };
 
@@ -43,6 +44,8 @@ void mapEditBox(int id,int boxX,int boxY,int width,int height,int tileType);
 
 int mapSearchTileCoords(int z,int boxX,int boxY,int width,int height,int tileType);
 int mapCheckTileCoords(int z,int boxX,int boxY,int width,int height,int tileType);
+
+int mapLosCheck(int x,int y,int x2,int y2);
 
 //Tile code to data
 struct tile_s mapGetTileByPos(int z,int x,int y);

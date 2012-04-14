@@ -3,6 +3,8 @@
 #include "render.h"
 #include "player.h"
 #include "math.h"
+#include <math.h>
+#include <stdlib.h>
 
 int currentRoom;
 struct tile_s tileInfo[TILE_COUNT];
@@ -218,4 +220,26 @@ struct tile_s mapGetTileByPos(int id,int x,int y){
 	assert(id < WORLD_ROOM_COUNT);
 
 	return tileInfo[room[id].mapData[x][y]];
+}
+
+
+int mapLosCheck(int x1, int y1, int x2, int y2) {
+	float vx,vy,ox,oy,l;
+	int i;
+	vx = x2-x1;
+	vy = y2-y1;
+	ox = (float)x2+0.5f;
+	oy= (float)y2+0.5f;
+	l=sqrt((vx*vx)+(vy*vy));
+	vx/=l;
+	vy/=l;
+	for(i=0;i<(int)l;i++){
+		if(room[currentRoom].mapData[(int)ox][(int)oy]==TILE_ROCK){
+			return 0;
+		}
+
+		ox+=vx;
+		oy+=vy;
+	};
+	return 1;
 }

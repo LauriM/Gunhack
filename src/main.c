@@ -9,7 +9,7 @@
 #include "input.h"
 #include "map.h"
 
-extern int playerZ,playerX,playerY;
+extern int playerX,playerY;
 int key;
 
 int main(int argc, const char *argv[]){
