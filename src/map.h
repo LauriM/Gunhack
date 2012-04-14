@@ -46,7 +46,7 @@ void mapEditBox(int id,int boxX,int boxY,int width,int height,int tileType);
 int mapSearchTileCoords(int z,int boxX,int boxY,int width,int height,int tileType);
 int mapCheckTileCoords(int z,int boxX,int boxY,int width,int height,int tileType);
 
-int mapLosCheck(int x,int y,int x2,int y2);
+int mapLosCheck(int x,int y,int x2,int y2,int wallFix);
 
 struct tile_s mapGetTileByPos(int z,int x,int y);
 struct tile_s mapGetVisByPos(int id,int x,int y);

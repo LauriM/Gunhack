@@ -2,9 +2,9 @@
 #include "map.h"
 #include "render.h"
 #include "player.h"
+#include <stdlib.h>
 #include <math.h>
 #include "math.h"
-#include <stdlib.h>
 
 int currentRoom;
 struct tile_s tileInfo[TILE_COUNT];
@@ -232,13 +232,36 @@ struct tile_s mapGetVisByPos(int id,int x,int y){
 	return tileInfo[room[id].visData[x][y]];
 }
 
-int mapLosCheck(int x1, int y1, int x2, int y2) {
+int mapLosCheck(int x1, int y1, int x2, int y2,int wallFix) {
+	int dx = abs(x1 - x2);
+	int dy = abs(y1 - y2);
+	double s = .99/(dx>dy?dx:dy); //double(
+	double t = 0.0;
+
+	while(t < 1.0) {
+		dx = (1.0 - t)*x1 + t*x2;         //int(
+		dy = (1.0 - t)*y1 + t*y2;
+
+		if(wallFix == 1){
+			dx++;
+			dy++;
+		}
+
+		if (mapGetTileByPos(currentRoom,dx,dy).visBlock == 1) {
+			return 0;
+		}
+
+		t += s; 
+	}
+
+	return 1;
+	/*
 	float vx,vy,ox,oy,l;
 	int i;
 	vx = x2-x1;
 	vy = y2-y1;
 	ox = (float)x2+0.5f;
-	oy= (float)y2+0.5f;
+	oy = (float)y2+0.5f;
 	l=sqrt((vx*vx)+(vy*vy));
 	vx/=l;
 	vy/=l;
@@ -251,6 +274,7 @@ int mapLosCheck(int x1, int y1, int x2, int y2) {
 		oy+=vy;
 	};
 	return 1;
+	*/
 }
 
 void mapScanFov(void){
@@ -258,9 +282,14 @@ void mapScanFov(void){
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
-			if(mapLosCheck(playerX,playerY,x,y) == 1){
+			if(mapLosCheck(playerX,playerY,x,y,0) == 1){
 				//Player can see, lets move the tile to the visualData table
 //				room[currentRoom].visData[x][y] = room[currentRoom].mapData[x][y];
+				room[currentRoom].colorData[x][y] = TERM_COLOR_WHITE_RED;
+			}
+			if(mapLosCheck(playerX,playerY,x,y,1) == 1){
+				//Player can see, lets move the tile to the visualData table
+				//				room[currentRoom].visData[x][y] = room[currentRoom].mapData[x][y];
 				room[currentRoom].colorData[x][y] = TERM_COLOR_WHITE_RED;
 			}
 		}
