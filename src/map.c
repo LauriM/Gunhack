@@ -23,6 +23,14 @@ void tileInit(void){
 	tileInfo[TILE_ROCK].symbol    = '#';
 	tileInfo[TILE_ROCK].visBlock  = 1;
 	tileInfo[TILE_ROCK].moveBlock = 1;
+
+	tileInfo[TILE_STAIRS_UP].symbol    = '<';
+	tileInfo[TILE_STAIRS_UP].visBlock  = 0;
+	tileInfo[TILE_STAIRS_UP].moveBlock = 0;
+
+	tileInfo[TILE_STAIRS_DOWN].symbol    = '>';
+	tileInfo[TILE_STAIRS_DOWN].visBlock  = 0;
+	tileInfo[TILE_STAIRS_DOWN].moveBlock = 0;
 }
 
 /**
@@ -174,6 +182,29 @@ void mapCreateRoom(int id){
 		}
 	}
 
+	//Lets add some dungeon features!
+	
+	//First up and down stairs
+	i = 0;
+	while(i < 1){
+		x = random(MAP_MAX_WIDTH);
+		y = random(MAP_MAX_HEIGHT);
+		if(room[id].mapData[x][y] == TILE_EMPTY){
+			room[id].mapData[x][y] = TILE_STAIRS_UP;
+			i++;//Break out
+		}
+	}
+
+	i = 0;
+	while(i < 1){
+		x = random(MAP_MAX_WIDTH);
+		y = random(MAP_MAX_HEIGHT);
+		if(room[id].mapData[x][y] == TILE_EMPTY){
+			room[id].mapData[x][y] = TILE_STAIRS_DOWN;
+			i++;//Break out
+		}
+	}
+
 	//And finally update the FoV
 	mapScanFov();
 }
@@ -300,6 +331,16 @@ void mapScanFov(void){
 			if(mapLosCheck(playerX,playerY,x,y,1) == 1){
 				room[currentRoom].visData[x][y] = room[currentRoom].mapData[x][y];
 			}
+		}
+	}
+}
+
+void mapCheatSeeAll(void){
+	int x,y;
+
+	for(x = 0;x < MAP_MAX_WIDTH;x++){
+		for(y = 0;y < MAP_MAX_HEIGHT;y++){
+			room[currentRoom].visData[x][y] = room[currentRoom].mapData[x][y];
 		}
 	}
 }

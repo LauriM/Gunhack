@@ -1,7 +1,7 @@
 TODO
 ====
 
-* LineOfSight
+* LineOfSight (Fix!)
 * Save system
 
 Plan

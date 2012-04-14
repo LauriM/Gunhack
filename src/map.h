@@ -10,7 +10,9 @@ enum{
 	TILE_VOID = 0,
 	TILE_EMPTY,
 	TILE_ROCK,
-	TILE_COUNT
+	TILE_COUNT,
+	TILE_STAIRS_UP,
+	TILE_STAIRS_DOWN
 };
 
 struct tile_s{
@@ -51,5 +53,7 @@ int mapLosCheck(int x,int y,int x2,int y2,int wallFix);
 
 struct tile_s mapGetTileByPos(int z,int x,int y);
 struct tile_s mapGetVisByPos(int id,int x,int y);
+
+void mapCheatSeeAll(void);
 
 #endif
