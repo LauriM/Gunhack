@@ -7,7 +7,8 @@
 //TODO: Fix rest of the extern bs
 
 enum{
-	TILE_EMPTY = 0,
+	TILE_VOID = 0,
+	TILE_EMPTY,
 	TILE_ROCK,
 	TILE_COUNT
 };

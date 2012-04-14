@@ -12,6 +12,10 @@ int world[WORLD_SIZE_Z][WORLD_SIZE_X][WORLD_SIZE_Y]; //Contains RoomId
 struct room_s room[WORLD_ROOM_COUNT]; //Room list
 
 void tileInit(void){
+	tileInfo[TILE_VOID].symbol    = ' ';
+	tileInfo[TILE_VOID].visBlock  = 0;
+	tileInfo[TILE_VOID].moveBlock = 0;
+
 	tileInfo[TILE_EMPTY].symbol    = '.';
 	tileInfo[TILE_EMPTY].visBlock  = 0;
 	tileInfo[TILE_EMPTY].moveBlock = 0;
@@ -44,8 +48,9 @@ void roomInit(int id){
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
-			room[id].mapData[x][y] = 0;
-			room[id].visData[x][y] = 0;
+			room[id].mapData[x][y]   = TILE_VOID;
+			room[id].visData[x][y]   = TILE_VOID;
+			room[id].colorData[x][y] = TERM_COLOR_DEFAULT;
 		}
 	}
 }
@@ -56,7 +61,7 @@ void mapRender(void){
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
 			setColor(room[currentRoom].colorData[x][y]);
-			printIntxy(x,y,mapGetTileByPos(currentRoom,x,y).symbol);
+			printIntxy(x,y,mapGetVisByPos(currentRoom,x,y).symbol);
 			setColorOff(room[currentRoom].colorData[x][y]);
 		}
 	}
@@ -65,6 +70,9 @@ void mapRender(void){
 void mapCreateRoom(int id){
 	int x,y;
 
+	//Clear the room
+	roomInit(id);
+	
 	//First, lets add the concrete
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
@@ -165,6 +173,9 @@ void mapCreateRoom(int id){
 			room[id].colorData[x][y] = TERM_COLOR_DEFAULT;
 		}
 	}
+
+	//And finally update the FoV
+	mapScanFov();
 }
 
 void mapEditPoint(int id,int x,int y,int tileType){
@@ -284,13 +295,10 @@ void mapScanFov(void){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
 			if(mapLosCheck(playerX,playerY,x,y,0) == 1){
 				//Player can see, lets move the tile to the visualData table
-//				room[currentRoom].visData[x][y] = room[currentRoom].mapData[x][y];
-				room[currentRoom].colorData[x][y] = TERM_COLOR_WHITE_RED;
+				room[currentRoom].visData[x][y] = room[currentRoom].mapData[x][y];
 			}
 			if(mapLosCheck(playerX,playerY,x,y,1) == 1){
-				//Player can see, lets move the tile to the visualData table
-				//				room[currentRoom].visData[x][y] = room[currentRoom].mapData[x][y];
-				room[currentRoom].colorData[x][y] = TERM_COLOR_WHITE_RED;
+				room[currentRoom].visData[x][y] = room[currentRoom].mapData[x][y];
 			}
 		}
 	}
