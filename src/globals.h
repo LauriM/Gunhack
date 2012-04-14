@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdbool.h>
 
 //directions
 #define DIR_N 0

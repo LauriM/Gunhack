@@ -69,7 +69,7 @@ void mapRender(void){
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
 			setColor(room[currentRoom].colorData[x][y]);
-			printIntxy(x,y,mapGetVisByPos(currentRoom,x,y).symbol);
+			printIntxy(x,y,mapGetVisByPos(currentRoom,x,y)->symbol);
 			setColorOff(room[currentRoom].colorData[x][y]);
 		}
 	}
@@ -96,7 +96,7 @@ void mapCreateRoom(int id){
 	roomX = playerX - 1;
 	roomY = playerY - 1; 
 
-	mapEditBox(id,roomX,roomY,3,3,0);
+	mapEditBox(id,roomX,roomY,3,3,TILE_EMPTY);
 
 	//Create the rooms
 	int roomCount = (random(GEN_ROOM_MAX_COUNT)+GEN_ROOM_MIN_COUNT);
@@ -256,79 +256,75 @@ int mapCheckTileCoords(int id,int boxX,int boxY,int width,int height,int tileTyp
 	return 1;
 }
 
-struct tile_s mapGetTileByPos(int id,int x,int y){
+struct tile_s* mapGetTileByPos(int id,int x,int y){
 	assert(x < MAP_MAX_WIDTH);
 	assert(y < MAP_MAX_HEIGHT);
 	assert(id >= 0);
 	assert(id < WORLD_ROOM_COUNT);
 
-	return tileInfo[room[id].mapData[x][y]];
+	return &tileInfo[room[id].mapData[x][y]];
 }
 
-struct tile_s mapGetVisByPos(int id,int x,int y){
+struct tile_s* mapGetVisByPos(int id,int x,int y){
 	assert(x < MAP_MAX_WIDTH);
 	assert(y < MAP_MAX_HEIGHT);
 	assert(id >= 0);
 	assert(id < WORLD_ROOM_COUNT);
 
-	return tileInfo[room[id].visData[x][y]];
+	return &tileInfo[room[id].visData[x][y]];
 }
 
-int mapLosCheck(int x1, int y1, int x2, int y2,int wallFix) {
-	int dx = abs(x1 - x2);
-	int dy = abs(y1 - y2);
-	double s = .99/(dx>dy?dx:dy); //double(
-	double t = 0.0;
+int mapLosCheck(int x1, int y1, int x2, int y2) {
+        float x_mul;
+        float y_mul;
+        int len;
+        int dx = x2 - x1;
+        int dy = y2 - y1;
+       
+        if(x1 == x2 && y1 == y2)
+                return true;
+       
+        // Check which delta axis is longer
+        if(abs(dx) > abs(dy))
+        {
+                x_mul = 1.0f;
+                y_mul = dy/((float)dx);
+                len = dx;
+        }
+        else
+        {
+                x_mul = dx/((float)dy);
+                y_mul = 1.0f;
+                len = dy;
+        }
+       
+        // Raycast
+        for(int i=0; i != len; len < 0 ? --i : ++i)
+        {
+               
+			//int x = x1 + ceil(i*x_mul);
+			//int y = y1 + ceil(i*y_mul);
 
-	while(t < 1.0) {
-		dx = (1.0 - t)*x1 + t*x2;         //int(
-		dy = (1.0 - t)*y1 + t*y2;
+			int x = x1 + ((dx < 0) ? ceil(i*x_mul) : i*x_mul);
+			int y = y1 + ((dy < 0) ? ceil(i*y_mul) : i*y_mul);
 
-		if(wallFix == 1){
-			dx++;
-			dy++;
-		}
 
-		if (mapGetTileByPos(currentRoom,dx,dy).visBlock == 1) {
-			return 0;
-		}
-
-		t += s; 
-	}
-
-	return 1;
-	/*
-	float vx,vy,ox,oy,l;
-	int i;
-	vx = x2-x1;
-	vy = y2-y1;
-	ox = (float)x2+0.5f;
-	oy = (float)y2+0.5f;
-	l=sqrt((vx*vx)+(vy*vy));
-	vx/=l;
-	vy/=l;
-	for(i=0;i<(int)l;i++){
-		if(mapGetTileByPos(currentRoom,(int)ox,(int)oy).visBlock == 1){//TODO: move current room to parameters
-			return 0;
-		}
-
-		ox+=vx;
-		oy+=vy;
-	};
-	return 1;
-	*/
+                if(mapGetTileByPos(currentRoom, x, y)->visBlock == 1)
+                        return false;
+        }
+       
+        // Nothing was hit in the raycast
+        return true;
 }
 
 void mapScanFov(void){
 	int x,y;
+	assert(mapGetTileByPos(currentRoom, playerX, playerY)->visBlock != 1);
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
-			if(mapLosCheck(playerX,playerY,x,y,0) == 1){
+			if(mapLosCheck(playerX,playerY,x,y) == 1){
 				//Player can see, lets move the tile to the visualData table
-				room[currentRoom].visData[x][y] = room[currentRoom].mapData[x][y];
-			}
-			if(mapLosCheck(playerX,playerY,x,y,1) == 1){
 				room[currentRoom].visData[x][y] = room[currentRoom].mapData[x][y];
 			}
 		}
