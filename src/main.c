@@ -35,6 +35,7 @@ int main(int argc, const char *argv[]){
 	roomInit(0);
 	mapCreateRoom(0);
 	currentRoom = 0;
+	mapScanFov();
 
 	//==========================================================//
 	//  Main loop

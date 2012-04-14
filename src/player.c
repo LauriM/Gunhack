@@ -31,6 +31,7 @@ void playerMove(int direction){
 	if(mapGetTileByPos(currentRoom,newX,newY).moveBlock == 0){
 		playerX = newX;
 		playerY = newY;
+		mapScanFov();
 	}
 }
 
