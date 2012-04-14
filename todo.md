@@ -1,8 +1,9 @@
 TODO
 ====
 
-* LineOfSight (Fix!)
 * Log system
+* better world generation
+* HUD
 * ingame message system
 * Save system
 

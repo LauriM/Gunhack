@@ -38,9 +38,14 @@ void tileInit(void){
  * Some functionality may be added
  */
 void worldInit(void){
+	//TODO: Do something clever with this...
 	int z,x,y;
-	int i = 0;
 
+	for(int i = 0;i < WORLD_ROOM_COUNT;i++){
+		room[i].roomType = ROOM_TYPE_UNINITIALIZED;
+	}
+
+	int i = 0;
 	for(z = 0;z < WORLD_SIZE_Z;z++){
 		for(x = 0;x < WORLD_SIZE_X;x++){
 			for(y = 0;y < WORLD_SIZE_Y;y++){
@@ -77,6 +82,8 @@ void mapRender(void){
 
 void mapCreateRoom(int id){
 	int x,y;
+
+	room[id].roomType = ROOM_TYPE_DUNGEON;
 
 	//Clear the room
 	roomInit(id);

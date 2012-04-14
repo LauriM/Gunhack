@@ -12,6 +12,11 @@ enum{
 	TILE_STAIRS_DOWN
 };
 
+enum{
+	ROOM_TYPE_UNINITIALIZED = 0,
+	ROOM_TYPE_DUNGEON
+};
+
 struct tile_s{
 	char symbol;
 	int visBlock;
@@ -28,12 +33,10 @@ struct room_s{
 	//TODO: If system to have rooms left/right int x/y/z should be added to the room. Atm the system can just use the currentRoom as depth
 };
 
-//---
 extern int currentRoom;
-extern int world[WORLD_SIZE_Z][WORLD_SIZE_X][WORLD_SIZE_Y]; //Contains RoomId
+extern int world[WORLD_SIZE_Z][WORLD_SIZE_X][WORLD_SIZE_Y]; //Contains RoomId DEPRACRATED (?)
 extern struct room_s room[WORLD_ROOM_COUNT]; //Room list
 extern struct tile_s tileInfo[TILE_COUNT];
-//---
 
 void worldInit(void);
 void roomInit(int id);

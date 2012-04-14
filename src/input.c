@@ -10,19 +10,40 @@ void inputHandle(){
 	int key = getch();
 	switch(key){
 		case 60://<
+			if(room[currentRoom].mapData[playerX][playerY] == TILE_STAIRS_UP){
+				if(currentRoom == 0){
+                    //TODO: can't go into -1 of room table, implement quit message style nethack
+				}else{
+					currentRoom = currentRoom - 1;
+					if(room[currentRoom].roomType == ROOM_TYPE_UNINITIALIZED){
+						playerRandomPosition();
+						mapCreateRoom(currentRoom);//TODO: Only create if doesn't exist!
+					}else{
+						//TODO: Locate up stairs and place player there
+					}
+				}
+			}
 			break;
 		case 62://>
 			if(room[currentRoom].mapData[playerX][playerY] == TILE_STAIRS_DOWN){
-				currentRoom = currentRoom + 1;
-				playerRandomPosition();
-				mapCreateRoom(currentRoom);//QQQ
+				if(currentRoom > WORLD_ROOM_COUNT){
+					//TODO: can't go into -1 of room table, implement message
+				}else{
+					currentRoom = currentRoom + 1;
+					if(room[currentRoom].roomType == ROOM_TYPE_UNINITIALIZED){
+						playerRandomPosition();
+						mapCreateRoom(currentRoom);
+					}else{
+						//TODO: Locate up stairs and place player there
+					}
+				}
 			}
 			break;
 		case 114://r
 			mapCheatSeeAll();
 			break;
 		case 116://t
-			playerRandomPosition();
+			playerRandomPosition();//TODO: Change cheat behavior to drop down level, not to destroy existing levels
 			mapCreateRoom(currentRoom);//QQQ
 			break;
 		case 106:  
