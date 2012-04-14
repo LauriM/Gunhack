@@ -110,7 +110,7 @@ void mapCreateRoom(int id){
 		roomY = random(MAP_MAX_HEIGHT-roomHeight-1);
 
 		//Check if the box exists (+- are to make sure rooms wont hit)
-		if(mapCheckTileCoords(id,roomX-1,roomY-1,roomWidth+2,roomHeight+2,0) == 1){
+		if(mapCheckTileCoords(id,roomX,roomY,roomWidth+2,roomHeight+2,0) == 1){
 			mapEditBox(id,roomX,roomY,roomWidth,roomHeight,TILE_EMPTY);
 			i++;
 		}else{
@@ -249,6 +249,17 @@ void mapEditBox(int id,int boxX,int boxY,int width,int height,int tileType){
  * Used to check if area is clear
  */
 int mapSearchTileCoords(int id,int boxX,int boxY,int width,int height,int tileType){
+	assert(tileType >= 0);
+	assert(tileType < TILE_COUNT);
+	assert(boxX >= 0);
+	assert(boxX < MAP_MAX_WIDTH);
+	assert(boxY >= 0);
+	assert(boxY < MAP_MAX_HEIGHT);
+	assert((boxX + width) >= 0);
+	assert((boxX + width) < MAP_MAX_WIDTH + 1);//+1 because width starts from 1, not from 0. Causing issues on this calculation
+	assert((boxY + height) >= 0);
+	assert((boxY + height) < MAP_MAX_HEIGHT + 1);
+
 	int count = 0;
 	for(int y = boxY;y < boxY + height;y++){
 		for(int x = boxX;x < boxX + width;x++){
@@ -265,6 +276,17 @@ int mapSearchTileCoords(int id,int boxX,int boxY,int width,int height,int tileTy
  * Returns bool. 1 when ok, 0 when not true
  */
 int mapCheckTileCoords(int id,int boxX,int boxY,int width,int height,int tileType){
+	assert(tileType >= 0);
+	assert(tileType < TILE_COUNT);
+	assert(boxX >= 0);
+	assert(boxX < MAP_MAX_WIDTH);
+	assert(boxY >= 0);
+	assert(boxY < MAP_MAX_HEIGHT);
+	assert((boxX + width) >= 0);
+	assert((boxX + width) < MAP_MAX_WIDTH + 1);//+1 because width starts from 1, not from 0. Causing issues on this calculation
+	assert((boxY + height) >= 0);
+	assert((boxY + height) < MAP_MAX_HEIGHT + 1);
+
 	for(int y = boxY;y < boxY + height;y++){
 		for(int x = boxX;x < boxX + width;x++){
 			if(room[id].mapData[x][y] == tileType){
@@ -302,7 +324,6 @@ int mapLosCheck(int x1, int y1, int x2, int y2) {
 	assert(x1 >= 0);
 	assert(y1 < MAP_MAX_HEIGHT);
 	assert(y1 >= 0);
-
 	assert(x2 < MAP_MAX_WIDTH);
 	assert(x2 >= 0);
 	assert(y2 < MAP_MAX_HEIGHT);

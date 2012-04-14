@@ -10,6 +10,7 @@ void playerRender(){
 }
 
 void playerMove(int direction){
+	assert(direction <= 3);
 	int newX = playerX;
 	int newY = playerY;
 

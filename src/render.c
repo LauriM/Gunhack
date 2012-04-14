@@ -1,3 +1,4 @@
+#include "globals.h"
 #include "render.h"
 #include <ncurses.h>
 
@@ -30,11 +31,21 @@ void setColorOff(int colorCode){
 }
 
 void printxy(int x,int y,char* ch){
+	assert(x >= 0);
+	assert(y >= 0);
+	assert(x < MAP_MAX_WIDTH);
+	assert(y < MAP_MAX_HEIGHT);
+
 	move(y,x);
 	printw(ch);
 }
 
 void printIntxy(int x,int y,int i){
+	assert(x >= 0);
+	assert(y >= 0);
+	assert(x < MAP_MAX_WIDTH);
+	assert(y < MAP_MAX_HEIGHT);
+
 	move(y,x);
 	printw("%c",i);
 }
