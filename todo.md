@@ -2,7 +2,14 @@ TODO
 ====
 
 * LineOfSight (Fix!)
+* Log system
+* ingame message system
 * Save system
+
+Gameplay
+========
+
+* Explosives to dig trough the dungeon
 
 Plan
 ====
