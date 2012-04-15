@@ -13,12 +13,17 @@ extern int playerX,playerY;
 int key;
 
 int main(int argc, const char *argv[]){
+	logInit();
 	worldInit();
 	renderInit();
 	playerInit();
 	tileInit();
 
 	srand(time(NULL));
+
+	LOG_INFO("################");
+	LOG_INFO("Game starting...");
+	LOG_INFO("Build time: " __DATE__ " " __TIME__);
 
 	/*
 	while(1){
@@ -50,5 +55,6 @@ int main(int argc, const char *argv[]){
 	}
 
 	renderUnInit();
+	logUnInit();
 	return 0;
 }

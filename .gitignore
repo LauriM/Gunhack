@@ -4,3 +4,4 @@ game.make
 obj/
 cscope.out
 tags
+log.txt

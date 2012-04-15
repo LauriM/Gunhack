@@ -41,10 +41,12 @@ void inputHandle(){
 			break;
 		case 114://r
 			mapCheatSeeAll();
+			LOG_INFO("Using see all cheat");
 			break;
 		case 116://t
 			playerRandomPosition();//TODO: Change cheat behavior to drop down level, not to destroy existing levels
 			mapCreateRoom(currentRoom);//QQQ
+			LOG_INFO("Forced room regeneration");
 			break;
 		case 106:  
 			playerMove(DIR_S);
