@@ -10,6 +10,7 @@ Gameplay
 ========
 
 * Explosives to dig trough the dungeon
+* Brutal blood effects
 
 Plan
 ====
