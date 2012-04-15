@@ -8,7 +8,6 @@
 
 int currentRoom;
 struct tile_s tileInfo[TILE_COUNT];
-int world[WORLD_SIZE_Z][WORLD_SIZE_X][WORLD_SIZE_Y]; //Contains RoomId
 struct room_s room[WORLD_ROOM_COUNT]; //Room list
 
 void tileInit(void){
@@ -33,26 +32,9 @@ void tileInit(void){
 	tileInfo[TILE_STAIRS_DOWN].moveBlock = 0;
 }
 
-/**
- * Setup the world array with 0's
- * Some functionality may be added
- */
 void worldInit(void){
-	//TODO: Do something clever with this...
-	int z,x,y;
-
 	for(int i = 0;i < WORLD_ROOM_COUNT;i++){
 		room[i].roomType = ROOM_TYPE_UNINITIALIZED;
-	}
-
-	int i = 0;
-	for(z = 0;z < WORLD_SIZE_Z;z++){
-		for(x = 0;x < WORLD_SIZE_X;x++){
-			for(y = 0;y < WORLD_SIZE_Y;y++){
-				world[z][x][y] = i;
-				i++;
-			}
-		}
 	}
 }
 

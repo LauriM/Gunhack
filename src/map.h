@@ -34,7 +34,6 @@ struct room_s{
 };
 
 extern int currentRoom;
-extern int world[WORLD_SIZE_Z][WORLD_SIZE_X][WORLD_SIZE_Y]; //Contains RoomId DEPRACRATED (?)
 extern struct room_s room[WORLD_ROOM_COUNT]; //Room list
 extern struct tile_s tileInfo[TILE_COUNT];
 
