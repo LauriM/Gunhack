@@ -1,6 +1,8 @@
 #include "globals.h"
 #include "log.h"
 #include <stdio.h>
+#include <string.h>
+#include <time.h>
 
 FILE *logFile;
 
@@ -16,5 +18,14 @@ void logUnInit(void){
 
 void insertLog(char msg[500]){
 	//TODO: Insert timestamp
-	fprintf(logFile,"%s\n",msg);
+	time_t rawtime;
+	struct tm * timeinfo;
+	char buffer[80];
+
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+
+	strftime(buffer,80,"%H:%M:%S",timeinfo);
+
+	fprintf(logFile,"%s %s\n",buffer,msg);
 }
