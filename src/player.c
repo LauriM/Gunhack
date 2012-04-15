@@ -4,46 +4,51 @@
 #include "map.h"
 #include "math.h"
 
+struct player_s playerInfo;
+
+void playerInit(){
+	playerInfo.playerX = 10;
+	playerInfo.playerY = 10;
+}
+
 void playerRender(){
 	setColor(TERM_COLOR_DEFAULT);
-	printxy(playerX,playerY,"@");
+	printxy(playerInfo.playerX,playerInfo.playerY,"@");
 }
 
 void playerMove(int direction){
 	assert(direction <= 3);
-	int newX = playerX;
-	int newY = playerY;
+	int newX = playerInfo.playerX;
+	int newY = playerInfo.playerY;
 
 	switch(direction){
 		case DIR_N:
-			newY = playerY - 1;
+			newY = playerInfo.playerY - 1;
 			break;
 		case DIR_S:
-			newY = playerY + 1;
+			newY = playerInfo.playerY + 1;
 			break;
 		case DIR_W:
-			newX = playerX - 1;
+			newX = playerInfo.playerX - 1;
 			break;
 		case DIR_E:
-			newX = playerX + 1;
+			newX = playerInfo.playerX + 1;
 			break;
 	}
 
 	//Check if the new position is ok
 	if(mapGetTileByPos(currentRoom,newX,newY)->block == 0){
-		playerX = newX;
-		playerY = newY;
+		playerInfo.playerX = newX;
+		playerInfo.playerY = newY;
 		mapScanFov();
 	}
 }
 
-void playerInit(void){
-	currentRoom = 0;
-	playerX     = 0;
-	playerY     = 0;
+void playerRandomPosition(void){
+	playerInfo.playerX = (random(MAP_MAX_WIDTH  - 4) + 2);
+	playerInfo.playerY = (random(MAP_MAX_HEIGHT - 4) + 2);
 }
 
-void playerRandomPosition(void){
-	playerX = (random(MAP_MAX_WIDTH  - 4) + 2);
-	playerY = (random(MAP_MAX_HEIGHT - 4) + 2);
+extern struct player_s* playerGetInfo(void){
+	return &playerInfo;
 }

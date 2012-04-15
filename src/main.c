@@ -9,15 +9,13 @@
 #include "input.h"
 #include "map.h"
 
-extern int playerX,playerY;
-int key;
-
 int main(int argc, const char *argv[]){
 	logInit();
 	worldInit();
 	renderInit();
 	playerInit();
 	tileInit();
+	playerInit();
 
 	srand(time(NULL));
 
@@ -25,6 +23,7 @@ int main(int argc, const char *argv[]){
 	LOG_INFO("Build time: " __DATE__ " " __TIME__);
 
 	/*
+	int key;
 	while(1){
 		key = getch();
 
@@ -32,10 +31,7 @@ int main(int argc, const char *argv[]){
 	}
 	*/
 
-	//Setup the first level and player
-	playerX = 10;
-	playerY = 10;
-
+	//Setup the level
 	roomInit(0);
 	mapCreateRoom(0);
 	currentRoom = 0;

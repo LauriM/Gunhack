@@ -78,8 +78,8 @@ void mapCreateRoom(int id){
 	int roomWidth  = 0;
 	int roomHeight = 0;
 
-	roomX = playerX - 1;
-	roomY = playerY - 1; 
+	roomX = playerGetInfo()->playerX - 1;
+	roomY = playerGetInfo()->playerY - 1; 
 
 	mapEditBox(id,roomX,roomY,3,3,TILE_EMPTY);
 
@@ -116,8 +116,8 @@ void mapCreateRoom(int id){
 
 	int tunnelCount = roomCount + (random(GEN_TUNNEL_COUNT_MAX - GEN_TUNNEL_COUNT_MIN) + GEN_TUNNEL_COUNT_MIN);
 	i = 0;
-	digX = playerX;
-	digY = playerY;
+	digX = playerGetInfo()->playerX;
+	digY = playerGetInfo()->playerY;
 
 	while(i < tunnelCount){
 		digLeft       = random(GEN_TUNNEL_MAX_LENGTH);
@@ -355,11 +355,11 @@ int mapLosCheck(int x1, int y1, int x2, int y2) {
 
 void mapScanFov(void){
 	int x,y;
-	assert(mapGetTileByPos(currentRoom, playerX, playerY)->block != 1);//Player should not be in the visblock thing
+	assert(mapGetTileByPos(currentRoom, playerGetInfo()->playerX, playerGetInfo()->playerY)->block != 1);//Player should not be in the visblock thing
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
-			if(mapLosCheck(playerX,playerY,x,y) == 1){
+			if(mapLosCheck(playerGetInfo()->playerX,playerGetInfo()->playerY,x,y) == 1){
 				//Player can see, lets move the tile to the visualData table
 				room[currentRoom].visData[x][y] = room[currentRoom].mapData[x][y];
 			}

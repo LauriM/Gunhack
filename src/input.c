@@ -10,7 +10,7 @@ void inputHandle(){
 	int key = getch();
 	switch(key){
 		case 60://<
-			if(room[currentRoom].mapData[playerX][playerY] == TILE_STAIRS_UP){
+			if(room[currentRoom].mapData[playerGetInfo()->playerX][playerGetInfo()->playerY] == TILE_STAIRS_UP){
 				if(currentRoom == 0){
                     //TODO: can't go into -1 of room table, implement quit message style nethack
 				}else{
@@ -25,7 +25,7 @@ void inputHandle(){
 			}
 			break;
 		case 62://>
-			if(room[currentRoom].mapData[playerX][playerY] == TILE_STAIRS_DOWN){
+			if(room[currentRoom].mapData[playerGetInfo()->playerX][playerGetInfo()->playerY] == TILE_STAIRS_DOWN){
 				if(currentRoom > WORLD_ROOM_COUNT){
 					//TODO: can't go into -1 of room table, implement message
 				}else{
