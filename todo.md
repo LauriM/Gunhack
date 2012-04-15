@@ -1,7 +1,6 @@
 TODO
 ====
 
-* Log system
 * better world generation
 * HUD
 * ingame message system

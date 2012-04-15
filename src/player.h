@@ -1,5 +1,6 @@
 #ifndef PLAYER_H
 
+//Struct these
 int playerX;
 int playerY;
 

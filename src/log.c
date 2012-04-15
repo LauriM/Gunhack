@@ -1,7 +1,6 @@
 #include "globals.h"
 #include "log.h"
 #include <stdio.h>
-#include <string.h>
 #include <time.h>
 
 FILE *logFile;

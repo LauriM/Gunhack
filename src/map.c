@@ -118,7 +118,7 @@ void mapCreateRoom(int id){
 	int digLeft;
 	int digLeftRotate;
 
-	int tunnelCount = roomCount + random(GEN_TUNNEL_EXTRA);
+	int tunnelCount = roomCount + (random(GEN_TUNNEL_COUNT_MAX - GEN_TUNNEL_COUNT_MIN) + GEN_TUNNEL_COUNT_MIN);
 	i = 0;
 	digX = playerX;
 	digY = playerY;
