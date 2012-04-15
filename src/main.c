@@ -21,7 +21,6 @@ int main(int argc, const char *argv[]){
 
 	srand(time(NULL));
 
-	LOG_INFO("################");
 	LOG_INFO("Game starting...");
 	LOG_INFO("Build time: " __DATE__ " " __TIME__);
 

@@ -7,9 +7,9 @@ enum{
 	TILE_VOID = 0,
 	TILE_EMPTY,
 	TILE_ROCK,
-	TILE_COUNT,
 	TILE_STAIRS_UP,
-	TILE_STAIRS_DOWN
+	TILE_STAIRS_DOWN,
+	TILE_COUNT
 };
 
 enum{
@@ -19,9 +19,7 @@ enum{
 
 struct tile_s{
 	char symbol;
-	int visBlock;
-	int moveBlock;
-	//TODO: Combine visblock and moveblock!
+	int block;
 };
 
 struct room_s{
@@ -29,8 +27,6 @@ struct room_s{
 	int colorData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
 	int visData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];//Contains the data that player has seen
 	int roomType;
-
-	//TODO: If system to have rooms left/right int x/y/z should be added to the room. Atm the system can just use the currentRoom as depth
 };
 
 extern int currentRoom;

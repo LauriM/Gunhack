@@ -11,25 +11,20 @@ struct tile_s tileInfo[TILE_COUNT];
 struct room_s room[WORLD_ROOM_COUNT]; //Room list
 
 void tileInit(void){
-	tileInfo[TILE_VOID].symbol    = ' ';
-	tileInfo[TILE_VOID].visBlock  = 0;
-	tileInfo[TILE_VOID].moveBlock = 0;
+	tileInfo[TILE_VOID].symbol        = ' ';
+	tileInfo[TILE_VOID].block         = 0;
 
-	tileInfo[TILE_EMPTY].symbol    = '.';
-	tileInfo[TILE_EMPTY].visBlock  = 0;
-	tileInfo[TILE_EMPTY].moveBlock = 0;
+	tileInfo[TILE_EMPTY].symbol       = '.';
+	tileInfo[TILE_EMPTY].block        = 0;
 
-	tileInfo[TILE_ROCK].symbol    = '#';
-	tileInfo[TILE_ROCK].visBlock  = 1;
-	tileInfo[TILE_ROCK].moveBlock = 1;
+	tileInfo[TILE_ROCK].symbol        = '#';
+	tileInfo[TILE_ROCK].block         = 1;
 
-	tileInfo[TILE_STAIRS_UP].symbol    = '<';
-	tileInfo[TILE_STAIRS_UP].visBlock  = 0;
-	tileInfo[TILE_STAIRS_UP].moveBlock = 0;
+	tileInfo[TILE_STAIRS_UP].symbol   = '<';
+	tileInfo[TILE_STAIRS_UP].block    = 0;
 
-	tileInfo[TILE_STAIRS_DOWN].symbol    = '>';
-	tileInfo[TILE_STAIRS_DOWN].visBlock  = 0;
-	tileInfo[TILE_STAIRS_DOWN].moveBlock = 0;
+	tileInfo[TILE_STAIRS_DOWN].symbol = '>';
+	tileInfo[TILE_STAIRS_DOWN].block  = 0;
 }
 
 void worldInit(void){
@@ -63,6 +58,7 @@ void mapRender(void){
 }
 
 void mapCreateRoom(int id){
+	//TODO: Clean up this function bit, its kinda a mess
 	int x,y;
 
 	room[id].roomType = ROOM_TYPE_DUNGEON;
@@ -348,7 +344,7 @@ int mapLosCheck(int x1, int y1, int x2, int y2) {
 		int y = y1 + ((dy < 0) ? ceil(i*y_mul) : i*y_mul);
 
 
-		if(mapGetTileByPos(currentRoom, x, y)->visBlock == 1){
+		if(mapGetTileByPos(currentRoom, x, y)->block == 1){
 			return false;
 		}
 	}
@@ -359,7 +355,7 @@ int mapLosCheck(int x1, int y1, int x2, int y2) {
 
 void mapScanFov(void){
 	int x,y;
-	assert(mapGetTileByPos(currentRoom, playerX, playerY)->visBlock != 1);//Player should not be in the visblock thing
+	assert(mapGetTileByPos(currentRoom, playerX, playerY)->block != 1);//Player should not be in the visblock thing
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){

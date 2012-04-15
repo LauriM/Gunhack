@@ -1,6 +1,6 @@
 #ifndef PLAYER_H
 
-//Struct these
+//TODO:Struct these
 int playerX;
 int playerY;
 
