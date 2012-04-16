@@ -19,11 +19,10 @@ void inputHandle(){
 					if(room[currentRoom].roomType == ROOM_TYPE_UNINITIALIZED){
 						playerRandomPosition();
 						mapCreateRoom(currentRoom);//TODO: Only create if doesn't exist!
-					}else{
-						struct pos_s pos =  mapFindTilePos(currentRoom,TILE_STAIRS_DOWN);
-						playerGetInfo()->playerX = pos.x;
-						playerGetInfo()->playerY = pos.y;
 					}
+					struct pos_s pos =  mapFindTilePos(currentRoom,TILE_STAIRS_DOWN);
+					playerGetInfo()->playerX = pos.x;
+					playerGetInfo()->playerY = pos.y;
 				}
 			}
 			break;
@@ -37,11 +36,10 @@ void inputHandle(){
 					if(room[currentRoom].roomType == ROOM_TYPE_UNINITIALIZED){
 						playerRandomPosition();
 						mapCreateRoom(currentRoom);
-					}else{
-						struct pos_s pos =  mapFindTilePos(currentRoom,TILE_STAIRS_UP);
-						playerGetInfo()->playerX = pos.x;
-						playerGetInfo()->playerY = pos.y;
 					}
+					struct pos_s pos =  mapFindTilePos(currentRoom,TILE_STAIRS_UP);
+					playerGetInfo()->playerX = pos.x;
+					playerGetInfo()->playerY = pos.y;
 				}
 			}
 			break;
