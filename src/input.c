@@ -12,13 +12,13 @@ void inputHandle(){
 		case 60://<
 			if(room[currentRoom].mapData[playerGetInfo()->playerX][playerGetInfo()->playerY] == TILE_STAIRS_UP){
 				if(currentRoom == 0){
-                    //TODO: can't go into -1 of room table, implement quit message style nethack
+                    //TODO: can't go into -1 of room table, implement quit prompt
 					LOG_INFO("Player trying to leave the level by going up");
 				}else{
 					currentRoom = currentRoom - 1;
 					if(room[currentRoom].roomType == ROOM_TYPE_UNINITIALIZED){
 						playerRandomPosition();
-						mapCreateRoom(currentRoom);//TODO: Only create if doesn't exist!
+						mapCreateRoom(currentRoom);
 					}
 					struct pos_s pos =  mapFindTilePos(currentRoom,TILE_STAIRS_DOWN);
 					playerGetInfo()->playerX = pos.x;
@@ -50,7 +50,7 @@ void inputHandle(){
 			LOG_INFO("Using see all cheat");
 			break;
 		case 116://t
-			playerRandomPosition();//TODO: Change cheat behavior to drop down level, not to destroy existing levels
+			playerRandomPosition();
 			mapCreateRoom(currentRoom);//QQQ
 			LOG_INFO("Forced current room regeneration");
 			mapScanFov();

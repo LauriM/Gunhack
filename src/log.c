@@ -16,7 +16,6 @@ void logUnInit(void){
 }
 
 void insertLog(char msg[500]){
-	//TODO: Insert timestamp
 	time_t rawtime;
 	struct tm * timeinfo;
 	char buffer[80];

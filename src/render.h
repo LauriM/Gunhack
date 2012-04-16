@@ -11,7 +11,7 @@ enum{
 	TERM_COLOR_CYAN,
 	TERM_COLOR_WHITE_RED,
 	TERM_COLOR_WHITE_GREEN
-	//TODO: rest...
+	//TODO: rest of the colors...
 };
 
 extern void renderInit(void);

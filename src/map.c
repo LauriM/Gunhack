@@ -158,7 +158,6 @@ void mapCreateRoom(int id){
 	}
 
 	//Finally, setup the "borders" of the map as solid rock
-	//TODO: Consider more world after the sides(?)
 	//TODO: Consider indestructible walls at borders(?)
 	mapEditBox(id , 0               , 0              , MAP_MAX_WIDTH-1 , 1              , TILE_ROCK);//Top
 	mapEditBox(id , 0               , MAP_MAX_HEIGHT-1 , MAP_MAX_WIDTH-1 , 1              , TILE_ROCK);//bottom
