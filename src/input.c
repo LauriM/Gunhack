@@ -13,13 +13,16 @@ void inputHandle(){
 			if(room[currentRoom].mapData[playerGetInfo()->playerX][playerGetInfo()->playerY] == TILE_STAIRS_UP){
 				if(currentRoom == 0){
                     //TODO: can't go into -1 of room table, implement quit message style nethack
+					LOG_INFO("Player trying to leave the level by going up");
 				}else{
 					currentRoom = currentRoom - 1;
 					if(room[currentRoom].roomType == ROOM_TYPE_UNINITIALIZED){
 						playerRandomPosition();
 						mapCreateRoom(currentRoom);//TODO: Only create if doesn't exist!
 					}else{
-						//TODO: Locate up stairs and place player there
+						struct pos_s pos =  mapFindTilePos(currentRoom,TILE_STAIRS_DOWN);
+						playerGetInfo()->playerX = pos.x;
+						playerGetInfo()->playerY = pos.y;
 					}
 				}
 			}
@@ -28,13 +31,16 @@ void inputHandle(){
 			if(room[currentRoom].mapData[playerGetInfo()->playerX][playerGetInfo()->playerY] == TILE_STAIRS_DOWN){
 				if(currentRoom > WORLD_ROOM_COUNT){
 					//TODO: can't go into -1 of room table, implement message
+					LOG_INFO("Trying to go outside the world_room_count!");
 				}else{
 					currentRoom = currentRoom + 1;
 					if(room[currentRoom].roomType == ROOM_TYPE_UNINITIALIZED){
 						playerRandomPosition();
 						mapCreateRoom(currentRoom);
 					}else{
-						//TODO: Locate up stairs and place player there
+						struct pos_s pos =  mapFindTilePos(currentRoom,TILE_STAIRS_UP);
+						playerGetInfo()->playerX = pos.x;
+						playerGetInfo()->playerY = pos.y;
 					}
 				}
 			}

@@ -376,3 +376,24 @@ void mapCheatSeeAll(void){
 		}
 	}
 }
+
+struct pos_s mapFindTilePos(int roomId,int tileType){
+	int x,y;
+
+	struct pos_s pos;
+
+	for(x = 0;x < MAP_MAX_WIDTH;x++){
+		for(y = 0;y < MAP_MAX_HEIGHT;y++){
+			if(room[roomId].mapData[x][y] == tileType){
+				pos.x = x;
+				pos.y = y;
+				return pos;
+			}
+		}
+	}
+
+	pos.x = 0;
+	pos.x = 0;
+
+	return pos;
+}
