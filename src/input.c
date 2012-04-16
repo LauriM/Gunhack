@@ -23,6 +23,7 @@ void inputHandle(){
 					struct pos_s pos =  mapFindTilePos(currentRoom,TILE_STAIRS_DOWN);
 					playerGetInfo()->playerX = pos.x;
 					playerGetInfo()->playerY = pos.y;
+					mapScanFov();
 				}
 			}
 			break;
@@ -40,6 +41,7 @@ void inputHandle(){
 					struct pos_s pos =  mapFindTilePos(currentRoom,TILE_STAIRS_UP);
 					playerGetInfo()->playerX = pos.x;
 					playerGetInfo()->playerY = pos.y;
+					mapScanFov();
 				}
 			}
 			break;
@@ -50,7 +52,8 @@ void inputHandle(){
 		case 116://t
 			playerRandomPosition();//TODO: Change cheat behavior to drop down level, not to destroy existing levels
 			mapCreateRoom(currentRoom);//QQQ
-			LOG_INFO("Forced room regeneration");
+			LOG_INFO("Forced current room regeneration");
+			mapScanFov();
 			break;
 		case 106:  
 			playerMove(DIR_S);

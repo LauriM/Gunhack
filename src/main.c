@@ -36,11 +36,12 @@ int main(int argc, const char *argv[]){
 	roomInit(0);
 	mapCreateRoom(0);
 	currentRoom = 0;
-	mapScanFov();
 
 	struct pos_s pos =  mapFindTilePos(currentRoom,TILE_STAIRS_UP);
 	playerGetInfo()->playerX = pos.x;
 	playerGetInfo()->playerY = pos.y;
+
+	mapScanFov();
 
 	//==========================================================//
 	//  Main loop

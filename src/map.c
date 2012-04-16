@@ -194,9 +194,6 @@ void mapCreateRoom(int id){
 			i++;//Break out
 		}
 	}
-
-	//And finally update the FoV
-	mapScanFov();
 }
 
 void mapEditPoint(int id,int x,int y,int tileType){
