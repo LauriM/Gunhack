@@ -7,6 +7,7 @@ enum{
 	TILE_VOID = 0,
 	TILE_EMPTY,
 	TILE_ROCK,
+	TILE_INDESTRUCTIBLE_ROCK,
 	TILE_STAIRS_UP,
 	TILE_STAIRS_DOWN,
 	TILE_COUNT
@@ -29,7 +30,6 @@ struct room_s{
 	int roomType;
 };
 
-extern int currentRoom;
 extern struct room_s room[WORLD_ROOM_COUNT]; //Room list
 extern struct tile_s tileInfo[TILE_COUNT];
 

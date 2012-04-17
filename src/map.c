@@ -16,6 +16,9 @@ void tileInit(void){
 	tileInfo[TILE_EMPTY].symbol       = '.';
 	tileInfo[TILE_EMPTY].block        = 0;
 
+	tileInfo[TILE_INDESTRUCTIBLE_ROCK].symbol        = '#';
+	tileInfo[TILE_INDESTRUCTIBLE_ROCK].block         = 1;
+
 	tileInfo[TILE_ROCK].symbol        = '#';
 	tileInfo[TILE_ROCK].block         = 1;
 
@@ -157,11 +160,10 @@ void mapCreateRoom(int id){
 	}
 
 	//Finally, setup the "borders" of the map as solid rock
-	//TODO: Consider indestructible walls at borders(?)
-	mapEditBox(id , 0               , 0              , MAP_MAX_WIDTH-1 , 1              , TILE_ROCK);//Top
-	mapEditBox(id , 0               , MAP_MAX_HEIGHT-1 , MAP_MAX_WIDTH-1 , 1              , TILE_ROCK);//bottom
-	mapEditBox(id , 0               , 0              , 1             , MAP_MAX_HEIGHT-1 , TILE_ROCK); //Left
-	mapEditBox(id , MAP_MAX_WIDTH-1 , 0              , 1             , MAP_MAX_HEIGHT-1 , TILE_ROCK); //Right
+	mapEditBox(id , 0               , 0              , MAP_MAX_WIDTH-1 , 1              , TILE_INDESTRUCTIBLE_ROCK);//Top
+	mapEditBox(id , 0               , MAP_MAX_HEIGHT-1 , MAP_MAX_WIDTH-1 , 1              , TILE_INDESTRUCTIBLE_ROCK);//bottom
+	mapEditBox(id , 0               , 0              , 1             , MAP_MAX_HEIGHT-1 , TILE_INDESTRUCTIBLE_ROCK); //Left
+	mapEditBox(id , MAP_MAX_WIDTH-1 , 0              , 1             , MAP_MAX_HEIGHT-1 , TILE_INDESTRUCTIBLE_ROCK); //Right
 
 	//Now that the room is generated, lets setup the color layer
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
