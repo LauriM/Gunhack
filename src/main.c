@@ -58,8 +58,11 @@ int main(int argc, const char *argv[]){
 	//ending game
 	clear();
 
+	LOG_INFO("Game over has been triggered.");
 	printw("Game over!");
 	getch();
+
+	LOG_INFO("Closing game...");
 
 	renderUnInit();
 	logUnInit();
