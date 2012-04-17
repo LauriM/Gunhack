@@ -5,6 +5,7 @@
 #include "player.h"
 #include "math.h"//QQQ
 #include "map.h"
+#include "hud.h"
 
 void inputHandle(){
 	int key = getch();
@@ -12,8 +13,13 @@ void inputHandle(){
 		case 60://<
 			if(room[currentRoom].mapData[playerGetInfo()->playerX][playerGetInfo()->playerY] == TILE_STAIRS_UP){
 				if(currentRoom == 0){
-                    //TODO: can't go into -1 of room table, implement quit prompt
 					LOG_INFO("Player trying to leave the level by going up");
+
+					if(prompt("Do you want to escape the dungeon?") == 1){
+						LOG_INFO("Player left the dungeon!");
+						playerGetInfo()->endGame = 1;
+					}
+
 				}else{
 					currentRoom = currentRoom - 1;
 					if(room[currentRoom].roomType == ROOM_TYPE_UNINITIALIZED){

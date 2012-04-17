@@ -30,7 +30,7 @@ int main(int argc, const char *argv[]){
 
 		printf("%i",key);
 	}
-	*/
+    */
 
 	//Setup the level
 	roomInit(0);
@@ -46,7 +46,7 @@ int main(int argc, const char *argv[]){
 	//==========================================================//
 	//  Main loop
 	//==========================================================//          
-	while(1){
+	while(playerGetInfo()->endGame == 0){
 		mapRender();
 		playerRender();
 
@@ -54,6 +54,12 @@ int main(int argc, const char *argv[]){
 
 		clear();
 	}
+
+	//ending game
+	clear();
+
+	printw("Game over!");
+	getch();
 
 	renderUnInit();
 	logUnInit();
