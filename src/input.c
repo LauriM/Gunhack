@@ -11,8 +11,8 @@ void inputHandle(){
 	int key = getch();
 	switch(key){
 		case 60://<
-			if(room[currentRoom].mapData[playerGetInfo()->playerX][playerGetInfo()->playerY] == TILE_STAIRS_UP){
-				if(currentRoom == 0){
+			if(room[playerGetInfo()->playerZ].mapData[playerGetInfo()->playerX][playerGetInfo()->playerY] == TILE_STAIRS_UP){
+				if(playerGetInfo()->playerZ == 0){
 					LOG_INFO("Player trying to leave the level by going up");
 
 					if(prompt("Do you want to escape the dungeon?") == 1){
@@ -21,12 +21,12 @@ void inputHandle(){
 					}
 
 				}else{
-					currentRoom = currentRoom - 1;
-					if(room[currentRoom].roomType == ROOM_TYPE_UNINITIALIZED){
+					playerGetInfo()->playerZ = playerGetInfo()->playerZ - 1;
+					if(room[playerGetInfo()->playerZ].roomType == ROOM_TYPE_UNINITIALIZED){
 						playerRandomPosition();
-						mapCreateRoom(currentRoom);
+						mapCreateRoom(playerGetInfo()->playerZ);
 					}
-					struct pos_s pos = mapFindTilePos(currentRoom,TILE_STAIRS_DOWN);
+					struct pos_s pos = mapFindTilePos(playerGetInfo()->playerZ,TILE_STAIRS_DOWN);
 					playerGetInfo()->playerX = pos.x;
 					playerGetInfo()->playerY = pos.y;
 					mapScanFov();
@@ -34,17 +34,16 @@ void inputHandle(){
 			}
 			break;
 		case 62://>
-			if(room[currentRoom].mapData[playerGetInfo()->playerX][playerGetInfo()->playerY] == TILE_STAIRS_DOWN){
-				if(currentRoom > WORLD_ROOM_COUNT){
-					//TODO: can't go into -1 of room table, implement message
+			if(room[playerGetInfo()->playerZ].mapData[playerGetInfo()->playerX][playerGetInfo()->playerY] == TILE_STAIRS_DOWN){
+				if(playerGetInfo()->playerZ > WORLD_ROOM_COUNT){
 					LOG_INFO("Trying to go outside the world_room_count!");
 				}else{
-					currentRoom = currentRoom + 1;
-					if(room[currentRoom].roomType == ROOM_TYPE_UNINITIALIZED){
+					playerGetInfo()->playerZ = playerGetInfo()->playerZ + 1;
+					if(room[playerGetInfo()->playerZ].roomType == ROOM_TYPE_UNINITIALIZED){
 						playerRandomPosition();
-						mapCreateRoom(currentRoom);
+						mapCreateRoom(playerGetInfo()->playerZ);
 					}
-					struct pos_s pos =  mapFindTilePos(currentRoom,TILE_STAIRS_UP);
+					struct pos_s pos =  mapFindTilePos(playerGetInfo()->playerZ,TILE_STAIRS_UP);
 					playerGetInfo()->playerX = pos.x;
 					playerGetInfo()->playerY = pos.y;
 					mapScanFov();
@@ -57,7 +56,7 @@ void inputHandle(){
 			break;
 		case 116://t
 			playerRandomPosition();
-			mapCreateRoom(currentRoom);//QQQ
+			mapCreateRoom(playerGetInfo()->playerZ);//QQQ
 			LOG_INFO("Forced current room regeneration");
 			mapScanFov();
 			break;

@@ -3,9 +3,8 @@
 struct player_s{
 	int playerX;
 	int playerY;
+	int playerZ;
 	int endGame;
-
-	//TODO: move currentRoom here to make saving games possible!
 };
 
 extern void playerInit();

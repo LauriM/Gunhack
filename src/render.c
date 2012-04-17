@@ -36,6 +36,7 @@ void printxy(int x,int y,char* ch){
 	assert(x < MAP_MAX_WIDTH);
 	assert(y < MAP_MAX_HEIGHT);
 
+	//+1 to move map down one slot to make room for the prompt
 	move(y+1,x);
 	printw(ch);
 }
@@ -46,6 +47,7 @@ void printIntxy(int x,int y,int i){
 	assert(x < MAP_MAX_WIDTH);
 	assert(y < MAP_MAX_HEIGHT);
 
+	//+1 to move map down one slot to make room for the prompt
 	move(y+1,x);
 	printw("%c",i);
 }

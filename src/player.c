@@ -37,7 +37,7 @@ void playerMove(int direction){
 	}
 
 	//Check if the new position is ok
-	if(mapGetTileByPos(currentRoom,newX,newY)->block == 0){
+	if(mapGetTileByPos(playerGetInfo()->playerZ,newX,newY)->block == 0){
 		playerInfo.playerX = newX;
 		playerInfo.playerY = newY;
 		mapScanFov();

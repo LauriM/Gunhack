@@ -6,7 +6,6 @@
 #include <math.h>
 #include "math.h"
 
-int currentRoom;
 struct tile_s tileInfo[TILE_COUNT];
 struct room_s room[WORLD_ROOM_COUNT]; //Room list
 
@@ -50,9 +49,9 @@ void mapRender(void){
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
-			setColor(room[currentRoom].colorData[x][y]);
-			printIntxy(x,y,mapGetVisByPos(currentRoom,x,y)->symbol);
-			setColorOff(room[currentRoom].colorData[x][y]);
+			setColor(room[playerGetInfo()->playerZ].colorData[x][y]);
+			printIntxy(x,y,mapGetVisByPos(playerGetInfo()->playerZ,x,y)->symbol);
+			setColorOff(room[playerGetInfo()->playerZ].colorData[x][y]);
 		}
 	}
 }
@@ -340,7 +339,7 @@ int mapLosCheck(int x1, int y1, int x2, int y2) {
 		int y = y1 + ((dy < 0) ? ceil(i*y_mul) : i*y_mul);
 
 
-		if(mapGetTileByPos(currentRoom, x, y)->block == 1){
+		if(mapGetTileByPos(playerGetInfo()->playerZ, x, y)->block == 1){
 			return false;
 		}
 	}
@@ -351,13 +350,13 @@ int mapLosCheck(int x1, int y1, int x2, int y2) {
 
 void mapScanFov(void){
 	int x,y;
-	assert(mapGetTileByPos(currentRoom, playerGetInfo()->playerX, playerGetInfo()->playerY)->block != 1);//Player should not be in the visblock thing
+	assert(mapGetTileByPos(playerGetInfo()->playerZ, playerGetInfo()->playerX, playerGetInfo()->playerY)->block != 1);//Player should not be in the visblock thing
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
 			if(mapLosCheck(playerGetInfo()->playerX,playerGetInfo()->playerY,x,y) == 1){
 				//Player can see, lets move the tile to the visualData table
-				room[currentRoom].visData[x][y] = room[currentRoom].mapData[x][y];
+				room[playerGetInfo()->playerZ].visData[x][y] = room[playerGetInfo()->playerZ].mapData[x][y];
 			}
 		}
 	}
@@ -368,7 +367,7 @@ void mapCheatSeeAll(void){
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
-			room[currentRoom].visData[x][y] = room[currentRoom].mapData[x][y];
+			room[playerGetInfo()->playerZ].visData[x][y] = room[playerGetInfo()->playerZ].mapData[x][y];
 		}
 	}
 }

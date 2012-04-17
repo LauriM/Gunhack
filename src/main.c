@@ -35,9 +35,9 @@ int main(int argc, const char *argv[]){
 	//Setup the level
 	roomInit(0);
 	mapCreateRoom(0);
-	currentRoom = 0;
+	playerGetInfo()->playerZ = 0;
 
-	struct pos_s pos =  mapFindTilePos(currentRoom,TILE_STAIRS_UP);
+	struct pos_s pos =  mapFindTilePos(playerGetInfo()->playerZ,TILE_STAIRS_UP);
 	playerGetInfo()->playerX = pos.x;
 	playerGetInfo()->playerY = pos.y;
 
