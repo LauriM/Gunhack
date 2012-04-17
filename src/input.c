@@ -26,7 +26,7 @@ void inputHandle(){
 						playerRandomPosition();
 						mapCreateRoom(currentRoom);
 					}
-					struct pos_s pos =  mapFindTilePos(currentRoom,TILE_STAIRS_DOWN);
+					struct pos_s pos = mapFindTilePos(currentRoom,TILE_STAIRS_DOWN);
 					playerGetInfo()->playerX = pos.x;
 					playerGetInfo()->playerY = pos.y;
 					mapScanFov();

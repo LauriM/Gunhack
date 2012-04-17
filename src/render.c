@@ -36,7 +36,7 @@ void printxy(int x,int y,char* ch){
 	assert(x < MAP_MAX_WIDTH);
 	assert(y < MAP_MAX_HEIGHT);
 
-	move(y,x);
+	move(y+1,x);
 	printw(ch);
 }
 
@@ -46,6 +46,6 @@ void printIntxy(int x,int y,int i){
 	assert(x < MAP_MAX_WIDTH);
 	assert(y < MAP_MAX_HEIGHT);
 
-	move(y,x);
+	move(y+1,x);
 	printw("%c",i);
 }
