@@ -2,6 +2,8 @@
 #include "globals.h"
 #include "hud.h"
 #include "render.h"
+#include "player.h"
+#include <stdio.h>
 
 int prompt(char text[250]){
 	move(0,0);
@@ -22,4 +24,13 @@ int prompt(char text[250]){
 
 	//Not y, return false just to be sure
 	return 0;
+}
+
+void hudRender(){
+	char statusLine[STATUSLINE_MAX_CHARS] = "";
+
+	sprintf(statusLine,"Depth: %i Hp 23/43",playerGetInfo()->playerZ);
+	
+	move(22,0);
+	printw(statusLine);
 }

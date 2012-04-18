@@ -74,4 +74,10 @@ void inputHandle(){
 			break;
 	}
 
+	//Numpad:
+	// 55 = 7
+	// 49 = 1
+	// 51 = 3
+	// 57 = 9
+	// *taken under tmux may or may not be the correct ones*
 }

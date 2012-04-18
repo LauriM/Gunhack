@@ -6,6 +6,7 @@
 #include "render.h"
 #include "player.h"
 #include "globals.h"
+#include "hud.h"
 #include "math.h"
 #include "input.h"
 #include "map.h"
@@ -30,7 +31,7 @@ int main(int argc, const char *argv[]){
 
 		printf("%i",key);
 	}
-    */
+	*/
 
 	//Setup the level
 	roomInit(0);
@@ -48,6 +49,7 @@ int main(int argc, const char *argv[]){
 	//==========================================================//          
 	while(playerGetInfo()->endGame == 0){
 		mapRender();
+		hudRender();
 		playerRender();
 
 		inputHandle();
