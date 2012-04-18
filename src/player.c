@@ -7,8 +7,14 @@
 struct player_s playerInfo;
 
 void playerInit(){
+	//TODO: Why repeat player? why not x 
 	playerInfo.playerX = 10;
 	playerInfo.playerY = 10;
+	playerInfo.hp      = 10;
+	playerInfo.points  = 0;
+	playerInfo.maxhp   = 10;
+	playerInfo.exp     = 0;
+	playerInfo.level   = 1;
 }
 
 void playerRender(){

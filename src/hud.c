@@ -29,7 +29,7 @@ int prompt(char text[250]){
 void hudRender(){
 	char statusLine[STATUSLINE_MAX_CHARS] = "";
 
-	sprintf(statusLine,"Depth: %i Hp 23/43",playerGetInfo()->playerZ);
+	sprintf(statusLine,"Level: %i Hp: %i/%i Exp: %i Level: %i",playerGetInfo()->playerZ,playerGetInfo()->hp,playerGetInfo()->maxhp,playerGetInfo()->exp,playerGetInfo()->level);
 	
 	move(22,0);
 	printw(statusLine);

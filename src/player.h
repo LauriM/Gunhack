@@ -4,6 +4,15 @@ struct player_s{
 	int playerX;
 	int playerY;
 	int playerZ;
+
+	int points;
+
+	int hp;
+	int maxhp;
+
+	int exp;
+	int level;
+
 	int endGame;
 };
 
