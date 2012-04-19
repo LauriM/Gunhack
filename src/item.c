@@ -20,6 +20,18 @@ void itemInit(void){
 	}
 }
 
+void itemClearFromLevel(int z){
+	//TODO: Add assert
+	
+	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+		if(itemData[i].state != ITEMSTATE_EMPTY){
+			if(itemData[i].z == z){
+				itemData[i].state = ITEMSTATE_EMPTY;//Removes the item from the game
+			}
+		}
+	}
+}
+
 void itemSpawn(int z,int x,int y,int type){
 	//TODO: Add asserts here!
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){

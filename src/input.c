@@ -3,9 +3,11 @@
 #include "input.h"
 #include "globals.h"
 #include "player.h"
-#include "math.h"//QQQ
 #include "map.h"
 #include "hud.h"
+
+#include "math.h"//QQQ
+#include "item.h"
 
 void inputHandle(){
 	int key = getch();
@@ -55,8 +57,10 @@ void inputHandle(){
 			LOG_INFO("Using see all cheat");
 			break;
 		case 116://t
+			//Cheat
 			playerRandomPosition();
-			mapCreateRoom(playerGetInfo()->playerZ);//QQQ
+			itemClearFromLevel(playerGetInfo()->playerZ);
+			mapCreateRoom(playerGetInfo()->playerZ);
 			LOG_INFO("Forced current room regeneration");
 			mapScanFov();
 			break;

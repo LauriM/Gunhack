@@ -44,5 +44,6 @@ struct item_s* itemGetInfo(int id);
 extern void itemInit(void);
 extern void itemSpawn(int z,int x,int y,int type);
 extern void itemSpawnRandom(int z);
+extern void itemClearFromLevel(int z);
 extern void itemRender(void);
 #endif
