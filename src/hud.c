@@ -9,6 +9,8 @@ int prompt(char text[250]){
 	move(0,0);
 	printw(text);
 
+	sprintf(text,"%s (y/n)",text);
+
 	int input = getch();
 
 	//y = 121
@@ -22,6 +24,7 @@ int prompt(char text[250]){
 			break;
 	}
 
+	LOG_WARNING("User failed to answer y/n. Returning n");
 	//Not y, return false just to be sure
 	return 0;
 }

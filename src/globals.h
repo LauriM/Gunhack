@@ -28,5 +28,11 @@
 
 #define GEN_MAX_TRIES 200
 
+#define GEN_ITEM_COUNT_MIN 5
+#define GEN_ITEM_COUNT_MAX 25
+
 //Hud
 #define STATUSLINE_MAX_CHARS 100
+
+//Items
+#define ITEM_MAX_COUNT 100 //How many items can be in the game

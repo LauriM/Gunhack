@@ -3,7 +3,8 @@
 
 enum{
 	ITEMSTATE_GROUND = 0,
-	ITEMSTATE_INV
+	ITEMSTATE_INV,
+	ITEMSTATE_EMPTY
 };
 
 enum{
@@ -23,8 +24,21 @@ struct item_s{
 	int itemType;
 };
 
+struct itemdata_s{
+	int itemId;//Links to the item_s in the itemInfo
+	int state;
+	int x;
+	int y;
+	int z;
+};
+
+extern struct itemdata_s itemData[ITEM_MAX_COUNT];
 extern struct item_s itemInfo[ITEM_COUNT];
 
-void itemInit(void);
+//itemData -> itemId -> iteminfo -> item_s -> itemtype/rarity
+
+extern void itemInit(void);
+extern void itemSpawn(int z,int x,int y,int type);
+extern void itemSpawnRandom(int z);
 
 #endif

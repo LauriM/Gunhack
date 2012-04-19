@@ -4,6 +4,9 @@
 int random(int max){
 	return rand() % max;
 }
+int randomRange(int min,int max){
+	return (rand() % max) + min;
+}
 
 int setMinMax(int value,int min,int max){
 	if(value > max){

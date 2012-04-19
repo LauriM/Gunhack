@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "math.h"
+#include "item.h"
 
 struct tile_s tileInfo[TILE_COUNT];
 struct room_s room[WORLD_ROOM_COUNT]; //Room list
@@ -194,6 +195,10 @@ void mapCreateRoom(int id){
 			i++;//Break out
 		}
 	}
+
+	itemSpawnRandom(id);
+
+	LOG_INFO("Level generated");
 }
 
 void mapEditPoint(int id,int x,int y,int tileType){
@@ -279,26 +284,26 @@ int mapCheckTileCoords(int id,int boxX,int boxY,int width,int height,int tileTyp
 	return 1;
 }
 
-struct tile_s* mapGetTileByPos(int id,int x,int y){
+struct tile_s* mapGetTileByPos(int z,int x,int y){
 	assert(x < MAP_MAX_WIDTH);
 	assert(x >= 0);
 	assert(y < MAP_MAX_HEIGHT);
 	assert(y >= 0);
-	assert(id >= 0);
-	assert(id < WORLD_ROOM_COUNT);
+	assert(z >= 0);
+	assert(z < WORLD_ROOM_COUNT);
 
-	return &tileInfo[room[id].mapData[x][y]];
+	return &tileInfo[room[z].mapData[x][y]];
 }
 
-struct tile_s* mapGetVisByPos(int id,int x,int y){
+struct tile_s* mapGetVisByPos(int z,int x,int y){
 	assert(x < MAP_MAX_WIDTH);
 	assert(x >= 0);
 	assert(y < MAP_MAX_HEIGHT);
 	assert(y >= 0);
-	assert(id >= 0);
-	assert(id < WORLD_ROOM_COUNT);
+	assert(z >= 0);
+	assert(z < WORLD_ROOM_COUNT);
 
-	return &tileInfo[room[id].visData[x][y]];
+	return &tileInfo[room[z].visData[x][y]];
 }
 
 int mapLosCheck(int x1, int y1, int x2, int y2) {

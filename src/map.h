@@ -52,7 +52,7 @@ struct pos_s mapFindTilePos(int roomId,int tileType);
 int mapLosCheck(int x,int y,int x2,int y2);
 
 struct tile_s* mapGetTileByPos(int z,int x,int y);
-struct tile_s* mapGetVisByPos(int id,int x,int y);
+struct tile_s* mapGetVisByPos(int z,int x,int y);
 
 void mapCheatSeeAll(void);
 

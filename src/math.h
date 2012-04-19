@@ -16,6 +16,7 @@ typedef struct vec2_s{
 */
 
 int random(int max);
+int randomRange(int min,int max);
 int setMinMax(int value,int min,int max);
 
 #endif
