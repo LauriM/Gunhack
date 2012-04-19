@@ -26,6 +26,14 @@ void itemClearFromLevel(int z){
 	//TODO: Add assert
 	
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+		if(itemVis[i].state != ITEMSTATE_EMPTY){
+			if(itemVis[i].z == z){
+				itemVis[i].state = ITEMSTATE_EMPTY;
+			}
+		}
+	}
+
+	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemData[i].state != ITEMSTATE_EMPTY){
 			if(itemData[i].z == z){
 				itemData[i].state = ITEMSTATE_EMPTY;//Removes the item from the game
