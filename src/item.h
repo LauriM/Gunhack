@@ -33,16 +33,19 @@ struct itemdata_s{
 	int z;
 };
 
+extern struct itemdata_s itemVis[ITEM_MAX_COUNT];
 extern struct itemdata_s itemData[ITEM_MAX_COUNT];
 extern struct item_s itemInfo[ITEM_COUNT];
 
 //itemData -> itemId -> iteminfo -> item_s -> itemtype/rarity
 
 struct itemdata_s* itemGetData(int id);
-struct item_s* itemGetInfo(int id);
+struct itemdata_s* itemGetVis (int id);
+struct item_s*     itemGetInfo(int id);
 
 extern void itemInit(void);
 extern void itemSpawn(int z,int x,int y,int type);
+extern void itemVisCreate(int z,int x,int y,int type);
 extern void itemSpawnRandom(int z);
 extern void itemClearFromLevel(int z);
 extern void itemRender(void);

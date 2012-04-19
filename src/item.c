@@ -5,18 +5,20 @@
 #include "player.h"
 #include "render.h"
 
-struct item_s itemInfo[ITEM_COUNT];
+struct itemdata_s itemVis[ITEM_MAX_COUNT];
+struct item_s     itemInfo[ITEM_COUNT];
 struct itemdata_s itemData[ITEM_MAX_COUNT];
 
 #define CREATE_ITEM(p_symbol,p_id,p_rarity,p_type) itemInfo[p_id].symbol = p_symbol; itemInfo[p_id].itemRarity = p_rarity;itemInfo[p_id].itemType = p_type;
 
 void itemInit(void){
-	CREATE_ITEM('+',ITEM_HP_SMALL,70,ITEM_TYPE_USABLE);
+	CREATE_ITEM('*',ITEM_HP_SMALL,70,ITEM_TYPE_USABLE);
 	CREATE_ITEM('+',ITEM_HP_BIG,60,ITEM_TYPE_USABLE);
 
 	//Reset the array
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		itemData[i].state = ITEMSTATE_EMPTY;
+		itemVis[i].state  = ITEMSTATE_EMPTY;
 	}
 }
 
@@ -30,6 +32,23 @@ void itemClearFromLevel(int z){
 			}
 		}
 	}
+}
+
+void itemVisCreate(int z,int x,int y,int type){
+	//TODO: Add asserts here!
+	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+		if(itemVis[i].state == ITEMSTATE_EMPTY){
+			itemVis[i].state  = ITEMSTATE_GROUND;
+			itemVis[i].itemId = type;
+			itemVis[i].x      = x;
+			itemVis[i].y      = y;
+			itemVis[i].z      = z;
+
+			return;
+		}
+	}
+	LOG_ERROR("ITEM_MAX_COUNT too small!");
+	return;
 }
 
 void itemSpawn(int z,int x,int y,int type){
@@ -75,28 +94,65 @@ void itemSpawnRandom(int z){
 	}
 }
 
+/* Returns data of item in world */
 struct itemdata_s* itemGetData(int id){
 	//TODO: Add asserts here
 	return &itemData[id];
 }
 
+/* Returns item visual info */ 
+struct itemdata_s* itemGetVis(int id){
+	//TODO: Add asserts here
+	return &itemVis[id];
+}
+
+/* Returns information about item */
 struct item_s* itemGetInfo(int id){
 	//TODO: Add asserts here
     return &itemInfo[id];
 }
 
-void itemRender(){
-	int playerX,playerY;
+void itemRender(void){
+	//Render process
+	//1) scan all visData, if seen, remove
+	//2) scan all itemData, if seen, add to visData
+	//3) render from visData
+	
+	int playerX,playerY;  //TODO: Add playerZ
 	playerX = playerGetInfo()->playerX;
 	playerY = playerGetInfo()->playerY;
 
+	//scan visdata
+	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+		if(itemVis[i].state != ITEMSTATE_EMPTY){
+			if(itemVis[i].z == playerGetInfo()->playerZ){
+				if(mapLosCheck(playerX,playerY,itemVis[i].x,itemVis[i].y) == 1){
+					itemVis[i].state = ITEMSTATE_EMPTY;//removes the visdata
+					LOG_INFO("removed");
+				}
+			}
+		}
+	}
+
+	//scan itemdata
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemData[i].state != ITEMSTATE_EMPTY){
 			if(itemData[i].z == playerGetInfo()->playerZ){
 				if(mapLosCheck(playerX,playerY,itemData[i].x,itemData[i].y) == 1){
-					int symbol = itemGetInfo(itemGetData(i)->itemId)->symbol;
-					printIntxy(itemGetData(i)->x,itemGetData(i)->y,symbol);
+					//Add to visdata
+					itemVisCreate(playerGetInfo()->playerZ,itemData[i].x,itemData[i].y,itemData[i].itemId);
+					LOG_INFO("Added");
 				}
+			}
+		}
+	}
+
+	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+		if(itemVis[i].state == ITEMSTATE_GROUND){
+			if(itemVis[i].z == playerGetInfo()->playerZ){
+				int symbol = itemGetInfo(itemGetVis(i)->itemId)->symbol;
+				printIntxy(itemGetVis(i)->x,itemGetVis(i)->y,symbol);
+				LOG_INFO("rendered");
 			}
 		}
 	}
