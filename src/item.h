@@ -20,8 +20,9 @@ enum{
 };
 
 struct item_s{
+	char symbol;
 	int itemRarity;
-	int itemType;
+	int itemType;//Wpn/armor
 };
 
 struct itemdata_s{

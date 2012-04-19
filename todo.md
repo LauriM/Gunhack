@@ -6,6 +6,7 @@ TODO
 * ingame message system
 * Save system
 * more FALSE TRUE stuff
+* item colors
 
 Gameplay
 ========
