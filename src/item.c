@@ -86,11 +86,17 @@ struct item_s* itemGetInfo(int id){
 }
 
 void itemRender(){
+	int playerX,playerY;
+	playerX = playerGetInfo()->playerX;
+	playerY = playerGetInfo()->playerY;
+
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemData[i].state != ITEMSTATE_EMPTY){
 			if(itemData[i].z == playerGetInfo()->playerZ){
-				int symbol = itemGetInfo(itemGetData(i)->itemId)->symbol;
-				printIntxy(itemGetData(i)->x,itemGetData(i)->y,symbol);
+				if(mapLosCheck(playerX,playerY,itemData[i].x,itemData[i].y) == 1){
+					int symbol = itemGetInfo(itemGetData(i)->itemId)->symbol;
+					printIntxy(itemGetData(i)->x,itemGetData(i)->y,symbol);
+				}
 			}
 		}
 	}
