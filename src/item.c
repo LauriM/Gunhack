@@ -2,6 +2,8 @@
 #include "item.h"
 #include "math.h"
 #include "map.h"
+#include "player.h"
+#include "render.h"
 
 struct item_s itemInfo[ITEM_COUNT];
 struct itemdata_s itemData[ITEM_MAX_COUNT];
@@ -58,5 +60,26 @@ void itemSpawnRandom(int z){
 			}
 		}
 		i++;
+	}
+}
+
+struct itemdata_s* itemGetData(int id){
+	//TODO: Add asserts here
+	return &itemData[id];
+}
+
+struct item_s* itemGetInfo(int id){
+	//TODO: Add asserts here
+    return &itemInfo[id];
+}
+
+void itemRender(){
+	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+		if(itemData[i].state != ITEMSTATE_EMPTY){
+			if(itemData[i].z == playerGetInfo()->playerZ){
+				int symbol = itemGetInfo(itemGetData(i)->itemId)->symbol;
+				printIntxy(itemGetData(i)->x,itemGetData(i)->y,symbol);
+			}
+		}
 	}
 }

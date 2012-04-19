@@ -50,8 +50,9 @@ int main(int argc, const char *argv[]){
 	//==========================================================//          
 	while(playerGetInfo()->endGame == 0){
 		mapRender();
-		hudRender();
+		itemRender();
 		playerRender();
+		hudRender();
 
 		inputHandle();
 
