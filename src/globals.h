@@ -29,5 +29,4 @@
 #define GEN_MAX_TRIES 200
 
 //Hud
-
 #define STATUSLINE_MAX_CHARS 100

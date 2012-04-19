@@ -10,6 +10,7 @@
 #include "math.h"
 #include "input.h"
 #include "map.h"
+#include "item.h"
 
 int main(int argc, const char *argv[]){
 	logInit();
@@ -17,7 +18,7 @@ int main(int argc, const char *argv[]){
 	renderInit();
 	playerInit();
 	tileInit();
-	playerInit();
+	itemInit();
 
 	srand(time(NULL));
 
