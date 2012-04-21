@@ -62,6 +62,7 @@ int main(int argc, const char *argv[]){
 	//ending game
 	clear();
 
+	//TODO: End reason code display with the endGame int
 	LOG_INFO("Game over has been triggered.");
 	printw("Game over!");
 	getch();

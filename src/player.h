@@ -16,6 +16,8 @@ struct player_s{
 	int endGame;
 };
 
+extern struct player_s playerInfo;
+
 extern void playerInit();
 
 extern void playerRender();

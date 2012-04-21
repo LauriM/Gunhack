@@ -35,7 +35,7 @@ struct itemdata_s{
 
 extern struct itemdata_s itemVis[ITEM_MAX_COUNT];
 extern struct itemdata_s itemData[ITEM_MAX_COUNT];
-extern struct item_s itemInfo[ITEM_COUNT];
+extern struct item_s itemInfo[ITEM_COUNT]; //"database" of the items
 
 //itemData -> itemId -> iteminfo -> item_s -> itemtype/rarity
 

@@ -5,6 +5,7 @@
 #include "player.h"
 #include "map.h"
 #include "hud.h"
+#include "save.h"
 
 #include "math.h"//QQQ
 #include "item.h"
@@ -75,6 +76,9 @@ void inputHandle(){
 			break;
 		case 104:
 			playerMove(DIR_W);
+			break;
+		case 83:
+			saveGame();
 			break;
 	}
 
