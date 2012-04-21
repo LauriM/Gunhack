@@ -136,7 +136,7 @@ void itemRender(void){
 			if(itemVis[i].z == playerGetInfo()->playerZ){
 				if(mapLosCheck(playerX,playerY,itemVis[i].x,itemVis[i].y) == 1){
 					itemVis[i].state = ITEMSTATE_EMPTY;//removes the visdata
-					LOG_INFO("removed");
+					LOG_DEBUG("removed");
 				}
 			}
 		}
@@ -149,7 +149,7 @@ void itemRender(void){
 				if(mapLosCheck(playerX,playerY,itemData[i].x,itemData[i].y) == 1){
 					//Add to visdata
 					itemVisCreate(playerGetInfo()->playerZ,itemData[i].x,itemData[i].y,itemData[i].itemId);
-					LOG_INFO("Added");
+					LOG_DEBUG("Added");
 				}
 			}
 		}
@@ -160,7 +160,7 @@ void itemRender(void){
 			if(itemVis[i].z == playerGetInfo()->playerZ){
 				int symbol = itemGetInfo(itemGetVis(i)->itemId)->symbol;
 				printIntxy(itemGetVis(i)->x,itemGetVis(i)->y,symbol);
-				LOG_INFO("rendered");
+				LOG_DEBUG("rendered");
 			}
 		}
 	}
