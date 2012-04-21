@@ -5,7 +5,7 @@
 #include "player.h"
 #include <stdio.h>
 
-int prompt(char text[250]){
+int hudPrompt(char text[250]){
 	move(0,0);
 
 	//TODO: Order of this feels weird, fix the (y/n)

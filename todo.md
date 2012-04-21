@@ -1,12 +1,16 @@
-TODO
-====
+Major todo
+==========
 
 * better world generation
 * HUD
 * ingame message system
-* Save system
 * more FALSE TRUE stuff
 * item colors
+
+Minor todo
+==========
+
+* Save system is not portable
 
 Gameplay
 ========

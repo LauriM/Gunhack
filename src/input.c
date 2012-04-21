@@ -18,7 +18,7 @@ void inputHandle(){
 				if(playerGetInfo()->playerZ == 0){
 					LOG_INFO("Player trying to leave the level by going up");
 
-					if(prompt("Do you want to escape the dungeon?") == 1){
+					if(hudPrompt("Do you want to escape the dungeon?") == 1){
 						LOG_INFO("Player left the dungeon!");
 						playerGetInfo()->endGame = 1;
 					}
