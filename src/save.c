@@ -6,8 +6,8 @@
 #include "map.h"
 #include "item.h"
 
-#define WRITE_STRUCT(p_struct) fwrite(&p_struct, sizeof(&p_struct),1,output);
-#define READ_STRUCT(p_struct)  fread (&p_struct, sizeof(&p_struct),1,input);
+#define WRITE_STRUCT(p_struct) fwrite(&p_struct, sizeof(p_struct),1,output);
+#define READ_STRUCT(p_struct)  fread (&p_struct, sizeof(p_struct),1,input);
 
 void saveGame(void){
 	FILE* output;

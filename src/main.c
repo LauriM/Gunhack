@@ -35,20 +35,22 @@ int main(int argc, const char *argv[]){
 	}
 	*/
 
-	//Setup the level
-	roomInit(0);
-	mapCreateRoom(0);
-	playerGetInfo()->playerZ = 0;
 
-	struct pos_s pos =  mapFindTilePos(playerGetInfo()->playerZ,TILE_STAIRS_UP);
-	playerGetInfo()->playerX = pos.x;
-	playerGetInfo()->playerY = pos.y;
-
-	mapScanFov();
-
+	//TODO: Better management for the save files
 	if(prompt("Load a save from disk?") == 1){
 		loadGame();
+	}else{
+		roomInit(0);
+		mapCreateRoom(0);
+		playerGetInfo()->playerZ = 0;
+
+		struct pos_s pos =  mapFindTilePos(playerGetInfo()->playerZ,TILE_STAIRS_UP);
+		playerGetInfo()->playerX = pos.x;
+		playerGetInfo()->playerY = pos.y;
+
+		mapScanFov();
 	}
+
 
 	//==========================================================//
 	//  Main loop
