@@ -11,6 +11,7 @@
 #include "input.h"
 #include "map.h"
 #include "item.h"
+#include "save.h"
 
 int main(int argc, const char *argv[]){
 	logInit();
@@ -44,6 +45,10 @@ int main(int argc, const char *argv[]){
 	playerGetInfo()->playerY = pos.y;
 
 	mapScanFov();
+
+	if(prompt("Load a save from disk?") == 1){
+		loadGame();
+	}
 
 	//==========================================================//
 	//  Main loop

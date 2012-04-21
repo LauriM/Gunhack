@@ -8,9 +8,9 @@
 int prompt(char text[250]){
 	move(0,0);
 
-	sprintf(text,"%s (y/n)",text);
-
+	//TODO: Order of this feels weird, fix the (y/n)
 	printw(text);
+	//sprintf(text,"%s (y/n)",text);
 
 	int input = getch();
 
