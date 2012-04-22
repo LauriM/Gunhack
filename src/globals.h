@@ -1,9 +1,9 @@
 #include <assert.h>
 #include <stdbool.h>
-#include "log.h"
 
 //Debugging
-#define LOGGING
+#define DEBUG_NO_LOG_DEBUG
+#include "log.h"
 
 //directions
 #define DIR_N 0
