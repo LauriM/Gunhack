@@ -4,13 +4,13 @@ Major todo
 * better world generation
 * HUD
 * ingame message system
-* more FALSE TRUE stuff
 * item colors
 
 Minor todo
 ==========
 
 * Save system is not portable
+* more FALSE TRUE stuff
 
 Gameplay
 ========

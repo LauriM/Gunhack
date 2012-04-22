@@ -2,6 +2,7 @@
 #include "item.h"
 #include "math.h"
 #include "map.h"
+#include "hud.h"
 #include "player.h"
 #include "render.h"
 
@@ -132,7 +133,7 @@ void itemRender(void){
 
 	//scan visdata
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
-		if(itemVis[i].state != ITEMSTATE_EMPTY){
+		if(itemVis[i].state == ITEMSTATE_GROUND){
 			if(itemVis[i].z == playerGetInfo()->playerZ){
 				if(mapLosCheck(playerX,playerY,itemVis[i].x,itemVis[i].y) == 1){
 					itemVis[i].state = ITEMSTATE_EMPTY;//removes the visdata
@@ -144,7 +145,7 @@ void itemRender(void){
 
 	//scan itemdata
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
-		if(itemData[i].state != ITEMSTATE_EMPTY){
+		if(itemData[i].state == ITEMSTATE_GROUND){
 			if(itemData[i].z == playerGetInfo()->playerZ){
 				if(mapLosCheck(playerX,playerY,itemData[i].x,itemData[i].y) == 1){
 					//Add to visdata
@@ -163,5 +164,42 @@ void itemRender(void){
 				LOG_DEBUG("rendered");
 			}
 		}
+	}
+}
+
+void itemPickup(){
+    //First get count of the items, if many items, ask what to pickup.
+
+    int itemCount = 0;
+	int itemId = 0;
+
+	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+		if(itemData[i].state == ITEMSTATE_GROUND){
+			if(itemData[i].x == playerGetInfo()->playerX && itemData[i].y == playerGetInfo()->playerY && itemData[i].z == playerGetInfo()->playerZ){
+				itemCount++;
+				itemId = i;
+			}
+		}
+	}
+
+	if(itemCount == 0){
+		hudMessage("Nothing to pickup");
+		LOG_INFO("nothing to pickup");
+		return;
+	}
+
+	if(itemCount == 1){
+		hudMessage("Picked up item");
+		LOG_INFO("Picking up single item");
+
+		itemData[itemId].state = ITEMSTATE_INV;
+		return;
+	}
+
+	if(itemCount >= 2){
+		hudMessage("choose item to pickup:");
+
+		LOG_WARNING("Picking up multitiple items not implemented!");
+		return;
 	}
 }

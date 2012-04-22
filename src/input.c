@@ -80,6 +80,9 @@ void inputHandle(){
 		case 83:
 			saveGame();
 			break;
+		case 44:
+			itemPickup();
+			break;
 	}
 
 	//Numpad:

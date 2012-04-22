@@ -48,5 +48,8 @@ extern void itemSpawn(int z,int x,int y,int type);
 extern void itemVisCreate(int z,int x,int y,int type);
 extern void itemSpawnRandom(int z);
 extern void itemClearFromLevel(int z);
+
 extern void itemRender(void);
+
+extern void itemPickup();
 #endif
