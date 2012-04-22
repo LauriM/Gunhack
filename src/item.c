@@ -11,11 +11,11 @@ struct itemdata_s itemVis[ITEM_MAX_COUNT];
 struct item_s     itemInfo[ITEM_COUNT];
 struct itemdata_s itemData[ITEM_MAX_COUNT];
 
-#define CREATE_ITEM(p_symbol,p_id,p_rarity,p_type) itemInfo[p_id].symbol = p_symbol; itemInfo[p_id].itemRarity = p_rarity;itemInfo[p_id].itemType = p_type;
+#define CREATE_ITEM(p_symbol,p_id,p_rarity,p_type,p_name) itemInfo[p_id].symbol = p_symbol; itemInfo[p_id].itemRarity = p_rarity;itemInfo[p_id].itemType = p_type; itemInfo[p_id].name = TO_STRING(p_name);
 
 void itemInit(void){
-	CREATE_ITEM('*',ITEM_HP_SMALL,70,ITEM_TYPE_USABLE);
-	CREATE_ITEM('+',ITEM_HP_BIG,60,ITEM_TYPE_USABLE);
+	CREATE_ITEM('*',ITEM_HP_SMALL,70,ITEM_TYPE_USABLE,"Small health pack");
+	CREATE_ITEM('+',ITEM_HP_BIG,60,ITEM_TYPE_USABLE,"Large health pack");
 
 	//Reset the array
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
@@ -213,7 +213,7 @@ extern void itemDebugDumpInv(){
 		if(itemData[i].state == ITEMSTATE_INV){
 			char output[500];
 
-			sprintf(output,"Item %i %i",i,itemInfo[itemData[i].itemId].symbol);
+			sprintf(output,"Id: %i Symbol: %c Name: %s",i,itemInfo[itemData[i].itemId].symbol,itemInfo[itemData[i].itemId].name);
 
 			LOG_INFO(output);
 		}

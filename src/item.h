@@ -23,6 +23,7 @@ struct item_s{
 	char symbol;
 	int itemRarity;
 	int itemType;//Wpn/armor
+	char *name;
 };
 
 struct itemdata_s{
