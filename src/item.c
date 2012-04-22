@@ -215,7 +215,7 @@ extern void itemDebugDumpInv(){
 
 			sprintf(output,"Item %i %i",i,itemInfo[itemData[i].itemId].symbol);
 
-			NEW_LOG_INFO(output);
+			LOG_INFO(output);
 		}
 	}
 }
