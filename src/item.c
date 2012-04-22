@@ -205,8 +205,16 @@ void itemPickup(){
 	}
 }
 
-
 extern void itemDebugDumpInv(){
+	hudMenu("Inventory",(const char*[]){
+			"1) testing",
+			"2) this system",
+			"3) out",
+			NULL
+			},
+			"choose option: "
+		   );
+
 	LOG_INFO("Dumping full inventory");
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){

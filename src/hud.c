@@ -44,3 +44,21 @@ void hudRender(){
 	move(22,0);
 	printw(statusLine);
 }
+
+int hudMenu(const char* title,const char** options,const char* prompt){
+	move(0,0);//TODO: check if this call is needed
+    printw(title);
+	printw("\n");
+	
+
+	while(*options != NULL){
+		printw(*options);
+		printw("\n");
+		++options;
+	}
+	printw("\n");
+	
+	printw(prompt);
+
+	return getch();
+}
