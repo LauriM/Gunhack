@@ -83,6 +83,9 @@ void inputHandle(){
 		case 44:
 			itemPickup();
 			break;
+		case 46: //.
+			itemDebugDumpInv();
+			break;
 	}
 
 	//Numpad:

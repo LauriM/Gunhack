@@ -1,4 +1,5 @@
 #include "globals.h"
+#include <stdio.h>
 #include "item.h"
 #include "math.h"
 #include "map.h"
@@ -201,5 +202,20 @@ void itemPickup(){
 
 		LOG_WARNING("Picking up multitiple items not implemented!");
 		return;
+	}
+}
+
+
+extern void itemDebugDumpInv(){
+	LOG_INFO("Dumping full inventory");
+
+	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+		if(itemData[i].state == ITEMSTATE_INV){
+			char output[500];
+
+			sprintf(output,"Item %i %i",i,itemInfo[itemData[i].itemId].symbol);
+			LOG_INFO("item");
+			//TODO: print the output
+		}
 	}
 }

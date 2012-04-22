@@ -52,4 +52,6 @@ extern void itemClearFromLevel(int z);
 extern void itemRender(void);
 
 extern void itemPickup();
+
+extern void itemDebugDumpInv();
 #endif
