@@ -205,21 +205,27 @@ void itemPickup(){
 	}
 }
 
-extern void itemDebugDumpInv(){
-	hudMenu("Inventory",(const char*[]){
-			"1) testing",
-			"2) this system",
-			"3) out",
-			NULL
-			},
-			"choose option: "
-		   );
+extern void itemDisplayInv(){
+	hudMenuInit();
 
+	hudMenuWrite("Inventory:");
+	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+		if(itemData[i].state == ITEMSTATE_INV){
+			char output[100];
+			sprintf(output,"Id: %i Symbol: %c Name: %s",i,itemInfo[itemData[i].itemId].symbol,itemInfo[itemData[i].itemId].name);
+
+			hudMenuWrite(output);
+		}
+	}
+	hudMenuFinish();
+}
+
+extern void itemDebugDumpInv(){
 	LOG_INFO("Dumping full inventory");
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemData[i].state == ITEMSTATE_INV){
-			char output[500];
+			char output[100];
 
 			sprintf(output,"Id: %i Symbol: %c Name: %s",i,itemInfo[itemData[i].itemId].symbol,itemInfo[itemData[i].itemId].name);
 

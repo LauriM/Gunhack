@@ -1,5 +1,6 @@
 #ifndef ITEM_H
 #define ITEM_H
+#include "globals.h"
 
 enum{
 	ITEMSTATE_GROUND = 0,
@@ -51,6 +52,7 @@ extern void itemSpawnRandom(int z);
 extern void itemClearFromLevel(int z);
 
 extern void itemRender(void);
+extern void itemDisplayInv();
 
 extern void itemPickup();
 

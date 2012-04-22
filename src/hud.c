@@ -45,7 +45,7 @@ void hudRender(){
 	printw(statusLine);
 }
 
-int hudMenu(const char* title,const char** options,const char* prompt){
+int hudMenu(const char* title,char** options,const char* prompt){
 	move(0,0);//TODO: check if this call is needed
     printw(title);
 	printw("\n");
@@ -60,5 +60,18 @@ int hudMenu(const char* title,const char** options,const char* prompt){
 	
 	printw(prompt);
 
+	return getch();
+}
+
+void hudMenuInit(){
+	move(0,0);
+}
+
+void hudMenuWrite(char line[50]){
+	printw(line);
+	printw("\n");
+}
+
+int hudMenuFinish(){
 	return getch();
 }
