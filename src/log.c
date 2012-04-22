@@ -27,3 +27,7 @@ void insertLog(char msg[500]){
 
 	fprintf(logFile,"%s %s\n",buffer,msg);
 }
+
+void insertLog2(char *format,const char* file,const char* line,char msg[250]){
+	fprintf(logFile,format,file,line,msg);
+}

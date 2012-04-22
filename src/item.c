@@ -214,8 +214,8 @@ extern void itemDebugDumpInv(){
 			char output[500];
 
 			sprintf(output,"Item %i %i",i,itemInfo[itemData[i].itemId].symbol);
-			LOG_INFO("item");
-			//TODO: print the output
+
+			NEW_LOG_INFO(output);
 		}
 	}
 }
