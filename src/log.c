@@ -16,5 +16,6 @@ void logUnInit(void){
 }
 
 void insertLog(const char *prefix,const char *msg){
+	//TODO: implement time and date:q
 	fprintf(logFile,"aika %s %s\n",prefix,msg);
 }
