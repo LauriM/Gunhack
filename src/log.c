@@ -15,6 +15,6 @@ void logUnInit(void){
 	fclose(logFile);
 }
 
-void insertLog(char *format,const char* file,const char* line,char msg[250]){
-	fprintf(logFile,format,file,line,msg);
+void insertLog(const char *prefix,const char *msg){
+	fprintf(logFile,"aika %s %s\n",prefix,msg);
 }
