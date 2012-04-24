@@ -14,8 +14,6 @@
 #define LOG_DEBUG(msg) 
 #endif
      
-#define NEW_LOG_INFO(msg) insertLog2("INFO: %s:%s => %s \n", __FILE__,TO_STRING( __LINE__), msg)
-
 void logInit(void);
 void logUnInit(void);
 void insertLog(char *format,const char* file,const char* line,char msg[250]);
