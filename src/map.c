@@ -126,7 +126,7 @@ void mapCreateRoom(int id){
 		digLeft       = random(GEN_TUNNEL_MAX_LENGTH);
 		digLeftRotate = random(GEN_TUNNEL_MAX_ROTATE_STEP);
 		digDir        = random(3);
-		setMinMax(digLeft,GEN_TUNNEL_MIN_ROTATE,GEN_TUNNEL_MAX_ROTATE);
+		CAP(digLeft,GEN_TUNNEL_MIN_ROTATE,GEN_TUNNEL_MAX_ROTATE);
 
 		while(digLeft > 0){
 			if(digX >= 0 && digX < MAP_MAX_WIDTH && digY >= 0 && digY < MAP_MAX_HEIGHT){

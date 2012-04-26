@@ -7,17 +7,3 @@ int random(int max){
 int randomRange(int min,int max){
 	return (rand() % max) + min;
 }
-
-int setMinMax(int value,int min,int max){
-	if(value > max){
-		value = max;
-		return value;
-	}
-
-	if(value < min){
-		value = min;
-		return value;
-	}
-
-	return value;
-}
