@@ -212,7 +212,7 @@ extern void itemDisplayInv(){
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemData[i].state == ITEMSTATE_INV){
 			char output[100];
-			sprintf(output,"Id: %i Symbol: %c Name: %s",i,itemInfo[itemData[i].itemId].symbol,itemInfo[itemData[i].itemId].name);
+			snprintf(output,100,"Id: %i Symbol: %c Name: %s",i,itemInfo[itemData[i].itemId].symbol,itemInfo[itemData[i].itemId].name);
 
 			hudMenuWrite(output);
 		}
@@ -227,7 +227,7 @@ extern void itemDebugDumpInv(){
 		if(itemData[i].state == ITEMSTATE_INV){
 			char output[100];
 
-			sprintf(output,"Id: %i Symbol: %c Name: %s",i,itemInfo[itemData[i].itemId].symbol,itemInfo[itemData[i].itemId].name);
+			snprintf(output,100,"Id: %i Symbol: %c Name: %s",i,itemInfo[itemData[i].itemId].symbol,itemInfo[itemData[i].itemId].name);
 
 			LOG_INFO(output);
 		}
