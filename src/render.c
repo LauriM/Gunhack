@@ -6,7 +6,7 @@ void renderInit(void){
 	initscr();
 	if(has_colors() == false){
 		endwin();
-		printf("Your terminal doesn't support colors...\nFind more modern system/treminal.");
+		printf("Your terminal doesn't support colors...\nFind more modern system/terminal.");
 	}
 
 	start_color();
