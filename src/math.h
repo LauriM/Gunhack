@@ -1,10 +1,10 @@
 #ifndef MATH_H
 #define MATH_H
 
-struct pos_s{
+typedef struct pos_s{
 	int x;
 	int y;
-};
+} pos_t;
 
 /*
 typedef struct vec2_s{

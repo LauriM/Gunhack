@@ -29,7 +29,7 @@ void inputHandle(){
 						playerRandomPosition();
 						mapCreateRoom(playerGetInfo()->playerZ);
 					}
-					pos_s pos = mapFindTilePos(playerGetInfo()->playerZ,TILE_STAIRS_DOWN);
+					pos_t pos = mapFindTilePos(playerGetInfo()->playerZ,TILE_STAIRS_DOWN);
 					playerGetInfo()->playerX = pos.x;
 					playerGetInfo()->playerY = pos.y;
 					mapScanFov();

@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <stdbool.h>
+#include "math.h"
 
 //Debugging
 #define DEBUG_NO_LOG_DEBUG

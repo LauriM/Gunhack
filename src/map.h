@@ -1,8 +1,6 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "globals.h"
-
 typedef enum{
 	TILE_VOID = 0,
 	TILE_EMPTY,
@@ -47,7 +45,7 @@ void mapEditBox(int id,int boxX,int boxY,int width,int height,int tileType);
 int mapSearchTileCoords(int z,int boxX,int boxY,int width,int height,int tileType);
 int mapCheckTileCoords(int z,int boxX,int boxY,int width,int height,int tileType);
 
-struct pos_s mapFindTilePos(int roomId,int tileType);
+pos_t mapFindTilePos(int roomId,tiletype_t tileType);
 
 int mapLosCheck(int x,int y,int x2,int y2);
 

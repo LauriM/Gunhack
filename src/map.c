@@ -7,8 +7,8 @@
 #include "math.h"
 #include "item.h"
 
-struct tile_s tileInfo[TILE_COUNT];
-struct room_s room[WORLD_ROOM_COUNT]; //Room list
+tile_t tileInfo[TILE_COUNT];
+room_t room[WORLD_ROOM_COUNT]; //Room list
 
 void tileInit(void){
 	tileInfo[TILE_VOID].symbol        = ' ';
@@ -379,10 +379,10 @@ void mapCheatSeeAll(void){
 	}
 }
 
-struct pos_s mapFindTilePos(int roomId,int tileType){
+pos_t mapFindTilePos(int roomId,tiletype_t tileType){
 	int x,y;
 
-	struct pos_s pos;
+	pos_t pos;
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
