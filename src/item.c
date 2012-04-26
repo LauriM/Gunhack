@@ -7,9 +7,9 @@
 #include "player.h"
 #include "render.h"
 
-struct itemdata_s itemVis[ITEM_MAX_COUNT];
-struct item_s     itemInfo[ITEM_COUNT];
-struct itemdata_s itemData[ITEM_MAX_COUNT];
+itemdata_t itemVis [ITEM_MAX_COUNT];
+itemdata_t itemData[ITEM_MAX_COUNT];
+item_t     itemInfo[ITEM_COUNT];
 
 #define CREATE_ITEM(p_symbol,p_id,p_rarity,p_type,p_name) itemInfo[p_id].symbol = p_symbol; itemInfo[p_id].itemRarity = p_rarity;itemInfo[p_id].itemType = p_type; itemInfo[p_id].name = TO_STRING(p_name);
 
