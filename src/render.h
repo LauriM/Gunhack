@@ -1,7 +1,7 @@
 #ifndef RENDER_H
 #define RENDER_H
 
-enum{
+typedef enum{
 	TERM_COLOR_DEFAULT = 0,
 	TERM_COLOR_RED,
 	TERM_COLOR_GREEN,
@@ -12,7 +12,7 @@ enum{
 	TERM_COLOR_WHITE_RED,
 	TERM_COLOR_WHITE_GREEN
 	//TODO: rest of the colors...
-};
+} color_t;
 
 extern void renderInit(void);
 extern void renderUnInit(void);
