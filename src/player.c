@@ -4,7 +4,7 @@
 #include "map.h"
 #include "math.h"
 
-struct player_s playerInfo;
+player_t playerInfo;
 
 void playerInit(){
 	//TODO: Why repeat player? why not x 
@@ -55,6 +55,6 @@ void playerRandomPosition(void){
 	playerInfo.playerY = (random(MAP_MAX_HEIGHT - 4) + 2);
 }
 
-extern struct player_s* playerGetInfo(void){
+extern player_t* playerGetInfo(void){
 	return &playerInfo;
 }

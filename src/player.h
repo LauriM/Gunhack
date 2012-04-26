@@ -1,6 +1,6 @@
 #ifndef PLAYER_H
 
-struct player_s{
+typedef struct player_s{
 	int playerX;
 	int playerY;
 	int playerZ;
@@ -14,7 +14,7 @@ struct player_s{
 	int level;
 
 	int endGame;
-};
+} player_t;
 
 extern struct player_s playerInfo;
 
@@ -26,6 +26,6 @@ extern void playerInit(void);
 
 extern void playerRandomPosition(void);
 
-extern struct player_s* playerGetInfo(void);
+extern player_t* playerGetInfo(void);
 
 #endif
