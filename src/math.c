@@ -1,7 +1,7 @@
 #include "math.h"
 #include <stdlib.h>
 
-int random(int max){
+int randomMax(int max){
 	return rand() % max;
 }
 int randomRange(int min,int max){

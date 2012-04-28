@@ -87,15 +87,15 @@ void mapCreateRoom(int id){
 	mapEditBox(id,roomX,roomY,3,3,TILE_EMPTY);
 
 	//Create the rooms
-	int roomCount = (random(GEN_ROOM_MAX_COUNT)+GEN_ROOM_MIN_COUNT);
+	int roomCount = (randomMax(GEN_ROOM_MAX_COUNT)+GEN_ROOM_MIN_COUNT);
 
 	int triesCount = 0;
 	int i = 0;
 	while(i < roomCount){
-		roomWidth = (random(8) + 3);//TODO: change 5 to max size
-		roomHeight = (random(8) + 3);   //TODO: Move these to globals
-		roomX = random(MAP_MAX_WIDTH-roomWidth-1);
-		roomY = random(MAP_MAX_HEIGHT-roomHeight-1);
+		roomWidth = (randomMax(8) + 3);//TODO: change 5 to max size
+		roomHeight = (randomMax(8) + 3);   //TODO: Move these to globals
+		roomX = randomMax(MAP_MAX_WIDTH-roomWidth-1);
+		roomY = randomMax(MAP_MAX_HEIGHT-roomHeight-1);
 
 		//Check if the box exists (+- are to make sure rooms wont hit)
 		if(mapCheckTileCoords(id,roomX,roomY,roomWidth+2,roomHeight+2,0) == 1){
@@ -117,16 +117,15 @@ void mapCreateRoom(int id){
 	int digLeft;
 	int digLeftRotate;
 
-	int tunnelCount = roomCount + (random(GEN_TUNNEL_COUNT_MAX - GEN_TUNNEL_COUNT_MIN) + GEN_TUNNEL_COUNT_MIN);
+	int tunnelCount = roomCount + (randomMax(GEN_TUNNEL_COUNT_MAX - GEN_TUNNEL_COUNT_MIN) + GEN_TUNNEL_COUNT_MIN);
 	i = 0;
 	digX = playerGetInfo()->playerX;
 	digY = playerGetInfo()->playerY;
 
 	while(i < tunnelCount){
-		digLeft       = random(GEN_TUNNEL_MAX_LENGTH);
-		digLeftRotate = random(GEN_TUNNEL_MAX_ROTATE_STEP);
-		digDir        = random(3);
-		CAP(digLeft,GEN_TUNNEL_MIN_ROTATE,GEN_TUNNEL_MAX_ROTATE);
+		digLeft       = randomMax(GEN_TUNNEL_MAX_LENGTH);
+		digLeftRotate = randomMax(GEN_TUNNEL_MAX_ROTATE_STEP);
+		digDir        = randomMax(3);
 
 		while(digLeft > 0){
 			if(digX >= 0 && digX < MAP_MAX_WIDTH && digY >= 0 && digY < MAP_MAX_HEIGHT){
@@ -154,7 +153,7 @@ void mapCreateRoom(int id){
 			}
 
 			if(digLeftRotate < 0){
-				digDir = random(3);
+				digDir = randomMax(3);
 			}
 		}
 		i++;//One tunnel done
@@ -178,8 +177,8 @@ void mapCreateRoom(int id){
 	//First up and down stairs
 	i = 0;
 	while(i < 1){
-		x = random(MAP_MAX_WIDTH);
-		y = random(MAP_MAX_HEIGHT);
+		x = randomMax(MAP_MAX_WIDTH);
+		y = randomMax(MAP_MAX_HEIGHT);
 		if(room[id].mapData[x][y] == TILE_EMPTY){
 			room[id].mapData[x][y] = TILE_STAIRS_UP;
 			i++;//Break out
@@ -188,8 +187,8 @@ void mapCreateRoom(int id){
 
 	i = 0;
 	while(i < 1){
-		x = random(MAP_MAX_WIDTH);
-		y = random(MAP_MAX_HEIGHT);
+		x = randomMax(MAP_MAX_WIDTH);
+		y = randomMax(MAP_MAX_HEIGHT);
 		if(room[id].mapData[x][y] == TILE_EMPTY){
 			room[id].mapData[x][y] = TILE_STAIRS_DOWN;
 			i++;//Break out

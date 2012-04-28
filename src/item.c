@@ -95,7 +95,7 @@ void itemSpawnRandom(int z){
 
 			//TODO: Implement nice rarity generator
 			if(mapGetTileByPos(z,x,y)->block == 0){
-				int type = random(ITEM_COUNT);
+				int type = randomMax(ITEM_COUNT);
 				itemSpawn(z,x,y,type);
 				done = true;
 			}

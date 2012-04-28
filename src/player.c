@@ -51,8 +51,8 @@ void playerMove(int direction){
 }
 
 void playerRandomPosition(void){
-	playerInfo.playerX = (random(MAP_MAX_WIDTH  - 4) + 2);
-	playerInfo.playerY = (random(MAP_MAX_HEIGHT - 4) + 2);
+	playerInfo.playerX = (randomMax(MAP_MAX_WIDTH  - 4) + 2);
+	playerInfo.playerY = (randomMax(MAP_MAX_HEIGHT - 4) + 2);
 }
 
 extern player_t* playerGetInfo(void){
