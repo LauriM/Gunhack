@@ -31,10 +31,8 @@ void setColorOff(int colorCode){
 }
 
 void printxy(int x,int y,char* ch){
-	assert(x >= 0);
-	assert(y >= 0);
-	assert(x < MAP_MAX_WIDTH);
-	assert(y < MAP_MAX_HEIGHT);
+	ASSERT_WIDTH(x);
+	ASSERT_HEIGHT(y);
 
 	//+1 to move map down one slot to make room for the prompt
 	move(y+1,x);
@@ -42,10 +40,8 @@ void printxy(int x,int y,char* ch){
 }
 
 void printIntxy(int x,int y,int i){
-	assert(x >= 0);
-	assert(y >= 0);
-	assert(x < MAP_MAX_WIDTH);
-	assert(y < MAP_MAX_HEIGHT);
+	ASSERT_WIDTH(x);
+	ASSERT_HEIGHT(y);
 
 	//+1 to move map down one slot to make room for the prompt
 	move(y+1,x);

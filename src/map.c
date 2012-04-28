@@ -126,6 +126,7 @@ void mapCreateRoom(int id){
 		digLeft       = randomMax(GEN_TUNNEL_MAX_LENGTH);
 		digLeftRotate = randomMax(GEN_TUNNEL_MAX_ROTATE_STEP);
 		digDir        = randomMax(3);
+		CAP(digLeftRotate,GEN_TUNNEL_MIN_ROTATE,GEN_TUNNEL_MAX_ROTATE);
 
 		while(digLeft > 0){
 			if(digX >= 0 && digX < MAP_MAX_WIDTH && digY >= 0 && digY < MAP_MAX_HEIGHT){
@@ -201,23 +202,19 @@ void mapCreateRoom(int id){
 }
 
 void mapEditPoint(int id,int x,int y,int tileType){
-	assert(tileType >= 0);
-	assert(tileType < TILE_COUNT);
-	assert(x >= 0);
-	assert(x < MAP_MAX_WIDTH);
-	assert(y >= 0);
-	assert(y < MAP_MAX_HEIGHT);
+	ASSERT_TILE_TYPE(tileType);
+	ASSERT_WIDTH(x);
+	ASSERT_HEIGHT(y);
+	ASSERT_ROOM(id);
 
 	room[id].mapData[x][y] = tileType;
 }
 
 void mapEditBox(int id,int boxX,int boxY,int width,int height,int tileType){
-	assert(tileType >= 0);
-	assert(tileType < TILE_COUNT);
-	assert(boxX >= 0);
-	assert(boxX < MAP_MAX_WIDTH);
-	assert(boxY >= 0);
-	assert(boxY < MAP_MAX_HEIGHT);
+	ASSERT_TILE_TYPE(tileType);
+	ASSERT_WIDTH(boxX);
+	ASSERT_HEIGHT(boxY);
+	ASSERT_ROOM(id);
     assert((boxX + width) >= 0);
 	assert((boxX + width) < MAP_MAX_WIDTH + 1);//+1 because width starts from 1, not from 0. Causing issues on this calculation
 	assert((boxY + height) >= 0);
@@ -235,12 +232,10 @@ void mapEditBox(int id,int boxX,int boxY,int width,int height,int tileType){
  * Used to check if area is clear
  */
 int mapSearchTileCoords(int id,int boxX,int boxY,int width,int height,int tileType){
-	assert(tileType >= 0);
-	assert(tileType < TILE_COUNT);
-	assert(boxX >= 0);
-	assert(boxX < MAP_MAX_WIDTH);
-	assert(boxY >= 0);
-	assert(boxY < MAP_MAX_HEIGHT);
+	ASSERT_TILE_TYPE(tileType);
+	ASSERT_WIDTH(boxX);
+	ASSERT_HEIGHT(boxY);
+	ASSERT_ROOM(id);
 	assert((boxX + width) >= 0);
 	assert((boxX + width) < MAP_MAX_WIDTH + 1);//+1 because width starts from 1, not from 0. Causing issues on this calculation
 	assert((boxY + height) >= 0);
@@ -262,12 +257,10 @@ int mapSearchTileCoords(int id,int boxX,int boxY,int width,int height,int tileTy
  * Returns bool. 1 when ok, 0 when not true
  */
 int mapCheckTileCoords(int id,int boxX,int boxY,int width,int height,int tileType){
-	assert(tileType >= 0);
-	assert(tileType < TILE_COUNT);
-	assert(boxX >= 0);
-	assert(boxX < MAP_MAX_WIDTH);
-	assert(boxY >= 0);
-	assert(boxY < MAP_MAX_HEIGHT);
+	ASSERT_TILE_TYPE(tileType);
+	ASSERT_WIDTH(boxX);
+	ASSERT_HEIGHT(boxY);
+	ASSERT_ROOM(id);
 	assert((boxX + width) >= 0);
 	assert((boxX + width) < MAP_MAX_WIDTH + 1);//+1 because width starts from 1, not from 0. Causing issues on this calculation
 	assert((boxY + height) >= 0);
@@ -284,36 +277,26 @@ int mapCheckTileCoords(int id,int boxX,int boxY,int width,int height,int tileTyp
 }
 
 struct tile_s* mapGetTileByPos(int z,int x,int y){
-	assert(x < MAP_MAX_WIDTH);
-	assert(x >= 0);
-	assert(y < MAP_MAX_HEIGHT);
-	assert(y >= 0);
-	assert(z >= 0);
-	assert(z < WORLD_ROOM_COUNT);
+	ASSERT_ROOM(z);
+	ASSERT_WIDTH(x);
+	ASSERT_HEIGHT(y);
 
 	return &tileInfo[room[z].mapData[x][y]];
 }
 
 struct tile_s* mapGetVisByPos(int z,int x,int y){
-	assert(x < MAP_MAX_WIDTH);
-	assert(x >= 0);
-	assert(y < MAP_MAX_HEIGHT);
-	assert(y >= 0);
-	assert(z >= 0);
-	assert(z < WORLD_ROOM_COUNT);
+	ASSERT_ROOM(z);
+	ASSERT_WIDTH(x);
+	ASSERT_HEIGHT(y);
 
 	return &tileInfo[room[z].visData[x][y]];
 }
 
 int mapLosCheck(int x1, int y1, int x2, int y2) {
-	assert(x1 < MAP_MAX_WIDTH);
-	assert(x1 >= 0);
-	assert(y1 < MAP_MAX_HEIGHT);
-	assert(y1 >= 0);
-	assert(x2 < MAP_MAX_WIDTH);
-	assert(x2 >= 0);
-	assert(y2 < MAP_MAX_HEIGHT);
-	assert(y2 >= 0);
+	ASSERT_WIDTH(x1);
+	ASSERT_HEIGHT(y1);
+	ASSERT_WIDTH(x2);
+	ASSERT_HEIGHT(y2);
 
 	float x_mul;
 	float y_mul;
@@ -379,6 +362,9 @@ void mapCheatSeeAll(void){
 }
 
 pos_t mapFindTilePos(int roomId,tiletype_t tileType){
+	ASSERT_TILE_TYPE(tileType);
+	ASSERT_ROOM(roomId);
+
 	int x,y;
 
 	pos_t pos;

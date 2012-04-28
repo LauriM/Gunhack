@@ -4,6 +4,7 @@
 int randomMax(int max){
 	return rand() % max;
 }
+
 int randomRange(int min,int max){
 	return (rand() % max) + min;
 }

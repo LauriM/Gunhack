@@ -25,7 +25,7 @@ void itemInit(void){
 }
 
 void itemClearFromLevel(int z){
-	//TODO: Add assert
+	ASSERT_ROOM(z);
 	
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemVis[i].state != ITEMSTATE_EMPTY){
@@ -45,7 +45,8 @@ void itemClearFromLevel(int z){
 }
 
 void itemVisCreate(int z,int x,int y,int type){
-	//TODO: Add asserts here!
+	ASSERT_ROOM(z);
+
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemVis[i].state == ITEMSTATE_EMPTY){
 			itemVis[i].state  = ITEMSTATE_GROUND;
@@ -62,7 +63,10 @@ void itemVisCreate(int z,int x,int y,int type){
 }
 
 void itemSpawn(int z,int x,int y,int type){
-	//TODO: Add asserts here!
+	ASSERT_ROOM(z);
+	ASSERT_WIDTH(x);
+	ASSERT_HEIGHT(y);
+
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
         if(itemData[i].state == ITEMSTATE_EMPTY){
 			itemData[i].state  = ITEMSTATE_GROUND;
@@ -81,7 +85,7 @@ void itemSpawn(int z,int x,int y,int type){
 }
 
 void itemSpawnRandom(int z){
-	//TODO: Add assert here!
+	ASSERT_ROOM(z);
 	int x,y,i;
 
 	int itemCount = randomRange(GEN_ITEM_COUNT_MIN,GEN_ITEM_COUNT_MAX);
@@ -106,19 +110,19 @@ void itemSpawnRandom(int z){
 
 /* Returns data of item in world */
 struct itemdata_s* itemGetData(int id){
-	//TODO: Add asserts here
+	ASSERT_ITEM_MAX_COUNT(id);
 	return &itemData[id];
 }
 
 /* Returns item visual info */ 
 struct itemdata_s* itemGetVis(int id){
-	//TODO: Add asserts here
+	ASSERT_ITEM_MAX_COUNT(id);
 	return &itemVis[id];
 }
 
 /* Returns information about item */
 struct item_s* itemGetInfo(int id){
-	//TODO: Add asserts here
+	ASSERT_ITEM_INFO_MAX_COUNT(id);
     return &itemInfo[id];
 }
 

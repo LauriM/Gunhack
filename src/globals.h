@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <stdbool.h>
+#include "debug.h"
 #include "math.h"
 
 //Debugging
