@@ -6,6 +6,7 @@
 #include <math.h>
 #include "math.h"
 #include "item.h"
+#include "npc.h"
 
 tile_t tileInfo[TILE_COUNT];
 room_t room[WORLD_ROOM_COUNT]; //Room list
@@ -207,6 +208,7 @@ void mapCreateRoom(int id){//TODO: Clean up this function bit, its kinda a mess
 	}
 
 	itemSpawnRandom(id);
+	npcSpawnRandom(id);
 
 	LOG_INFO("Level generated");
 }

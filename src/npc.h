@@ -40,4 +40,6 @@ extern void npcInit(void);
 extern void npcSpawnRandom(int z);
 extern void npcSpawn(pos_t pos,npcname_t id);
 
+extern void npcRender();
+
 #endif

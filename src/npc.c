@@ -53,3 +53,11 @@ void npcSpawn(pos_t pos,npcname_t id){
 		}
 	}
 }
+
+void npcRender(){
+	for(int i = 0;i < NPC_MAX_COUNT;i++){
+		if(npcData[i].state == NPCSTATE_ALIVE){
+			printIntxy(npcData[i].pos.x,npcData[i].pos.y,npcInfo[npcData[i].name].symbol);
+		}
+	}
+}
