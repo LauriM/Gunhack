@@ -2,18 +2,18 @@ Major todo
 ==========
 
 * better world generation
-* HUD
 * ingame message system
 * item colors
 * item dropping/applying
 * item trigger coding (a,b,c etc)
+* killing npcs
 
 Minor todo
 ==========
 
 * Save system is not portable
 * more FALSE TRUE stuff
-* npc saving
+* HUD improvements
 
 Gameplay
 ========
