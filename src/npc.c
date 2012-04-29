@@ -65,3 +65,13 @@ void npcRender(){
 		}
 	}
 }
+
+void npcClearFromLevel(int z){
+	for(int i = 0;i < NPC_MAX_COUNT;i++){
+		if(npcData[i].state == NPCSTATE_ALIVE){
+			if(npcData[i].pos.z == z){
+				npcData[i].state = NPCSTATE_DEAD;
+			}
+		}
+	}
+}

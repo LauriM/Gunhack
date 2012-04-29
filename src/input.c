@@ -6,6 +6,7 @@
 #include "map.h"
 #include "hud.h"
 #include "save.h"
+#include "npc.h"
 
 #include "math.h"//QQQ
 #include "item.h"
@@ -61,6 +62,7 @@ void inputHandle(){
 			//Cheat
 			playerRandomPosition();
 			itemClearFromLevel(playerGetInfo()->pos.z);
+			npcClearFromLevel(playerGetInfo()->pos.z);
 			mapCreateRoom(playerGetInfo()->pos.z);
 			LOG_INFO("Forced current room regeneration");
 			mapScanFov();
