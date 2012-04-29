@@ -7,3 +7,5 @@
 #define  ASSERT_ITEM_VIS_MAX_COUNT(p_count)   _ASSERT_RANGE(p_count,ITEM_MAX_COUNT)
 #define  ASSERT_ITEM_INFO_MAX_COUNT(p_count)  _ASSERT_RANGE(p_count,ITEM_COUNT);
 #define  ASSERT_TILE_TYPE(p_type)             _ASSERT_RANGE(p_type,TILE_COUNT);
+
+#define ASSERT_POS_T(p_pos) ASSERT_WIDTH(p_pos.x) ASSERT_HEIGHT(p_pos.y) ASSERT_ROOM(p_pos.z)

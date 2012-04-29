@@ -25,7 +25,6 @@ void npcSpawnRandom(int z){
 			pos.x = randomRange(1,MAP_MAX_WIDTH-1);
 			pos.y = randomRange(1,MAP_MAX_HEIGHT-1);
 
-			//TODO: implement!
 		}
 		npcCount--;
 	}

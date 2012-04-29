@@ -54,7 +54,13 @@ void mapRender(void){
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
 			setColor(room[playerGetInfo()->pos.z].colorData[x][y]);
-			printIntxy(x,y,mapGetVisByPos(playerGetInfo()->pos.z,x,y)->symbol);
+
+			pos_t pos;
+			pos.z = playerGetInfo()->pos.z;
+			pos.x = x;
+			pos.y = y;
+
+			printIntxy(x,y,mapGetVisByPos(pos)->symbol);
 			setColorOff(room[playerGetInfo()->pos.z].colorData[x][y]);
 		}
 	}
@@ -129,7 +135,12 @@ void mapCreateRoom(int id){//TODO: Clean up this function bit, its kinda a mess
 
 		while(digLeft > 0){
 			if(digX >= 0 && digX < MAP_MAX_WIDTH && digY >= 0 && digY < MAP_MAX_HEIGHT){
-				mapEditPoint(id,digX,digY,TILE_EMPTY);
+				pos_t pos;
+				pos.z = id;
+				pos.x = digX;
+				pos.y = digY;
+
+				mapEditPoint(pos,TILE_EMPTY);
 			}else{
 				digLeft       = 0;
 				digLeftRotate = 0;
@@ -200,13 +211,11 @@ void mapCreateRoom(int id){//TODO: Clean up this function bit, its kinda a mess
 	LOG_INFO("Level generated");
 }
 
-void mapEditPoint(int id,int x,int y,int tileType){
+void mapEditPoint(pos_t pos,tiletype_t tileType){
 	ASSERT_TILE_TYPE(tileType);
-	ASSERT_WIDTH(x);
-	ASSERT_HEIGHT(y);
-	ASSERT_ROOM(id);
+	ASSERT_POS_T(pos);
 
-	room[id].mapData[x][y] = tileType;
+	room[pos.z].mapData[pos.x][pos.y] = tileType;
 }
 
 void mapEditBox(int id,int boxX,int boxY,int width,int height,int tileType){
@@ -275,20 +284,20 @@ int mapCheckTileCoords(int id,int boxX,int boxY,int width,int height,int tileTyp
 	return 1;
 }
 
-struct tile_s* mapGetTileByPos(int z,int x,int y){
-	ASSERT_ROOM(z);
-	ASSERT_WIDTH(x);
-	ASSERT_HEIGHT(y);
+struct tile_s* mapGetTileByPos(pos_t pos){
+	ASSERT_ROOM(pos.z);
+	ASSERT_WIDTH(pos.x);
+	ASSERT_HEIGHT(pos.y);
 
-	return &tileInfo[room[z].mapData[x][y]];
+	return &tileInfo[room[pos.z].mapData[pos.x][pos.y]];
 }
 
-struct tile_s* mapGetVisByPos(int z,int x,int y){
-	ASSERT_ROOM(z);
-	ASSERT_WIDTH(x);
-	ASSERT_HEIGHT(y);
+struct tile_s* mapGetVisByPos(pos_t pos){
+	ASSERT_ROOM(pos.z);
+	ASSERT_WIDTH(pos.x);
+	ASSERT_HEIGHT(pos.y);
 
-	return &tileInfo[room[z].visData[x][y]];
+	return &tileInfo[room[pos.z].visData[pos.x][pos.y]];
 }
 
 int mapLosCheck(int x1, int y1, int x2, int y2) {
@@ -326,8 +335,12 @@ int mapLosCheck(int x1, int y1, int x2, int y2) {
 		int x = x1 + ((dx < 0) ? ceil(i*x_mul) : i*x_mul);
 		int y = y1 + ((dy < 0) ? ceil(i*y_mul) : i*y_mul);
 
+		pos_t pos;
+		pos.z = playerGetInfo()->pos.z;
+		pos.x = x;
+		pos.y = y;
 
-		if(mapGetTileByPos(playerGetInfo()->pos.z, x, y)->block == 1){
+		if(mapGetTileByPos(pos)->block == 1){
 			return false;
 		}
 	}
@@ -338,7 +351,7 @@ int mapLosCheck(int x1, int y1, int x2, int y2) {
 
 void mapScanFov(void){
 	int x,y;
-	assert(mapGetTileByPos(playerGetInfo()->pos.z, playerGetInfo()->pos.x, playerGetInfo()->pos.y)->block != 1);//Player should not be in the visblock thing
+	assert(mapGetTileByPos(playerGetInfo()->pos)->block != 1);//Player should not be in the visblock thing
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){

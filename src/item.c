@@ -46,9 +46,7 @@ void itemClearFromLevel(int z){
 }
 
 void itemVisCreate(pos_t pos,itemtype_t type){
-	ASSERT_WIDTH(pos.x);
-	ASSERT_HEIGHT(pos.y);
-	ASSERT_ROOM(pos.z);
+	ASSERT_POS_T(pos);
 	ASSERT_ITEM_MAX_COUNT(type);
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
@@ -65,9 +63,7 @@ void itemVisCreate(pos_t pos,itemtype_t type){
 }
 
 void itemSpawn(pos_t pos,itemtype_t type){
-	ASSERT_ROOM(pos.z);
-	ASSERT_WIDTH(pos.x);
-	ASSERT_HEIGHT(pos.y);
+	ASSERT_POS_T(pos);
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
         if(itemData[i].state == ITEMSTATE_EMPTY){
@@ -103,7 +99,7 @@ void itemSpawnRandom(int z){
 			pos.y = randomRange(1,MAP_MAX_HEIGHT-1);
 
 			//TODO: Implement nice rarity generator
-			if(mapGetTileByPos(pos.z,pos.x,pos.y)->block == 0){
+			if(mapGetTileByPos(pos)->block == 0){
 				int type = randomMax(ITEM_COUNT);
 				itemSpawn(pos,type);
 				done = true;

@@ -39,7 +39,7 @@ void mapRender(void);
 void mapCreateRoom(int z);
 void mapScanFov(void);
 
-void mapEditPoint(int id,int x,int y,int tileType);
+void mapEditPoint(pos_t pos,tiletype_t tileType);
 void mapEditBox(int id,int boxX,int boxY,int width,int height,int tileType);
 
 int mapSearchTileCoords(int z,int boxX,int boxY,int width,int height,int tileType);
@@ -49,8 +49,8 @@ pos_t mapFindTilePos(int roomId,tiletype_t tileType);
 
 int mapLosCheck(int x,int y,int x2,int y2);
 
-struct tile_s* mapGetTileByPos(int z,int x,int y);
-struct tile_s* mapGetVisByPos(int z,int x,int y);
+struct tile_s* mapGetTileByPos(pos_t pos);
+struct tile_s* mapGetVisByPos(pos_t pos);
 
 void mapCheatSeeAll(void);
 
