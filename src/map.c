@@ -53,9 +53,9 @@ void mapRender(void){
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
-			setColor(room[playerGetInfo()->playerZ].colorData[x][y]);
-			printIntxy(x,y,mapGetVisByPos(playerGetInfo()->playerZ,x,y)->symbol);
-			setColorOff(room[playerGetInfo()->playerZ].colorData[x][y]);
+			setColor(room[playerGetInfo()->pos.z].colorData[x][y]);
+			printIntxy(x,y,mapGetVisByPos(playerGetInfo()->pos.z,x,y)->symbol);
+			setColorOff(room[playerGetInfo()->pos.z].colorData[x][y]);
 		}
 	}
 }
@@ -80,8 +80,8 @@ void mapCreateRoom(int id){//TODO: Clean up this function bit, its kinda a mess
 	int roomWidth  = 0;
 	int roomHeight = 0;
 
-	roomX = playerGetInfo()->playerX - 1;
-	roomY = playerGetInfo()->playerY - 1; 
+	roomX = playerGetInfo()->pos.x- 1;
+	roomY = playerGetInfo()->pos.y- 1; 
 
 	mapEditBox(id,roomX,roomY,3,3,TILE_EMPTY);
 
@@ -118,8 +118,8 @@ void mapCreateRoom(int id){//TODO: Clean up this function bit, its kinda a mess
 
 	int tunnelCount = roomCount + (randomMax(GEN_TUNNEL_COUNT_MAX - GEN_TUNNEL_COUNT_MIN) + GEN_TUNNEL_COUNT_MIN);
 	i = 0;
-	digX = playerGetInfo()->playerX;
-	digY = playerGetInfo()->playerY;
+	digX = playerGetInfo()->pos.x;
+	digY = playerGetInfo()->pos.y;
 
 	while(i < tunnelCount){
 		digLeft       = randomMax(GEN_TUNNEL_MAX_LENGTH);
@@ -327,7 +327,7 @@ int mapLosCheck(int x1, int y1, int x2, int y2) {
 		int y = y1 + ((dy < 0) ? ceil(i*y_mul) : i*y_mul);
 
 
-		if(mapGetTileByPos(playerGetInfo()->playerZ, x, y)->block == 1){
+		if(mapGetTileByPos(playerGetInfo()->pos.z, x, y)->block == 1){
 			return false;
 		}
 	}
@@ -338,13 +338,13 @@ int mapLosCheck(int x1, int y1, int x2, int y2) {
 
 void mapScanFov(void){
 	int x,y;
-	assert(mapGetTileByPos(playerGetInfo()->playerZ, playerGetInfo()->playerX, playerGetInfo()->playerY)->block != 1);//Player should not be in the visblock thing
+	assert(mapGetTileByPos(playerGetInfo()->pos.z, playerGetInfo()->pos.x, playerGetInfo()->pos.y)->block != 1);//Player should not be in the visblock thing
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
-			if(mapLosCheck(playerGetInfo()->playerX,playerGetInfo()->playerY,x,y) == 1){
+			if(mapLosCheck(playerGetInfo()->pos.x,playerGetInfo()->pos.y,x,y) == 1){
 				//Player can see, lets move the tile to the visualData table
-				room[playerGetInfo()->playerZ].visData[x][y] = room[playerGetInfo()->playerZ].mapData[x][y];
+				room[playerGetInfo()->pos.z].visData[x][y] = room[playerGetInfo()->pos.z].mapData[x][y];
 			}
 		}
 	}
@@ -355,7 +355,7 @@ void mapCheatSeeAll(void){
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
-			room[playerGetInfo()->playerZ].visData[x][y] = room[playerGetInfo()->playerZ].mapData[x][y];
+			room[playerGetInfo()->pos.z].visData[x][y] = room[playerGetInfo()->pos.z].mapData[x][y];
 		}
 	}
 }

@@ -8,9 +8,7 @@ typedef enum{
 } endgamereason_t;
 
 typedef struct player_s{
-	int playerX;
-	int playerY;
-	int playerZ;
+	pos_t pos;
 
 	int points;
 

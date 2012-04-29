@@ -134,9 +134,9 @@ void itemRender(void){
 	//3) render from visData
 	
 	int playerX,playerY,playerZ;
-	playerX = playerGetInfo()->playerX;
-	playerY = playerGetInfo()->playerY;
-	playerZ = playerGetInfo()->playerZ;
+	playerX = playerGetInfo()->pos.x;
+	playerY = playerGetInfo()->pos.y;
+	playerZ = playerGetInfo()->pos.z;
 
 	//scan visdata
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
@@ -186,7 +186,7 @@ void itemPickup(){
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemData[i].state == ITEMSTATE_GROUND){
-			if(itemData[i].x == playerGetInfo()->playerX && itemData[i].y == playerGetInfo()->playerY && itemData[i].z == playerGetInfo()->playerZ){
+			if(itemData[i].x == playerGetInfo()->pos.x && itemData[i].y == playerGetInfo()->pos.y && itemData[i].z == playerGetInfo()->pos.z){
 				itemCount++;
 				itemId = i;
 			}

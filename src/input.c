@@ -14,8 +14,8 @@ void inputHandle(){
 	int key = getch();
 	switch(key){
 		case 60://<
-			if(room[playerGetInfo()->playerZ].mapData[playerGetInfo()->playerX][playerGetInfo()->playerY] == TILE_STAIRS_UP){
-				if(playerGetInfo()->playerZ == 0){
+			if(room[playerGetInfo()->pos.z].mapData[playerGetInfo()->pos.x][playerGetInfo()->pos.y] == TILE_STAIRS_UP){
+				if(playerGetInfo()->pos.z == 0){
 					LOG_INFO("Player trying to leave the level by going up");
 
 					if(hudPrompt("Do you want to escape the dungeon?") == 1){
@@ -24,31 +24,31 @@ void inputHandle(){
 					}
 
 				}else{
-					playerGetInfo()->playerZ = playerGetInfo()->playerZ - 1;
-					if(room[playerGetInfo()->playerZ].roomType == ROOM_TYPE_UNINITIALIZED){
+					playerGetInfo()->pos.z = playerGetInfo()->pos.z - 1;
+					if(room[playerGetInfo()->pos.z].roomType == ROOM_TYPE_UNINITIALIZED){
 						playerRandomPosition();
-						mapCreateRoom(playerGetInfo()->playerZ);
+						mapCreateRoom(playerGetInfo()->pos.z);
 					}
-					pos_t pos = mapFindTilePos(playerGetInfo()->playerZ,TILE_STAIRS_DOWN);
-					playerGetInfo()->playerX = pos.x;
-					playerGetInfo()->playerY = pos.y;
+					pos_t pos = mapFindTilePos(playerGetInfo()->pos.z,TILE_STAIRS_DOWN);
+					playerGetInfo()->pos.x = pos.x;
+					playerGetInfo()->pos.y = pos.y;
 					mapScanFov();
 				}
 			}
 			break;
 		case 62://>
-			if(room[playerGetInfo()->playerZ].mapData[playerGetInfo()->playerX][playerGetInfo()->playerY] == TILE_STAIRS_DOWN){
-				if(playerGetInfo()->playerZ > WORLD_ROOM_COUNT){
+			if(room[playerGetInfo()->pos.z].mapData[playerGetInfo()->pos.x][playerGetInfo()->pos.y] == TILE_STAIRS_DOWN){
+				if(playerGetInfo()->pos.z > WORLD_ROOM_COUNT){
 					LOG_INFO("Trying to go outside the world_room_count!");
 				}else{
-					playerGetInfo()->playerZ = playerGetInfo()->playerZ + 1;
-					if(room[playerGetInfo()->playerZ].roomType == ROOM_TYPE_UNINITIALIZED){
+					playerGetInfo()->pos.z = playerGetInfo()->pos.z + 1;
+					if(room[playerGetInfo()->pos.z].roomType == ROOM_TYPE_UNINITIALIZED){
 						playerRandomPosition();
-						mapCreateRoom(playerGetInfo()->playerZ);
+						mapCreateRoom(playerGetInfo()->pos.z);
 					}
-					struct pos_s pos =  mapFindTilePos(playerGetInfo()->playerZ,TILE_STAIRS_UP);
-					playerGetInfo()->playerX = pos.x;
-					playerGetInfo()->playerY = pos.y;
+					struct pos_s pos =  mapFindTilePos(playerGetInfo()->pos.z,TILE_STAIRS_UP);
+					playerGetInfo()->pos.x = pos.x;
+					playerGetInfo()->pos.y = pos.y;
 					mapScanFov();
 				}
 			}
@@ -60,8 +60,8 @@ void inputHandle(){
 		case 116://t
 			//Cheat
 			playerRandomPosition();
-			itemClearFromLevel(playerGetInfo()->playerZ);
-			mapCreateRoom(playerGetInfo()->playerZ);
+			itemClearFromLevel(playerGetInfo()->pos.z);
+			mapCreateRoom(playerGetInfo()->pos.z);
 			LOG_INFO("Forced current room regeneration");
 			mapScanFov();
 			break;

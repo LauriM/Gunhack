@@ -8,6 +8,7 @@
 typedef struct pos_s{
 	int x;
 	int y;
+	int z;
 } pos_t;
 
 /*

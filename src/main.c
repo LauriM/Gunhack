@@ -42,11 +42,11 @@ int main(int argc, const char *argv[]){
 	}else{
 		roomInit(0);
 		mapCreateRoom(0);
-		playerGetInfo()->playerZ = 0;
+		playerGetInfo()->pos.z = 0;
 
-		struct pos_s pos =  mapFindTilePos(playerGetInfo()->playerZ,TILE_STAIRS_UP);
-		playerGetInfo()->playerX = pos.x;
-		playerGetInfo()->playerY = pos.y;
+		struct pos_s pos =  mapFindTilePos(playerGetInfo()->pos.z,TILE_STAIRS_UP);
+		playerGetInfo()->pos.x = pos.x;
+		playerGetInfo()->pos.y = pos.y;
 
 		mapScanFov();
 	}
