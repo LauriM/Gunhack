@@ -98,6 +98,7 @@ void itemSpawnRandom(int z){
 	while(i < itemCount){
 		int done = false;
 		while(done == false){
+			//TODO: Add fallback if level is full!
 			pos.x = randomRange(1,MAP_MAX_WIDTH-1);
 			pos.y = randomRange(1,MAP_MAX_HEIGHT-1);
 

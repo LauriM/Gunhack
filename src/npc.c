@@ -8,3 +8,25 @@ npc_t npcInfo[NPC_COUNT];
 void npcInit(void){
 	CREATE_NPC('D',NPC_DUMMY,"Dummy",TERM_COLOR_DEFAULT);
 }
+
+void npcSpawnRandom(int z){
+	pos_t pos;
+	pos.x = 0;
+	pos.y = 0;
+	pos.z = z;
+
+	int npcCount = randomRange(GEN_NPC_COUNT_MIN,GEN_NPC_COUNT_MAX);
+
+	while(npcCount > 0){
+		int done = false;
+		while(done == false){
+            //TODO: Check for existing enemies
+
+			pos.x = randomRange(1,MAP_MAX_WIDTH-1);
+			pos.y = randomRange(1,MAP_MAX_HEIGHT-1);
+
+			//TODO: implement!
+		}
+		npcCount--;
+	}
+}

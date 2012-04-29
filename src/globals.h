@@ -37,6 +37,9 @@
 #define GEN_ITEM_COUNT_MIN 5
 #define GEN_ITEM_COUNT_MAX 25
 
+#define GEN_NPC_COUNT_MIN 5
+#define GEN_NPC_COUNT_MAX 25
+
 //Hud
 #define STATUSLINE_MAX_CHARS 100
 
