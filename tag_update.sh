@@ -6,13 +6,15 @@ echo "#######################"
 #TODO: Git commit counts
 
 while true; do
-	echo Building tags and premake...
+	echo Building tags,static analysis and premake...
 
 	startTime=$(date +%s)
 
 	premake4 gmake
 	cscope -R -b
 	ctags -R --c-kinds=+p --fields=+iaS --extra=+q -R .
+
+	make clean && scan-build -o /var/www/scan-build/ make
 
 	endTime=$(date +%s)
 	diff=$(($endTime - $startTime))

@@ -55,7 +55,7 @@ int main(int argc, const char *argv[]){
 	//==========================================================//
 	//  Main loop
 	//==========================================================//          
-	while(playerGetInfo()->endGame == 0){
+	while(playerGetInfo()->endGame == ENDGAME_REASON_NOTENDED){
 		mapRender();
 		itemRender();
 		playerRender();
@@ -69,10 +69,25 @@ int main(int argc, const char *argv[]){
 	//ending game
 	clear();
 
-	//TODO: End reason code display with the endGame int
 	LOG_INFO("Game over has been triggered.");
-	printw("Game over!");
-	getch();
+
+	switch(playerGetInfo()->endGame){
+		case ENDGAME_REASON_NOTENDED:
+			printw("Error!");
+			LOG_ERROR("Ending game when game should not end!");
+			break;
+		case ENDGAME_REASON_SAVE:
+			printw("Game saved, see you soon!");
+			break;
+		case ENDGAME_REASON_GAMEOVER:
+			printw("Game over!");
+			break;
+		case ENDGAME_REASON_WIN:
+			printw("Victory!");
+			break;
+	}
+
+	getch();//Wait for input before quitting
 
 	LOG_INFO("Closing game...");
 

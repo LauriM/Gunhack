@@ -11,7 +11,6 @@ Minor todo
 
 * Save system is not portable
 * more FALSE TRUE stuff
-* clang testing
 
 Gameplay
 ========

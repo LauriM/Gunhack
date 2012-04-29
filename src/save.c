@@ -24,8 +24,7 @@ void saveGame(void){
 	fclose(output);
 
 	LOG_INFO("Game saved to disk");
-	hudMessage("Game saved!");
-	playerGetInfo()->endGame = 1;
+	playerGetInfo()->endGame = ENDGAME_REASON_SAVE;
 }
 
 void loadGame(void){

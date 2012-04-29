@@ -1,5 +1,12 @@
 #ifndef PLAYER_H
 
+typedef enum{
+	ENDGAME_REASON_NOTENDED = 0,
+	ENDGAME_REASON_SAVE,
+	ENDGAME_REASON_GAMEOVER,
+	ENDGAME_REASON_WIN
+} endgamereason_t;
+
 typedef struct player_s{
 	int playerX;
 	int playerY;
@@ -13,7 +20,7 @@ typedef struct player_s{
 	int exp;
 	int level;
 
-	int endGame;
+	endgamereason_t endGame;
 } player_t;
 
 extern struct player_s playerInfo;
