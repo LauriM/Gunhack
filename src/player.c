@@ -24,7 +24,7 @@ void playerRender(){
 }
 
 void playerMove(int direction){
-	assert(direction <= 3);
+	assert(direction <= DIR_COUNT);
 	int newX = playerInfo.pos.x;
 	int newY = playerInfo.pos.y;
 

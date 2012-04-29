@@ -11,11 +11,16 @@
 #define DEBUG_NO_LOG_DEBUG
 #include "log.h"
 
-//directions
-#define DIR_N 0
-#define DIR_S 1
-#define DIR_E 2
-#define DIR_W 3
+#ifndef GLOBALS_H
+#define GLOBALS_H
+typedef enum{
+	DIR_N = 0,
+	DIR_S,
+	DIR_E,
+	DIR_W,//TODO: Add rest of the directions
+	DIR_COUNT
+} dir_t;
+#endif
 
 //Room generator settings
 #define GEN_ROOM_MAX_COUNT 20
