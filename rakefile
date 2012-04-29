@@ -1,0 +1,29 @@
+desc 'rake'
+task :default do
+    puts '|----------|'
+    puts '|> stats   |'
+    puts '|> update  |'
+    puts '|> analyze |'
+    puts '|----------|'
+end
+
+desc 'rake stats'
+task :stats do
+	system('cloc --quiet --no3 --yaml src/ | tail -4')
+end
+
+desc 'rake update'
+task :update do
+	while true do
+		system('premake4 gmake')
+		system('cscope -R -b ')
+		system('ctags -R --c-kinds=+p --fields=+iaS --extra=+q -R .')
+
+		sleep(60)
+	end
+end
+
+desc 'rake analyse'
+task :analyse do
+	system('make clean && scan-build -o /var/www/scan-build/ make')
+end
