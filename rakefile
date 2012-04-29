@@ -3,7 +3,7 @@ task :default do
     puts '|----------|'
     puts '|> stats   |'
     puts '|> update  |'
-    puts '|> analyze |'
+    puts '|> analyse |'
     puts '|----------|'
 end
 

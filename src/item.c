@@ -81,8 +81,6 @@ void itemSpawn(int z,int x,int y,int type){
 			return;
 		}
 	}
-	//TODO: Check error here, for some reason item spawn random
-	//      hits this function too many times
 	LOG_ERROR("ITEM_MAX_COUNT too small!");
 	return;
 }
@@ -135,14 +133,15 @@ void itemRender(void){
 	//2) scan all itemData, if seen, add to visData
 	//3) render from visData
 	
-	int playerX,playerY;  //TODO: Add playerZ
+	int playerX,playerY,playerZ;
 	playerX = playerGetInfo()->playerX;
 	playerY = playerGetInfo()->playerY;
+	playerZ = playerGetInfo()->playerZ;
 
 	//scan visdata
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemVis[i].state == ITEMSTATE_GROUND){
-			if(itemVis[i].z == playerGetInfo()->playerZ){
+			if(itemVis[i].z == playerZ){
 				if(mapLosCheck(playerX,playerY,itemVis[i].x,itemVis[i].y) == 1){
 					itemVis[i].state = ITEMSTATE_EMPTY;//removes the visdata
 					LOG_DEBUG("removed");
@@ -154,10 +153,10 @@ void itemRender(void){
 	//scan itemdata
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemData[i].state == ITEMSTATE_GROUND){
-			if(itemData[i].z == playerGetInfo()->playerZ){
+			if(itemData[i].z == playerZ){
 				if(mapLosCheck(playerX,playerY,itemData[i].x,itemData[i].y) == 1){
 					//Add to visdata
-					itemVisCreate(playerGetInfo()->playerZ,itemData[i].x,itemData[i].y,itemData[i].itemId);
+					itemVisCreate(playerZ,itemData[i].x,itemData[i].y,itemData[i].itemId);
 					LOG_DEBUG("Added");
 				}
 			}
@@ -166,7 +165,7 @@ void itemRender(void){
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemVis[i].state == ITEMSTATE_GROUND){
-			if(itemVis[i].z == playerGetInfo()->playerZ){
+			if(itemVis[i].z == playerZ){
 				int symbol = itemGetInfo(itemGetVis(i)->itemId)->symbol;
 
 				setColor(itemGetInfo(itemGetVis(i)->itemId)->itemColor);

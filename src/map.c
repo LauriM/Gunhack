@@ -60,8 +60,7 @@ void mapRender(void){
 	}
 }
 
-void mapCreateRoom(int id){
-	//TODO: Clean up this function bit, its kinda a mess
+void mapCreateRoom(int id){//TODO: Clean up this function bit, its kinda a mess
 	int x,y;
 
 	room[id].roomType = ROOM_TYPE_DUNGEON;
@@ -92,7 +91,7 @@ void mapCreateRoom(int id){
 	int triesCount = 0;
 	int i = 0;
 	while(i < roomCount){
-		roomWidth = (randomMax(8) + 3);//TODO: change 5 to max size
+		roomWidth = (randomMax(8) + 3);
 		roomHeight = (randomMax(8) + 3);   //TODO: Move these to globals
 		roomX = randomMax(MAP_MAX_WIDTH-roomWidth-1);
 		roomY = randomMax(MAP_MAX_HEIGHT-roomHeight-1);
