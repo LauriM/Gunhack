@@ -27,6 +27,7 @@ typedef enum {
 
 extern npc_t npcInfo[NPC_COUNT];
 
-void npcInit(void);
+extern void npcInit(void);
+extern void npcSpawnRandom(int z); //TODO: implement
 
 #endif

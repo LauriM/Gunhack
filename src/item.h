@@ -48,8 +48,8 @@ itemdata_t* itemGetVis (int id);
 item_t*     itemGetInfo(int id);
 
 extern void itemInit(void);
-extern void itemSpawn(int z,int x,int y,int type);
-extern void itemVisCreate(int z,int x,int y,int type);
+extern void itemSpawn(pos_t pos,itemtype_t type);
+extern void itemVisCreate(pos_t pos,itemtype_t type);
 extern void itemSpawnRandom(int z);
 extern void itemClearFromLevel(int z);
 

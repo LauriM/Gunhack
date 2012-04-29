@@ -5,6 +5,8 @@ Major todo
 * HUD
 * ingame message system
 * item colors
+* item dropping/applying
+* item trigger coding (a,b,c etc)
 
 Minor todo
 ==========

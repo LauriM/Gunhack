@@ -45,19 +45,17 @@ void itemClearFromLevel(int z){
 	}
 }
 
-void itemVisCreate(int z,int x,int y,int type){
-	ASSERT_WIDTH(x);
-	ASSERT_HEIGHT(y);
+void itemVisCreate(pos_t pos,itemtype_t type){
+	ASSERT_WIDTH(pos.x);
+	ASSERT_HEIGHT(pos.y);
+	ASSERT_ROOM(pos.z);
 	ASSERT_ITEM_MAX_COUNT(type);
-	ASSERT_ROOM(z);
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemVis[i].state == ITEMSTATE_EMPTY){
 			itemVis[i].state  = ITEMSTATE_GROUND;
 			itemVis[i].itemId = type;
-			itemVis[i].pos.x      = x;
-			itemVis[i].pos.y      = y;
-			itemVis[i].pos.z      = z;
+			itemVis[i].pos    = pos;
 
 			return;
 		}
@@ -66,18 +64,18 @@ void itemVisCreate(int z,int x,int y,int type){
 	return;
 }
 
-void itemSpawn(int z,int x,int y,int type){
-	ASSERT_ROOM(z);
-	ASSERT_WIDTH(x);
-	ASSERT_HEIGHT(y);
+void itemSpawn(pos_t pos,itemtype_t type){
+	ASSERT_ROOM(pos.z);
+	ASSERT_WIDTH(pos.x);
+	ASSERT_HEIGHT(pos.y);
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
         if(itemData[i].state == ITEMSTATE_EMPTY){
 			itemData[i].state  = ITEMSTATE_GROUND;
 			itemData[i].itemId = type;
-			itemData[i].pos.x      = x;
-			itemData[i].pos.y      = y;
-			itemData[i].pos.z      = z;
+			itemData[i].pos.x      = pos.x;
+			itemData[i].pos.y      = pos.y;
+			itemData[i].pos.z      = pos.z;
 
 			return;
 		}
@@ -88,7 +86,11 @@ void itemSpawn(int z,int x,int y,int type){
 
 void itemSpawnRandom(int z){
 	ASSERT_ROOM(z);
-	int x,y,i;
+	int i;
+	pos_t pos;
+	pos.x = 0;
+	pos.z = 0;
+	pos.y = 0;
 
 	int itemCount = randomRange(GEN_ITEM_COUNT_MIN,GEN_ITEM_COUNT_MAX);
 
@@ -96,13 +98,13 @@ void itemSpawnRandom(int z){
 	while(i < itemCount){
 		int done = false;
 		while(done == false){
-			x = randomRange(1,MAP_MAX_WIDTH-1);
-			y = randomRange(1,MAP_MAX_HEIGHT-1);
+			pos.x = randomRange(1,MAP_MAX_WIDTH-1);
+			pos.y = randomRange(1,MAP_MAX_HEIGHT-1);
 
 			//TODO: Implement nice rarity generator
-			if(mapGetTileByPos(z,x,y)->block == 0){
+			if(mapGetTileByPos(pos.z,pos.x,pos.y)->block == 0){
 				int type = randomMax(ITEM_COUNT);
-				itemSpawn(z,x,y,type);
+				itemSpawn(pos,type);
 				done = true;
 			}
 		}
@@ -157,7 +159,12 @@ void itemRender(void){
 			if(itemData[i].pos.z == playerZ){
 				if(mapLosCheck(playerX,playerY,itemData[i].pos.x,itemData[i].pos.y) == 1){
 					//Add to visdata
-					itemVisCreate(playerZ,itemData[i].pos.x,itemData[i].pos.y,itemData[i].itemId);
+					pos_t newPos;
+					newPos.z = playerZ;
+					newPos.x = itemData[i].pos.x;
+					newPos.y = itemData[i].pos.y;
+
+					itemVisCreate(newPos,itemData[i].itemId);
 					LOG_DEBUG("Added");
 				}
 			}
