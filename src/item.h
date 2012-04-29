@@ -1,6 +1,8 @@
 #ifndef ITEM_H
 #define ITEM_H
 
+#include "globals.h"
+
 typedef enum{
 	ITEMSTATE_GROUND = 0,
 	ITEMSTATE_INV,
@@ -22,8 +24,9 @@ typedef enum{
 typedef struct item_s{
 	char symbol;
 	int itemRarity;
-	int itemType;//Wpn/armor
+	itemtype_t itemType;
 	char *name;
+	color_t itemColor;
 } item_t;
 
 typedef struct itemdata_s{

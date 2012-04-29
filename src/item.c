@@ -11,11 +11,11 @@ itemdata_t itemVis [ITEM_MAX_COUNT];
 itemdata_t itemData[ITEM_MAX_COUNT];
 item_t     itemInfo[ITEM_COUNT];
 
-#define CREATE_ITEM(p_symbol,p_id,p_rarity,p_type,p_name) itemInfo[p_id].symbol = p_symbol; itemInfo[p_id].itemRarity = p_rarity;itemInfo[p_id].itemType = p_type; itemInfo[p_id].name = TO_STRING(p_name);
+#define CREATE_ITEM(p_symbol,p_id,p_rarity,p_type,p_name,p_color) itemInfo[p_id].symbol = p_symbol; itemInfo[p_id].itemRarity = p_rarity;itemInfo[p_id].itemType = p_type; itemInfo[p_id].name = TO_STRING(p_name); itemInfo[p_id].itemColor = p_color;
 
 void itemInit(void){
-	CREATE_ITEM('*',ITEM_HP_SMALL,70,ITEM_TYPE_USABLE,"Small health pack");
-	CREATE_ITEM('+',ITEM_HP_BIG,60,ITEM_TYPE_USABLE,"Large health pack");
+	CREATE_ITEM('*',ITEM_HP_SMALL,70,ITEM_TYPE_USABLE,"Small health pack",TERM_COLOR_RED);
+	CREATE_ITEM('+',ITEM_HP_BIG,60,ITEM_TYPE_USABLE,"Large health pack",TERM_COLOR_RED);
 
 	//Reset the array
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
@@ -45,6 +45,9 @@ void itemClearFromLevel(int z){
 }
 
 void itemVisCreate(int z,int x,int y,int type){
+	ASSERT_WIDTH(x);
+	ASSERT_HEIGHT(y);
+	ASSERT_ITEM_MAX_COUNT(type);
 	ASSERT_ROOM(z);
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
@@ -165,7 +168,11 @@ void itemRender(void){
 		if(itemVis[i].state == ITEMSTATE_GROUND){
 			if(itemVis[i].z == playerGetInfo()->playerZ){
 				int symbol = itemGetInfo(itemGetVis(i)->itemId)->symbol;
+
+				setColor(itemGetInfo(itemGetVis(i)->itemId)->itemColor);
 				printIntxy(itemGetVis(i)->x,itemGetVis(i)->y,symbol);
+				setColorOff(itemGetInfo(itemGetVis(i)->itemId)->itemColor);
+
 				LOG_DEBUG("rendered");
 			}
 		}

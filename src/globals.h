@@ -3,6 +3,22 @@
 #include "debug.h"
 #include "math.h"
 
+#ifndef GLOBALS_H
+#define GLOBALS_H
+typedef enum{
+	TERM_COLOR_DEFAULT = 0,
+	TERM_COLOR_RED,
+	TERM_COLOR_GREEN,
+	TERM_COLOR_YELLOW,
+	TERM_COLOR_BLUE,
+	TERM_COLOR_MAGENTA,
+	TERM_COLOR_CYAN,
+	TERM_COLOR_WHITE_RED,
+	TERM_COLOR_WHITE_GREEN
+	//TODO: rest of the colors...
+} color_t;
+#endif
+
 //Debugging
 #define DEBUG_NO_LOG_DEBUG
 #include "log.h"

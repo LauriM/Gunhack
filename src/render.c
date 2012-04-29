@@ -22,11 +22,11 @@ void renderUnInit(void){
 	endwin();
 }
 
-void setColor(int colorCode){
+void setColor(color_t colorCode){
 	attron(COLOR_PAIR(colorCode));
 }
 
-void setColorOff(int colorCode){
+void setColorOff(color_t colorCode){
 	attroff(COLOR_PAIR(colorCode));
 }
 
