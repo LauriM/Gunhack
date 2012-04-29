@@ -32,9 +32,7 @@ typedef struct item_s{
 typedef struct itemdata_s{
 	itemname_t itemId;//Links to the item_s in the itemInfo
 	itemstate_t state;
-	int x;
-	int y;
-	int z;
+	pos_t pos;
 } itemdata_t;
 
 extern itemdata_t itemVis[ITEM_MAX_COUNT];

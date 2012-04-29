@@ -29,7 +29,7 @@ void itemClearFromLevel(int z){
 	
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemVis[i].state != ITEMSTATE_EMPTY){
-			if(itemVis[i].z == z){
+			if(itemVis[i].pos.z == z){
 				itemVis[i].state = ITEMSTATE_EMPTY;
 			}
 		}
@@ -37,7 +37,7 @@ void itemClearFromLevel(int z){
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemData[i].state != ITEMSTATE_EMPTY){
-			if(itemData[i].z == z){
+			if(itemData[i].pos.z == z){
 				itemData[i].state = ITEMSTATE_EMPTY;//Removes the item from the game
 			}
 		}
@@ -54,9 +54,9 @@ void itemVisCreate(int z,int x,int y,int type){
 		if(itemVis[i].state == ITEMSTATE_EMPTY){
 			itemVis[i].state  = ITEMSTATE_GROUND;
 			itemVis[i].itemId = type;
-			itemVis[i].x      = x;
-			itemVis[i].y      = y;
-			itemVis[i].z      = z;
+			itemVis[i].pos.x      = x;
+			itemVis[i].pos.y      = y;
+			itemVis[i].pos.z      = z;
 
 			return;
 		}
@@ -74,9 +74,9 @@ void itemSpawn(int z,int x,int y,int type){
         if(itemData[i].state == ITEMSTATE_EMPTY){
 			itemData[i].state  = ITEMSTATE_GROUND;
 			itemData[i].itemId = type;
-			itemData[i].x      = x;
-			itemData[i].y      = y;
-			itemData[i].z      = z;
+			itemData[i].pos.x      = x;
+			itemData[i].pos.y      = y;
+			itemData[i].pos.z      = z;
 
 			return;
 		}
@@ -141,8 +141,8 @@ void itemRender(void){
 	//scan visdata
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemVis[i].state == ITEMSTATE_GROUND){
-			if(itemVis[i].z == playerZ){
-				if(mapLosCheck(playerX,playerY,itemVis[i].x,itemVis[i].y) == 1){
+			if(itemVis[i].pos.z == playerZ){
+				if(mapLosCheck(playerX,playerY,itemVis[i].pos.x,itemVis[i].pos.y) == 1){
 					itemVis[i].state = ITEMSTATE_EMPTY;//removes the visdata
 					LOG_DEBUG("removed");
 				}
@@ -153,10 +153,10 @@ void itemRender(void){
 	//scan itemdata
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemData[i].state == ITEMSTATE_GROUND){
-			if(itemData[i].z == playerZ){
-				if(mapLosCheck(playerX,playerY,itemData[i].x,itemData[i].y) == 1){
+			if(itemData[i].pos.z == playerZ){
+				if(mapLosCheck(playerX,playerY,itemData[i].pos.x,itemData[i].pos.y) == 1){
 					//Add to visdata
-					itemVisCreate(playerZ,itemData[i].x,itemData[i].y,itemData[i].itemId);
+					itemVisCreate(playerZ,itemData[i].pos.x,itemData[i].pos.y,itemData[i].itemId);
 					LOG_DEBUG("Added");
 				}
 			}
@@ -165,11 +165,11 @@ void itemRender(void){
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemVis[i].state == ITEMSTATE_GROUND){
-			if(itemVis[i].z == playerZ){
+			if(itemVis[i].pos.z == playerZ){
 				int symbol = itemGetInfo(itemGetVis(i)->itemId)->symbol;
 
 				setColor(itemGetInfo(itemGetVis(i)->itemId)->itemColor);
-				printIntxy(itemGetVis(i)->x,itemGetVis(i)->y,symbol);
+				printIntxy(itemGetVis(i)->pos.x,itemGetVis(i)->pos.y,symbol);
 				setColorOff(itemGetInfo(itemGetVis(i)->itemId)->itemColor);
 
 				LOG_DEBUG("rendered");
@@ -186,7 +186,7 @@ void itemPickup(){
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemData[i].state == ITEMSTATE_GROUND){
-			if(itemData[i].x == playerGetInfo()->pos.x && itemData[i].y == playerGetInfo()->pos.y && itemData[i].z == playerGetInfo()->pos.z){
+			if(itemData[i].pos.x == playerGetInfo()->pos.x && itemData[i].pos.y == playerGetInfo()->pos.y && itemData[i].pos.z == playerGetInfo()->pos.z){
 				itemCount++;
 				itemId = i;
 			}
