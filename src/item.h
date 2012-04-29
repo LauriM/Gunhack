@@ -1,7 +1,7 @@
 #ifndef ITEM_H
 #define ITEM_H
 
-#include "globals.h"
+#include "render.h"
 
 typedef enum{
 	ITEMSTATE_GROUND = 0,

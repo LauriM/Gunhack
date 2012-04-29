@@ -12,6 +12,7 @@
 #include "map.h"
 #include "item.h"
 #include "save.h"
+#include "npc.h"
 
 int main(int argc, const char *argv[]){
 	logInit();
@@ -20,6 +21,7 @@ int main(int argc, const char *argv[]){
 	playerInit();
 	tileInit();
 	itemInit();
+	npcInit();
 
 	srand(time(NULL));
 

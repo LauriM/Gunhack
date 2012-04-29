@@ -1,5 +1,7 @@
 #ifndef PLAYER_H
 
+#include "math.h"
+
 typedef enum{
 	ENDGAME_REASON_NOTENDED = 0,
 	ENDGAME_REASON_SAVE,

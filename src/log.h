@@ -1,8 +1,7 @@
 #ifndef LOG_H
 #define LOG_H
 
-#define _TO_STRING(value) #value
-#define TO_STRING(value) _TO_STRING(value)
+#include "globals.h"
 
 #define LOG_ERROR(msg) insertLog("ERROR: " TO_STRING(__FILE__) ":" TO_STRING( __LINE__), msg) 
 #define LOG_WARNING(msg) insertLog( "WARNIGN: " TO_STRING(__FILE__) ":" TO_STRING( __LINE__), msg) 

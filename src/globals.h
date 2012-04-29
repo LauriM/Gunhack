@@ -3,21 +3,9 @@
 #include "debug.h"
 #include "math.h"
 
-#ifndef GLOBALS_H
-#define GLOBALS_H
-typedef enum{
-	TERM_COLOR_DEFAULT = 0,
-	TERM_COLOR_RED,
-	TERM_COLOR_GREEN,
-	TERM_COLOR_YELLOW,
-	TERM_COLOR_BLUE,
-	TERM_COLOR_MAGENTA,
-	TERM_COLOR_CYAN,
-	TERM_COLOR_WHITE_RED,
-	TERM_COLOR_WHITE_GREEN
-	//TODO: rest of the colors...
-} color_t;
-#endif
+//Global macros
+#define _TO_STRING(value) #value
+#define TO_STRING(value) _TO_STRING(value)
 
 //Debugging
 #define DEBUG_NO_LOG_DEBUG
@@ -54,3 +42,7 @@ typedef enum{
 
 //Items
 #define ITEM_MAX_COUNT 100 //How many items can be in the game
+
+//Npc
+
+#define NPC_MAX_COUNT 100
