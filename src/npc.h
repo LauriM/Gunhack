@@ -24,6 +24,7 @@ typedef struct npc_s{
 	char symbol;
 	char *name;
 	color_t color;
+	int maxHp;
 } npc_t;
 
 typedef struct npcdata_s{
@@ -31,6 +32,7 @@ typedef struct npcdata_s{
 	npcname_t name;
 	pos_t pos;
 	npc_ai_state_t aiState;
+	int hp;
 } npcdata_t;
 
 extern npcdata_t npcData[NPC_MAX_COUNT];

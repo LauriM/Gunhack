@@ -6,10 +6,11 @@
 npcdata_t npcData[NPC_MAX_COUNT];
 npc_t npcInfo[NPC_COUNT];
 
-#define CREATE_NPC(p_symbol,p_id,p_name,p_color) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color;
+#define CREATE_NPC(p_symbol,p_id,p_name,p_color,p_maxhp) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color; npcInfo[p_id].maxHp = p_maxhp;
 
 void npcInit(void){
-	CREATE_NPC('D',NPC_DUMMY,"Dummy",TERM_COLOR_DEFAULT);
+	//--    symbol   id         name       color                maxhp
+	CREATE_NPC('D' , NPC_DUMMY , "Dummy" , TERM_COLOR_DEFAULT , 10);
 
 	//Init the npcdata array
 
@@ -47,10 +48,12 @@ void npcSpawnRandom(int z){
 void npcSpawn(pos_t pos,npcname_t id){
 	for(int i = 0;i < NPC_MAX_COUNT;i++){
 		if(npcData[i].state == NPCSTATE_DEAD){
-			npcData[i].state = NPCSTATE_ALIVE;
-			npcData[i].pos = pos;
+			npcData[i].state   = NPCSTATE_ALIVE;
+			npcData[i].pos     = pos;
 			npcData[i].aiState = NPC_AI_STATE_IDLE;
-			npcData[i].name= id;
+			npcData[i].name    = id;
+			npcData[i].hp      = npcInfo[id].maxHp;
+
 			LOG_INFO("NPC spawned");
 			return;
 		}
