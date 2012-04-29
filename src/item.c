@@ -14,8 +14,9 @@ item_t     itemInfo[ITEM_COUNT];
 #define CREATE_ITEM(p_symbol,p_id,p_rarity,p_type,p_name,p_color) itemInfo[p_id].symbol = p_symbol; itemInfo[p_id].itemRarity = p_rarity;itemInfo[p_id].itemType = p_type; itemInfo[p_id].name = TO_STRING(p_name); itemInfo[p_id].itemColor = p_color;
 
 void itemInit(void){
-	CREATE_ITEM('*',ITEM_HP_SMALL,70,ITEM_TYPE_USABLE,"Small health pack",TERM_COLOR_RED);
-	CREATE_ITEM('+',ITEM_HP_BIG,60,ITEM_TYPE_USABLE,"Large health pack",TERM_COLOR_RED);
+	CREATE_ITEM('*' , ITEM_HP_SMALL    , 70 , ITEM_TYPE_USABLE , "Small health pack" , TERM_COLOR_RED);
+	CREATE_ITEM('+' , ITEM_HP_BIG      , 60 , ITEM_TYPE_USABLE , "Large health pack" , TERM_COLOR_RED);
+	CREATE_ITEM('/' , ITEM_MELEE_KNIFE , 50 , ITEM_TYPE_MELEE  , "Knife"             , TERM_COLOR_DEFAULT);
 
 	//Reset the array
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
