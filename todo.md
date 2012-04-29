@@ -13,6 +13,8 @@ Minor todo
 
 * Save system is not portable
 * more FALSE TRUE stuff
+* npc saving
+* npc los
 
 Gameplay
 ========

@@ -50,8 +50,12 @@ void npcSpawn(pos_t pos,npcname_t id){
 			npcData[i].pos = pos;
 			npcData[i].aiState = NPC_AI_STATE_IDLE;
 			npcData[i].name= id;
+			LOG_INFO("NPC spawned");
+			return;
 		}
 	}
+
+	LOG_ERROR("NPC_MAX_COUNT is too small!");
 }
 
 void npcRender(){
