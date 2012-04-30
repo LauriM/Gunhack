@@ -1,5 +1,6 @@
 #ifndef NPC_H
 #define NPC_H
+#include "globals.h"
 #include "render.h"
 
 typedef enum {
@@ -28,8 +29,8 @@ typedef struct npc_s{
 } npc_t;
 
 typedef struct npcdata_s{
-	npc_state_t state;
 	npcname_t name;
+	npc_state_t state;
 	pos_t pos;
 	npc_ai_state_t aiState;
 	int hp;
@@ -42,6 +43,8 @@ extern void npcInit(void);
 extern void npcSpawnRandom(int z);
 extern void npcSpawn(pos_t pos,npcname_t id);
 extern void npcClearFromLevel(int z);
+
+extern bool npcExistsInPos(pos_t pos);
 
 extern void npcRender();
 

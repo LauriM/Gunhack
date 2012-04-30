@@ -1,6 +1,7 @@
 #include "globals.h"
 #include "npc.h"
 #include "map.h"
+#include <stdbool.h>
 #include "player.h"
 
 npcdata_t npcData[NPC_MAX_COUNT];
@@ -80,4 +81,16 @@ void npcClearFromLevel(int z){
 			}
 		}
 	}
+}
+
+bool npcExistsInPos(pos_t pos){
+	for(int i = 0;i < NPC_MAX_COUNT;i++){
+		if(npcData[i].state == NPCSTATE_ALIVE){
+			if(npcData[i].pos.x == pos.x && npcData[i].pos.y == pos.y){
+				return true;
+			}
+		}
+	}
+
+	return false;
 }

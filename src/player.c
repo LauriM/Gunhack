@@ -3,6 +3,7 @@
 #include "render.h"
 #include "map.h"
 #include "math.h"
+#include "npc.h"
 
 player_t playerInfo;
 
@@ -49,7 +50,7 @@ void playerMove(int direction){
 	posToCheck.x = newX;
 	posToCheck.y = newY;
 
-	if(mapGetTileByPos(posToCheck)->block == 0){
+	if(mapGetTileByPos(posToCheck)->block == 0 && npcExistsInPos(posToCheck) == 0){
 		playerInfo.pos.x = newX;
 		playerInfo.pos.y = newY;
 		mapScanFov();
