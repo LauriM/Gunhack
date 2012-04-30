@@ -16,5 +16,5 @@ void logUnInit(void){
 }
 
 void insertLog(const char *prefix,const char *msg){
-	fprintf(logFile,"aika %s %s\n",prefix,msg);
+	fprintf(logFile,"%s %s\n",prefix,msg);
 }
