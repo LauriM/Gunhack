@@ -21,9 +21,6 @@ void itemInit(void){
 	CREATE_ITEM('/' , ITEM_MELEE_KNIFE , 50 , ITEM_TYPE_MELEE  , "Knife"             , TERM_COLOR_DEFAULT);
 	CREATE_ITEM('%' , ITEM_CORPSE      , 5  , ITEM_TYPE_EDIBLE , "Corpse"            , TERM_COLOR_RED);
 
-	//memset(itemData , ITEMSTATE_EMPTY , sizeof(itemData[0])*ITEM_MAX_COUNT);
-	//memset(itemVis  , ITEMSTATE_EMPTY , sizeof(itemVis[0])*ITEM_MAX_COUNT);
-
 	//Reset the array
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		itemData[i].state = ITEMSTATE_EMPTY;

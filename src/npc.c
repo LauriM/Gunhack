@@ -87,12 +87,13 @@ void npcClearFromLevel(int z){
 
 bool npcExistsInPos(pos_t pos){
 	ASSERT_POS_T(pos);
+
 	for(int i = 0;i < NPC_MAX_COUNT;i++){
-		if(npcData[i].state == NPCSTATE_ALIVE){
-			if(npcData[i].pos.x == pos.x && npcData[i].pos.y == pos.y){
-				return true;
-			}
-		}
+		if(npcData[i].state != NPCSTATE_ALIVE)
+			continue;
+
+		if(npcData[i].pos.x == pos.x && npcData[i].pos.y == pos.y)
+			return true;
 	}
 
 	return false;
@@ -102,19 +103,21 @@ bool npcApplyDamagePos(pos_t pos,int damage){
 	ASSERT_POS_T(pos);
 
 	for(int i = 0;i < NPC_MAX_COUNT;i++){
-		if(npcData[i].state == NPCSTATE_ALIVE){
-			if(npcData[i].pos.x == pos.x && npcData[i].pos.y == pos.y){
-				npcData[i].hp = npcData[i].hp - damage;
+		if(npcData[i].state != NPCSTATE_ALIVE)
+			continue;
 
-				if(npcData[i].hp < 0){
-					//DEATH
-					npcKillById(i);
-					return true;
-				}else{
-					break;
-				}
-			}
+		if(npcData[i].pos.x != pos.x || npcData[i].pos.y != pos.y)
+			continue;
+
+		npcData[i].hp = npcData[i].hp - damage;
+
+		if(npcData[i].hp < 0){
+			//DEATH
+			npcKillById(i);
+			return true;
 		}
+
+		break;
 	}
 
 	return false;
