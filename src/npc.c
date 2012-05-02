@@ -49,16 +49,17 @@ void npcSpawnRandom(int z){
 
 void npcSpawn(pos_t pos,npcname_t id){
 	for(int i = 0;i < NPC_MAX_COUNT;i++){
-		if(npcData[i].state == NPCSTATE_DEAD){
-			npcData[i].state   = NPCSTATE_ALIVE;
-			npcData[i].pos     = pos;
-			npcData[i].aiState = NPC_AI_STATE_IDLE;
-			npcData[i].name    = id;
-			npcData[i].hp      = npcInfo[id].maxHp;
+		if(npcData[i].state != NPCSTATE_DEAD)
+			continue;
 
-			LOG_INFO("NPC spawned");
-			return;
-		}
+		npcData[i].state   = NPCSTATE_ALIVE;
+		npcData[i].pos     = pos;
+		npcData[i].aiState = NPC_AI_STATE_IDLE;
+		npcData[i].name    = id;
+		npcData[i].hp      = npcInfo[id].maxHp;
+
+		LOG_INFO("NPC spawned");
+		return;
 	}
 
 	LOG_ERROR("NPC_MAX_COUNT is too small!");
@@ -66,22 +67,28 @@ void npcSpawn(pos_t pos,npcname_t id){
 
 void npcRender(){
 	for(int i = 0;i < NPC_MAX_COUNT;i++){
-		if(npcData[i].state == NPCSTATE_ALIVE){
-			if(mapLosCheck(playerGetInfo()->pos.x,playerGetInfo()->pos.y,npcData[i].pos.x,npcData[i].pos.y) == true){
-				printIntxy(npcData[i].pos.x,npcData[i].pos.y,npcInfo[npcData[i].name].symbol);
-			}
-		}
+		if(npcData[i].state != NPCSTATE_ALIVE)
+			continue;
+
+		if(mapLosCheck(playerGetInfo()->pos.x,playerGetInfo()->pos.y,npcData[i].pos.x,npcData[i].pos.y) == false)
+			continue;
+
+		printIntxy(npcData[i].pos.x,npcData[i].pos.y,npcInfo[npcData[i].name].symbol);
 	}
 }
 
 void npcClearFromLevel(int z){
 	ASSERT_ROOM(z);
+
 	for(int i = 0;i < NPC_MAX_COUNT;i++){
-		if(npcData[i].state == NPCSTATE_ALIVE){
-			if(npcData[i].pos.z == z){
-				npcData[i].state = NPCSTATE_DEAD;
-			}
-		}
+
+		if(npcData[i].state != NPCSTATE_ALIVE)
+			continue;
+
+		if(npcData[i].pos.z != z)
+			continue;
+
+		npcData[i].state = NPCSTATE_DEAD;
 	}
 }
 
