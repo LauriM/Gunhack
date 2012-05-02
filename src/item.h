@@ -13,6 +13,7 @@ typedef enum{
 	ITEM_HP_SMALL = 0,
 	ITEM_HP_BIG,
 	ITEM_MELEE_KNIFE,
+	ITEM_CORPSE,
 	ITEM_COUNT
 } itemname_t;
 
@@ -21,6 +22,7 @@ typedef enum{
 	ITEM_TYPE_GUN,
 	ITEM_TYPE_MELEE,
 	ITEM_TYPE_ARMOR,
+	ITEM_TYPE_EDIBLE,
 } itemtype_t;
 
 typedef struct item_s{

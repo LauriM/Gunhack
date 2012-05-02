@@ -48,4 +48,7 @@ extern bool npcExistsInPos(pos_t pos);
 
 extern void npcRender();
 
+extern bool npcApplyDamagePos(pos_t pos,int damage);
+extern void npcKillById(int id);
+
 #endif

@@ -1,6 +1,7 @@
 #include "globals.h"
 #include "npc.h"
 #include "map.h"
+#include "item.h"
 #include <stdbool.h>
 #include "player.h"
 
@@ -74,6 +75,7 @@ void npcRender(){
 }
 
 void npcClearFromLevel(int z){
+	ASSERT_ROOM(z);
 	for(int i = 0;i < NPC_MAX_COUNT;i++){
 		if(npcData[i].state == NPCSTATE_ALIVE){
 			if(npcData[i].pos.z == z){
@@ -84,6 +86,7 @@ void npcClearFromLevel(int z){
 }
 
 bool npcExistsInPos(pos_t pos){
+	ASSERT_POS_T(pos);
 	for(int i = 0;i < NPC_MAX_COUNT;i++){
 		if(npcData[i].state == NPCSTATE_ALIVE){
 			if(npcData[i].pos.x == pos.x && npcData[i].pos.y == pos.y){
@@ -93,4 +96,33 @@ bool npcExistsInPos(pos_t pos){
 	}
 
 	return false;
+}
+
+bool npcApplyDamagePos(pos_t pos,int damage){
+	ASSERT_POS_T(pos);
+
+	for(int i = 0;i < NPC_MAX_COUNT;i++){
+		if(npcData[i].state == NPCSTATE_ALIVE){
+			if(npcData[i].pos.x == pos.x && npcData[i].pos.y == pos.y){
+				npcData[i].hp = npcData[i].hp - damage;
+
+				if(npcData[i].hp < 0){
+					//DEATH
+					npcKillById(i);
+					return true;
+				}else{
+					break;
+				}
+			}
+		}
+	}
+
+	return false;
+}
+
+void npcKillById(int id){
+	npcData[id].state = NPCSTATE_DEAD;
+
+	itemSpawn(npcData[id].pos,ITEM_CORPSE);
+	LOG_INFO("Enemy down!");
 }

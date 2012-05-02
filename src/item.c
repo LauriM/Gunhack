@@ -1,5 +1,6 @@
 #include "globals.h"
 #include <stdio.h>
+#include <string.h>
 #include "item.h"
 #include "math.h"
 #include "map.h"
@@ -18,6 +19,10 @@ void itemInit(void){
 	CREATE_ITEM('*' , ITEM_HP_SMALL    , 70 , ITEM_TYPE_USABLE , "Small health pack" , TERM_COLOR_RED);
 	CREATE_ITEM('+' , ITEM_HP_BIG      , 60 , ITEM_TYPE_USABLE , "Large health pack" , TERM_COLOR_RED);
 	CREATE_ITEM('/' , ITEM_MELEE_KNIFE , 50 , ITEM_TYPE_MELEE  , "Knife"             , TERM_COLOR_DEFAULT);
+	CREATE_ITEM('%' , ITEM_CORPSE      , 5  , ITEM_TYPE_EDIBLE , "Corpse"            , TERM_COLOR_RED);
+
+	//memset(itemData , ITEMSTATE_EMPTY , sizeof(itemData[0])*ITEM_MAX_COUNT);
+	//memset(itemVis  , ITEMSTATE_EMPTY , sizeof(itemVis[0])*ITEM_MAX_COUNT);
 
 	//Reset the array
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){

@@ -50,11 +50,22 @@ void playerMove(int direction){
 	posToCheck.x = newX;
 	posToCheck.y = newY;
 
-	if(mapGetTileByPos(posToCheck)->block == 0 && npcExistsInPos(posToCheck) == 0){
-		playerInfo.pos.x = newX;
-		playerInfo.pos.y = newY;
-		mapScanFov();
+	if(npcExistsInPos(posToCheck) == 1){ 
+		//Attacking npc!
+
+		npcApplyDamagePos(posToCheck,5);
+
+		//movement canceled because of attack
+		return;
 	}
+	if(mapGetTileByPos(posToCheck)->block == 1){
+		//Movement blocked, leave function before execution.
+		return;
+	}
+
+	playerInfo.pos.x = newX;
+	playerInfo.pos.y = newY;
+	mapScanFov();
 }
 
 void playerRandomPosition(void){
