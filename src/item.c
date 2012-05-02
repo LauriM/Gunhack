@@ -32,19 +32,22 @@ void itemClearFromLevel(int z){
 	ASSERT_ROOM(z);
 	
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
-		if(itemVis[i].state != ITEMSTATE_EMPTY){
-			if(itemVis[i].pos.z == z){
-				itemVis[i].state = ITEMSTATE_EMPTY;
-			}
-		}
+		if(itemVis[i].state == ITEMSTATE_EMPTY)
+			continue;
+		if(itemVis[i].pos.z != z)
+			continue;
+
+		itemVis[i].state = ITEMSTATE_EMPTY;
 	}
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
-		if(itemData[i].state != ITEMSTATE_EMPTY){
-			if(itemData[i].pos.z == z){
-				itemData[i].state = ITEMSTATE_EMPTY;//Removes the item from the game
-			}
-		}
+		if(itemData[i].state == ITEMSTATE_EMPTY)
+			continue;
+
+		if(itemData[i].pos.z != z)
+			continue;
+
+		itemData[i].state = ITEMSTATE_EMPTY;//Removes the item from the game
 	}
 }
 
@@ -144,7 +147,7 @@ void itemRender(void){
 	//scan visdata
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
 		if(itemVis[i].state == ITEMSTATE_GROUND){
-			if(itemVis[i].pos.z == playerZ){
+			if(itemVis[i].pos.z == playerZ){//TODO: FIX THIS THING IMPORTANT VERY BAD CODE
 				if(mapLosCheck(playerX,playerY,itemVis[i].pos.x,itemVis[i].pos.y) == 1){
 					itemVis[i].state = ITEMSTATE_EMPTY;//removes the visdata
 					LOG_DEBUG("removed");

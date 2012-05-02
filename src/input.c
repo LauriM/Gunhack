@@ -12,6 +12,7 @@
 #include "item.h"
 
 void inputHandle(){
+	//TODO: Fix the whole fucking input system to dynamic system or something
 	int key = getch();
 	switch(key){
 		case 60://<
