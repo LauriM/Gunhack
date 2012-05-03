@@ -100,8 +100,8 @@ void mapCreateRoom(int id){//TODO: Clean up this function bit, its kinda a mess
 	while(i < roomCount){
 		roomWidth = (randomMax(8) + 3);
 		roomHeight = (randomMax(8) + 3);   //TODO: Move these to globals
-		roomX = randomMax(MAP_MAX_WIDTH-roomWidth-1);
-		roomY = randomMax(MAP_MAX_HEIGHT-roomHeight-1);
+		roomX = randomMax(MAP_MAX_WIDTH-roomWidth-2);
+		roomY = randomMax(MAP_MAX_HEIGHT-roomHeight-2);
 
 		//Check if the box exists (+- are to make sure rooms wont hit)
 		if(mapCheckTileCoords(id,roomX,roomY,roomWidth+2,roomHeight+2,0) == 1){

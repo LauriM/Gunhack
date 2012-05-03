@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int randomMax(int max){
-	return rand() % max;
+	return rand() % (max+1);
 }
 
 int randomRange(int min,int max){
