@@ -146,32 +146,39 @@ void itemRender(void){
 
 	//scan visdata
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
-		if(itemVis[i].state == ITEMSTATE_GROUND){
-			if(itemVis[i].pos.z == playerZ){//TODO: FIX THIS THING IMPORTANT VERY BAD CODE
-				if(mapLosCheck(playerX,playerY,itemVis[i].pos.x,itemVis[i].pos.y) == 1){
-					itemVis[i].state = ITEMSTATE_EMPTY;//removes the visdata
-					LOG_DEBUG("removed");
-				}
-			}
-		}
+		if(itemVis[i].state != ITEMSTATE_GROUND)
+			continue;
+
+		if(itemVis[i].pos.z != playerZ)
+			continue;
+
+		if(mapLosCheck(playerX,playerY,itemVis[i].pos.x,itemVis[i].pos.y) != 1)
+			continue;
+
+
+		itemVis[i].state = ITEMSTATE_EMPTY;//removes the visdata
+		LOG_DEBUG("removed");
 	}
 
 	//scan itemdata
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
-		if(itemData[i].state == ITEMSTATE_GROUND){
-			if(itemData[i].pos.z == playerZ){
-				if(mapLosCheck(playerX,playerY,itemData[i].pos.x,itemData[i].pos.y) == 1){
-					//Add to visdata
-					pos_t newPos;
-					newPos.z = playerZ;
-					newPos.x = itemData[i].pos.x;
-					newPos.y = itemData[i].pos.y;
+		if(itemData[i].state != ITEMSTATE_GROUND)
+			continue;
 
-					itemVisCreate(newPos,itemData[i].itemId);
-					LOG_DEBUG("Added");
-				}
-			}
-		}
+		if(itemData[i].pos.z != playerZ)
+			continue;
+
+		if(mapLosCheck(playerX,playerY,itemData[i].pos.x,itemData[i].pos.y) != 1)
+			continue;
+
+		//Add to visdata
+		pos_t newPos;
+		newPos.z = playerZ;
+		newPos.x = itemData[i].pos.x;
+		newPos.y = itemData[i].pos.y;
+
+		itemVisCreate(newPos,itemData[i].itemId);
+		LOG_DEBUG("Added");
 	}
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
