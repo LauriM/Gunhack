@@ -182,17 +182,19 @@ void itemRender(void){
 	}
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
-		if(itemVis[i].state == ITEMSTATE_GROUND){
-			if(itemVis[i].pos.z == playerZ){
-				int symbol = itemGetInfo(itemGetVis(i)->itemId)->symbol;
+		if(itemVis[i].state != ITEMSTATE_GROUND)
+			continue;
 
-				setColor(itemGetInfo(itemGetVis(i)->itemId)->itemColor);
-				printIntxy(itemGetVis(i)->pos.x,itemGetVis(i)->pos.y,symbol);
-				setColorOff(itemGetInfo(itemGetVis(i)->itemId)->itemColor);
+		if(itemVis[i].pos.z != playerZ)
+			continue;
+		
+		int symbol = itemGetInfo(itemGetVis(i)->itemId)->symbol;
 
-				LOG_DEBUG("rendered");
-			}
-		}
+		setColor(itemGetInfo(itemGetVis(i)->itemId)->itemColor);
+		printIntxy(itemGetVis(i)->pos.x,itemGetVis(i)->pos.y,symbol);
+		setColorOff(itemGetInfo(itemGetVis(i)->itemId)->itemColor);
+
+		LOG_DEBUG("rendered");
 	}
 }
 
@@ -203,12 +205,14 @@ void itemPickup(){
 	int itemId = 0;
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
-		if(itemData[i].state == ITEMSTATE_GROUND){
-			if(itemData[i].pos.x == playerGetInfo()->pos.x && itemData[i].pos.y == playerGetInfo()->pos.y && itemData[i].pos.z == playerGetInfo()->pos.z){
-				itemCount++;
-				itemId = i;
-			}
-		}
+		if(itemData[i].state != ITEMSTATE_GROUND)
+			continue;
+
+		if(itemData[i].pos.x != playerGetInfo()->pos.x || itemData[i].pos.y != playerGetInfo()->pos.y || itemData[i].pos.z != playerGetInfo()->pos.z)
+			continue;
+
+		itemCount++;
+		itemId = i;
 	}
 
 	if(itemCount == 0){
