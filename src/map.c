@@ -398,3 +398,8 @@ pos_t mapFindTilePos(int roomId,tiletype_t tileType){
 
 	return pos;
 }
+
+
+void mapEditColorPoint(pos_t pos,color_t color){
+	room[pos.z].colorData[pos.x][pos.y] = color;
+}

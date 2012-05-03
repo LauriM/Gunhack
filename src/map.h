@@ -1,6 +1,8 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "render.h"
+
 typedef enum{
 	TILE_VOID = 0,
 	TILE_EMPTY,
@@ -23,7 +25,7 @@ typedef struct tile_s{
 
 typedef struct room_s{
 	int mapData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
-	int colorData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
+	color_t colorData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
 	int visData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];//Contains the data that player has seen
 	roomtype_t roomType;
 } room_t;
@@ -41,6 +43,7 @@ void mapScanFov(void);
 
 void mapEditPoint(pos_t pos,tiletype_t tileType);
 void mapEditBox(int id,int boxX,int boxY,int width,int height,int tileType);
+void mapEditColorPoint(pos_t pos,color_t color);
 
 int mapSearchTileCoords(int z,int boxX,int boxY,int width,int height,int tileType);
 int mapCheckTileCoords(int z,int boxX,int boxY,int width,int height,int tileType);
