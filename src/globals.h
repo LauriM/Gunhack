@@ -17,7 +17,11 @@ typedef enum{
 	DIR_N = 0,
 	DIR_S,
 	DIR_E,
-	DIR_W,//TODO: Add rest of the directions
+	DIR_W,
+	DIR_NE,
+	DIR_SE,
+	DIR_SW,
+	DIR_NW,
 	DIR_COUNT
 } dir_t;
 #endif
