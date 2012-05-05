@@ -417,10 +417,109 @@ void mapEditColorPoint(pos_t pos,color_t color){
 }
 
 pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
+#define NODATA -1
+#define BLOCK -2
+
 	pos_t positionPatch;
 	positionPatch.z = 0;
 	positionPatch.x = 0;
 	positionPatch.y = 0;
+
+	if(pos_start.z != pos_end.z){
+		LOG_ERROR("Trying to pathfind different z to another!");
+		return positionPatch;
+	}
+
+	int z = pos_start.z;
+
+
+	int fillData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
+
+	//init the array
+	for(int x = 0;x < MAP_MAX_WIDTH;x++){
+		for(int y = 0; y < MAP_MAX_HEIGHT;y++){
+			fillData[x][y] = NODATA;
+			pos_t tempPos;
+			tempPos.z = z;
+			tempPos.x = x;
+			tempPos.y = y;
+
+			if(mapGetTileByPos(tempPos)->block == 1){
+				fillData[x][y] = BLOCK;
+			}
+		}
+	}
+
+	fillData[pos_start.x][pos_start.y] = 0;
+
+	//start filling the array
+	
+#define PATH_FILL_POS(p_x,p_y) if(fillData[x + p_x][p_y + p_y] == NODATA){fillData[x + p_x][y + p_y] = i;}
+
+	//Fill
+	for(int i = 0;i < PATHFIND_MAX_DEPTH;i++){
+		for(int x = 0;x < MAP_MAX_WIDTH;x++){
+			for(int y = 0; y < MAP_MAX_HEIGHT;y++){
+				if(fillData[x][y] == i-1){
+					//Found tile that represents our current depth in the search!
+
+					//Fill the tiles near it
+					PATH_FILL_POS(1,0);
+					PATH_FILL_POS(-1,0);
+					PATH_FILL_POS(0,1);
+					PATH_FILL_POS(0,-1);
+
+
+					//TODO: Stop when found the target!
+				}
+			}
+		}
+	}
+
+	//TODO: bailout when search not possible
+
+	//Walk back from the target and find the fastest route
+    pos_t pos;
+	pos = pos_end;
+
+	int i = fillData[pos.x][pos.y];// + 1 because we do i-- in the start
+	while(i > 0){
+		//__asm__("int $3");
+		LOG_INFO("[path] backscrolling...");
+		if(i == 2){
+			//we found the next step!
+			LOG_INFO("[path]NEXT STEP FOUND!");
+			i = 0;
+
+			positionPatch.x = pos.x; 
+			positionPatch.y = pos.y; 
+			__asm__("int $3");
+			return positionPatch;
+		}
+
+		//Find the next value near us
+		
+		if(fillData[pos.x+1][pos.y] == (i - 1)){
+			pos.x++;
+			i--;
+			continue;
+		}
+		if(fillData[pos.x-1][pos.y] == (i - 1)){
+			pos.x--;
+			i--;
+			continue;
+		}
+		if(fillData[pos.x][pos.y+1] == (i - 1)){
+			pos.y++;
+			i--;
+			continue;
+		}
+		if(fillData[pos.x][pos.y-1] == (i - 1)){
+			pos.y--;
+			i--;
+			continue;
+		}
+	}
 
 	return positionPatch;
 }

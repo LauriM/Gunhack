@@ -179,6 +179,8 @@ void npcAiTick(){
 				
 				if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
 					//We can see the player, ATTACK!
+					pos_t temp = mapPathfindStep(npcData[i].pos,playerGetInfo()->pos);
+					temp.z++;
 				}else{
 					//Lost player, start searching..
 					LOG_INFO("[AI] [State] ATTACK -> SEARCH");

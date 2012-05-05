@@ -157,7 +157,6 @@ void itemRender(void){
 
 
 		itemVis[i].state = ITEMSTATE_EMPTY;//removes the visdata
-		LOG_DEBUG("removed");
 	}
 
 	//scan itemdata
@@ -178,7 +177,6 @@ void itemRender(void){
 		newPos.y = itemData[i].pos.y;
 
 		itemVisCreate(newPos,itemData[i].itemId);
-		LOG_DEBUG("Added");
 	}
 
 	for(int i = 0;i < ITEM_MAX_COUNT;i++){
@@ -193,8 +191,6 @@ void itemRender(void){
 		setColor(itemGetInfo(itemGetVis(i)->itemId)->itemColor);
 		printIntxy(itemGetVis(i)->pos.x,itemGetVis(i)->pos.y,symbol);
 		setColorOff(itemGetInfo(itemGetVis(i)->itemId)->itemColor);
-
-		LOG_DEBUG("rendered");
 	}
 }
 
