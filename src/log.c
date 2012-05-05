@@ -17,4 +17,5 @@ void logUnInit(void){
 
 void insertLog(const char *prefix,const char *msg){
 	fprintf(logFile,"%s %s\n",prefix,msg);
+	fflush(logFile);
 }
