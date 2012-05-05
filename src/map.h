@@ -51,6 +51,7 @@ int mapCheckTileCoords(int z,int boxX,int boxY,int width,int height,int tileType
 pos_t mapFindTilePos(int roomId,tiletype_t tileType);
 
 int mapLosCheck(int x,int y,int x2,int y2);
+int mapLosCheckByPos(pos_t pos1,pos_t pos2);
 
 struct tile_s* mapGetTileByPos(pos_t pos);
 struct tile_s* mapGetVisByPos(pos_t pos);

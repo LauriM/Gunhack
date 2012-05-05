@@ -20,12 +20,19 @@ typedef enum {
 	NPC_COUNT
 } npcname_t;
 
+typedef enum {
+	NPC_RELATION_NEUTRAL = 0,
+	NPC_RELATION_HOSTILE,
+	NPC_RELATION_PEACFUL,
+} npcrelation_t;
+
 
 typedef struct npc_s{
 	char symbol;
 	char *name;
 	color_t color;
 	int maxHp;
+	npcrelation_t relation;
 } npc_t;
 
 typedef struct npcdata_s{
@@ -47,6 +54,7 @@ extern void npcClearFromLevel(int z);
 extern bool npcExistsInPos(pos_t pos);
 
 extern void npcRender();
+extern void npcAiTick();
 
 extern bool npcApplyDamagePos(pos_t pos,int damage);
 extern void npcKillById(int id);

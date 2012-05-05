@@ -302,6 +302,18 @@ struct tile_s* mapGetVisByPos(pos_t pos){
 	return &tileInfo[room[pos.z].visData[pos.x][pos.y]];
 }
 
+int mapLosCheckByPos(pos_t pos1,pos_t pos2){
+	ASSERT_POS_T(pos1);
+	ASSERT_POS_T(pos2);
+
+	if(pos1.z != pos2.z){
+		//Not even in the same level...
+		return false;
+	}
+
+	return mapLosCheck(pos1.x,pos1.y,pos2.x,pos2.y);
+}
+
 int mapLosCheck(int x1, int y1, int x2, int y2) {
 	ASSERT_WIDTH(x1);
 	ASSERT_HEIGHT(y1);
