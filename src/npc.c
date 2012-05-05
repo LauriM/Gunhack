@@ -8,16 +8,17 @@
 npcdata_t npcData[NPC_MAX_COUNT];
 npc_t npcInfo[NPC_COUNT];
 
-#define CREATE_NPC(p_symbol,p_id,p_name,p_color,p_maxhp) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color; npcInfo[p_id].maxHp = p_maxhp;
+#define CREATE_NPC(p_symbol,p_id,p_name,p_color,p_maxhp,p_rel) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color; npcInfo[p_id].maxHp = p_maxhp; npcInfo[p_id].relation = p_rel;
 
 void npcInit(void){
-	//--    symbol   id         name       color                maxhp
-	CREATE_NPC('D' , NPC_DUMMY , "Dummy" , TERM_COLOR_DEFAULT , 10);
+	//--    symbol , id                , name            , color              , maxhp , relationship
+	CREATE_NPC('D' , NPC_DUMMY         , "Dummy"         , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_NEUTRAL);
+	CREATE_NPC('d' , NPC_DUMMY_HOSTILE , "Hostile Dummy" , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_HOSTILE);
 
 	//Init the npcdata array
-
 	for(int i = 0;i < NPC_MAX_COUNT;i++){
-		npcData[i].state = NPCSTATE_DEAD;
+		npcData[i].state   = NPCSTATE_DEAD;
+		npcData[i].aiState = NPC_AI_STATE_SLEEP;
 	}
 }
 
@@ -39,7 +40,7 @@ void npcSpawnRandom(int z){
 
 			if(mapGetTileByPos(pos)->block == 0){
 				//TODO: Implement random npc type
-				npcSpawn(pos,NPC_DUMMY);
+				npcSpawn(pos,randomMax(NPC_COUNT));
 				done = true;
 			}
 		}
@@ -54,7 +55,7 @@ void npcSpawn(pos_t pos,npcname_t id){
 
 		npcData[i].state   = NPCSTATE_ALIVE;
 		npcData[i].pos     = pos;
-		npcData[i].aiState = NPC_AI_STATE_IDLE;
+		npcData[i].aiState = NPC_AI_STATE_SLEEP;
 		npcData[i].name    = id;
 		npcData[i].hp      = npcInfo[id].maxHp;
 
@@ -144,4 +145,60 @@ void npcKillById(int id){
 
 	itemSpawn(npcData[id].pos,ITEM_CORPSE);
 	LOG_INFO("Enemy down!");
+}
+
+void npcAiTick(){
+	for(int i = 0;i < NPC_MAX_COUNT;i++){
+		if(npcData[i].state != NPCSTATE_ALIVE)
+			continue;
+
+		if(npcData[i].pos.z != playerGetInfo()->pos.z)
+			continue;
+
+		//Found player and its on the same floor! Lets process it...
+
+		switch(npcData[i].aiState){
+			case NPC_AI_STATE_SLEEP:
+
+				if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
+
+					if(npcInfo[npcData[i].name].relation != NPC_RELATION_HOSTILE){
+						npcData[i].aiState = NPC_AI_STATE_IDLE;
+						LOG_INFO("[AI] [State] SLEEP -> IDLE");
+					}else{
+						npcData[i].aiState = NPC_AI_STATE_ATTACK;
+						LOG_INFO("[AI] [State] SLEEP -> ATTACK");
+					}
+				}
+
+				break;
+			case NPC_AI_STATE_IDLE:
+				//TODO: Implement
+				break;
+			case NPC_AI_STATE_ATTACK:
+				//Check that we can still see the player
+				
+				if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
+					//We can see the player, ATTACK!
+					pos_t temp = mapPathfindStep(npcData[i].pos,playerGetInfo()->pos);
+					temp.z++;
+				}else{
+					//Lost player, start searching..
+					LOG_INFO("[AI] [State] ATTACK -> SEARCH");
+					npcData[i].aiState = NPC_AI_STATE_SEARCH;
+				}
+				break;
+			case NPC_AI_STATE_FLEE:
+				//TODO: Implement
+				break;
+			case NPC_AI_STATE_SEARCH:
+				if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
+					LOG_INFO("[AI] [State] SEARCH -> ATTACK");
+					npcData[i].aiState = NPC_AI_STATE_ATTACK;
+				}else{
+					//Continue search
+				}
+				break;
+		}
+	}
 }

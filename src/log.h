@@ -4,7 +4,7 @@
 #include "globals.h"
 
 #define LOG_ERROR(msg) insertLog("ERROR: " TO_STRING(__FILE__) ":" TO_STRING( __LINE__), msg) 
-#define LOG_WARNING(msg) insertLog( "WARNIGN: " TO_STRING(__FILE__) ":" TO_STRING( __LINE__), msg) 
+#define LOG_WARNING(msg) insertLog( "WARNING: " TO_STRING(__FILE__) ":" TO_STRING( __LINE__), msg) 
 #define LOG_INFO(msg) insertLog( "INFO: " TO_STRING(__FILE__) ":" TO_STRING( __LINE__), msg) 
 
 #ifndef DEBUG_NO_LOG_DEBUG

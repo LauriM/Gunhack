@@ -12,13 +12,21 @@ typedef enum {
 	NPC_AI_STATE_SLEEP = 0,
 	NPC_AI_STATE_IDLE,
 	NPC_AI_STATE_ATTACK,
-	NPC_AI_STATE_FLEE
+	NPC_AI_STATE_FLEE,
+	NPC_AI_STATE_SEARCH
 } npc_ai_state_t;
 
 typedef enum {
 	NPC_DUMMY = 0,
+	NPC_DUMMY_HOSTILE,
 	NPC_COUNT
 } npcname_t;
+
+typedef enum {
+	NPC_RELATION_NEUTRAL = 0,
+	NPC_RELATION_HOSTILE,
+	NPC_RELATION_PEACFUL,
+} npcrelation_t;
 
 
 typedef struct npc_s{
@@ -26,13 +34,14 @@ typedef struct npc_s{
 	char *name;
 	color_t color;
 	int maxHp;
+	npcrelation_t relation;
 } npc_t;
 
 typedef struct npcdata_s{
 	npcname_t name;
 	npc_state_t state;
-	pos_t pos;
 	npc_ai_state_t aiState;
+	pos_t pos;
 	int hp;
 } npcdata_t;
 
@@ -47,6 +56,7 @@ extern void npcClearFromLevel(int z);
 extern bool npcExistsInPos(pos_t pos);
 
 extern void npcRender();
+extern void npcAiTick();
 
 extern bool npcApplyDamagePos(pos_t pos,int damage);
 extern void npcKillById(int id);

@@ -47,3 +47,11 @@ void printIntxy(int x,int y,int i){
 	move(y+1,x);
 	printw("%c",i);
 }
+
+void printRealIntxy(int x,int y,int i){
+	ASSERT_WIDTH(x);
+	ASSERT_HEIGHT(y);
+
+	move(y+1,x);
+	printw("%i",i);
+}

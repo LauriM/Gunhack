@@ -37,6 +37,9 @@ void worldInit(void);
 void roomInit(int id);
 void tileInit(void);
 
+void mapDebugClearColor(int z);
+void mapDebugRenderFill(int fillData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT]);
+
 void mapRender(void);
 void mapCreateRoom(int z);
 void mapScanFov(void);
@@ -51,6 +54,8 @@ int mapCheckTileCoords(int z,int boxX,int boxY,int width,int height,int tileType
 pos_t mapFindTilePos(int roomId,tiletype_t tileType);
 
 int mapLosCheck(int x,int y,int x2,int y2);
+int mapLosCheckByPos(pos_t pos1,pos_t pos2);
+pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end);
 
 struct tile_s* mapGetTileByPos(pos_t pos);
 struct tile_s* mapGetVisByPos(pos_t pos);

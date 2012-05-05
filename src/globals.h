@@ -8,7 +8,7 @@
 #define TO_STRING(value) _TO_STRING(value)
 
 //Debugging
-#define DEBUG_NO_LOG_DEBUG
+//#define DEBUG_NO_LOG_DEBUG
 #include "log.h"
 
 #ifndef GLOBALS_H
@@ -17,7 +17,11 @@ typedef enum{
 	DIR_N = 0,
 	DIR_S,
 	DIR_E,
-	DIR_W,//TODO: Add rest of the directions
+	DIR_W,
+	DIR_NE,
+	DIR_SE,
+	DIR_SW,
+	DIR_NW,
 	DIR_COUNT
 } dir_t;
 #endif
@@ -52,5 +56,7 @@ typedef enum{
 #define ITEM_MAX_COUNT 100 //How many items can be in the game
 
 //Npc
-
 #define NPC_MAX_COUNT 100
+
+//Pathfind
+#define PATHFIND_MAX_DEPTH 100
