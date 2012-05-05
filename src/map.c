@@ -7,6 +7,7 @@
 #include "math.h"
 #include "item.h"
 #include "npc.h"
+#include <ncurses.h>
 
 tile_t tileInfo[TILE_COUNT];
 room_t room[WORLD_ROOM_COUNT]; //Room list
@@ -65,6 +66,17 @@ void mapRender(void){
 			setColorOff(room[playerGetInfo()->pos.z].colorData[x][y]);
 		}
 	}
+}
+
+void mapDebugRenderFill(int fillData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT]){
+	int x,y;
+	clear();
+	for(x = 0;x < MAP_MAX_WIDTH;x++){
+		for(y = 0;y < MAP_MAX_HEIGHT;y++){
+			printRealIntxy(x,y,fillData[x][y]);
+		}
+	}
+	getch();
 }
 
 void mapCreateRoom(int id){//TODO: Clean up this function bit, its kinda a mess
@@ -476,6 +488,8 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 		}
 	}
 
+//	mapDebugRenderFill(fillData);
+
 	//TODO: bailout when search not possible
 
 	//Walk back from the target and find the fastest route
@@ -486,6 +500,7 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 	while(i > 0){
 		//__asm__("int $3");
 		LOG_INFO("[path] backscrolling...");
+		mapEditColorPoint(pos,TERM_COLOR_WHITE_RED);
 		if(i == 2){
 			//we found the next step!
 			LOG_INFO("[path]NEXT STEP FOUND!");
@@ -493,7 +508,7 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 
 			positionPatch.x = pos.x; 
 			positionPatch.y = pos.y; 
-			__asm__("int $3");
+			//__asm__("int $3");
 			return positionPatch;
 		}
 
@@ -522,4 +537,13 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 	}
 
 	return positionPatch;
+}
+
+void mapDebugClearColor(int z){
+
+	for(int x = 0;x < MAP_MAX_WIDTH;x++){
+		for(int y = 0;y < MAP_MAX_HEIGHT;y++){
+			room[z].colorData[x][y] = TERM_COLOR_DEFAULT;
+		}
+	}
 }

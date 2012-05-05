@@ -37,6 +37,9 @@ void worldInit(void);
 void roomInit(int id);
 void tileInit(void);
 
+void mapDebugClearColor(int z);
+void mapDebugRenderFill(int fillData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT]);
+
 void mapRender(void);
 void mapCreateRoom(int z);
 void mapScanFov(void);
