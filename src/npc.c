@@ -182,13 +182,19 @@ void npcAiTick(){
 				}else{
 					//Lost player, start searching..
 					LOG_INFO("[AI] [State] ATTACK -> SEARCH");
+					npcData[i].aiState = NPC_AI_STATE_SEARCH;
 				}
 				break;
 			case NPC_AI_STATE_FLEE:
 				//TODO: Implement
 				break;
 			case NPC_AI_STATE_SEARCH:
-				//TODO: Implement
+				if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
+					LOG_INFO("[AI] [State] SEARCH -> ATTACK");
+					npcData[i].aiState = NPC_AI_STATE_ATTACK;
+				}else{
+					//Continue search
+				}
 				break;
 		}
 	}
