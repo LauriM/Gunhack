@@ -12,11 +12,13 @@ typedef enum {
 	NPC_AI_STATE_SLEEP = 0,
 	NPC_AI_STATE_IDLE,
 	NPC_AI_STATE_ATTACK,
-	NPC_AI_STATE_FLEE
+	NPC_AI_STATE_FLEE,
+	NPC_AI_STATE_SEARCH
 } npc_ai_state_t;
 
 typedef enum {
 	NPC_DUMMY = 0,
+	NPC_DUMMY_HOSTILE,
 	NPC_COUNT
 } npcname_t;
 

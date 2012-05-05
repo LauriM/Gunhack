@@ -52,6 +52,7 @@ pos_t mapFindTilePos(int roomId,tiletype_t tileType);
 
 int mapLosCheck(int x,int y,int x2,int y2);
 int mapLosCheckByPos(pos_t pos1,pos_t pos2);
+pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end);
 
 struct tile_s* mapGetTileByPos(pos_t pos);
 struct tile_s* mapGetVisByPos(pos_t pos);

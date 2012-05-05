@@ -415,3 +415,12 @@ pos_t mapFindTilePos(int roomId,tiletype_t tileType){
 void mapEditColorPoint(pos_t pos,color_t color){
 	room[pos.z].colorData[pos.x][pos.y] = color;
 }
+
+pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
+	pos_t positionPatch;
+	positionPatch.z = 0;
+	positionPatch.x = 0;
+	positionPatch.y = 0;
+
+	return positionPatch;
+}

@@ -11,8 +11,9 @@ npc_t npcInfo[NPC_COUNT];
 #define CREATE_NPC(p_symbol,p_id,p_name,p_color,p_maxhp,p_rel) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color; npcInfo[p_id].maxHp = p_maxhp; npcInfo[p_id].relation = p_rel;
 
 void npcInit(void){
-	//--    symbol   id         name       color                maxhp
-	CREATE_NPC('D' , NPC_DUMMY , "Dummy" , TERM_COLOR_DEFAULT , 10, NPC_RELATION_NEUTRAL);
+	//--    symbol , id                , name            , color              , maxhp , relationship
+	CREATE_NPC('D' , NPC_DUMMY         , "Dummy"         , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_NEUTRAL);
+	CREATE_NPC('d' , NPC_DUMMY_HOSTILE , "Hostile Dummy" , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_HOSTILE);
 
 	//Init the npcdata array
 	for(int i = 0;i < NPC_MAX_COUNT;i++){
@@ -39,7 +40,7 @@ void npcSpawnRandom(int z){
 
 			if(mapGetTileByPos(pos)->block == 0){
 				//TODO: Implement random npc type
-				npcSpawn(pos,NPC_DUMMY);
+				npcSpawn(pos,randomMax(NPC_COUNT));
 				done = true;
 			}
 		}
@@ -174,9 +175,19 @@ void npcAiTick(){
 				//TODO: Implement
 				break;
 			case NPC_AI_STATE_ATTACK:
-				//TODO: Implement
+				//Check that we can still see the player
+				
+				if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
+					//We can see the player, ATTACK!
+				}else{
+					//Lost player, start searching..
+					LOG_INFO("[AI] [State] ATTACK -> SEARCH");
+				}
 				break;
 			case NPC_AI_STATE_FLEE:
+				//TODO: Implement
+				break;
+			case NPC_AI_STATE_SEARCH:
 				//TODO: Implement
 				break;
 		}
