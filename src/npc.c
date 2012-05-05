@@ -124,7 +124,8 @@ bool npcApplyDamagePos(pos_t pos,int damage){
 		bloodPos.x = bloodPos.x + randomRange(-1,1);
 		bloodPos.y = bloodPos.y + randomRange(-1,1);
 
-		mapEditColorPoint(bloodPos,TERM_COLOR_WHITE_RED);
+		mapEditColorPoint(bloodPos,TERM_COLOR_RED);
+		
 
 		if(npcData[i].hp < 0){
 			//DEATH
