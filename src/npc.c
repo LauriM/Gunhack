@@ -15,9 +15,9 @@ void npcInit(void){
 	CREATE_NPC('D' , NPC_DUMMY , "Dummy" , TERM_COLOR_DEFAULT , 10, NPC_RELATION_NEUTRAL);
 
 	//Init the npcdata array
-
 	for(int i = 0;i < NPC_MAX_COUNT;i++){
-		npcData[i].state = NPCSTATE_DEAD;
+		npcData[i].state   = NPCSTATE_DEAD;
+		npcData[i].aiState = NPC_AI_STATE_SLEEP;
 	}
 }
 
@@ -54,7 +54,7 @@ void npcSpawn(pos_t pos,npcname_t id){
 
 		npcData[i].state   = NPCSTATE_ALIVE;
 		npcData[i].pos     = pos;
-		npcData[i].aiState = NPC_AI_STATE_IDLE;
+		npcData[i].aiState = NPC_AI_STATE_SLEEP;
 		npcData[i].name    = id;
 		npcData[i].hp      = npcInfo[id].maxHp;
 
@@ -145,20 +145,28 @@ void npcKillById(int id){
 	LOG_INFO("Enemy down!");
 }
 
-extern void npcAiTick(){
+void npcAiTick(){
 	for(int i = 0;i < NPC_MAX_COUNT;i++){
-        if(npcData[i].pos.z != playerGetInfo()->pos.z)
+		if(npcData[i].state != NPCSTATE_ALIVE)
+			continue;
+
+		if(npcData[i].pos.z != playerGetInfo()->pos.z)
 			continue;
 
 		//Found player and its on the same floor! Lets process it...
 
 		switch(npcData[i].aiState){
 			case NPC_AI_STATE_SLEEP:
+
 				if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
-					if(npcInfo[npcData[i].name].relation != NPC_RELATION_HOSTILE)
-					npcData[i].aiState = NPC_AI_STATE_IDLE;
-				}else{
-					npcData[i].aiState = NPC_AI_STATE_ATTACK;
+
+					if(npcInfo[npcData[i].name].relation != NPC_RELATION_HOSTILE){
+						npcData[i].aiState = NPC_AI_STATE_IDLE;
+						LOG_INFO("[AI] [State] SLEEP -> IDLE");
+					}else{
+						npcData[i].aiState = NPC_AI_STATE_ATTACK;
+						LOG_INFO("[AI] [State] SLEEP -> ATTACK");
+					}
 				}
 
 				break;

@@ -38,8 +38,8 @@ typedef struct npc_s{
 typedef struct npcdata_s{
 	npcname_t name;
 	npc_state_t state;
-	pos_t pos;
 	npc_ai_state_t aiState;
+	pos_t pos;
 	int hp;
 } npcdata_t;
 
