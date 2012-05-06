@@ -3,12 +3,21 @@
 #include "globals.h"
 #include "render.h"
 
-typedef void (*npcaistate_t)(int reason);
+typedef void (*npcaistate_t)(int id,int flags);
 
-typedef enum {
-	REASON_NONE = 0,
-	REASON_LOS_TO_PLAYER,
-} npc_reason_t;
+extern void npcState_sleep(int id,int flags);
+extern void npcState_attack(int id,int flags);
+extern void npcState_idle(int id,int flags);
+extern void npcState_search(int id,int flags);
+
+typedef enum{
+	SEE_PLAYER      = 1 << 0,
+	CANT_SEE_PLAYER = 1 << 1,
+	IS_HOSTILE      = 1 << 2,
+	IS_NEUTRAL      = 1 << 3,
+	IS_PEACEFUL     = 1 << 4,
+	LOW_HP          = 1 << 5,
+} npc_flags_t;
 
 typedef enum {
 	NPCSTATE_DEAD = 0,
@@ -32,7 +41,7 @@ typedef enum {
 typedef enum {
 	NPC_RELATION_NEUTRAL = 0,
 	NPC_RELATION_HOSTILE,
-	NPC_RELATION_PEACFUL,
+	NPC_RELATION_PEACEFUL,
 } npcrelation_t;
 
 
@@ -50,7 +59,7 @@ typedef struct npcdata_s{
 	pos_t pos;
 	int hp;
 	pos_t playerLastKnownPosition;
-	npcaistate_t aiState;
+	void(*aiState)(int,int);
 } npcdata_t;
 
 extern npcdata_t npcData[NPC_MAX_COUNT];

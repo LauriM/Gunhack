@@ -55,7 +55,7 @@ void npcSpawn(pos_t pos,npcname_t id){
 
 		npcData[i].state   = NPCSTATE_ALIVE;
 		npcData[i].pos     = pos;
-		npcData[i].aiState = NPC_AI_STATE_SLEEP;
+		npcData[i].aiState= &npcState_sleep;
 		npcData[i].name    = id;
 		npcData[i].hp      = npcInfo[id].maxHp;
 
@@ -152,85 +152,24 @@ void npcAiTick(){
 		if(npcData[i].state != NPCSTATE_ALIVE)
 			continue;
 
-		if(npcData[i].pos.z != playerGetInfo()->pos.z)
-			continue;
+		int flags;
 
-		//Found player and its on the same floor! Lets process it...
-
-		switch(npcData[i].aiState){
-			case NPC_AI_STATE_SLEEP:
-
-				if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
-					npcData[i].playerLastKnownPosition.x = playerGetInfo()->pos.x;
-					npcData[i].playerLastKnownPosition.y = playerGetInfo()->pos.y;
-					npcData[i].playerLastKnownPosition.z = playerGetInfo()->pos.z;
-
-					if(npcInfo[npcData[i].name].relation != NPC_RELATION_HOSTILE){
-						npcData[i].aiState = NPC_AI_STATE_IDLE;
-						LOG_INFO("[AI] [State] SLEEP -> IDLE");
-					}else{
-						npcData[i].aiState = NPC_AI_STATE_ATTACK;
-						LOG_INFO("[AI] [State] SLEEP -> ATTACK");
-					}
-				}
-
+		switch(npcInfo[npcData[i].name].relation){
+			case NPC_RELATION_HOSTILE:
+				flags = IS_HOSTILE;
 				break;
-			case NPC_AI_STATE_IDLE:
-				//TODO: Implement
+			case NPC_RELATION_NEUTRAL:
+				flags = IS_NEUTRAL;
 				break;
-			case NPC_AI_STATE_ATTACK:
-				//Check that we can still see the player
-				
-				if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
-					//We can see the player, ATTACK!
-
-					//first dump the player position to memory 
-					npcData[i].playerLastKnownPosition.x = playerGetInfo()->pos.x;
-					npcData[i].playerLastKnownPosition.y = playerGetInfo()->pos.y;
-					npcData[i].playerLastKnownPosition.z = playerGetInfo()->pos.z;
-
-					pos_t temp = mapPathfindStep(npcData[i].pos,playerGetInfo()->pos);
-					npcData[i].pos.x = temp.x;
-					npcData[i].pos.y = temp.y;
-					//TODO: Add move commands
-
-					if(temp.x == npcData[i].pos.x && temp.y == npcData[i].pos.y && temp.z == npcData[i].pos.z){
-						LOG_INFO("[AI] [State] [Forced] ATTACK -> IDLE (Error on pathfind)");
-					  //  npcData[i].aiState = NPC_AI_STATE_IDLE;
-					}
-
-				}else{
-					//Lost player, start searching..
-					LOG_INFO("[AI] [State] ATTACK -> SEARCH");
-					npcData[i].aiState = NPC_AI_STATE_SEARCH;
-				}
-				break;
-			case NPC_AI_STATE_FLEE:
-				//TODO: Implement
-				break;
-			case NPC_AI_STATE_SEARCH:
-				if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
-					npcData[i].playerLastKnownPosition.x = playerGetInfo()->pos.x;
-					npcData[i].playerLastKnownPosition.y = playerGetInfo()->pos.y;
-					npcData[i].playerLastKnownPosition.z = playerGetInfo()->pos.z;
-
-					LOG_INFO("[AI] [State] SEARCH -> ATTACK");
-					npcData[i].aiState = NPC_AI_STATE_ATTACK;
-				}else{
-					pos_t temp = mapPathfindStep(npcData[i].pos,npcData[i].playerLastKnownPosition);
-					npcData[i].pos.x = temp.x;
-					npcData[i].pos.y = temp.y;
-					//TODO: Add move commands
-
-					if(npcData[i].pos.x == npcData[i].playerLastKnownPosition.x && npcData[i].pos.y == npcData[i].playerLastKnownPosition.y){
-						npcData[i].aiState = NPC_AI_STATE_IDLE;
-					}
-					if(temp.x == npcData[i].pos.x && temp.y == npcData[i].pos.y && temp.z == npcData[i].pos.z){
-						LOG_INFO("[AI] [State] [Forced] SEARCH -> IDLE (Error on pathfind)");
-					 //   npcData[i].aiState = NPC_AI_STATE_IDLE;
-					}
-				}
+			case NPC_RELATION_PEACEFUL:
+				flags = IS_PEACEFUL;
 				break;
 		}
+
+		if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
+			flags = flags + SEE_PLAYER;
+		}
+
+		(*npcData[i].aiState)(i,flags);
 	}
 }
