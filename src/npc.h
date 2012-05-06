@@ -43,6 +43,7 @@ typedef struct npcdata_s{
 	npc_ai_state_t aiState;
 	pos_t pos;
 	int hp;
+	pos_t playerLastKnownPosition;
 } npcdata_t;
 
 extern npcdata_t npcData[NPC_MAX_COUNT];

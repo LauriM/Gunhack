@@ -161,6 +161,9 @@ void npcAiTick(){
 			case NPC_AI_STATE_SLEEP:
 
 				if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
+					npcData[i].playerLastKnownPosition.x = playerGetInfo()->pos.x;
+					npcData[i].playerLastKnownPosition.y = playerGetInfo()->pos.y;
+					npcData[i].playerLastKnownPosition.z = playerGetInfo()->pos.z;
 
 					if(npcInfo[npcData[i].name].relation != NPC_RELATION_HOSTILE){
 						npcData[i].aiState = NPC_AI_STATE_IDLE;
@@ -180,6 +183,12 @@ void npcAiTick(){
 				
 				if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
 					//We can see the player, ATTACK!
+
+					//first dump the player position to memory 
+					npcData[i].playerLastKnownPosition.x = playerGetInfo()->pos.x;
+					npcData[i].playerLastKnownPosition.y = playerGetInfo()->pos.y;
+					npcData[i].playerLastKnownPosition.z = playerGetInfo()->pos.z;
+
 					pos_t temp = mapPathfindStep(npcData[i].pos,playerGetInfo()->pos);
 					npcData[i].pos.x = temp.x;
 					npcData[i].pos.y = temp.y;
@@ -187,6 +196,7 @@ void npcAiTick(){
 
 					if(temp.x == npcData[i].pos.x && temp.y == npcData[i].pos.y && temp.z == npcData[i].pos.z){
 						LOG_INFO("[AI] [State] [Forced] ATTACK -> IDLE (Error on pathfind)");
+					  //  npcData[i].aiState = NPC_AI_STATE_IDLE;
 					}
 
 				}else{
@@ -200,10 +210,25 @@ void npcAiTick(){
 				break;
 			case NPC_AI_STATE_SEARCH:
 				if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
+					npcData[i].playerLastKnownPosition.x = playerGetInfo()->pos.x;
+					npcData[i].playerLastKnownPosition.y = playerGetInfo()->pos.y;
+					npcData[i].playerLastKnownPosition.z = playerGetInfo()->pos.z;
+
 					LOG_INFO("[AI] [State] SEARCH -> ATTACK");
 					npcData[i].aiState = NPC_AI_STATE_ATTACK;
 				}else{
-					//Continue search
+					pos_t temp = mapPathfindStep(npcData[i].pos,npcData[i].playerLastKnownPosition);
+					npcData[i].pos.x = temp.x;
+					npcData[i].pos.y = temp.y;
+					//TODO: Add move commands
+
+					if(npcData[i].pos.x == npcData[i].playerLastKnownPosition.x && npcData[i].pos.y == npcData[i].playerLastKnownPosition.y){
+						npcData[i].aiState = NPC_AI_STATE_IDLE;
+					}
+					if(temp.x == npcData[i].pos.x && temp.y == npcData[i].pos.y && temp.z == npcData[i].pos.z){
+						LOG_INFO("[AI] [State] [Forced] SEARCH -> IDLE (Error on pathfind)");
+					 //   npcData[i].aiState = NPC_AI_STATE_IDLE;
+					}
 				}
 				break;
 		}

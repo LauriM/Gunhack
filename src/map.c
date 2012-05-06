@@ -432,8 +432,6 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 #define NODATA -1
 #define BLOCK -2
 
-	LOG_DEBUG("[Path] Starting search");
-
 	pos_t positionPatch;
 	positionPatch.z = 0;
 	positionPatch.x = 0;
@@ -501,16 +499,9 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 	int i = fillData[pos.x][pos.y];// + 1 because we do i-- in the start
 	while(i > 0){
 		//__asm__("int $3");
-		LOG_INFO("[path] backscrolling...");
 		if(i == 1){
 			//we found the next step!
-			LOG_INFO("[path]NEXT STEP FOUND!");
 			i = 0;
-
-			mapEditColorPoint(pos,TERM_COLOR_WHITE_RED);
-
-			LOG_DEBUG_INT("Position patch x: %i",pos.x);
-			LOG_DEBUG_INT("Position patch y: %i",pos.y);
 
 			return pos;
 		}
