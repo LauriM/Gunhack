@@ -73,6 +73,10 @@ void playerRandomPosition(void){
 	playerInfo.pos.y = (randomMax(MAP_MAX_HEIGHT - 4) + 2);
 }
 
-extern player_t* playerGetInfo(void){
+player_t* playerGetInfo(void){
 	return &playerInfo;
+}
+
+void playerIncTurn(void){
+	playerInfo.turn++;
 }

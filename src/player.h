@@ -20,6 +20,8 @@ typedef struct player_s{
 	int exp;
 	int level;
 
+	int turn;
+
 	endgamereason_t endGame;
 } player_t;
 
@@ -34,5 +36,7 @@ extern void playerInit(void);
 extern void playerRandomPosition(void);
 
 extern player_t* playerGetInfo(void);
+
+extern void playerIncTurn(void);
 
 #endif

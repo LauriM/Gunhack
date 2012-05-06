@@ -67,6 +67,7 @@ int main(int argc, const char *argv[]){
 		hudRender();
 
 		inputHandle();
+		playerIncTurn();
 
 		clear();
 		//npcDumpState();

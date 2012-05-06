@@ -39,7 +39,7 @@ void hudMessage(char text[250]){
 void hudRender(){
 	char statusLine[STATUSLINE_MAX_CHARS] = "";
 
-	snprintf(statusLine,STATUSLINE_MAX_CHARS,"Level: %i Hp: %i/%i Exp: %i Level: %i",playerGetInfo()->pos.z,playerGetInfo()->hp,playerGetInfo()->maxhp,playerGetInfo()->exp,playerGetInfo()->level);
+	snprintf(statusLine,STATUSLINE_MAX_CHARS,"Level: %i Hp: %i/%i Exp: %i Level: %i Turn: %i",playerGetInfo()->pos.z,playerGetInfo()->hp,playerGetInfo()->maxhp,playerGetInfo()->exp,playerGetInfo()->level,playerGetInfo()->turn);
 	
 	move(22,0);
 	printw(statusLine);
