@@ -9,12 +9,12 @@
 npcdata_t npcData[NPC_MAX_COUNT];
 npc_t npcInfo[NPC_COUNT];
 
-#define CREATE_NPC(p_symbol,p_id,p_name,p_color,p_maxhp,p_rel) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color; npcInfo[p_id].maxHp = p_maxhp; npcInfo[p_id].relation = p_rel;
+#define CREATE_NPC(p_symbol,p_id,p_name,p_color,p_maxhp,p_rel,p_meleedmg) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color; npcInfo[p_id].maxHp = p_maxhp; npcInfo[p_id].relation = p_rel; npcInfo[p_id].meleeDmg = p_meleedmg;
 
 void npcInit(void){
-	//--    symbol , id                , name            , color              , maxhp , relationship
-	CREATE_NPC('D' , NPC_DUMMY         , "Dummy"         , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_NEUTRAL);
-	CREATE_NPC('d' , NPC_DUMMY_HOSTILE , "Hostile Dummy" , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_HOSTILE);
+	//--    symbol , id                , name            , color              , maxhp , relationship         , meleeDMG
+	CREATE_NPC('D' , NPC_DUMMY         , "Dummy"         , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_NEUTRAL , 1);
+	CREATE_NPC('d' , NPC_DUMMY_HOSTILE , "Hostile Dummy" , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_HOSTILE , 1);
 
 	//Init the npcdata array
 	for(int i = 0;i < NPC_MAX_COUNT;i++){

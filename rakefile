@@ -9,7 +9,7 @@ end
 
 desc 'rake stats'
 task :stats do
-	system('cloc --quiet --no3 --yaml src/ | tail -4')
+	system('cloc --quiet --no3 src/')
 	system('echo "Git commits: "; git shortlog | wc -l')
 end
 
