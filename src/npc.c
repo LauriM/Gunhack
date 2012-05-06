@@ -198,6 +198,14 @@ void npcAiTick(){
 			if(flags & SEE_PLAYER){
 				NPC_UPDATE_LAST_KNOWN_POSITION;
 			}
+
+			//move randomly
+			pos_t randPos;
+			randPos.z = npcData[i].pos.z;
+			randPos.x = (npcData[i].pos.x + randomRange(-1,1));
+			randPos.y = (npcData[i].pos.y + randomRange(-1,1));
+
+			npcMoveToPos(i,randPos);
 		}
 
 		if(npcData[i].aiState == *npcState_search){
@@ -219,6 +227,9 @@ void npcMoveToPos(int id,pos_t pos){
 		playerGetInfo()->hp = playerGetInfo()->hp - npcInfo[npcData[id].name].meleeDmg;
 		return;
 	}
+
+	if(mapGetTileByPos(pos)->block == 1)
+		return;
 
 	if(npcExistsInPos(pos) == true)
 		return;
