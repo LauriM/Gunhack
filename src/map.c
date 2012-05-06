@@ -482,7 +482,6 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 					PATH_FILL_POS(-1,0);
 
 					if(x == pos_end.x && y == pos_end.y){
-						LOG_DEBUG("[Path] Found the end!");
 						break;
 					}
 				}

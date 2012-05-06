@@ -17,6 +17,7 @@ typedef enum{
 	IS_NEUTRAL      = 1 << 3,
 	IS_PEACEFUL     = 1 << 4,
 	LOW_HP          = 1 << 5,
+	SEARCH_DONE     = 1 << 6,
 } npc_flags_t;
 
 typedef enum {
@@ -77,5 +78,8 @@ extern void npcAiTick();
 
 extern bool npcApplyDamagePos(pos_t pos,int damage);
 extern void npcKillById(int id);
+
+
+#define NPC_UPDATE_LAST_KNOWN_POSITION npcData[i].playerLastKnownPosition.x = playerGetInfo()->pos.x; npcData[i].playerLastKnownPosition.y = playerGetInfo()->pos.y; npcData[i].playerLastKnownPosition.z = playerGetInfo()->pos.z;
 
 #endif

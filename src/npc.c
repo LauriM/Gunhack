@@ -4,6 +4,7 @@
 #include "item.h"
 #include <stdbool.h>
 #include "player.h"
+#include <stdio.h>
 
 npcdata_t npcData[NPC_MAX_COUNT];
 npc_t npcInfo[NPC_COUNT];
@@ -166,10 +167,39 @@ void npcAiTick(){
 				break;
 		}
 
+		if(npcData[i].pos.x == npcData[i].playerLastKnownPosition.x && npcData[i].pos.y == npcData[i].playerLastKnownPosition.y){
+			flags = flags + SEARCH_DONE; 
+			LOG_DEBUG_INT("[ai] %i Search done!",i);
+		}
+
 		if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
 			flags = flags + SEE_PLAYER;
 		}
 
-		(*npcData[i].aiState)(i,flags);
+		//==========================================================//
+			(*npcData[i].aiState)(i,flags);
+		//==========================================================//          
+
+		if(npcData[i].aiState == *npcState_attack){
+			if(flags & SEE_PLAYER){
+				NPC_UPDATE_LAST_KNOWN_POSITION;
+			}
+
+			pos_t temp = mapPathfindStep(npcData[i].pos,playerGetInfo()->pos);
+			npcData[i].pos.x = temp.x;
+			npcData[i].pos.y = temp.y;
+		}
+
+		if(npcData[i].aiState == *npcState_idle){
+			if(flags & SEE_PLAYER){
+				NPC_UPDATE_LAST_KNOWN_POSITION;
+			}
+		}
+
+		if(npcData[i].aiState == *npcState_search){
+			pos_t temp = mapPathfindStep(npcData[i].pos,npcData[i].playerLastKnownPosition); //TODO: Manage situation where its not possible to get to the player
+			npcData[i].pos.x = temp.x;
+			npcData[i].pos.y = temp.y;
+		}
 	}
 }
