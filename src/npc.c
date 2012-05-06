@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include "player.h"
 #include <stdio.h>
+#include <math.h>
 
 npcdata_t npcData[NPC_MAX_COUNT];
 npc_t npcInfo[NPC_COUNT];
@@ -185,9 +186,8 @@ void npcAiTick(){
 				NPC_UPDATE_LAST_KNOWN_POSITION;
 			}
 
-			pos_t temp = mapPathfindStep(npcData[i].pos,playerGetInfo()->pos);
-			npcData[i].pos.x = temp.x;
-			npcData[i].pos.y = temp.y;
+			pos_t tempPos = mapPathfindStep(npcData[i].pos,playerGetInfo()->pos);
+			npcMoveToPos(i,tempPos);
 		}
 
 		if(npcData[i].aiState == *npcState_idle){
@@ -197,9 +197,27 @@ void npcAiTick(){
 		}
 
 		if(npcData[i].aiState == *npcState_search){
-			pos_t temp = mapPathfindStep(npcData[i].pos,npcData[i].playerLastKnownPosition); //TODO: Manage situation where its not possible to get to the player
-			npcData[i].pos.x = temp.x;
-			npcData[i].pos.y = temp.y;
+			pos_t tempPos = mapPathfindStep(npcData[i].pos,npcData[i].playerLastKnownPosition); //TODO: Manage situation where its not possible to get to the player
+			npcMoveToPos(i,tempPos);
 		}
 	}
+}
+
+void npcMoveToPos(int id,pos_t pos){
+    //Check that the distance isn't longer than one tile.
+
+	if(fabs(npcData[id].pos.x - pos.x) > 1 || fabs(npcData[id].pos.y - pos.y) > 1){
+		LOG_ERROR("Npc tries to jump tiles!");
+		return;
+	}
+
+	if(playerGetInfo()->pos.x == pos.x && playerGetInfo()->pos.y == pos.y){
+		playerGetInfo()->hp = playerGetInfo()->hp - npcInfo[npcData[id].name].meleeDmg;
+		return;
+	}
+
+	if(npcExistsInPos(pos) == true)
+		return;
+
+	npcData[id].pos = pos;
 }

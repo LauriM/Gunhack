@@ -71,6 +71,7 @@ extern void npcInit(void);
 extern void npcSpawnRandom(int z);
 extern void npcSpawn(pos_t pos,npcname_t id);
 extern void npcClearFromLevel(int z);
+extern void npcMoveToPos(int id,pos_t pos);
 
 extern bool npcExistsInPos(pos_t pos);
 
