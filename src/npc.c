@@ -181,7 +181,14 @@ void npcAiTick(){
 				if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
 					//We can see the player, ATTACK!
 					pos_t temp = mapPathfindStep(npcData[i].pos,playerGetInfo()->pos);
-					temp.z++;
+					npcData[i].pos.x = temp.x;
+					npcData[i].pos.y = temp.y;
+					//TODO: Add move commands
+
+					if(temp.x == npcData[i].pos.x && temp.y == npcData[i].pos.y && temp.z == npcData[i].pos.z){
+						LOG_INFO("[AI] [State] [Forced] ATTACK -> IDLE (Error on pathfind)");
+					}
+
 				}else{
 					//Lost player, start searching..
 					LOG_INFO("[AI] [State] ATTACK -> SEARCH");

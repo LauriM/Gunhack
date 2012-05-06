@@ -11,6 +11,8 @@
 //#define DEBUG_NO_LOG_DEBUG
 #include "log.h"
 
+#define DEBUG_BREAKPOINT __asm__("int $3");
+
 #ifndef GLOBALS_H
 #define GLOBALS_H
 typedef enum{

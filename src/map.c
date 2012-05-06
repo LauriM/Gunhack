@@ -432,6 +432,8 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 #define NODATA -1
 #define BLOCK -2
 
+	LOG_DEBUG("[Path] Starting search");
+
 	pos_t positionPatch;
 	positionPatch.z = 0;
 	positionPatch.x = 0;
@@ -466,29 +468,29 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 
 	//start filling the array
 	
-#define PATH_FILL_POS(p_x,p_y) if(fillData[x + p_x][p_y + p_y] == NODATA){fillData[x + p_x][y + p_y] = i;}
+#define PATH_FILL_POS(p_x,p_y) if(fillData[x + p_x][y + p_y] == NODATA){fillData[x + p_x][y + p_y] = (i+1);}
 
 	//Fill
 	for(int i = 0;i < PATHFIND_MAX_DEPTH;i++){
 		for(int x = 0;x < MAP_MAX_WIDTH;x++){
 			for(int y = 0; y < MAP_MAX_HEIGHT;y++){
-				if(fillData[x][y] == i-1){
+				if(fillData[x][y] == i){
 					//Found tile that represents our current depth in the search!
 
 					//Fill the tiles near it
-					PATH_FILL_POS(1,0);
-					PATH_FILL_POS(-1,0);
 					PATH_FILL_POS(0,1);
 					PATH_FILL_POS(0,-1);
+					PATH_FILL_POS(1,0);
+					PATH_FILL_POS(-1,0);
 
-
-					//TODO: Stop when found the target!
+					if(x == pos_end.x && y == pos_end.y){
+						LOG_DEBUG("[Path] Found the end!");
+						break;
+					}
 				}
 			}
 		}
 	}
-
-//	mapDebugRenderFill(fillData);
 
 	//TODO: bailout when search not possible
 
@@ -500,16 +502,17 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 	while(i > 0){
 		//__asm__("int $3");
 		LOG_INFO("[path] backscrolling...");
-		mapEditColorPoint(pos,TERM_COLOR_WHITE_RED);
-		if(i == 2){
+		if(i == 1){
 			//we found the next step!
 			LOG_INFO("[path]NEXT STEP FOUND!");
 			i = 0;
 
-			positionPatch.x = pos.x; 
-			positionPatch.y = pos.y; 
-			//__asm__("int $3");
-			return positionPatch;
+			mapEditColorPoint(pos,TERM_COLOR_WHITE_RED);
+
+			LOG_DEBUG_INT("Position patch x: %i",pos.x);
+			LOG_DEBUG_INT("Position patch y: %i",pos.y);
+
+			return pos;
 		}
 
 		//Find the next value near us
@@ -536,7 +539,9 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 		}
 	}
 
-	return positionPatch;
+	pos = pos_start;//Could not calculate the path!
+	LOG_ERROR("Path find failed!");
+	return pos;
 }
 
 void mapDebugClearColor(int z){

@@ -9,9 +9,13 @@
 
 #ifndef DEBUG_NO_LOG_DEBUG
 #define LOG_DEBUG(msg) insertLog("DEBUG: " TO_STRING(__FILE__) ":" TO_STRING( __LINE__), msg) 
+#define LOG_DEBUG_INT(p_msg,p_value) {char output[100]; snprintf(output,100,p_msg,i); LOG_DEBUG(output);}
 #else
 #define LOG_DEBUG(msg) 
+#define LOG_DEBUG_INT(p_msg,p_value)
 #endif
+
+
      
 void logInit(void);
 void logUnInit(void);

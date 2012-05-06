@@ -14,6 +14,8 @@ Minor todo
 * Save system is not portable
 * more FALSE TRUE stuff
 * HUD improvements
+* ColorData doesn't respect visdata
+* npcs won't block pathfind
 
 Gameplay
 ========
