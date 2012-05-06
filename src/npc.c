@@ -18,7 +18,7 @@ void npcInit(void){
 	//Init the npcdata array
 	for(int i = 0;i < NPC_MAX_COUNT;i++){
 		npcData[i].state   = NPCSTATE_DEAD;
-		npcData[i].aiState = NPC_AI_STATE_SLEEP;
+		npcData[i].aiState = &npcState_sleep;
 	}
 }
 

@@ -3,6 +3,13 @@
 #include "globals.h"
 #include "render.h"
 
+typedef void (*npcaistate_t)(int reason);
+
+typedef enum {
+	REASON_NONE = 0,
+	REASON_LOS_TO_PLAYER,
+} npc_reason_t;
+
 typedef enum {
 	NPCSTATE_DEAD = 0,
 	NPCSTATE_ALIVE
@@ -40,10 +47,10 @@ typedef struct npc_s{
 typedef struct npcdata_s{
 	npcname_t name;
 	npc_state_t state;
-	npc_ai_state_t aiState;
 	pos_t pos;
 	int hp;
 	pos_t playerLastKnownPosition;
+	npcaistate_t aiState;
 } npcdata_t;
 
 extern npcdata_t npcData[NPC_MAX_COUNT];
