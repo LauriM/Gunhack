@@ -69,6 +69,7 @@ int main(int argc, const char *argv[]){
 		inputHandle();
 
 		clear();
+		//npcDumpState();
 	}
 
 	//ending game

@@ -6,7 +6,6 @@ Major todo
 * item colors
 * item dropping/applying
 * item trigger coding (a,b,c etc)
-* killing npcs
 
 Minor todo
 ==========

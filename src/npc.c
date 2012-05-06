@@ -25,6 +25,7 @@ void npcInit(void){
 }
 
 void npcSpawnRandom(int z){
+	ASSERT_ROOM(z);
 	pos_t pos;
 	pos.x = 0;
 	pos.y = 0;
@@ -42,7 +43,7 @@ void npcSpawnRandom(int z){
 
 			if(mapGetTileByPos(pos)->block == 0){
 				//TODO: Implement random npc type
-				npcSpawn(pos,randomMax(NPC_COUNT));
+				npcSpawn(pos,randomMax(NPC_COUNT-1));
 				done = true;
 			}
 		}
@@ -51,6 +52,9 @@ void npcSpawnRandom(int z){
 }
 
 void npcSpawn(pos_t pos,npcname_t id){
+	assert(id < NPC_COUNT);
+	assert(id >= 0);
+
 	for(int i = 0;i < NPC_MAX_COUNT;i++){
 		if(npcData[i].state != NPCSTATE_DEAD)
 			continue;
@@ -220,4 +224,17 @@ void npcMoveToPos(int id,pos_t pos){
 		return;
 
 	npcData[id].pos = pos;
+}
+
+void npcDumpState(){
+	LOG_DEBUG("=======================");
+	for(int i = 0;i < NPC_MAX_COUNT;i++){
+		if(npcData[i].state != NPCSTATE_ALIVE)
+			continue;
+
+		char output[100];
+
+		snprintf(output,100,"%i -> name: %i state: %i hp: %i",i,npcData[i].name,npcData[i].state,npcData[i].hp);
+		LOG_DEBUG(output);
+	}
 }

@@ -80,6 +80,7 @@ extern void npcAiTick();
 
 extern bool npcApplyDamagePos(pos_t pos,int damage);
 extern void npcKillById(int id);
+extern void npcDumpState();
 
 #define NPC_UPDATE_LAST_KNOWN_POSITION npcData[i].playerLastKnownPosition.x = playerGetInfo()->pos.x; npcData[i].playerLastKnownPosition.y = playerGetInfo()->pos.y; npcData[i].playerLastKnownPosition.z = playerGetInfo()->pos.z;
 
