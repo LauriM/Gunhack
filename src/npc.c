@@ -4,7 +4,6 @@
 #include "item.h"
 #include <stdbool.h>
 #include "player.h"
-#include <stdio.h>
 #include <math.h>
 
 npcdata_t npcData[NPC_MAX_COUNT];
@@ -245,7 +244,7 @@ void npcDumpState(){
 
 		char output[100];
 
-		snprintf(output,100,"%i -> name: %i state: %i hp: %i",i,npcData[i].name,npcData[i].state,npcData[i].hp);
+		snprintf(output,100,"%i -> name: %i state: %i hp: %i aistate: %x",i,npcData[i].name,npcData[i].state,npcData[i].hp,(intptr_t)npcData[i].aiState);
 		LOG_DEBUG(output);
 	}
 }

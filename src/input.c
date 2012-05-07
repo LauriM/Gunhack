@@ -88,10 +88,10 @@ void inputHandle(){
 			break;
 		case 46: //.
 			itemDebugDumpInv();
+			npcDumpState();
 			break;
 		case 105:
 			itemDisplayInv();
-			npcDumpState();
 			break;
 	}
 

@@ -480,6 +480,12 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 					PATH_FILL_POS(0,-1);
 					PATH_FILL_POS(1,0);
 					PATH_FILL_POS(-1,0);
+					/*
+					PATH_FILL_POS(1,1);
+					PATH_FILL_POS(-1,-1);
+					PATH_FILL_POS(1,-1);
+					PATH_FILL_POS(-1,1);
+					*/
 
 					if(x == pos_end.x && y == pos_end.y){
 						break;
@@ -497,7 +503,6 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 
 	int i = fillData[pos.x][pos.y];// + 1 because we do i-- in the start
 	while(i > 0){
-		//__asm__("int $3");
 		if(i == 1){
 			//we found the next step!
 			i = 0;
