@@ -58,19 +58,17 @@ int main(int argc, const char *argv[]){
 	//  Main loop
 	//==========================================================//          
 	while(playerGetInfo()->endGame == ENDGAME_REASON_NOTENDED){
+		inputHandle();
 		npcAiTick();
+		playerIncTurn();
+
+		clear();
 
 		mapRender();
 		itemRender();
 		npcRender();
 		playerRender();
 		hudRender();
-
-		inputHandle();
-		playerIncTurn();
-
-		clear();
-		//npcDumpState();
 	}
 
 	//ending game

@@ -58,8 +58,6 @@ void inputHandle(){
 		case 114://r
 			mapCheatSeeAll();
 			LOG_INFO("Using see all cheat");
-			break;
-		case 116://t
 			//Cheat
 			playerRandomPosition();
 			itemClearFromLevel(playerGetInfo()->pos.z);
@@ -91,6 +89,7 @@ void inputHandle(){
 			break;
 		case 105:
 			itemDisplayInv();
+			npcDumpState();
 			break;
 	}
 

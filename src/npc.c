@@ -177,7 +177,7 @@ void npcAiTick(){
 			LOG_DEBUG_INT("[ai] %i Search done!",i);
 		}
 
-		if(mapLosCheckByPos(npcData[i].pos,playerGetInfo()->pos) == true){
+		if(mapLosCheckByPos(playerGetInfo()->pos,npcData[i].pos) == true){
 			flags = flags + SEE_PLAYER;
 		}
 
