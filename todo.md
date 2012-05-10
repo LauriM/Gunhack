@@ -7,6 +7,12 @@ Major todo
 * item dropping/applying
 * item trigger coding (a,b,c etc)
 
+Malloc todo
+===========
+* check clear
+* other parts of the code
+* save system rebuild
+
 Minor todo
 ==========
 
