@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -55,9 +56,6 @@ typedef enum{
 
 //Hud
 #define STATUSLINE_MAX_CHARS 100
-
-//Items
-#define ITEM_MAX_COUNT 100 //How many items can be in the game
 
 //Npc
 #define NPC_MAX_COUNT 100

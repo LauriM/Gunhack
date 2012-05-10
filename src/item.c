@@ -8,8 +8,15 @@
 #include "player.h"
 #include "render.h"
 
-itemdata_t itemVis [ITEM_MAX_COUNT];
-itemdata_t itemData[ITEM_MAX_COUNT];
+
+size_t itemVisSize      = 0;
+size_t itemVisCapacity  = 0;
+itemdata_t *itemVis     = NULL;
+
+size_t itemDataSize     = 0;
+size_t itemDataCapacity = 0;
+itemdata_t *itemData    = NULL;
+
 item_t     itemInfo[ITEM_COUNT];
 
 #define CREATE_ITEM(p_symbol,p_id,p_rarity,p_type,p_name,p_color) itemInfo[p_id].symbol = p_symbol; itemInfo[p_id].itemRarity = p_rarity;itemInfo[p_id].itemType = p_type; itemInfo[p_id].name = TO_STRING(p_name); itemInfo[p_id].itemColor = p_color;
@@ -20,18 +27,13 @@ void itemInit(void){
 	CREATE_ITEM('+' , ITEM_HP_BIG      , 60 , ITEM_TYPE_USABLE , "Large health pack" , TERM_COLOR_DEFAULT);
 	CREATE_ITEM('/' , ITEM_MELEE_KNIFE , 50 , ITEM_TYPE_MELEE  , "Knife"             , TERM_COLOR_DEFAULT);
 	CREATE_ITEM('%' , ITEM_CORPSE      , 5  , ITEM_TYPE_EDIBLE , "Corpse"            , TERM_COLOR_RED);
-
-	//Reset the array
-	for(int i = 0;i < ITEM_MAX_COUNT;i++){
-		itemData[i].state = ITEMSTATE_EMPTY;
-		itemVis[i].state  = ITEMSTATE_EMPTY;
-	}
 }
 
 void itemClearFromLevel(int z){
 	ASSERT_ROOM(z);
 	
-	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+	//TODO: FIX
+	for(int i = 0;i < itemVisSize;i++){
 		if(itemVis[i].state == ITEMSTATE_EMPTY)
 			continue;
 		if(itemVis[i].pos.z != z)
@@ -40,7 +42,7 @@ void itemClearFromLevel(int z){
 		itemVis[i].state = ITEMSTATE_EMPTY;
 	}
 
-	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+	for(int i = 0;i < itemDataSize;i++){
 		if(itemData[i].state == ITEMSTATE_EMPTY)
 			continue;
 
@@ -53,37 +55,59 @@ void itemClearFromLevel(int z){
 
 void itemVisCreate(pos_t pos,itemtype_t type){
 	ASSERT_POS_T(pos);
-	ASSERT_ITEM_MAX_COUNT(type);
 
-	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+	int i;
+
+	for(i = 0;i < itemVisCapacity;i++){
 		if(itemVis[i].state == ITEMSTATE_EMPTY){
-			itemVis[i].state  = ITEMSTATE_GROUND;
-			itemVis[i].itemId = type;
-			itemVis[i].pos    = pos;
-
-			return;
+			goto visSpawnReturn;
 		}
 	}
-	LOG_ERROR("ITEM_MAX_COUNT too small!");
+
+	if(itemVisSize >= itemVisCapacity){
+		itemVisCapacity *= 2;
+		if(itemVisCapacity == 0)
+			itemVisCapacity = 2;
+
+		itemVis = realloc(itemVis,(itemVisCapacity)*sizeof(itemVis[0]));
+	}
+
+	i = itemVisSize++;
+
+visSpawnReturn:
+	itemVis[i].state  = ITEMSTATE_GROUND;
+	itemVis[i].itemId = type;
+	itemVis[i].pos    = pos;
 	return;
 }
 
 void itemSpawn(pos_t pos,itemtype_t type){
 	ASSERT_POS_T(pos);
+	int i;
 
-	for(int i = 0;i < ITEM_MAX_COUNT;i++){
-        if(itemData[i].state == ITEMSTATE_EMPTY){
-			itemData[i].state  = ITEMSTATE_GROUND;
-			itemData[i].itemId = type;
-			itemData[i].pos.x      = pos.x;
-			itemData[i].pos.y      = pos.y;
-			itemData[i].pos.z      = pos.z;
-
-			return;
-		}
+	for(i = 0;i < itemDataSize;i++){
+        if(itemData[i].state == ITEMSTATE_EMPTY)
+			goto itemSpawnReturn;
 	}
-	LOG_ERROR("ITEM_MAX_COUNT too small!");
-	return;
+
+	//TODO: WHEN REMOVING DATA SIZE TO 0 AND SHIT
+
+	if(itemDataSize >= itemDataCapacity){
+		itemDataCapacity *= 2;
+		if(itemDataCapacity == 0)
+            itemDataCapacity = 2;
+
+		itemData = realloc(itemData,(itemDataCapacity) * sizeof(itemData[0]));
+	}
+
+	i = itemDataSize++;
+
+itemSpawnReturn:
+	itemData[i].state  = ITEMSTATE_GROUND;
+	itemData[i].itemId = type;
+	itemData[i].pos.x  = pos.x;
+	itemData[i].pos.y  = pos.y;
+	itemData[i].pos.z  = pos.z;
 }
 
 void itemSpawnRandom(int z){
@@ -117,13 +141,11 @@ void itemSpawnRandom(int z){
 
 /* Returns data of item in world */
 struct itemdata_s* itemGetData(int id){
-	ASSERT_ITEM_MAX_COUNT(id);
 	return &itemData[id];
 }
 
 /* Returns item visual info */ 
 struct itemdata_s* itemGetVis(int id){
-	ASSERT_ITEM_MAX_COUNT(id);
 	return &itemVis[id];
 }
 
@@ -145,7 +167,7 @@ void itemRender(void){
 	playerZ = playerGetInfo()->pos.z;
 
 	//scan visdata
-	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+	for(int i = 0;i < itemVisSize;i++){
 		if(itemVis[i].state != ITEMSTATE_GROUND)
 			continue;
 
@@ -160,7 +182,7 @@ void itemRender(void){
 	}
 
 	//scan itemdata
-	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+	for(int i = 0;i < itemDataSize;i++){
 		if(itemData[i].state != ITEMSTATE_GROUND)
 			continue;
 
@@ -179,7 +201,7 @@ void itemRender(void){
 		itemVisCreate(newPos,itemData[i].itemId);
 	}
 
-	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+	for(int i = 0;i < itemVisSize;i++){
 		if(itemVis[i].state != ITEMSTATE_GROUND)
 			continue;
 
@@ -200,7 +222,7 @@ void itemPickup(){
     int itemCount = 0;
 	int itemId = 0;
 
-	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+	for(int i = 0;i < itemDataSize;i++){
 		if(itemData[i].state != ITEMSTATE_GROUND)
 			continue;
 
@@ -237,7 +259,7 @@ extern void itemDisplayInv(){
 	hudMenuInit();
 
 	hudMenuWrite("Inventory:");
-	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+	for(int i = 0;i < itemDataSize;i++){
 		if(itemData[i].state == ITEMSTATE_INV){
 			char output[100];
 			snprintf(output,100,"Id: %i Symbol: %c Name: %s",i,itemInfo[itemData[i].itemId].symbol,itemInfo[itemData[i].itemId].name);
@@ -251,7 +273,7 @@ extern void itemDisplayInv(){
 extern void itemDebugDumpInv(){
 	LOG_INFO("Dumping full inventory");
 
-	for(int i = 0;i < ITEM_MAX_COUNT;i++){
+	for(int i = 0;i < itemDataSize;i++){
 		if(itemData[i].state == ITEMSTATE_INV){
 			char output[100];
 

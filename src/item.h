@@ -39,8 +39,8 @@ typedef struct itemdata_s{
 	pos_t pos;
 } itemdata_t;
 
-extern itemdata_t itemVis[ITEM_MAX_COUNT];
-extern itemdata_t itemData[ITEM_MAX_COUNT];
+extern itemdata_t *itemVis;
+extern itemdata_t *itemData;
 extern item_t itemInfo[ITEM_COUNT]; //"database" of the items
 
 //itemData -> itemId -> iteminfo -> item_s -> itemtype/rarity
