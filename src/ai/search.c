@@ -7,7 +7,7 @@ void npcState_search(int id,int flags){
 	}
 
 	if(flags & SEE_PLAYER){
-		LOG_DEBUG_INT("[ai] %i Attacking",id);
+		LOG_DEBUG_F("[ai] %i Attacking",id);
 		npcData[id].aiState = &npcState_attack;
 	}
 }

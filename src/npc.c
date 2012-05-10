@@ -178,7 +178,7 @@ void npcAiTick(){
 
 		if(npcData[i].pos.x == npcData[i].playerLastKnownPosition.x && npcData[i].pos.y == npcData[i].playerLastKnownPosition.y){
 			flags = flags + SEARCH_DONE; 
-			LOG_DEBUG_INT("[ai] %i Search done!",i);
+			LOG_DEBUG_F("[ai] %i Search done!",i);
 		}
 
 		if(mapLosCheckByPos(playerGetInfo()->pos,npcData[i].pos) == true){
