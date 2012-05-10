@@ -30,6 +30,8 @@ void npcSpawnRandom(int z){
 	pos.y = 0;
 	pos.z = z;
 
+	//LOG_DEBUG_INT("depth: %i",z);
+
 	int npcCount = randomRange(GEN_NPC_COUNT_MIN,GEN_NPC_COUNT_MAX);
 
 	while(npcCount > 0){
@@ -64,6 +66,9 @@ void npcSpawn(pos_t pos,npcname_t id){
 		npcData[i].name    = id;
 		npcData[i].hp      = npcInfo[id].maxHp;
 
+		static const pos_t empty = {0,0,0};
+		npcData[i].playerLastKnownPosition = empty;
+
 		LOG_INFO("NPC spawned");
 		return;
 	}
@@ -76,7 +81,10 @@ void npcRender(){
 		if(npcData[i].state != NPCSTATE_ALIVE)
 			continue;
 
-		if(mapLosCheck(playerGetInfo()->pos.x,playerGetInfo()->pos.y,npcData[i].pos.x,npcData[i].pos.y) == false)
+		if(npcData[i].pos.z != playerGetInfo()->pos.z)
+			continue;
+
+		if(mapLosCheckByPos(playerGetInfo()->pos,npcData[i].pos) == false)
 			continue;
 
 		printIntxy(npcData[i].pos.x,npcData[i].pos.y,npcInfo[npcData[i].name].symbol);
@@ -87,9 +95,6 @@ void npcClearFromLevel(int z){
 	ASSERT_ROOM(z);
 
 	for(int i = 0;i < NPC_MAX_COUNT;i++){
-
-		if(npcData[i].state != NPCSTATE_ALIVE)
-			continue;
 
 		if(npcData[i].pos.z != z)
 			continue;
@@ -105,7 +110,7 @@ bool npcExistsInPos(pos_t pos){
 		if(npcData[i].state != NPCSTATE_ALIVE)
 			continue;
 
-		if(npcData[i].pos.x == pos.x && npcData[i].pos.y == pos.y)
+		if(npcData[i].pos.x == pos.x && npcData[i].pos.y == pos.y && npcData[i].pos.z == pos.z)
 			return true;
 	}
 
@@ -119,7 +124,7 @@ bool npcApplyDamagePos(pos_t pos,int damage){
 		if(npcData[i].state != NPCSTATE_ALIVE)
 			continue;
 
-		if(npcData[i].pos.x != pos.x || npcData[i].pos.y != pos.y)
+		if(npcData[i].pos.x != pos.x || npcData[i].pos.y != pos.y || npcData[i].pos.z != pos.z)
 			continue;
 
 		npcData[i].hp = npcData[i].hp - damage;

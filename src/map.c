@@ -82,6 +82,8 @@ void mapDebugRenderFill(int fillData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT]){
 void mapCreateRoom(int id){//TODO: Clean up this function bit, its kinda a mess
 	int x,y;
 
+	npcClearFromLevel(id);
+
 	room[id].roomType = ROOM_TYPE_DUNGEON;
 
 	//Clear the room
