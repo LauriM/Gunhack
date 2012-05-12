@@ -70,6 +70,7 @@ void itemVisCreate(pos_t pos,itemtype_t type){
 			itemVisCapacity = 2;
 
 		itemVis = realloc(itemVis,(itemVisCapacity)*sizeof(itemVis[0]));
+		LOG_DEBUG_F("[mem] Reallocing itemVis to %i",itemVisCapacity);
 	}
 
 	i = itemVisSize++;
