@@ -13,6 +13,11 @@ Malloc todo
 * other parts of the code
 * save system rebuild
 
+## System left to convert
+
+* npc
+* map
+
 Minor todo
 ==========
 
