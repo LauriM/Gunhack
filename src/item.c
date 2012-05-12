@@ -90,14 +90,13 @@ void itemSpawn(pos_t pos,itemtype_t type){
 			goto itemSpawnReturn;
 	}
 
-	//TODO: WHEN REMOVING DATA SIZE TO 0 AND SHIT
-
 	if(itemDataSize >= itemDataCapacity){
 		itemDataCapacity *= 2;
 		if(itemDataCapacity == 0)
             itemDataCapacity = 2;
 
 		itemData = realloc(itemData,(itemDataCapacity) * sizeof(itemData[0]));
+		LOG_DEBUG_F("[mem] Reallocing itemData to %i",itemDataCapacity);
 	}
 
 	i = itemDataSize++;

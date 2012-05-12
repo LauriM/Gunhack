@@ -6,7 +6,10 @@
 #include "player.h"
 #include <math.h>
 
-npcdata_t npcData[NPC_MAX_COUNT];
+size_t npcDataSize     = 0;
+size_t npcDataCapacity = 0;
+npcdata_t *npcData     = NULL;
+
 npc_t npcInfo[NPC_COUNT];
 
 #define CREATE_NPC(p_symbol,p_id,p_name,p_color,p_maxhp,p_rel,p_meleedmg) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color; npcInfo[p_id].maxHp = p_maxhp; npcInfo[p_id].relation = p_rel; npcInfo[p_id].meleeDmg = p_meleedmg;
@@ -17,7 +20,7 @@ void npcInit(void){
 	CREATE_NPC('d' , NPC_DUMMY_HOSTILE , "Hostile Dummy" , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_HOSTILE , 1);
 
 	//Init the npcdata array
-	for(int i = 0;i < NPC_MAX_COUNT;i++){
+	for(int i = 0;i < npcDataSize;i++){
 		npcData[i].state   = NPCSTATE_DEAD;
 		npcData[i].aiState = &npcState_sleep;
 	}
@@ -56,28 +59,37 @@ void npcSpawn(pos_t pos,npcname_t id){
 	assert(id < NPC_COUNT);
 	assert(id >= 0);
 
-	for(int i = 0;i < NPC_MAX_COUNT;i++){
-		if(npcData[i].state != NPCSTATE_DEAD)
-			continue;
+	int i;
 
-		npcData[i].state   = NPCSTATE_ALIVE;
-		npcData[i].pos     = pos;
-		npcData[i].aiState= &npcState_sleep;
-		npcData[i].name    = id;
-		npcData[i].hp      = npcInfo[id].maxHp;
-
-		static const pos_t empty = {0,0,0};
-		npcData[i].playerLastKnownPosition = empty;
-
-		LOG_INFO("NPC spawned");
-		return;
+	for(i = 0;i < npcDataSize;i++){
+		if(npcData[i].state == NPCSTATE_DEAD)
+			goto itemSpawnReturn;
 	}
 
-	LOG_ERROR("NPC_MAX_COUNT is too small!");
+	if(npcDataSize >= npcDataCapacity){
+		npcDataCapacity *= 2;
+		if(npcDataCapacity == 0)
+			npcDataCapacity = 2;
+
+		npcData = realloc(npcData,(npcDataCapacity) * sizeof(npcData[0]));
+		LOG_DEBUG_F("[mem] Reallocing npcData to %i",npcDataCapacity);
+	}
+
+	i = npcDataSize++;
+
+itemSpawnReturn:
+	npcData[i].state   = NPCSTATE_ALIVE;
+	npcData[i].pos     = pos;
+	npcData[i].aiState= &npcState_sleep;
+	npcData[i].name    = id;
+	npcData[i].hp      = npcInfo[id].maxHp;
+
+	static const pos_t empty = {0,0,0};
+	npcData[i].playerLastKnownPosition = empty;
 }
 
 void npcRender(){
-	for(int i = 0;i < NPC_MAX_COUNT;i++){
+	for(int i = 0;i < npcDataSize;i++){
 		if(npcData[i].state != NPCSTATE_ALIVE)
 			continue;
 
@@ -94,7 +106,7 @@ void npcRender(){
 void npcClearFromLevel(int z){
 	ASSERT_ROOM(z);
 
-	for(int i = 0;i < NPC_MAX_COUNT;i++){
+	for(int i = 0;i < npcDataSize;i++){
 
 		if(npcData[i].pos.z != z)
 			continue;
@@ -106,7 +118,7 @@ void npcClearFromLevel(int z){
 bool npcExistsInPos(pos_t pos){
 	ASSERT_POS_T(pos);
 
-	for(int i = 0;i < NPC_MAX_COUNT;i++){
+	for(int i = 0;i < npcDataSize;i++){
 		if(npcData[i].state != NPCSTATE_ALIVE)
 			continue;
 
@@ -120,7 +132,7 @@ bool npcExistsInPos(pos_t pos){
 bool npcApplyDamagePos(pos_t pos,int damage){
 	ASSERT_POS_T(pos);
 
-	for(int i = 0;i < NPC_MAX_COUNT;i++){
+	for(int i = 0;i < npcDataSize;i++){
 		if(npcData[i].state != NPCSTATE_ALIVE)
 			continue;
 
@@ -158,7 +170,7 @@ void npcKillById(int id){
 }
 
 void npcAiTick(){
-	for(int i = 0;i < NPC_MAX_COUNT;i++){
+	for(int i = 0;i < npcDataSize;i++){
 		if(npcData[i].state != NPCSTATE_ALIVE)
 			continue;
 
@@ -243,7 +255,7 @@ void npcMoveToPos(int id,pos_t pos){
 
 void npcDumpState(){
 	LOG_DEBUG("=======================");
-	for(int i = 0;i < NPC_MAX_COUNT;i++){
+	for(int i = 0;i < npcDataSize;i++){
 		if(npcData[i].state != NPCSTATE_ALIVE)
 			continue;
 

@@ -15,7 +15,6 @@ Malloc todo
 
 ## System left to convert
 
-* npc
 * map
 
 Minor todo

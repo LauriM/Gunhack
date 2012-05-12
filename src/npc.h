@@ -64,7 +64,7 @@ typedef struct npcdata_s{
 	void(*aiState)(int,int);
 } npcdata_t;
 
-extern npcdata_t npcData[NPC_MAX_COUNT];
+extern npcdata_t *npcData;
 extern npc_t     npcInfo[NPC_COUNT];
 
 extern void npcInit(void);

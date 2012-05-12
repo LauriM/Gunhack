@@ -57,8 +57,5 @@ typedef enum{
 //Hud
 #define STATUSLINE_MAX_CHARS 100
 
-//Npc
-#define NPC_MAX_COUNT 100
-
 //Pathfind
 #define PATHFIND_MAX_DEPTH 100
