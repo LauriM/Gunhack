@@ -6,13 +6,10 @@ typedef struct{
 	int roomSize;
 
 	int itemVisSize;
-	int itemVisCapacity;
 
 	int itemDataSize;
-	int itemDataCapacity;
 
 	int npcDataSize;
-	int npcDataCapacity;
 } save_header_t;
 
 void saveGame(void);
