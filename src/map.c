@@ -10,7 +10,9 @@
 #include <ncurses.h>
 
 tile_t tileInfo[TILE_COUNT];
-room_t room[WORLD_ROOM_COUNT]; //Room list
+
+size_t roomSize     = 0;
+room_t *room        = NULL; //Room list
 
 void tileInit(void){
 	tileInfo[TILE_VOID].symbol        = ' ';
@@ -33,9 +35,6 @@ void tileInit(void){
 }
 
 void worldInit(void){
-	for(int i = 0;i < WORLD_ROOM_COUNT;i++){
-		room[i].roomType = ROOM_TYPE_UNINITIALIZED;
-	}
 }
 
 void roomInit(int id){
@@ -81,6 +80,16 @@ void mapDebugRenderFill(int fillData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT]){
 
 void mapCreateRoom(int id){//TODO: Clean up this function bit, its kinda a mess
 	int x,y;
+
+	LOG_DEBUG_F("Creating room %i",id);
+
+	if(id  >= roomSize){ //Grow the array size to fit the new room if required
+		roomSize++;
+		room = realloc(room,(roomSize)*sizeof(room[0]));
+		LOG_DEBUG_F("[mem] Realloccing room to %i",roomSize);
+	}else{
+		LOG_DEBUG("no need to realloc room!");
+	}
 
 	npcClearFromLevel(id);
 
@@ -238,7 +247,6 @@ void mapEditBox(int id,int boxX,int boxY,int width,int height,int tileType){
 	ASSERT_TILE_TYPE(tileType);
 	ASSERT_WIDTH(boxX);
 	ASSERT_HEIGHT(boxY);
-	ASSERT_ROOM(id);
     assert((boxX + width) >= 0);
 	assert((boxX + width) < MAP_MAX_WIDTH + 1);//+1 because width starts from 1, not from 0. Causing issues on this calculation
 	assert((boxY + height) >= 0);
@@ -259,7 +267,6 @@ int mapSearchTileCoords(int id,int boxX,int boxY,int width,int height,int tileTy
 	ASSERT_TILE_TYPE(tileType);
 	ASSERT_WIDTH(boxX);
 	ASSERT_HEIGHT(boxY);
-	ASSERT_ROOM(id);
 	assert((boxX + width) >= 0);
 	assert((boxX + width) < MAP_MAX_WIDTH + 1);//+1 because width starts from 1, not from 0. Causing issues on this calculation
 	assert((boxY + height) >= 0);
@@ -284,7 +291,6 @@ int mapCheckTileCoords(int id,int boxX,int boxY,int width,int height,int tileTyp
 	ASSERT_TILE_TYPE(tileType);
 	ASSERT_WIDTH(boxX);
 	ASSERT_HEIGHT(boxY);
-	ASSERT_ROOM(id);
 	assert((boxX + width) >= 0);
 	assert((boxX + width) < MAP_MAX_WIDTH + 1);//+1 because width starts from 1, not from 0. Causing issues on this calculation
 	assert((boxY + height) >= 0);
@@ -301,7 +307,6 @@ int mapCheckTileCoords(int id,int boxX,int boxY,int width,int height,int tileTyp
 }
 
 struct tile_s* mapGetTileByPos(pos_t pos){
-	ASSERT_ROOM(pos.z);
 	ASSERT_WIDTH(pos.x);
 	ASSERT_HEIGHT(pos.y);
 
@@ -309,7 +314,6 @@ struct tile_s* mapGetTileByPos(pos_t pos){
 }
 
 struct tile_s* mapGetVisByPos(pos_t pos){
-	ASSERT_ROOM(pos.z);
 	ASSERT_WIDTH(pos.x);
 	ASSERT_HEIGHT(pos.y);
 
@@ -403,7 +407,6 @@ void mapCheatSeeAll(void){
 
 pos_t mapFindTilePos(int roomId,tiletype_t tileType){
 	ASSERT_TILE_TYPE(tileType);
-	ASSERT_ROOM(roomId);
 
 	int x,y;
 

@@ -30,7 +30,8 @@ typedef struct room_s{
 	roomtype_t roomType;
 } room_t;
 
-extern room_t room[WORLD_ROOM_COUNT]; //Room list
+extern size_t roomSize;
+extern room_t *room; //Room list
 extern tile_t tileInfo[TILE_COUNT];
 
 void worldInit(void);

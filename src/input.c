@@ -40,8 +40,8 @@ void inputHandle(){
 			break;
 		case 62://>
 			if(room[playerGetInfo()->pos.z].mapData[playerGetInfo()->pos.x][playerGetInfo()->pos.y] == TILE_STAIRS_DOWN){
-				if(playerGetInfo()->pos.z > WORLD_ROOM_COUNT){
-					LOG_INFO("Trying to go outside the world_room_count!");
+				if(playerGetInfo()->pos.z > roomSize){
+					LOG_INFO("Trying to go outside the roomSize!");
 				}else{
 					playerGetInfo()->pos.z = playerGetInfo()->pos.z + 1;
 					if(room[playerGetInfo()->pos.z].roomType == ROOM_TYPE_UNINITIALIZED){

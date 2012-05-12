@@ -30,8 +30,6 @@ void itemInit(void){
 }
 
 void itemClearFromLevel(int z){
-	ASSERT_ROOM(z);
-	
 	//TODO: FIX
 	for(int i = 0;i < itemVisSize;i++){
 		if(itemVis[i].state == ITEMSTATE_EMPTY)
@@ -111,7 +109,6 @@ itemSpawnReturn:
 }
 
 void itemSpawnRandom(int z){
-	ASSERT_ROOM(z);
 	int i;
 	pos_t pos;
 	pos.x = 0;

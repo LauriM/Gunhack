@@ -41,8 +41,6 @@ typedef enum{
 #define GEN_TUNNEL_MIN_ROTATE 10
 #define GEN_TUNNEL_MAX_ROTATE 20
 
-#define WORLD_ROOM_COUNT 50
-
 #define MAP_MAX_WIDTH  80
 #define MAP_MAX_HEIGHT 21
 

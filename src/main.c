@@ -42,7 +42,6 @@ int main(int argc, const char *argv[]){
 	if(hudPrompt("Load a save from disk?") == 1){
 		loadGame();
 	}else{
-		roomInit(0);
 		mapCreateRoom(0);
 		playerGetInfo()->pos.z = 0;
 

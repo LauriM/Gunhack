@@ -27,7 +27,6 @@ void npcInit(void){
 }
 
 void npcSpawnRandom(int z){
-	ASSERT_ROOM(z);
 	pos_t pos;
 	pos.x = 0;
 	pos.y = 0;
@@ -104,7 +103,6 @@ void npcRender(){
 }
 
 void npcClearFromLevel(int z){
-	ASSERT_ROOM(z);
 
 	for(int i = 0;i < npcDataSize;i++){
 
