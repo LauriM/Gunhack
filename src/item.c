@@ -9,7 +9,7 @@
 #include "render.h"
 
 
-size_t itemVisSize      = 0;//TODO: extern these if required
+size_t itemVisSize      = 0;
 size_t itemVisCapacity  = 0;
 itemdata_t *itemVis     = NULL;
 

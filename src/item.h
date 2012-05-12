@@ -39,6 +39,11 @@ typedef struct itemdata_s{
 	pos_t pos;
 } itemdata_t;
 
+extern size_t itemVisSize;   
+extern size_t itemVisCapacity;
+extern size_t itemDataSize;   
+extern size_t itemDataCapacity;
+
 extern itemdata_t *itemVis;
 extern itemdata_t *itemData;
 extern item_t itemInfo[ITEM_COUNT]; //"database" of the items

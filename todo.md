@@ -9,13 +9,7 @@ Major todo
 
 Malloc todo
 ===========
-* check clear
-* other parts of the code
 * save system rebuild
-
-## System left to convert
-
-* map
 
 Minor todo
 ==========
