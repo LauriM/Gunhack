@@ -67,7 +67,7 @@ void hudMenuInit(){
 	move(0,0);
 }
 
-void hudMenuWrite(char line[50]){
+void hudMenuWrite(char *line){
 	printw(line);
 	printw("\n");
 }

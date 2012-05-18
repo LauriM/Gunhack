@@ -1,5 +1,6 @@
 #include "globals.h"
 #include "msg.h"
+#include "hud.h"
 
 msg_t *head;
 msg_t *end;
@@ -13,7 +14,7 @@ void msgAdd(char *msg,color_t color){
 	if(head == NULL){
 		head = malloc(sizeof(msg_t) + strlen(msg)*sizeof(char));
 
-		head->prev = head;
+		head->prev = NULL;
 		head->next = NULL;
 		end = head;
 
@@ -27,13 +28,14 @@ void msgAdd(char *msg,color_t color){
 	
 	msg_t *newMsg = malloc(sizeof(msg_t) + strlen(msg)*sizeof(char));
 
-	end->next  = newMsg;
+	end->next = newMsg;
 	newMsg->prev = end;
 
 	newMsg->next = NULL;
 	strcpy(newMsg->msg,msg);
 
 	newMsg->color = color;
+	end = newMsg;
 }
 
 void msgPrintDebugInfo(){
@@ -45,4 +47,21 @@ void msgPrintDebugInfo(){
 		LOG_INFO_F("Msg color: %i | %s",curr->color,curr->msg);
 		curr = curr->next;
 	}
+}
+
+void msgShowWindow(){
+	hudMenuInit();
+	hudMenuWrite("Message History:");
+	hudMenuWrite("================");
+
+	msg_t *curr;
+	
+	curr = end;
+
+	while(curr != NULL){
+		hudMenuWrite(curr->msg);
+		curr = curr->prev;
+	}
+
+	hudMenuFinish();
 }

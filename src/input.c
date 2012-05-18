@@ -7,6 +7,7 @@
 #include "hud.h"
 #include "save.h"
 #include "npc.h"
+#include "msg.h"
 
 #include "math.h"//QQQ
 #include "item.h"
@@ -92,6 +93,9 @@ void inputHandle(){
 			break;
 		case 105:
 			itemDisplayInv();
+			break;
+		case 112:
+			msgShowWindow();
 			break;
 	}
 

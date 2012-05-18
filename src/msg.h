@@ -10,7 +10,7 @@ typedef struct msg_s{
 
 extern void msgInit();
 extern void msgAdd(char *msg,color_t color);
-extern void msgRender();
+extern void msgShowWindow();
 
 extern void msgPrintDebugInfo();
 
