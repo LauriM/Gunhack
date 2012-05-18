@@ -13,6 +13,7 @@
 #include "item.h"
 #include "save.h"
 #include "npc.h"
+#include "msg.h"
 
 int main(int argc, const char *argv[]){
 	logInit();
@@ -22,11 +23,15 @@ int main(int argc, const char *argv[]){
 	tileInit();
 	itemInit();
 	npcInit();
+	msgInit();
 
-	srand(time(NULL));
+	msgAdd("hello world!",TERM_COLOR_RED);
+	msgAdd("test",TERM_COLOR_GREEN);
 
 	LOG_INFO("Game starting...");
 	LOG_INFO("Build time: " __DATE__ " " __TIME__);
+
+	msgPrintDebugInfo();
 
 	/*
 	int key;
