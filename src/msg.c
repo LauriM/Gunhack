@@ -12,7 +12,7 @@ void msgInit(){
 
 void msgAdd(char *msg,color_t color){
 	if(head == NULL){
-		head = malloc(sizeof(msg_t) + strlen(msg)*sizeof(char));
+		head = malloc(sizeof(msg_t) + (strlen(msg)+1)*sizeof(char));
 
 		head->prev = NULL;
 		head->next = NULL;
@@ -26,7 +26,7 @@ void msgAdd(char *msg,color_t color){
 
 	//End always points to the last node where the new nodes should be linked
 	
-	msg_t *newMsg = malloc(sizeof(msg_t) + strlen(msg)*sizeof(char));
+	msg_t *newMsg = malloc(sizeof(msg_t) + (strlen(msg)+1)*sizeof(char));
 
 	end->next = newMsg;
 	newMsg->prev = end;

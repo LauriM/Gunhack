@@ -15,3 +15,6 @@ extern void msgShowWindow();
 extern void msgPrintDebugInfo();
 
 extern msg_t *head;
+extern msg_t *end;
+
+#define MSG_ADD(p_msg,p_color,...) {char output[100]; snprintf(output,100,p_msg,__VA_ARGS__);msgAdd(output,p_color);}

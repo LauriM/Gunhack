@@ -4,6 +4,7 @@
 #include "item.h"
 #include <stdbool.h>
 #include "player.h"
+#include "msg.h"
 #include <math.h>
 
 size_t npcDataSize     = 0;
@@ -151,6 +152,8 @@ bool npcApplyDamagePos(pos_t pos,int damage){
 		if(npcData[i].hp < 0){
 			//DEATH
 			npcKillById(i);
+
+			MSG_ADD("%s is dead!",TERM_COLOR_RED,npcInfo[npcData[i].name].name);
 			return true;
 		}
 
