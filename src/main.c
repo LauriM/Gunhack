@@ -43,7 +43,7 @@ int main(int argc, const char *argv[]){
 
 
 	//TODO: Better management for the save files
-	if(hudPrompt("Load a save from disk?") == 1){
+	if(hudPrompt("Load a save from disk?") == 0){
 		loadGame();
 	}else{
 		mapCreateRoom(0);

@@ -31,12 +31,6 @@ int hudPrompt(char text[250]){
 	return 0;
 }
 
-void hudMessage(char text[250]){
-	//TODO: Rendering the message won't work. Some kind of message buffer required(?)
-	move(0,0);
-	printw(text);
-}
-
 void hudRender(){
 	move(0,0);
 	printw(msgGetLastMsg()->msg);

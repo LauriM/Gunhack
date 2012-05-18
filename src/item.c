@@ -1,4 +1,5 @@
 #include "globals.h"
+#include "msg.h"
 #include <stdio.h>
 #include <string.h>
 #include "item.h"
@@ -231,13 +232,13 @@ void itemPickup(){
 	}
 
 	if(itemCount == 0){
-		hudMessage("Nothing to pickup");
+		msgAdd("Nothing to pickup",TERM_COLOR_DEFAULT);
 		LOG_INFO("nothing to pickup");
 		return;
 	}
 
 	if(itemCount == 1){
-		hudMessage("Picked up item");
+		MSG_ADD("Picked up %s",TERM_COLOR_DEFAULT,itemInfo[itemId].name);
 		LOG_INFO("Picking up single item");
 
 		itemData[itemId].state = ITEMSTATE_INV;
@@ -245,9 +246,7 @@ void itemPickup(){
 	}
 
 	if(itemCount >= 2){
-		hudMessage("choose item to pickup:");
-
-		LOG_WARNING("Picking up multitiple items not implemented!");
+		msgAdd("failed to pickup multitiple items",TERM_COLOR_RED);
 		return;
 	}
 }
