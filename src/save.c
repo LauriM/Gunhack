@@ -44,7 +44,6 @@ void loadGame(void){
 	itemDataCapacity = itemDataSize = header.itemDataSize;
 	npcDataCapacity = npcDataSize = header.npcDataSize;
 
-
 	room = realloc(room,roomSize * sizeof(room[0]));
 	itemVis = realloc(itemVis,itemVisCapacity * sizeof(itemVis[0]));
 	itemData = realloc(itemData,itemDataCapacity * sizeof(itemVis[0]));

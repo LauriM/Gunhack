@@ -20,6 +20,8 @@ typedef struct vec2_s{
 } vec2_t;            
 */
 
+void mathInit();
+
 int randomMax(int max);
 int randomRange(int min,int max);
 #endif

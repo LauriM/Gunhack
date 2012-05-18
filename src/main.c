@@ -16,6 +16,7 @@
 #include "msg.h"
 
 int main(int argc, const char *argv[]){
+	mathInit();
 	logInit();
 	worldInit();
 	renderInit();
@@ -43,7 +44,7 @@ int main(int argc, const char *argv[]){
 
 
 	//TODO: Better management for the save files
-	if(hudPrompt("Load a save from disk?") == 0){
+	if(hudPrompt("Load a save from disk?") == 1){
 		loadGame();
 	}else{
 		mapCreateRoom(0);
@@ -62,7 +63,6 @@ int main(int argc, const char *argv[]){
 	//==========================================================//          
 	while(playerGetInfo()->endGame == ENDGAME_REASON_NOTENDED){
 		inputHandle();
-		npcAiTick();
 		playerIncTurn();
 
 		clear();
