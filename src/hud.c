@@ -2,6 +2,7 @@
 #include "globals.h"
 #include "hud.h"
 #include "render.h"
+#include "msg.h"
 #include "player.h"
 #include <stdio.h>
 
@@ -37,6 +38,9 @@ void hudMessage(char text[250]){
 }
 
 void hudRender(){
+	move(0,0);
+	printw(msgGetLastMsg()->msg);
+
 	char statusLine[STATUSLINE_MAX_CHARS] = "";
 
 	snprintf(statusLine,STATUSLINE_MAX_CHARS,"Level: %i Hp: %i/%i Exp: %i Level: %i Turn: %i",playerGetInfo()->pos.z,playerGetInfo()->hp,playerGetInfo()->maxhp,playerGetInfo()->exp,playerGetInfo()->level,playerGetInfo()->turn);

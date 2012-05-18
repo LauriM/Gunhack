@@ -11,6 +11,7 @@ typedef struct msg_s{
 extern void msgInit();
 extern void msgAdd(char *msg,color_t color);
 extern void msgShowWindow();
+extern msg_t* msgGetLastMsg();
 
 extern void msgPrintDebugInfo();
 

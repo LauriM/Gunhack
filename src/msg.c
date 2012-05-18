@@ -65,3 +65,7 @@ void msgShowWindow(){
 
 	hudMenuFinish();
 }
+
+extern msg_t* msgGetLastMsg(){
+	return end;
+}

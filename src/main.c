@@ -25,8 +25,7 @@ int main(int argc, const char *argv[]){
 	npcInit();
 	msgInit();
 
-	msgAdd("hello world!",TERM_COLOR_RED);
-	msgAdd("test",TERM_COLOR_GREEN);
+	msgAdd("Welcome to __GAME_NAME_",TERM_COLOR_RED);
 
 	LOG_INFO("Game starting...");
 	LOG_INFO("Build time: " __DATE__ " " __TIME__);
