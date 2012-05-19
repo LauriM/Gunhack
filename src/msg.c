@@ -69,6 +69,11 @@ int msgGetMsgCount(){
 }
 
 void msgPrintDebugInfo(){
+#ifdef DEBUG_LOG_SHOW_INGAME
+	//If debugging over this is enabled, bailout from this function. It would cause a infinite loop
+	LOG_WARNING("Disabled DEBUG_LOG_SHOW_INGAME to enabled msgPrintDebugInfo()");
+	return;
+#endif
 	msg_t *curr;
 
 	curr = head;

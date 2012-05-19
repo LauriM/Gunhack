@@ -16,6 +16,7 @@
 #include "msg.h"
 
 int main(int argc, const char *argv[]){
+	msgInit();
 	mathInit();
 	logInit();
 	worldInit();
@@ -24,7 +25,6 @@ int main(int argc, const char *argv[]){
 	tileInit();
 	itemInit();
 	npcInit();
-	msgInit();
 
 	msgAdd("Welcome to __GAME_NAME_",TERM_COLOR_RED);
 

@@ -13,6 +13,8 @@
 
 //Debugging
 //#define DEBUG_NO_LOG_DEBUG
+#define DEBUG_LOG_SHOW_INGAME
+
 #include "log.h"
 
 #define DEBUG_BREAKPOINT __asm__("int $3");
