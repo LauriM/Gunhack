@@ -15,6 +15,7 @@ extern void msgShowWindow();
 extern void msgDropHead();
 extern msg_t* msgGetLastMsg();
 extern int msgGetMsgCount();
+extern void msgRenderSideView();
 
 extern void msgPrintDebugInfo();
 

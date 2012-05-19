@@ -1,4 +1,5 @@
 #include "globals.h"
+#include "render.h"
 #include "msg.h"
 #include "player.h"
 #include "hud.h"
@@ -81,6 +82,25 @@ void msgPrintDebugInfo(){
 	while(curr != NULL){
 		LOG_INFO_F("Msg color: %i | %s",curr->color,curr->msg);
 		curr = curr->next;
+	}
+}
+
+void msgRenderSideView(){
+	int i = 0;
+	msg_t *curr;
+
+	curr = end;
+
+	while(curr != NULL){
+		setColor(curr->color);
+		{
+			char line[100];
+			snprintf(line,100,"%i : %s",curr->turn,curr->msg);
+			printxy(82,i,line);
+		}
+		setColorOff(curr->color);
+		curr = curr->prev;
+		i++;
 	}
 }
 

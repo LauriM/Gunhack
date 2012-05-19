@@ -16,6 +16,8 @@
 #include "msg.h"
 
 int main(int argc, const char *argv[]){
+	int maxy,maxx;
+
 	msgInit();
 	mathInit();
 	logInit();
@@ -26,12 +28,19 @@ int main(int argc, const char *argv[]){
 	itemInit();
 	npcInit();
 
-	msgAdd("Welcome to __GAME_NAME_",TERM_COLOR_RED);
-
 	LOG_INFO("Game starting...");
 	LOG_INFO("Build time: " __DATE__ " " __TIME__);
 
-	msgPrintDebugInfo();
+	msgAdd("Welcome to __GAME_NAME_",TERM_COLOR_RED);
+
+	getmaxyx(stdscr,maxy,maxx);
+
+	if(maxx < 80 || maxy < 24){
+		renderUnInit();
+		printf("Console size is too small 80x24 is the minimun size!\n");
+		return 0;
+	}
+
 
 	/*
 	int key;
@@ -57,7 +66,6 @@ int main(int argc, const char *argv[]){
 		mapScanFov();
 	}
 
-
 	//==========================================================//
 	//  Main loop
 	//==========================================================//          
@@ -73,6 +81,12 @@ int main(int argc, const char *argv[]){
 		npcRender();
 		playerRender();
 		hudRender();
+
+		getmaxyx(stdscr,maxy,maxx);
+
+		if(maxx > 145){
+			msgRenderSideView();
+		}
 	}
 
 	//ending game
