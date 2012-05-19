@@ -58,3 +58,7 @@ typedef enum{
 
 //Pathfind
 #define PATHFIND_MAX_DEPTH 100
+
+//Msg
+
+#define MSG_HISTORY_MAX_COUNT 20

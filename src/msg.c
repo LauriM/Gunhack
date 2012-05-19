@@ -36,6 +36,33 @@ void msgAdd(char *msg,color_t color){
 
 	newMsg->color = color;
 	end = newMsg;
+
+	if(msgGetMsgCount() > MSG_HISTORY_MAX_COUNT){
+		msgDropHead();
+	}
+}
+
+void msgDropHead(){
+	msg_t *newHead;
+	newHead = head->next;
+	newHead->prev = NULL;
+
+	free(head);
+	head = newHead;
+}
+
+int msgGetMsgCount(){
+	int count = 0;
+
+	msg_t *curr;
+	curr = head;
+
+	while(curr != NULL){
+		count++;
+		curr = curr->next;
+	}
+
+	return count;
 }
 
 void msgPrintDebugInfo(){
