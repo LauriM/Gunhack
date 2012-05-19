@@ -242,6 +242,15 @@ void npcMoveToPos(int id,pos_t pos){
 
 	if(playerGetInfo()->pos.x == pos.x && playerGetInfo()->pos.y == pos.y){
 		playerGetInfo()->hp = playerGetInfo()->hp - npcInfo[npcData[id].name].meleeDmg;
+
+		//blood
+		pos_t bloodPos;
+		bloodPos = playerGetInfo()->pos;
+		bloodPos.x = bloodPos.x + randomRange(-1,1);
+		bloodPos.y = bloodPos.y + randomRange(-1,1);
+
+		mapEditColorPoint(bloodPos,TERM_COLOR_RED);
+
 		return;
 	}
 
