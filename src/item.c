@@ -42,7 +42,7 @@ void itemClearFromLevel(int z){
 	}
 
 	for(int i = 0;i < itemDataSize;i++){
-		if(itemData[i].state == ITEMSTATE_EMPTY)
+		if(itemData[i].state != ITEMSTATE_GROUND)
 			continue;
 
 		if(itemData[i].pos.z != z)
