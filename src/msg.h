@@ -5,6 +5,7 @@ typedef struct msg_s{
 	struct msg_s *prev;
 
 	color_t color;
+	int turn;
 	char msg[];
 } msg_t;
 

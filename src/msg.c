@@ -1,5 +1,6 @@
 #include "globals.h"
 #include "msg.h"
+#include "player.h"
 #include "hud.h"
 
 msg_t *head;
@@ -20,6 +21,7 @@ void msgAdd(char *msg,color_t color){
 
 		head->color = color;
 		strcpy(head->msg,msg);
+		head->turn = playerGetInfo()->turn;
 
 		return;
 	}
@@ -33,6 +35,7 @@ void msgAdd(char *msg,color_t color){
 
 	newMsg->next = NULL;
 	strcpy(newMsg->msg,msg);
+	newMsg->turn = playerGetInfo()->turn;
 
 	newMsg->color = color;
 	end = newMsg;
@@ -86,7 +89,9 @@ void msgShowWindow(){
 	curr = end;
 
 	while(curr != NULL){
-		hudMenuWrite(curr->msg);
+		setColor(curr->color);
+		hudMenuWriteF("Turn %i -> %s",curr->turn,curr->msg);
+		setColorOff(curr->color);
 		curr = curr->prev;
 	}
 
