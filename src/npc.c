@@ -148,6 +148,7 @@ bool npcApplyDamagePos(pos_t pos,int damage){
 
 		mapEditColorPoint(bloodPos,TERM_COLOR_RED);
 		
+		MSG_ADD("you hit %s! (-%i)",TERM_COLOR_DEFAULT,npcInfo[npcData[i].name].name,damage);
 
 		if(npcData[i].hp < 0){
 			//DEATH
@@ -250,6 +251,8 @@ void npcMoveToPos(int id,pos_t pos){
 		bloodPos.y = bloodPos.y + randomRange(-1,1);
 
 		mapEditColorPoint(bloodPos,TERM_COLOR_RED);
+
+		MSG_ADD("%s hits you! (-%i)",TERM_COLOR_DEFAULT,npcInfo[npcData[id].name].name,npcInfo[npcData[id].name].meleeDmg);
 
 		return;
 	}

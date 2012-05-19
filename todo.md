@@ -11,6 +11,10 @@ Malloc todo
 ===========
 * save system rebuild
 
+Battle system
+=============
+* change meleeDmg to be range, not static
+
 Minor todo
 ==========
 
