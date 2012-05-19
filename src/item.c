@@ -217,8 +217,7 @@ void itemRender(void){
 void itemPickup(){
     //First get count of the items, if many items, ask what to pickup.
 
-    int itemCount = 0;
-	int itemId = 0;
+	int itemCount = 0;
 
 	for(int i = 0;i < itemDataSize;i++){
 		if(itemData[i].state != ITEMSTATE_GROUND)
@@ -227,26 +226,17 @@ void itemPickup(){
 		if(itemData[i].pos.x != playerGetInfo()->pos.x || itemData[i].pos.y != playerGetInfo()->pos.y || itemData[i].pos.z != playerGetInfo()->pos.z)
 			continue;
 
+		//Pickup happens!
+		MSG_ADD("Picked up %s",TERM_COLOR_DEFAULT,itemInfo[itemData[i].itemId].name);
+		itemData[i].state = ITEMSTATE_INV;
 		itemCount++;
-		itemId = i;
 	}
 
 	if(itemCount == 0){
-		msgAdd("Nothing to pickup",TERM_COLOR_DEFAULT);
-		LOG_INFO("nothing to pickup");
-		return;
+		msgAdd("Nothing to pickup!",TERM_COLOR_DEFAULT);
 	}
-
-	if(itemCount == 1){
-		MSG_ADD("Picked up %s",TERM_COLOR_DEFAULT,itemInfo[itemId].name);
-		LOG_INFO("Picking up single item");
-
-		itemData[itemId].state = ITEMSTATE_INV;
-		return;
-	}
-
-	if(itemCount >= 2){
-		msgAdd("failed to pickup multitiple items",TERM_COLOR_RED);
+	if(itemCount > 1){
+		MSG_ADD("Picked up %i items.",TERM_COLOR_DEFAULT,itemCount);
 		return;
 	}
 }
