@@ -176,7 +176,7 @@ void npcAiTick(){
 		if(npcData[i].state != NPCSTATE_ALIVE)
 			continue;
 
-		int flags;
+		int flags = IS_NEUTRAL;//Just a default flag
 
 		switch(npcInfo[npcData[i].name].relation){
 			case NPC_RELATION_HOSTILE:

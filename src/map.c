@@ -510,8 +510,6 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 	while(i > 0){
 		if(i == 1){
 			//we found the next step!
-			i = 0;
-
 			return pos;
 		}
 
