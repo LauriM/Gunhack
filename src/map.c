@@ -474,6 +474,7 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 #define PATH_FILL_POS(p_x,p_y) if(fillData[x + p_x][y + p_y] == NODATA){fillData[x + p_x][y + p_y] = (i+1);}
 
 	//Fill
+	
 	for(int i = 0;i < PATHFIND_MAX_DEPTH;i++){
 		for(int x = 0;x < MAP_MAX_WIDTH;x++){
 			for(int y = 0; y < MAP_MAX_HEIGHT;y++){
@@ -485,12 +486,11 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 					PATH_FILL_POS(0,-1);
 					PATH_FILL_POS(1,0);
 					PATH_FILL_POS(-1,0);
-					/*
+
 					PATH_FILL_POS(1,1);
 					PATH_FILL_POS(-1,-1);
 					PATH_FILL_POS(1,-1);
 					PATH_FILL_POS(-1,1);
-					*/
 
 					if(x == pos_end.x && y == pos_end.y){
 						break;
@@ -515,6 +515,8 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 
 		//Find the next value near us
 		
+		//HACK: This isn't pretty, but it works :D
+		
 		if(fillData[pos.x+1][pos.y] == (i - 1)){
 			pos.x++;
 			i--;
@@ -532,6 +534,31 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 		}
 		if(fillData[pos.x][pos.y-1] == (i - 1)){
 			pos.y--;
+			i--;
+			continue;
+		}
+
+		if(fillData[pos.x+1][pos.y+1] == (i - 1)){
+			pos.x++;
+			pos.y++;
+			i--;
+			continue;
+		}
+		if(fillData[pos.x-1][pos.y-1] == (i - 1)){
+			pos.x--;
+			pos.y--;
+			i--;
+			continue;
+		}
+		if(fillData[pos.x-1][pos.y+1] == (i - 1)){
+			pos.x--;
+			pos.y++;
+			i--;
+			continue;
+		}
+		if(fillData[pos.x+1][pos.y-1] == (i - 1)){
+			pos.y--;
+			pos.x++;
 			i--;
 			continue;
 		}
