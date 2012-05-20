@@ -33,7 +33,7 @@ void itemInit(void){
 void itemClearFromLevel(int z){
 	//TODO: FIX
 	for(int i = 0;i < itemVisSize;i++){
-		if(itemVis[i].state == ITEMSTATE_EMPTY)
+		if(itemVis[i].state != ITEMSTATE_GROUND)
 			continue;
 		if(itemVis[i].pos.z != z)
 			continue;

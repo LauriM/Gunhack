@@ -87,6 +87,10 @@ int main(int argc, const char *argv[]){
 		if(maxx > 145){
 			msgRenderSideView();
 		}
+
+		if(maxy > 35){
+			debugShowAllocations();
+		}
 	}
 
 	//ending game

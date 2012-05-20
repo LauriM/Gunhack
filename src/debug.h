@@ -6,3 +6,9 @@
 #define  ASSERT_TILE_TYPE(p_type)             _ASSERT_RANGE(p_type,TILE_COUNT);
 
 #define ASSERT_POS_T(p_pos) ASSERT_WIDTH(p_pos.x) ASSERT_HEIGHT(p_pos.y)
+
+#ifndef DEBUG_H
+#define DEBUG_H
+
+extern void debugShowAllocations();
+#endif
