@@ -18,7 +18,6 @@
 int main(int argc, const char *argv[]){
 	int maxy,maxx;
 
-	msgInit();
 	mathInit();
 	logInit();
 	worldInit();

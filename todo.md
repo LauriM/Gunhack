@@ -14,6 +14,7 @@ Malloc todo
 Battle system
 =============
 * change meleeDmg to be range, not static
+* drops from enemies
 
 Minor todo
 ==========
