@@ -9,6 +9,7 @@ extern void npcState_sleep(int id,int flags);
 extern void npcState_attack(int id,int flags);
 extern void npcState_idle(int id,int flags);
 extern void npcState_search(int id,int flags);
+extern void npcState_flee(int id,int flags);
 
 typedef enum{
 	SEE_PLAYER      = 1 << 0,
@@ -16,7 +17,7 @@ typedef enum{
 	IS_HOSTILE      = 1 << 2,
 	IS_NEUTRAL      = 1 << 3,
 	IS_PEACEFUL     = 1 << 4,
-	LOW_HP          = 1 << 5,
+	IS_DAMAGED      = 1 << 5,
 	SEARCH_DONE     = 1 << 6,
 } npc_flags_t;
 

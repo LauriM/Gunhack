@@ -24,6 +24,7 @@ Minor todo
 * HUD improvements
 * ColorData doesn't respect visdata
 * npcs won't block pathfind
+* idling enemies may randomly attack player
 
 Gameplay
 ========
