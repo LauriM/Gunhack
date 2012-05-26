@@ -38,3 +38,8 @@ Plan
 * Simple roguelike implementation with rapid gameplay
 * Gameplay should be possible to be developed forward without much challenge
 * Overall plan: get that "one-game" out before the army ends
+
+Notes
+=====
+
+Windows version is build using MinGW. Ncurses is replaced with pdcurses. Line 92 on curses.h needs to be commented out. stdbool.h is used for the boolean types instead.
