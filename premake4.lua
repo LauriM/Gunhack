@@ -1,15 +1,19 @@
 solution "roguelike"
     configurations { "Debug", "Release" }
+	flags { "ExtraWarnings", "FatalWarnings" }
 
-    flags { "ExtraWarnings", "FatalWarnings" }
     --includedirs { "" }
     --libdirs { "" }
 
     -- Platform-specific options
     configuration { "gmake" }
-        buildoptions { "-std=c99", "-pedantic" }
+		buildoptions { "-std=c99", "-pedantic" }
+
+	configuration { "windows" }
+		defines { "WINDOWS" }
 
     configuration { "linux" }
+		defines { "LINUX" }
         links { "m", "rt" }
 
     -- Configuration-specific options

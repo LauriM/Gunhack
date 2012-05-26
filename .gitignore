@@ -1,5 +1,7 @@
 Makefile
 game
+game.exe
+pdcurses.dll
 game.make
 obj/
 cscope.out
@@ -7,3 +9,9 @@ tags
 log.txt
 keytester
 save
+
+ipch/
+roguelike.sln
+roguelike.sdf
+roguelike.opensdf
+game.vcxproj*
