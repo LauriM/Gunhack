@@ -6,5 +6,4 @@ void npcState_attack(int id,int flags){
 		npcData[id].aiState = &npcState_search;
 		LOG_DEBUG_F("[ai] %i searching!",id);
 	}
-
 }
