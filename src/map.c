@@ -337,12 +337,16 @@ pos_t mapFindFleePos(pos_t pos,pos_t pos_thread){
 	pos_t match = pos;
 	double match_distance = 0;
 
-#define CHECK_POS(p_x,p_y) p.x = p.x + p_x; p.y = p.y + p_y; if(distance(p,pos_thread) > match_distance){match_distance = distance(p,pos_thread); match = p;} p = pos;
+#define CHECK_POS(p_x,p_y) p.x = p.x + p_x; p.y = p.y + p_y; if(distance(p,pos_thread) > match_distance && mapGetTileByPos(p)->block == 0){match_distance = distance(p,pos_thread); match = p;} p = pos;
 
-	CHECK_POS(1,0);
-	CHECK_POS(-1,0);
-	CHECK_POS(0,1);
-	CHECK_POS(0,-1);
+	CHECK_POS( 1 ,  0);
+	CHECK_POS( 0 ,  1);
+	CHECK_POS(-1 ,  0);
+	CHECK_POS( 0 , -1);
+	CHECK_POS( 1 ,  1);
+	CHECK_POS(-1 , -1);
+	CHECK_POS( 1 , -1);
+	CHECK_POS(-1 ,  1);
 
 	return match;
 }
