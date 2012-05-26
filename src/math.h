@@ -24,4 +24,5 @@ void mathInit();
 
 int randomMax(int max);
 int randomRange(int min,int max);
+double distance(pos_t pos1,pos_t pos2);
 #endif
