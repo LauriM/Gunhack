@@ -9,6 +9,10 @@ Malloc todo
 ===========
 * save system rebuild
 
+Gameplay
+========
+* max items carried
+
 Battle system
 =============
 * change meleeDmg to be range, not static

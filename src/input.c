@@ -15,7 +15,16 @@
 void inputHandle(){
 	//TODO: Fix the whole fucking input system to dynamic system or something
 	int key = getch();
+	int itemIdentifier = 0;
 	switch(key){
+		case 97://[a]pply item
+
+			//TODO: Check that the item exists
+			//TODO: Check that player actual has the item
+			itemIdentifier = itemInvChooseItem();
+
+			(*itemInfo[itemData[itemIdentifier].itemId].itemCall)(itemIdentifier,ITEMACTION_USE);
+			break;
 		case 60://<
 			if(room[playerGetInfo()->pos.z].mapData[playerGetInfo()->pos.x][playerGetInfo()->pos.y] == TILE_STAIRS_UP){
 				if(playerGetInfo()->pos.z == 0){

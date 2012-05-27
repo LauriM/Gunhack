@@ -1,7 +1,13 @@
 #ifndef ITEM_H
 #define ITEM_H
 
+#include "globals.h"
 #include "render.h"
+
+typedef enum{
+	ITEMACTION_USE = 0,
+	ITEMACTION_ATTACK
+} itemaction_t;
 
 typedef enum{
 	ITEMSTATE_GROUND = 0,
@@ -30,6 +36,7 @@ typedef struct item_s{
 	itemtype_t itemType;
 	char *name;
 	color_t itemColor;
+	void(*itemCall)(int itemId, itemaction_t action);
 } item_t;
 
 typedef struct itemdata_s{
@@ -61,8 +68,14 @@ extern void itemClearFromLevel(int z);
 
 extern void itemRender(void);
 extern void itemDisplayInv();
+extern int itemInvChooseItem();
 
 extern void itemPickup();
 
 extern void itemDebugDumpInv();
+
+typedef void (*itemcall_t)(int itemId,itemaction_t action);
+extern void itemCall_null(int itemId,itemaction_t action);
+extern void itemCall_hp_small(int itemId,itemaction_t action);
+
 #endif
