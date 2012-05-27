@@ -44,8 +44,8 @@ void inputHandle(){
 				if(playerGetInfo()->pos.z > roomSize){
 					LOG_INFO("Trying to go outside the roomSize!");
 				}else{
-					playerGetInfo()->pos.z = playerGetInfo()->pos.z + 1;
-					if(room[playerGetInfo()->pos.z].roomType == ROOM_TYPE_UNINITIALIZED){
+					playerGetInfo()->pos.z++;
+					if(playerGetInfo()->pos.z > roomSize-1){
 						playerRandomPosition();
 						mapCreateRoom(playerGetInfo()->pos.z);
 					}

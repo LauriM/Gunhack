@@ -190,6 +190,10 @@ void npcAiTick(){
 				break;
 		}
 
+		if(npcData[i].hp < npcInfo[npcData[i].name].maxHp){
+			flags = flags + IS_DAMAGED;
+		}
+
 		if(npcData[i].pos.x == npcData[i].playerLastKnownPosition.x && npcData[i].pos.y == npcData[i].playerLastKnownPosition.y){
 			flags = flags + SEARCH_DONE; 
 			LOG_DEBUG_F("[ai] %i Search done!",i);
@@ -202,20 +206,15 @@ void npcAiTick(){
 		//==========================================================//
 			(*npcData[i].aiState)(i,flags);
 		//==========================================================//          
-
 		if(npcData[i].aiState == *npcState_attack){
-			if(flags & SEE_PLAYER){
-				NPC_UPDATE_LAST_KNOWN_POSITION;
-			}
+			npcMoveToPos(i,mapPathfindStep(npcData[i].pos,playerGetInfo()->pos));
+		}
 
-			pos_t tempPos = mapPathfindStep(npcData[i].pos,playerGetInfo()->pos);
-			npcMoveToPos(i,tempPos);
+		if(npcData[i].aiState == *npcState_flee){
+			npcMoveToPos(i,mapFindFleePos(npcData[i].pos,playerGetInfo()->pos));
 		}
 
 		if(npcData[i].aiState == *npcState_idle){
-			if(flags & SEE_PLAYER){
-				NPC_UPDATE_LAST_KNOWN_POSITION;
-			}
 
 			//move randomly
 			pos_t randPos;
@@ -229,6 +228,10 @@ void npcAiTick(){
 		if(npcData[i].aiState == *npcState_search){
 			pos_t tempPos = mapPathfindStep(npcData[i].pos,npcData[i].playerLastKnownPosition); //TODO: Manage situation where its not possible to get to the player
 			npcMoveToPos(i,tempPos);
+		}
+
+		if(flags & SEE_PLAYER){
+			NPC_UPDATE_LAST_KNOWN_POSITION;
 		}
 	}
 }

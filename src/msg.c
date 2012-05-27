@@ -4,13 +4,8 @@
 #include "player.h"
 #include "hud.h"
 
-msg_t *head;
-msg_t *end;
-
-void msgInit(){
-	head = NULL;
-	end = NULL;
-}
+msg_t *head = NULL;
+msg_t *end  = NULL;
 
 void msgAdd(char *msg,color_t color){
 	if(head == NULL){
@@ -49,7 +44,7 @@ void msgAdd(char *msg,color_t color){
 void msgDropHead(){
 	msg_t *newHead;
 	newHead = head->next;
-	newHead->prev = NULL;
+	newHead->prev = head->prev;
 
 	free(head);
 	head = newHead;

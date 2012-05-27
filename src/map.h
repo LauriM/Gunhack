@@ -58,6 +58,8 @@ int mapLosCheck(int x,int y,int x2,int y2);
 int mapLosCheckByPos(pos_t pos1,pos_t pos2);
 pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end);
 
+pos_t mapFindFleePos(pos_t pos,pos_t pos_thread);
+
 struct tile_s* mapGetTileByPos(pos_t pos);
 struct tile_s* mapGetVisByPos(pos_t pos);
 

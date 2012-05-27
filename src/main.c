@@ -18,7 +18,6 @@
 int main(int argc, const char *argv[]){
 	int maxy,maxx;
 
-	msgInit();
 	mathInit();
 	logInit();
 	worldInit();
@@ -53,7 +52,7 @@ int main(int argc, const char *argv[]){
 
 
 	//TODO: Better management for the save files
-	if(hudPrompt("Load a save from disk?") == 1){
+	if(hudPrompt("Load a save from disk? (y/n)") == 1){
 		loadGame();
 	}else{
 		mapCreateRoom(0);

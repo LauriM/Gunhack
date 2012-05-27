@@ -332,6 +332,25 @@ int mapLosCheckByPos(pos_t pos1,pos_t pos2){
 	return mapLosCheck(pos1.x,pos1.y,pos2.x,pos2.y);
 }
 
+pos_t mapFindFleePos(pos_t pos,pos_t pos_thread){
+	pos_t p = pos;
+	pos_t match = pos;
+	double match_distance = 0;
+
+#define CHECK_POS(p_x,p_y) p.x = p.x + p_x; p.y = p.y + p_y; if(distance(p,pos_thread) > match_distance && mapGetTileByPos(p)->block == 0){match_distance = distance(p,pos_thread); match = p;} p = pos;
+
+	CHECK_POS( 1 ,  0);
+	CHECK_POS( 0 ,  1);
+	CHECK_POS(-1 ,  0);
+	CHECK_POS( 0 , -1);
+	CHECK_POS( 1 ,  1);
+	CHECK_POS(-1 , -1);
+	CHECK_POS( 1 , -1);
+	CHECK_POS(-1 ,  1);
+
+	return match;
+}
+
 int mapLosCheck(int x1, int y1, int x2, int y2) {
 	ASSERT_WIDTH(x1);
 	ASSERT_HEIGHT(y1);
