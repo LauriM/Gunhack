@@ -18,12 +18,13 @@ void inputHandle(){
 	int itemIdentifier = 0;
 	switch(key){
 		case 97://[a]pply item
-
-			//TODO: Check that the item exists
-			//TODO: Check that player actual has the item
 			itemIdentifier = itemInvChooseItem();
 
-			(*itemInfo[itemData[itemIdentifier].itemId].itemCall)(itemIdentifier,ITEMACTION_USE);
+			if(itemData[itemIdentifier].state == ITEMSTATE_INV){
+				(*itemInfo[itemData[itemIdentifier].itemId].itemCall)(itemIdentifier,ITEMACTION_USE);
+			}else{
+				msgAdd("Invalid item code!",TERM_COLOR_DEFAULT);
+			}
 			break;
 		case 60://<
 			if(room[playerGetInfo()->pos.z].mapData[playerGetInfo()->pos.x][playerGetInfo()->pos.y] == TILE_STAIRS_UP){

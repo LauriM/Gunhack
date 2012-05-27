@@ -27,3 +27,4 @@ Minor todo
 * ColorData doesn't respect visdata
 * npcs won't block pathfind
 * idling enemies may randomly attack player
+* hudMenuWrite may temporary black out parts of the map

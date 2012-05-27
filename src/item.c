@@ -271,6 +271,8 @@ int itemInvChooseItem(){
 		}
 	}
 
+	hudMenuWrite("Write item id to use: ");
+
 	char str[80];
 	getstr(str);
 	return atoi(str);
