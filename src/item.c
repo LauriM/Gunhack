@@ -27,7 +27,7 @@ void itemInit(void){
 	CREATE_ITEM('*' , ITEM_HP_SMALL    , 70 , ITEM_TYPE_USABLE , "Small health pack" , TERM_COLOR_DEFAULT);
 	CREATE_ITEM('+' , ITEM_HP_BIG      , 60 , ITEM_TYPE_USABLE , "Large health pack" , TERM_COLOR_DEFAULT);
 	CREATE_ITEM('/' , ITEM_MELEE_KNIFE , 50 , ITEM_TYPE_MELEE  , "Knife"             , TERM_COLOR_DEFAULT);
-	CREATE_ITEM('%' , ITEM_CORPSE      , 5  , ITEM_TYPE_EDIBLE , "Corpse"            , TERM_COLOR_RED);
+	CREATE_ITEM('%' , ITEM_CORPSE      , 5  , ITEM_TYPE_USABLE , "Corpse"            , TERM_COLOR_RED);
 }
 
 void itemClearFromLevel(int z){

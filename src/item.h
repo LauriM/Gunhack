@@ -22,7 +22,6 @@ typedef enum{
 	ITEM_TYPE_GUN,
 	ITEM_TYPE_MELEE,
 	ITEM_TYPE_ARMOR,
-	ITEM_TYPE_EDIBLE,
 } itemtype_t;
 
 typedef struct item_s{
