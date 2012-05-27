@@ -2,8 +2,6 @@ Major todo
 ==========
 
 * better world generation
-* ingame message system
-* item colors
 * item dropping/applying
 * item trigger coding (a,b,c etc)
 
@@ -28,7 +26,6 @@ Gameplay
 ========
 
 * Explosives to dig trough the dungeon
-* Brutal blood effects
 
 Plan
 ====
