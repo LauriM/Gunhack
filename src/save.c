@@ -46,8 +46,8 @@ void loadGame(void){
 
 	room = realloc(room,roomSize * sizeof(room[0]));
 	itemVis = realloc(itemVis,itemVisCapacity * sizeof(itemVis[0]));
-	itemData = realloc(itemData,itemDataCapacity * sizeof(itemVis[0]));
-	npcData = realloc(npcData,npcDataCapacity * sizeof(itemVis[0]));
+	itemData = realloc(itemData,itemDataCapacity * sizeof(itemData[0]));
+	npcData = realloc(npcData,npcDataCapacity * sizeof(npcData[0]));
 
 	fread(room, sizeof(room[0]), roomSize, file);
 	fread(itemVis, sizeof(itemVis[0]), itemVisSize, file);

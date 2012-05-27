@@ -26,7 +26,7 @@ typedef enum {
 	NPCSTATE_ALIVE
 } npc_state_t;
 
-typedef enum {
+typedef enum { /* TODO: Depracrated ? */
 	NPC_AI_STATE_SLEEP = 0,
 	NPC_AI_STATE_IDLE,
 	NPC_AI_STATE_ATTACK,
