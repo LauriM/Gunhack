@@ -27,10 +27,10 @@ item_t     itemInfo[ITEM_COUNT];
 void itemInit(void){
 	//symbol        , id               , rarity , type             , name                   , color              , action                      , candrop
 	CREATE_ITEM('*' , ITEM_HP_SMALL    , 70     , ITEM_TYPE_USABLE , "Small health pack"    , TERM_COLOR_DEFAULT , &itemCall_hp_small          , true);
-	CREATE_ITEM('+' , ITEM_HP_BIG      , 70     , ITEM_TYPE_USABLE , "Large health pack"    , TERM_COLOR_DEFAULT , &itemCall_null              , true);
+	CREATE_ITEM('+' , ITEM_HP_BIG      , 70     , ITEM_TYPE_USABLE , "Large health pack"    , TERM_COLOR_DEFAULT , &itemCall_hp_large          , true);
 	CREATE_ITEM('/' , ITEM_MELEE_KNIFE , 70     , ITEM_TYPE_MELEE  , "Knife"                , TERM_COLOR_DEFAULT , &itemCall_null              , true);
 	CREATE_ITEM('%' , ITEM_CORPSE      , 0      , ITEM_TYPE_USABLE , "Corpse"               , TERM_COLOR_RED     , &itemCall_null              , false);
-	CREATE_ITEM('!' , ITEM_LVL_POTION  , 5      , ITEM_TYPE_USABLE , "Potion of gain level" , TERM_COLOR_GREEN   , &itemCall_potion_gain_level , true);
+	CREATE_ITEM('!' , ITEM_LVL_POTION  , 2      , ITEM_TYPE_USABLE , "Potion of gain level" , TERM_COLOR_GREEN   , &itemCall_potion_gain_level , true);
 }
 
 void itemClearFromLevel(int z){
@@ -131,8 +131,7 @@ void itemSpawnRandom(int z){
 
 			//TODO: Implement nice rarity generator
 			if(mapGetTileByPos(pos)->block == 0){
-				int type = randomMax(ITEM_COUNT-1);
-				itemSpawn(pos,type);
+				itemSpawn(pos,itemGiveRandomDropId());
 				done = true;
 			}
 		}
@@ -298,7 +297,7 @@ int itemGiveRandomDropId(){
 	int possibleCount = 0;
 
 	for(int i = 0;i < ITEM_COUNT;i++){
-		if(itemInfo[i].itemRarity < rarity){
+		if(itemInfo[i].itemRarity > rarity){
 			//Can drop!
 			possibleCount++;
 		}
