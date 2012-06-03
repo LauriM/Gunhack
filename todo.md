@@ -8,6 +8,8 @@ Gameplay
 * max items carried
 * inc turn/process ai only when player does an action
 * Implement armor with defense bonuses (!)
+* wpn ammo status
+* make weapon to use ammunition
 
 Minor todo
 ==========

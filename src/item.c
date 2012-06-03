@@ -26,17 +26,17 @@ item_t     itemInfo[ITEM_COUNT];
 
 void itemInit(void){
 	//symbol        , id               , rarity , type             , name                   , color              , action                      , candrop , slot
-	CREATE_ITEM('*' , ITEM_HP_SMALL    , 70     , ITEM_TYPE_USABLE , "Small health pack"    , TERM_COLOR_DEFAULT , &itemCall_hp_small          , true    , SLOT_NULL);
-	CREATE_ITEM('+' , ITEM_HP_BIG      , 70     , ITEM_TYPE_USABLE , "Large health pack"    , TERM_COLOR_DEFAULT , &itemCall_hp_large          , true    , SLOT_NULL);
-	CREATE_ITEM('/' , ITEM_MELEE_KNIFE , 70     , ITEM_TYPE_MELEE  , "Knife"                , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_WPN);
+	CREATE_ITEM('*' , ITEM_HP_SMALL    , 30     , ITEM_TYPE_USABLE , "Small health pack"    , TERM_COLOR_DEFAULT , &itemCall_hp_small          , true    , SLOT_NULL);
+	CREATE_ITEM('+' , ITEM_HP_BIG      , 30     , ITEM_TYPE_USABLE , "Large health pack"    , TERM_COLOR_DEFAULT , &itemCall_hp_large          , true    , SLOT_NULL);
+	CREATE_ITEM('/' , ITEM_MELEE_KNIFE , 30     , ITEM_TYPE_MELEE  , "Knife"                , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_WPN);
 	CREATE_ITEM('%' , ITEM_CORPSE      , 0      , ITEM_TYPE_USABLE , "Corpse"               , TERM_COLOR_RED     , &itemCall_null              , false   , SLOT_NULL);
-	CREATE_ITEM('!' , ITEM_LVL_POTION  , 2      , ITEM_TYPE_USABLE , "Potion of gain level" , TERM_COLOR_GREEN   , &itemCall_potion_gain_level , true    , SLOT_NULL);
-	CREATE_ITEM('=' , ITEM_9mm_BOX     , 85     , ITEM_TYPE_AMMO   , "9mm Ammunition"       , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL);
-	CREATE_ITEM('=' , ITEM_39mm_BOX    , 70     , ITEM_TYPE_AMMO   , "39mm Ammunition"      , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL);
-	CREATE_ITEM('=' , ITEM_shells_BOX  , 60     , ITEM_TYPE_AMMO   , "Shotgun shells"       , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL);
-	CREATE_ITEM('=' , ITEM_rockets_BOX , 30     , ITEM_TYPE_AMMO   , "Rockets"              , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL);
-	CREATE_ITEM('(' , ITEM_PISTOL      , 20     , ITEM_TYPE_GUN    , "9mm Pistol"           , TERM_COLOR_DEFAULT , &itemCall_pistol            , true    , SLOT_WPN);
-	}
+	CREATE_ITEM('!' , ITEM_LVL_POTION  , 95     , ITEM_TYPE_USABLE , "Potion of gain level" , TERM_COLOR_GREEN   , &itemCall_potion_gain_level , true    , SLOT_NULL);
+	CREATE_ITEM('=' , ITEM_9mm_BOX     , 10     , ITEM_TYPE_AMMO   , "9mm Ammunition"       , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL);
+	CREATE_ITEM('=' , ITEM_39mm_BOX    , 20     , ITEM_TYPE_AMMO   , "39mm Ammunition"      , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL);
+	CREATE_ITEM('=' , ITEM_shells_BOX  , 30     , ITEM_TYPE_AMMO   , "Shotgun shells"       , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL);
+	CREATE_ITEM('=' , ITEM_rockets_BOX , 40     , ITEM_TYPE_AMMO   , "Rockets"              , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL);
+	CREATE_ITEM('(' , ITEM_PISTOL      , 60     , ITEM_TYPE_GUN    , "9mm Pistol"           , TERM_COLOR_DEFAULT , &itemCall_pistol            , true    , SLOT_WPN);
+}
 
 void itemClearFromLevel(int z){
 	//TODO: FIX
@@ -241,19 +241,20 @@ void itemPickup(){
 				msgAdd("Found 39mm rounds. (+30)",TERM_COLOR_GREEN);
 			}
 			if(itemData[i].itemId == ITEM_shells_BOX){
-				playerGetInfo()->ammo_shell= playerGetInfo()->ammo_shell + 8;
+				playerGetInfo()->ammo_shell = playerGetInfo()->ammo_shell + 8;
 				msgAdd("Found shotgun shells. (+8)",TERM_COLOR_GREEN);
 			}
 			if(itemData[i].itemId == ITEM_rockets_BOX){
-				playerGetInfo()->ammo_rockets= playerGetInfo()->ammo_rockets + 3;
+				playerGetInfo()->ammo_rockets = playerGetInfo()->ammo_rockets + 3;
 				msgAdd("Found rockets. (+3)",TERM_COLOR_GREEN);
 			}
+			itemData[i].state = ITEMSTATE_EMPTY;
 		}else{
 			//normal pickup happens!
 			MSG_ADD("Picked up %s",TERM_COLOR_DEFAULT,itemInfo[itemData[i].itemId].name);
+			itemData[i].state = ITEMSTATE_INV;
 		}
 
-		itemData[i].state = ITEMSTATE_INV;
 
 	}
 }
@@ -354,7 +355,7 @@ int itemGiveRandomDropId(){
 	int possibleCount = 0;
 
 	for(int i = 0;i < ITEM_COUNT;i++){
-		if(itemInfo[i].itemRarity > rarity){
+		if(itemInfo[i].itemRarity < rarity){
 			//Can drop!
 			possibleCount++;
 		}
@@ -421,6 +422,22 @@ void itemFireWpn(){
 
 		//Found wpn slot, fire it!
 		(*itemInfo[itemData[i].itemId].itemCall)(i,ITEMACTION_ATTACK);
+		return;
+	}
+
+	msgAdd("You are not wielding a weapon!",TERM_COLOR_DEFAULT);
+}
+
+void itemApplyWpn(){
+	for(int i = 0;i < itemDataSize;i++){
+		if(itemData[i].state != ITEMSTATE_EQ)
+			continue;
+
+		if(itemInfo[itemData[i].itemId].slot != SLOT_WPN)
+			continue;
+
+		//Found wpn slot, apply it (reload)!
+		(*itemInfo[itemData[i].itemId].itemCall)(i,ITEMACTION_USE);
 		return;
 	}
 

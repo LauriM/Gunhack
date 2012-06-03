@@ -66,7 +66,7 @@ void inputHandle(){
 				}
 			}
 			break;
-		case 114://r
+		case 121://r
 			mapCheatSeeAll();
 			LOG_INFO("Using see all cheat");
 			break;
@@ -118,6 +118,9 @@ void inputHandle(){
 			break;
 		case 102:
 			itemFireWpn();
+			break;
+		case 114:
+			itemApplyWpn();
 			break;
 	}
 

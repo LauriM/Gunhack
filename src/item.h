@@ -96,6 +96,7 @@ extern void itemPickup();
 extern void itemDrop(int id);
 extern void itemWield(int id);
 extern void itemRemoveSlot(slot_t slot);
+extern void itemApplyWpn();//Used to reload active eq
 
 extern int itemGiveRandomDropId();
 
