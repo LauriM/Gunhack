@@ -1,6 +1,7 @@
 Major todo
 ==========
 * better world generation (?)
+* End game screen + dump to file
 
 Gameplay
 ========

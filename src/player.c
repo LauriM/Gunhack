@@ -78,5 +78,10 @@ player_t* playerGetInfo(void){
 }
 
 void playerIncTurn(void){
+	//Also check the hp
+	
+	if(playerInfo.hp < 1){
+		playerInfo.endGame = ENDGAME_REASON_GAMEOVER;
+	}
 	playerInfo.turn++;
 }
