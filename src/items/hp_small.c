@@ -5,7 +5,7 @@
 
 void itemCall_hp_small(int itemId,itemaction_t action){
 	if(action == ITEMACTION_USE){
-		msgAdd("You ate small Health pack! (+10hp)",TERM_COLOR_GREEN);
+		msgAdd("You ate small health pack! (+10hp)",TERM_COLOR_GREEN);
 		playerGetInfo()->hp = playerGetInfo()->hp + 10;
 
 		if(playerGetInfo()->hp > playerGetInfo()->maxhp)

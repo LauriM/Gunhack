@@ -22,14 +22,15 @@ itemdata_t *itemData    = NULL;
 
 item_t     itemInfo[ITEM_COUNT];
 
-#define CREATE_ITEM(p_symbol,p_id,p_rarity,p_type,p_name,p_color,p_call) itemInfo[p_id].symbol = p_symbol; itemInfo[p_id].itemRarity = p_rarity;itemInfo[p_id].itemType = p_type; itemInfo[p_id].name = TO_STRING(p_name); itemInfo[p_id].itemColor = p_color; itemInfo[p_id].itemCall = p_call;
+#define CREATE_ITEM(p_symbol,p_id,p_rarity,p_type,p_name,p_color,p_call,p_drop) itemInfo[p_id].symbol = p_symbol; itemInfo[p_id].itemRarity = p_rarity;itemInfo[p_id].itemType = p_type; itemInfo[p_id].name = TO_STRING(p_name); itemInfo[p_id].itemColor = p_color; itemInfo[p_id].itemCall = p_call; itemInfo[p_id].canDrop = p_drop;
 
 void itemInit(void){
-	//--       symbol     id           rarity      type                  name               color
-	CREATE_ITEM('*' , ITEM_HP_SMALL    , 70 , ITEM_TYPE_USABLE , "Small health pack" , TERM_COLOR_DEFAULT , &itemCall_hp_small);
-	CREATE_ITEM('+' , ITEM_HP_BIG      , 60 , ITEM_TYPE_USABLE , "Large health pack" , TERM_COLOR_DEFAULT , &itemCall_null);
-	CREATE_ITEM('/' , ITEM_MELEE_KNIFE , 50 , ITEM_TYPE_MELEE  , "Knife"             , TERM_COLOR_DEFAULT , &itemCall_null);
-	CREATE_ITEM('%' , ITEM_CORPSE      , 5  , ITEM_TYPE_USABLE , "Corpse"            , TERM_COLOR_RED     , &itemCall_null);
+	//symbol        , id               , rarity , type             , name                   , color              , action                      , candrop
+	CREATE_ITEM('*' , ITEM_HP_SMALL    , 70     , ITEM_TYPE_USABLE , "Small health pack"    , TERM_COLOR_DEFAULT , &itemCall_hp_small          , true);
+	CREATE_ITEM('+' , ITEM_HP_BIG      , 70     , ITEM_TYPE_USABLE , "Large health pack"    , TERM_COLOR_DEFAULT , &itemCall_null              , true);
+	CREATE_ITEM('/' , ITEM_MELEE_KNIFE , 70     , ITEM_TYPE_MELEE  , "Knife"                , TERM_COLOR_DEFAULT , &itemCall_null              , true);
+	CREATE_ITEM('%' , ITEM_CORPSE      , 0      , ITEM_TYPE_USABLE , "Corpse"               , TERM_COLOR_RED     , &itemCall_null              , false);
+	CREATE_ITEM('!' , ITEM_LVL_POTION  , 5      , ITEM_TYPE_USABLE , "Potion of gain level" , TERM_COLOR_GREEN   , &itemCall_potion_gain_level , true);
 }
 
 void itemClearFromLevel(int z){
@@ -290,4 +291,32 @@ void itemDebugDumpInv(){
 			LOG_INFO(output);
 		}
 	}
+}
+
+int itemGiveRandomDropId(){
+	int rarity        = randomRange(1,100);
+	int possibleCount = 0;
+
+	for(int i = 0;i < ITEM_COUNT;i++){
+		if(itemInfo[i].itemRarity < rarity){
+			//Can drop!
+			possibleCount++;
+		}
+	}
+
+	int toBeChosen = randomRange(0,possibleCount);
+
+	int count = 0;
+	for(int i = 0;i < ITEM_COUNT;i++){
+		if(itemInfo[i].itemRarity < rarity){
+			if(count == toBeChosen){
+				return i;
+			}
+
+			count++;
+		}
+	}
+
+	//Should not be triggered
+	return 0;
 }

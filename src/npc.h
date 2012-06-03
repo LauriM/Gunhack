@@ -53,6 +53,7 @@ typedef struct npc_s{
 	color_t color;
 	int maxHp;
 	int meleeDmg;
+	int dropCount;
 	npcrelation_t relation;
 } npc_t;
 

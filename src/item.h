@@ -20,6 +20,7 @@ typedef enum{
 	ITEM_HP_BIG,
 	ITEM_MELEE_KNIFE,
 	ITEM_CORPSE,
+	ITEM_LVL_POTION,
 	ITEM_COUNT
 } itemname_t;
 
@@ -36,6 +37,7 @@ typedef struct item_s{
 	itemtype_t itemType;
 	char *name;
 	color_t itemColor;
+	bool canDrop;
 	void(*itemCall)(int itemId, itemaction_t action);
 } item_t;
 
@@ -72,10 +74,14 @@ extern int itemInvChooseItem();
 
 extern void itemPickup();
 
+extern int itemGiveRandomDropId();
+
 extern void itemDebugDumpInv();
 
 typedef void (*itemcall_t)(int itemId,itemaction_t action);
 extern void itemCall_null(int itemId,itemaction_t action);
 extern void itemCall_hp_small(int itemId,itemaction_t action);
+extern void itemCall_hp_large(int itemId,itemaction_t action);
+extern void itemCall_potion_gain_level(int itemId,itemaction_t action);
 
 #endif
