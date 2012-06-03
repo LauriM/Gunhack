@@ -17,6 +17,11 @@ void playerInit(){
 	playerInfo.maxhp  = 10;
 	playerInfo.exp    = 0;
 	playerInfo.level  = 1;
+
+	playerInfo.ammo_rockets = 0;
+	playerInfo.ammo_shell   = 0;
+	playerInfo.ammo_39mm    = 0;
+	playerInfo.ammo_9mm     = 0;
 }
 
 void playerRender(){

@@ -22,6 +22,11 @@ typedef struct player_s{
 
 	int turn;
 
+	int ammo_9mm;
+	int ammo_39mm;
+	int ammo_shell;
+	int ammo_rockets;
+
 	endgamereason_t endGame;
 } player_t;
 

@@ -7,6 +7,7 @@ Gameplay
 ========
 * max items carried
 * inc turn/process ai only when player does an action
+* Implement armor with defense bonuses (!)
 
 Minor todo
 ==========

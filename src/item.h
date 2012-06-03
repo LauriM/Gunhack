@@ -33,6 +33,10 @@ typedef enum{
 	ITEM_CORPSE,
 	ITEM_LVL_POTION,
 	ITEM_PISTOL,
+	ITEM_9mm_BOX,
+	ITEM_39mm_BOX,
+	ITEM_rockets_BOX,
+	ITEM_shells_BOX,
 	ITEM_COUNT
 } itemname_t;
 
@@ -41,6 +45,7 @@ typedef enum{
 	ITEM_TYPE_GUN,
 	ITEM_TYPE_MELEE,
 	ITEM_TYPE_ARMOR,
+	ITEM_TYPE_AMMO,
 } itemtype_t;
 
 typedef struct item_s{

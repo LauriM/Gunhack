@@ -31,8 +31,12 @@ void itemInit(void){
 	CREATE_ITEM('/' , ITEM_MELEE_KNIFE , 70     , ITEM_TYPE_MELEE  , "Knife"                , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_WPN);
 	CREATE_ITEM('%' , ITEM_CORPSE      , 0      , ITEM_TYPE_USABLE , "Corpse"               , TERM_COLOR_RED     , &itemCall_null              , false   , SLOT_NULL);
 	CREATE_ITEM('!' , ITEM_LVL_POTION  , 2      , ITEM_TYPE_USABLE , "Potion of gain level" , TERM_COLOR_GREEN   , &itemCall_potion_gain_level , true    , SLOT_NULL);
-	CREATE_ITEM('(' , ITEM_PISTOL      , 5      , ITEM_TYPE_GUN    , "9mm Pistol"           , TERM_COLOR_DEFAULT , &itemCall_pistol            , true    , SLOT_WPN);
-}
+	CREATE_ITEM('=' , ITEM_9mm_BOX     , 85     , ITEM_TYPE_AMMO   , "9mm Ammunition"       , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL);
+	CREATE_ITEM('=' , ITEM_39mm_BOX    , 70     , ITEM_TYPE_AMMO   , "39mm Ammunition"      , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL);
+	CREATE_ITEM('=' , ITEM_shells_BOX  , 60     , ITEM_TYPE_AMMO   , "Shotgun shells"       , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL);
+	CREATE_ITEM('=' , ITEM_rockets_BOX , 30     , ITEM_TYPE_AMMO   , "Rockets"              , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL);
+	CREATE_ITEM('(' , ITEM_PISTOL      , 20     , ITEM_TYPE_GUN    , "9mm Pistol"           , TERM_COLOR_DEFAULT , &itemCall_pistol            , true    , SLOT_WPN);
+	}
 
 void itemClearFromLevel(int z){
 	//TODO: FIX
@@ -219,9 +223,6 @@ void itemRender(void){
 
 void itemPickup(){
     //First get count of the items, if many items, ask what to pickup.
-
-	int itemCount = 0;
-
 	for(int i = 0;i < itemDataSize;i++){
 		if(itemData[i].state != ITEMSTATE_GROUND)
 			continue;
@@ -229,18 +230,31 @@ void itemPickup(){
 		if(itemData[i].pos.x != playerGetInfo()->pos.x || itemData[i].pos.y != playerGetInfo()->pos.y || itemData[i].pos.z != playerGetInfo()->pos.z)
 			continue;
 
-		//Pickup happens!
-		MSG_ADD("Picked up %s",TERM_COLOR_DEFAULT,itemInfo[itemData[i].itemId].name);
-		itemData[i].state = ITEMSTATE_INV;
-		itemCount++;
-	}
+		if(itemInfo[itemData[i].itemId].itemType == ITEM_TYPE_AMMO){
+			//Its ammunition..
+			if(itemData[i].itemId == ITEM_9mm_BOX){
+				playerGetInfo()->ammo_9mm = playerGetInfo()->ammo_9mm + 12;
+				msgAdd("Found 9mm rounds. (+12)",TERM_COLOR_GREEN);
+			}
+			if(itemData[i].itemId == ITEM_39mm_BOX){
+				playerGetInfo()->ammo_39mm = playerGetInfo()->ammo_39mm + 30;
+				msgAdd("Found 39mm rounds. (+30)",TERM_COLOR_GREEN);
+			}
+			if(itemData[i].itemId == ITEM_shells_BOX){
+				playerGetInfo()->ammo_shell= playerGetInfo()->ammo_shell + 8;
+				msgAdd("Found shotgun shells. (+8)",TERM_COLOR_GREEN);
+			}
+			if(itemData[i].itemId == ITEM_rockets_BOX){
+				playerGetInfo()->ammo_rockets= playerGetInfo()->ammo_rockets + 3;
+				msgAdd("Found rockets. (+3)",TERM_COLOR_GREEN);
+			}
+		}else{
+			//normal pickup happens!
+			MSG_ADD("Picked up %s",TERM_COLOR_DEFAULT,itemInfo[itemData[i].itemId].name);
+		}
 
-	if(itemCount == 0){
-		msgAdd("Nothing to pickup!",TERM_COLOR_DEFAULT);
-	}
-	if(itemCount > 1){
-		MSG_ADD("Picked up %i items.",TERM_COLOR_DEFAULT,itemCount);
-		return;
+		itemData[i].state = ITEMSTATE_INV;
+
 	}
 }
 
