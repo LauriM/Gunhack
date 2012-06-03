@@ -27,6 +27,8 @@ typedef struct player_s{
 	int ammo_shell;
 	int ammo_rockets;
 
+	int wpnAmmo;
+
 	endgamereason_t endGame;
 } player_t;
 

@@ -8,12 +8,29 @@
 
 void itemCall_pistol(int itemId,itemaction_t action){
 	if(action == ITEMACTION_USE){
+		playerGetInfo()->ammo_9mm += playerGetInfo()->wpnAmmo;
+
+		if(playerGetInfo()->ammo_9mm >= 12){
+			playerGetInfo()->wpnAmmo   = 12;
+			playerGetInfo()->ammo_9mm -= 12;
+		}else{
+			playerGetInfo()->wpnAmmo  = playerGetInfo()->ammo_9mm;
+			playerGetInfo()->ammo_9mm = 0;
+		}
 		msgAdd("You reloaded your pistol with 9mm bullets.",TERM_COLOR_GREEN);
+        return;
 	}
 
 	if(action == ITEMACTION_ATTACK){
+		if(playerGetInfo()->wpnAmmo < 1){
+            msgAdd("Click.",TERM_COLOR_RED);
+			return;
+		}
+
 		pos_t movement = dirToPos(inputGetDirection());
 		pos_t pos = playerGetInfo()->pos;
+
+		--playerGetInfo()->wpnAmmo;
 
 		//Move one tile at the time
 
@@ -35,6 +52,4 @@ void itemCall_pistol(int itemId,itemaction_t action){
 			}
 		}
 	}
-
-	return;
 }

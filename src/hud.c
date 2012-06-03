@@ -37,7 +37,7 @@ void hudRender(){
 
 	char statusLine[STATUSLINE_MAX_CHARS] = "";
 
-	snprintf(statusLine,STATUSLINE_MAX_CHARS,"Level: %i Hp: %i/%i Exp: %i Level: %i Turn: %i | 9mm: %i 39mm: %i Shells: %i Rockets: %i",playerGetInfo()->pos.z,playerGetInfo()->hp,playerGetInfo()->maxhp,playerGetInfo()->exp,playerGetInfo()->level,playerGetInfo()->turn,playerGetInfo()->ammo_9mm,playerGetInfo()->ammo_39mm,playerGetInfo()->ammo_shell,playerGetInfo()->ammo_rockets);
+	snprintf(statusLine,STATUSLINE_MAX_CHARS,"lvl: %i Hp: %i/%i Exp: %i/%i Turn: %i |%i| 9mm: %i 39mm: %i Shells: %i Rockets: %i",playerGetInfo()->pos.z,playerGetInfo()->hp,playerGetInfo()->maxhp,playerGetInfo()->exp,playerGetInfo()->level,playerGetInfo()->turn,playerGetInfo()->wpnAmmo,playerGetInfo()->ammo_9mm,playerGetInfo()->ammo_39mm,playerGetInfo()->ammo_shell,playerGetInfo()->ammo_rockets);
 	
 	move(22,0);
 	printw(statusLine);

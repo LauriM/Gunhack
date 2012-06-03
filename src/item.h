@@ -55,6 +55,7 @@ typedef struct item_s{
 	char *name;
 	color_t itemColor;
 	bool canDrop;
+	int maxAmmo;
 	slot_t slot;
 	void(*itemCall)(int itemId, itemaction_t action);
 } item_t;
