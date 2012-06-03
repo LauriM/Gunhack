@@ -13,12 +13,12 @@ npcdata_t *npcData     = NULL;
 
 npc_t npcInfo[NPC_COUNT];
 
-#define CREATE_NPC(p_symbol,p_id,p_name,p_color,p_maxhp,p_rel,p_meleedmg,p_itemDropCount) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color; npcInfo[p_id].maxHp = p_maxhp; npcInfo[p_id].relation = p_rel; npcInfo[p_id].meleeDmg = p_meleedmg; npcInfo[p_id].dropCount = p_itemDropCount;
+#define CREATE_NPC(p_symbol,p_id,p_name,p_color,p_maxhp,p_rel,p_meleedmgmin,p_meleedmgmax,p_itemDropCount) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color; npcInfo[p_id].maxHp = p_maxhp; npcInfo[p_id].relation = p_rel; npcInfo[p_id].meleeDmgMin = p_meleedmgmin; npcInfo[p_id].meleeDmgMax = p_meleedmgmax; npcInfo[p_id].dropCount = p_itemDropCount;
 
 void npcInit(void){
-	//--    symbol , id                , name            , color              , maxhp , relationship         , meleeDMG , itemDropCount
-	CREATE_NPC('D' , NPC_DUMMY         , "Dummy"         , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_NEUTRAL , 1        , 3);
-	CREATE_NPC('d' , NPC_DUMMY_HOSTILE , "Hostile Dummy" , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_HOSTILE , 1        , 3);
+	//--    symbol , id                , name            , color              , maxhp , relationship         , meleeDMGmin , meleeDMGmax , itemDropCount
+	CREATE_NPC('D' , NPC_DUMMY         , "Dummy"         , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_NEUTRAL , 1           , 5           , 3);
+	CREATE_NPC('d' , NPC_DUMMY_HOSTILE , "Hostile Dummy" , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_HOSTILE , 1           , 3           , 3);
 
 	//Init the npcdata array
 	for(int i = 0;i < npcDataSize;i++){
@@ -215,11 +215,11 @@ void npcAiTick(){
 			(*npcData[i].aiState)(i,flags);
 		//==========================================================//          
 		if(npcData[i].aiState == *npcState_attack){
-			npcMoveToPos(i,mapPathfindStep(npcData[i].pos,playerGetInfo()->pos));
+			npcMoveToPos(i,mapPathfindStep(npcData[i].pos,playerGetInfo()->pos),true);
 		}
 
 		if(npcData[i].aiState == *npcState_flee){
-			npcMoveToPos(i,mapFindFleePos(npcData[i].pos,playerGetInfo()->pos));
+			npcMoveToPos(i,mapFindFleePos(npcData[i].pos,playerGetInfo()->pos),true);
 		}
 
 		if(npcData[i].aiState == *npcState_idle){
@@ -230,12 +230,12 @@ void npcAiTick(){
 			randPos.x = (npcData[i].pos.x + randomRange(-1,1));
 			randPos.y = (npcData[i].pos.y + randomRange(-1,1));
 
-			npcMoveToPos(i,randPos);
+			npcMoveToPos(i,randPos,false);
 		}
 
 		if(npcData[i].aiState == *npcState_search){
 			pos_t tempPos = mapPathfindStep(npcData[i].pos,npcData[i].playerLastKnownPosition); //TODO: Manage situation where its not possible to get to the player
-			npcMoveToPos(i,tempPos);
+			npcMoveToPos(i,tempPos,true);
 		}
 
 		if(flags & SEE_PLAYER){
@@ -244,7 +244,7 @@ void npcAiTick(){
 	}
 }
 
-void npcMoveToPos(int id,pos_t pos){
+void npcMoveToPos(int id,pos_t pos,bool allowAttack){
     //Check that the distance isn't longer than one tile.
 
 	if(fabs(npcData[id].pos.x - pos.x) > 1 || fabs(npcData[id].pos.y - pos.y) > 1){
@@ -253,7 +253,11 @@ void npcMoveToPos(int id,pos_t pos){
 	}
 
 	if(playerGetInfo()->pos.x == pos.x && playerGetInfo()->pos.y == pos.y){
-		playerGetInfo()->hp = playerGetInfo()->hp - npcInfo[npcData[id].name].meleeDmg;
+		if(allowAttack == false)//If attacking is not allowed, don't move at all.
+			return;
+
+		int dmg = randomRange(npcInfo[npcData[id].name].meleeDmgMin,npcInfo[npcData[id].name].meleeDmgMax);
+		playerGetInfo()->hp = playerGetInfo()->hp - dmg;
 
 		//blood
 		pos_t bloodPos;
@@ -263,7 +267,7 @@ void npcMoveToPos(int id,pos_t pos){
 
 		mapEditColorPoint(bloodPos,TERM_COLOR_RED);
 
-		MSG_ADD("%s hits you! (-%i)",TERM_COLOR_DEFAULT,npcInfo[npcData[id].name].name,npcInfo[npcData[id].name].meleeDmg);
+		MSG_ADD("%s hits you! (-%i)",TERM_COLOR_DEFAULT,npcInfo[npcData[id].name].name,dmg);
 
 		return;
 	}
