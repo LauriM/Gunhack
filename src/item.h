@@ -73,6 +73,7 @@ extern void itemDisplayInv();
 extern int itemInvChooseItem();
 
 extern void itemPickup();
+extern void itemDrop(int id);
 
 extern int itemGiveRandomDropId();
 

@@ -1,9 +1,6 @@
 Major todo
 ==========
-
-* better world generation
-* item dropping/applying
-* item trigger coding (a,b,c etc)
+* better world generation (?)
 
 Malloc todo
 ===========

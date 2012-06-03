@@ -319,3 +319,12 @@ int itemGiveRandomDropId(){
 	//Should not be triggered
 	return 0;
 }
+
+void itemDrop(int id){
+	if(itemData[id].state == ITEMSTATE_INV){
+		itemData[id].pos = playerGetInfo()->pos;
+		itemData[id].state = ITEMSTATE_GROUND;
+	}
+
+	MSG_ADD("Dropped item %s.",TERM_COLOR_DEFAULT,itemInfo[itemData[id].itemId].name);
+}

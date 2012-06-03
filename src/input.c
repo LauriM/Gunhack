@@ -107,6 +107,9 @@ void inputHandle(){
 		case 112:
 			msgShowWindow();
 			break;
+		case 100:
+			itemDrop(itemInvChooseItem());
+			break;
 	}
 
 	//Numpad:
