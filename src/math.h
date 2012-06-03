@@ -1,6 +1,8 @@
 #ifndef MATH_H
 #define MATH_H
 
+#include "globals.h"
+
 #define MAX(p_v1, p_v2) ((p_v1) > (p_v2) ? (p_v1) : (p_v2))
 #define MIN(p_v1, p_v2) ((p_v1) < (p_v2) ? (p_v1) : (p_v2))
 #define CAP(p_value, p_min, p_max) (p_value = MAX(p_min, MIN(p_max, p_value)))
@@ -25,4 +27,6 @@ void mathInit();
 int randomMax(int max);
 int randomRange(int min,int max);
 double distance(pos_t pos1,pos_t pos2);
+
+pos_t dirToPos(dir_t dir);
 #endif

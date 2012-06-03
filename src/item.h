@@ -86,6 +86,7 @@ extern void itemDisplayInv();
 extern void itemDisplayEq();
 extern int itemInvChooseItem();
 
+extern void itemFireWpn();
 extern void itemPickup();
 extern void itemDrop(int id);
 extern void itemWield(int id);

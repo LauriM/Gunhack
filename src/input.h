@@ -3,7 +3,7 @@
 #include "globals.h"
 
 extern void inputHandle();
-extern dir_t mapGetDirection();
+extern dir_t inputGetDirection();
 
 
 #endif

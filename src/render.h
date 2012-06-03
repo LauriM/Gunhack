@@ -2,9 +2,14 @@
 #define RENDER_H
 
 typedef enum{
+	COLOR_GREY = 100,
+} customcolor_t;
+
+typedef enum{
 	TERM_COLOR_DEFAULT = 0,
 	TERM_COLOR_RED,
 	TERM_COLOR_GREEN,
+	TERM_COLOR_GREY,
 	TERM_COLOR_YELLOW,
 	TERM_COLOR_BLUE,
 	TERM_COLOR_MAGENTA,

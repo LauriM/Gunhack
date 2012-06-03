@@ -396,3 +396,19 @@ void itemRemoveSlot(slot_t slot){
 	}
 	msgAdd("Nothing to remove!",TERM_COLOR_DEFAULT);
 }
+
+void itemFireWpn(){
+	for(int i = 0;i < itemDataSize;i++){
+		if(itemData[i].state != ITEMSTATE_EQ)
+			continue;
+
+		if(itemInfo[itemData[i].itemId].slot != SLOT_WPN)
+			continue;
+
+		//Found wpn slot, fire it!
+		(*itemInfo[itemData[i].itemId].itemCall)(i,ITEMACTION_ATTACK);
+		return;
+	}
+
+	msgAdd("You are not wielding a weapon!",TERM_COLOR_DEFAULT);
+}

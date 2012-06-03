@@ -116,6 +116,9 @@ void inputHandle(){
 		case 100:
 			itemDrop(itemInvChooseItem());
 			break;
+		case 102:
+			itemFireWpn();
+			break;
 	}
 
 	//Numpad:
@@ -127,6 +130,7 @@ void inputHandle(){
 }
 
 dir_t inputGetDirection(){
+	printw("Give a direction: \n");
 	int key = getch();
 
 	switch(key){

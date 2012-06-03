@@ -155,10 +155,9 @@ bool npcApplyDamagePos(pos_t pos,int damage){
 			npcKillById(i);
 
 			MSG_ADD("%s is dead!",TERM_COLOR_RED,npcInfo[npcData[i].name].name);
-
-			return true;
 		}
 
+		return true;//Return true when hit
 		break;
 	}
 

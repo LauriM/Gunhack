@@ -11,10 +11,13 @@ void renderInit(void){
 
 	start_color();
 
-	init_pair(TERM_COLOR_DEFAULT   , COLOR_WHITE , COLOR_BLACK);
-	init_pair(TERM_COLOR_RED       , COLOR_RED   , COLOR_BLACK);
-	init_pair(TERM_COLOR_BLUE      , COLOR_BLUE  , COLOR_BLACK);
-	init_pair(TERM_COLOR_GREEN     , COLOR_GREEN , COLOR_BLACK);
+	init_color(COLOR_GREY,900,0,0); //TODO: FIX THIS DAMN THING
+
+	init_pair(TERM_COLOR_DEFAULT , COLOR_WHITE , COLOR_BLACK);
+	init_pair(TERM_COLOR_RED     , COLOR_RED   , COLOR_BLACK);
+	init_pair(TERM_COLOR_BLUE    , COLOR_BLUE  , COLOR_BLACK);
+	init_pair(TERM_COLOR_GREEN   , COLOR_GREEN , COLOR_BLACK);
+	init_pair(TERM_COLOR_GREY    , COLOR_WHITE , COLOR_WHITE);
 
 	init_pair(TERM_COLOR_WHITE_RED , COLOR_WHITE , COLOR_RED);
 }

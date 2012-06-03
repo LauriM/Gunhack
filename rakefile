@@ -28,3 +28,11 @@ desc 'rake analyse'
 task :analyse do
 	system('make clean && scan-build -o /var/www/scan-build/ make')
 end
+
+desc 'rake diffcount'
+task :diffcount do
+	while true do
+		system('clear && echo "Lines of diff: " && git diff | wc -l')
+		sleep(1)
+	end
+end
