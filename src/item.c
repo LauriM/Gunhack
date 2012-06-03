@@ -22,15 +22,16 @@ itemdata_t *itemData    = NULL;
 
 item_t     itemInfo[ITEM_COUNT];
 
-#define CREATE_ITEM(p_symbol,p_id,p_rarity,p_type,p_name,p_color,p_call,p_drop) itemInfo[p_id].symbol = p_symbol; itemInfo[p_id].itemRarity = p_rarity;itemInfo[p_id].itemType = p_type; itemInfo[p_id].name = TO_STRING(p_name); itemInfo[p_id].itemColor = p_color; itemInfo[p_id].itemCall = p_call; itemInfo[p_id].canDrop = p_drop;
+#define CREATE_ITEM(p_symbol,p_id,p_rarity,p_type,p_name,p_color,p_call,p_drop,p_slot) itemInfo[p_id].symbol = p_symbol; itemInfo[p_id].itemRarity = p_rarity;itemInfo[p_id].itemType = p_type; itemInfo[p_id].name = TO_STRING(p_name); itemInfo[p_id].itemColor = p_color; itemInfo[p_id].itemCall = p_call; itemInfo[p_id].canDrop = p_drop; itemInfo[p_id].slot = p_slot;
 
 void itemInit(void){
-	//symbol        , id               , rarity , type             , name                   , color              , action                      , candrop
-	CREATE_ITEM('*' , ITEM_HP_SMALL    , 70     , ITEM_TYPE_USABLE , "Small health pack"    , TERM_COLOR_DEFAULT , &itemCall_hp_small          , true);
-	CREATE_ITEM('+' , ITEM_HP_BIG      , 70     , ITEM_TYPE_USABLE , "Large health pack"    , TERM_COLOR_DEFAULT , &itemCall_hp_large          , true);
-	CREATE_ITEM('/' , ITEM_MELEE_KNIFE , 70     , ITEM_TYPE_MELEE  , "Knife"                , TERM_COLOR_DEFAULT , &itemCall_null              , true);
-	CREATE_ITEM('%' , ITEM_CORPSE      , 0      , ITEM_TYPE_USABLE , "Corpse"               , TERM_COLOR_RED     , &itemCall_null              , false);
-	CREATE_ITEM('!' , ITEM_LVL_POTION  , 2      , ITEM_TYPE_USABLE , "Potion of gain level" , TERM_COLOR_GREEN   , &itemCall_potion_gain_level , true);
+	//symbol        , id               , rarity , type             , name                   , color              , action                      , candrop , slot
+	CREATE_ITEM('*' , ITEM_HP_SMALL    , 70     , ITEM_TYPE_USABLE , "Small health pack"    , TERM_COLOR_DEFAULT , &itemCall_hp_small          , true    , SLOT_NULL);
+	CREATE_ITEM('+' , ITEM_HP_BIG      , 70     , ITEM_TYPE_USABLE , "Large health pack"    , TERM_COLOR_DEFAULT , &itemCall_hp_large          , true    , SLOT_NULL);
+	CREATE_ITEM('/' , ITEM_MELEE_KNIFE , 70     , ITEM_TYPE_MELEE  , "Knife"                , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_WPN);
+	CREATE_ITEM('%' , ITEM_CORPSE      , 0      , ITEM_TYPE_USABLE , "Corpse"               , TERM_COLOR_RED     , &itemCall_null              , false   , SLOT_NULL);
+	CREATE_ITEM('!' , ITEM_LVL_POTION  , 2      , ITEM_TYPE_USABLE , "Potion of gain level" , TERM_COLOR_GREEN   , &itemCall_potion_gain_level , true    , SLOT_NULL);
+	CREATE_ITEM('(' , ITEM_PISTOL      , 5      , ITEM_TYPE_GUN    , "9mm Pistol"           , TERM_COLOR_DEFAULT , &itemCall_pistol            , true    , SLOT_WPN);
 }
 
 void itemClearFromLevel(int z){
@@ -258,6 +259,48 @@ void itemDisplayInv(){
 	hudMenuFinish();
 }
 
+void itemDisplayEq(){
+	hudMenuInit();
+
+	hudMenuWrite("Equipment:");
+	for(int i = 0;i < itemDataSize;i++){
+		if(itemData[i].state == ITEMSTATE_EQ){
+			char output[100];
+			char *slot;
+
+			switch(itemInfo[itemData[i].itemId].slot){
+				case SLOT_HEAD:
+					slot = "Head:";
+					break;
+				case SLOT_WPN:
+					slot = "Weapon:";
+					break;
+				case SLOT_BODY:
+					slot = "Body:";
+					break;
+				case SLOT_AMULET:
+					slot = "Amulet:";
+					break;
+				case SLOT_HANDS:
+					slot = "Hands";
+					break;
+				case SLOT_LEG:
+					slot = "Legs:";
+					break;
+				case SLOT_NULL:
+					LOG_ERROR("INVALID EQ SLOT TYPE!");
+					slot ="Invalid!";
+					break;
+			}
+
+			snprintf(output,100,"%s %s",slot,itemInfo[itemData[i].itemId].name);
+
+			hudMenuWrite(output);
+		}
+	}
+	hudMenuFinish();
+}
+
 int itemInvChooseItem(){
 	hudMenuInit();
 
@@ -324,7 +367,32 @@ void itemDrop(int id){
 	if(itemData[id].state == ITEMSTATE_INV){
 		itemData[id].pos = playerGetInfo()->pos;
 		itemData[id].state = ITEMSTATE_GROUND;
+		MSG_ADD("Dropped item %s.",TERM_COLOR_DEFAULT,itemInfo[itemData[id].itemId].name);
 	}
+}
 
-	MSG_ADD("Dropped item %s.",TERM_COLOR_DEFAULT,itemInfo[itemData[id].itemId].name);
+void itemWield(int id){
+	if(itemData[id].state == ITEMSTATE_INV){
+		itemRemoveSlot(itemInfo[itemData[id].itemId].slot);
+		itemData[id].state = ITEMSTATE_EQ;
+		MSG_ADD("You wield %s.",TERM_COLOR_DEFAULT,itemInfo[itemData[id].itemId].name);
+	}
+}
+
+void itemRemoveSlot(slot_t slot){
+	for(int i = 0;i < itemDataSize;i++){
+		if(itemData[i].state != ITEMSTATE_EQ)
+			continue;
+
+		if(itemInfo[itemData[i].itemId].slot != slot)
+			continue;
+
+		//Found the slot on the position, remove it
+		itemData[i].state = ITEMSTATE_INV;
+
+		MSG_ADD("You remove %s.",TERM_COLOR_DEFAULT,itemInfo[itemData[i].itemId].name);
+
+		return;
+	}
+	msgAdd("Nothing to remove!",TERM_COLOR_DEFAULT);
 }

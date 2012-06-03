@@ -6,6 +6,7 @@ Major todo
 Gameplay
 ========
 * max items carried
+* inc turn/process ai only when player does an action
 
 Minor todo
 ==========

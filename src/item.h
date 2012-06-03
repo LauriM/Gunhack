@@ -12,8 +12,19 @@ typedef enum{
 typedef enum{
 	ITEMSTATE_GROUND = 0,
 	ITEMSTATE_INV,
+	ITEMSTATE_EQ,
 	ITEMSTATE_EMPTY
 } itemstate_t;
+
+typedef enum{
+	SLOT_LEG = 0,
+	SLOT_HEAD,
+	SLOT_BODY,
+	SLOT_HANDS,
+	SLOT_AMULET,
+	SLOT_WPN,
+	SLOT_NULL,
+} slot_t;
 
 typedef enum{
 	ITEM_HP_SMALL = 0,
@@ -21,6 +32,7 @@ typedef enum{
 	ITEM_MELEE_KNIFE,
 	ITEM_CORPSE,
 	ITEM_LVL_POTION,
+	ITEM_PISTOL,
 	ITEM_COUNT
 } itemname_t;
 
@@ -38,6 +50,7 @@ typedef struct item_s{
 	char *name;
 	color_t itemColor;
 	bool canDrop;
+	slot_t slot;
 	void(*itemCall)(int itemId, itemaction_t action);
 } item_t;
 
@@ -70,10 +83,13 @@ extern void itemClearFromLevel(int z);
 
 extern void itemRender(void);
 extern void itemDisplayInv();
+extern void itemDisplayEq();
 extern int itemInvChooseItem();
 
 extern void itemPickup();
 extern void itemDrop(int id);
+extern void itemWield(int id);
+extern void itemRemoveSlot(slot_t slot);
 
 extern int itemGiveRandomDropId();
 
@@ -84,5 +100,6 @@ extern void itemCall_null(int itemId,itemaction_t action);
 extern void itemCall_hp_small(int itemId,itemaction_t action);
 extern void itemCall_hp_large(int itemId,itemaction_t action);
 extern void itemCall_potion_gain_level(int itemId,itemaction_t action);
+extern void itemCall_pistol(int itemId,itemaction_t action);
 
 #endif

@@ -104,6 +104,12 @@ void inputHandle(){
 		case 105:
 			itemDisplayInv();
 			break;
+		case 101:
+			itemDisplayEq();
+			break;
+		case 119:
+			itemWield(itemInvChooseItem());
+			break;
 		case 112:
 			msgShowWindow();
 			break;
@@ -118,4 +124,25 @@ void inputHandle(){
 	// 51 = 3
 	// 57 = 9
 	// *taken under tmux may or may not be the correct ones*
+}
+
+dir_t inputGetDirection(){
+	int key = getch();
+
+	switch(key){
+		case 106:  
+			return DIR_S;
+			break;
+		case 107:
+			return DIR_N;
+			break;
+		case 108:
+			return DIR_E;
+			break;
+		case 104:
+			return DIR_W;
+			break;
+	}
+
+	return DIR_S; //Add random dir with msg to player about failure to choose direction
 }
