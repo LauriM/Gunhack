@@ -33,6 +33,7 @@ typedef enum{
 	ITEM_CORPSE,
 	ITEM_LVL_POTION,
 	ITEM_PISTOL,
+	ITEM_ROCKET_LAUNCHER,
 	ITEM_9mm_BOX,
 	ITEM_39mm_BOX,
 	ITEM_rockets_BOX,
@@ -109,5 +110,6 @@ extern void itemCall_hp_small(int itemId,itemaction_t action);
 extern void itemCall_hp_large(int itemId,itemaction_t action);
 extern void itemCall_potion_gain_level(int itemId,itemaction_t action);
 extern void itemCall_pistol(int itemId,itemaction_t action);
+extern void itemCall_rLauncher(int itemId,itemaction_t action);
 
 #endif

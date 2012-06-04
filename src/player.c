@@ -18,10 +18,10 @@ void playerInit(){
 	playerInfo.exp    = 0;
 	playerInfo.level  = 1;
 
-	playerInfo.ammo_rockets = 0;
-	playerInfo.ammo_shell   = 0;
-	playerInfo.ammo_39mm    = 0;
-	playerInfo.ammo_9mm     = 0;
+	playerInfo.ammo_rockets = 100;
+	playerInfo.ammo_shell   = 100;
+	playerInfo.ammo_39mm    = 100;
+	playerInfo.ammo_9mm     = 100;
 
 	playerInfo.wpnAmmo = 0;
 }

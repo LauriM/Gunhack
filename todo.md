@@ -2,6 +2,8 @@ Major todo
 ==========
 * better world generation (?)
 * End game screen + dump to file
+* Crashes on rocket launcher (!!)
+* More gore when overkill (!!)
 
 Gameplay
 ========
