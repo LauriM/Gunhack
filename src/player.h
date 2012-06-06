@@ -32,18 +32,21 @@ typedef struct player_s{
 	endgamereason_t endGame;
 } player_t;
 
-extern struct player_s playerInfo;
+struct player_s playerInfo;
 
-extern void playerInit();
+void playerInit();
 
-extern void playerRender();
-extern void playerMove(int direction);
-extern void playerInit(void);
+void playerRender();
+void playerMove(int direction);
+void playerInit(void);
 
-extern void playerRandomPosition(void);
+void playerRandomPosition(void);
 
-extern player_t* playerGetInfo(void);
+player_t* playerGetInfo(void);
 
-extern void playerIncTurn(void);
+void playerIncTurn(void);
+
+void playerAddPoints(int amount);
+void playerAddExp(int amount);
 
 #endif

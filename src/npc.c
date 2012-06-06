@@ -165,6 +165,10 @@ bool npcApplyDamagePos(pos_t pos,int damage){
 			npcKillById(i);
 
 			MSG_ADD("%s is dead!",TERM_COLOR_RED,npcInfo[npcData[i].name].name);
+
+			playerAddPoints(npcInfo[npcData[i].name].maxHp);
+			playerAddExp(npcInfo[npcData[i].name].maxHp);
+
 		}
 
 		return true;//Return true when hit

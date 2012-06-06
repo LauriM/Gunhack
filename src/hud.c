@@ -38,12 +38,12 @@ void hudRender(){
 
 	char statusLine[STATUSLINE_MAX_CHARS] = "";
 
-	snprintf(statusLine,STATUSLINE_MAX_CHARS,"lvl: %i Hp: %i/%i Exp: %i/%i Turn: %i 9mm: %i 39mm: %i Shells: %i Rockets: %i",playerGetInfo()->pos.z,playerGetInfo()->hp,playerGetInfo()->maxhp,playerGetInfo()->exp,playerGetInfo()->level,playerGetInfo()->turn,playerGetInfo()->ammo_9mm,playerGetInfo()->ammo_39mm,playerGetInfo()->ammo_shell,playerGetInfo()->ammo_rockets);
+	snprintf(statusLine,STATUSLINE_MAX_CHARS,"LV: %i Hp: %i/%i Exp: %i/%i 9mm: %i 39mm: %i Shells: %i RPGs: %i",playerGetInfo()->pos.z,playerGetInfo()->hp,playerGetInfo()->maxhp,playerGetInfo()->exp,playerGetInfo()->level,playerGetInfo()->ammo_9mm,playerGetInfo()->ammo_39mm,playerGetInfo()->ammo_shell,playerGetInfo()->ammo_rockets);
 	
 	move(21,0);
 	printw(statusLine);
 
-	snprintf(statusLine,STATUSLINE_MAX_CHARS,"Ammo: %i/%i Weight: %i/%i",playerGetInfo()->wpnAmmo,itemInfo[itemData[itemGiveCurrentWpnId()].itemId].maxAmmo,itemGetCarriedCount(),PLAYER_MAX_CARRY);
+	snprintf(statusLine,STATUSLINE_MAX_CHARS,"Ammo: %i/%i Weight: %i/%i Turns: %i Points: %i",playerGetInfo()->wpnAmmo,itemInfo[itemData[itemGiveCurrentWpnId()].itemId].maxAmmo,itemGetCarriedCount(),PLAYER_MAX_CARRY,playerGetInfo()->turn,playerGetInfo()->points);
 
 	move(22,0);
 	printw(statusLine);

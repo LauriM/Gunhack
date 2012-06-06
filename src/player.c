@@ -4,6 +4,7 @@
 #include "map.h"
 #include "math.h"
 #include "npc.h"
+#include "msg.h"
 
 player_t playerInfo;
 
@@ -95,4 +96,20 @@ void playerIncTurn(void){
 	}
 	*/
 	playerInfo.turn++;
+}
+
+void playerAddPoints(int amount){
+	playerInfo.points += amount;
+}
+
+void playerAddExp(int amount){
+    playerInfo.exp += amount;
+
+	if(playerInfo.exp > (playerInfo.level * 15)){
+		playerInfo.exp = 0;
+		//TODO: Fix that player will lose the exp that goes over the levelup
+		++playerInfo.level;
+		playerInfo.maxhp += 10;
+		MSG_ADD("Welcome to level %i!",TERM_COLOR_GREEN,playerInfo.level);
+	}
 }
