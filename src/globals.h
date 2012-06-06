@@ -36,7 +36,7 @@ typedef enum{
 #endif
 
 //Game settings
-#define PLAYER_MAX_CARRY 21
+#define PLAYER_MAX_CARRY 20
 
 //Room generator settings
 #define GEN_ROOM_MAX_COUNT 20
@@ -49,7 +49,7 @@ typedef enum{
 #define GEN_TUNNEL_MAX_ROTATE 20
 
 #define MAP_MAX_WIDTH  80
-#define MAP_MAX_HEIGHT 21
+#define MAP_MAX_HEIGHT 20
 
 #define GEN_MAX_TRIES 200
 

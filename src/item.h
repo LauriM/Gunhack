@@ -107,6 +107,8 @@ extern int itemGiveRandomDropId();
 
 extern void itemDebugDumpInv();
 
+int itemGiveCurrentWpnId();
+
 typedef void (*itemcall_t)(int itemId,itemaction_t action);
 void itemCall_null(int itemId,itemaction_t action);
 void itemCall_hp_small(int itemId,itemaction_t action);

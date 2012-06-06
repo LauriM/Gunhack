@@ -479,3 +479,17 @@ int itemGetCarriedCount(){
 	return count;
 
 }
+
+int itemGiveCurrentWpnId(){
+	for(int i = 0;i < itemDataSize;i++){
+		if(itemData[i].state != ITEMSTATE_EQ)
+			continue;
+
+		if(itemInfo[itemData[i].itemId].slot != SLOT_WPN)
+			continue;
+
+		return i;
+	}
+
+	return 0;
+}
