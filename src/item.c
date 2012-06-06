@@ -224,6 +224,11 @@ void itemRender(void){
 }
 
 void itemPickup(){
+	if(itemGetCarriedCount() > PLAYER_MAX_CARRY){
+		msgAdd("Cannot carry more!",TERM_COLOR_RED);
+		return;
+	}
+
     //First get count of the items, if many items, ask what to pickup.
 	for(int i = 0;i < itemDataSize;i++){
 		if(itemData[i].state != ITEMSTATE_GROUND)
@@ -459,4 +464,18 @@ void itemApplyWpn(){
 	}
 
 	msgAdd("You are not wielding a weapon!",TERM_COLOR_DEFAULT);
+}
+
+int itemGetCarriedCount(){
+	int count = 0;
+
+	for(int i = 0;i < itemDataSize;i++){
+		if(itemData[i].state != ITEMSTATE_INV)
+			continue;
+
+		++count;
+	}
+
+	return count;
+
 }

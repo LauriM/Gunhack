@@ -83,35 +83,37 @@ itemdata_t* itemGetData(int id);
 itemdata_t* itemGetVis (int id);
 item_t*     itemGetInfo(int id);
 
-extern void itemInit(void);
-extern void itemSpawn(pos_t pos,itemtype_t type);
-extern void itemVisCreate(pos_t pos,itemtype_t type);
-extern void itemSpawnRandom(int z);
-extern void itemClearFromLevel(int z);
+void itemInit(void);
+void itemSpawn(pos_t pos,itemtype_t type);
+void itemVisCreate(pos_t pos,itemtype_t type);
+void itemSpawnRandom(int z);
+void itemClearFromLevel(int z);
 
-extern void itemRender(void);
-extern void itemDisplayInv();
-extern void itemDisplayEq();
-extern int itemInvChooseItem();
+void itemRender(void);
+void itemDisplayInv();
+void itemDisplayEq();
+int itemInvChooseItem();
 
-extern void itemFireWpn();
-extern void itemPickup();
-extern void itemDrop(int id);
-extern void itemWield(int id);
-extern void itemRemoveSlot(slot_t slot);
-extern void itemApplyWpn();//Used to reload active eq
+void itemFireWpn();
+void itemPickup();
+void itemDrop(int id);
+void itemWield(int id);
+void itemRemoveSlot(slot_t slot);
+void itemApplyWpn();//Used to reload active eq
+
+int itemGetCarriedCount();
 
 extern int itemGiveRandomDropId();
 
 extern void itemDebugDumpInv();
 
 typedef void (*itemcall_t)(int itemId,itemaction_t action);
-extern void itemCall_null(int itemId,itemaction_t action);
-extern void itemCall_hp_small(int itemId,itemaction_t action);
-extern void itemCall_hp_large(int itemId,itemaction_t action);
-extern void itemCall_potion_gain_level(int itemId,itemaction_t action);
-extern void itemCall_pistol(int itemId,itemaction_t action);
-extern void itemCall_rLauncher(int itemId,itemaction_t action);
-extern void itemCall_law(int itemId,itemaction_t action);
+void itemCall_null(int itemId,itemaction_t action);
+void itemCall_hp_small(int itemId,itemaction_t action);
+void itemCall_hp_large(int itemId,itemaction_t action);
+void itemCall_potion_gain_level(int itemId,itemaction_t action);
+void itemCall_pistol(int itemId,itemaction_t action);
+void itemCall_rLauncher(int itemId,itemaction_t action);
+void itemCall_law(int itemId,itemaction_t action);
 
 #endif

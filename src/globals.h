@@ -35,6 +35,9 @@ typedef enum{
 } dir_t;
 #endif
 
+//Game settings
+#define PLAYER_MAX_CARRY 21
+
 //Room generator settings
 #define GEN_ROOM_MAX_COUNT 20
 #define GEN_ROOM_MIN_COUNT 8
