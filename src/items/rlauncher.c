@@ -72,7 +72,7 @@ void itemCall_rLauncher(int itemId,itemaction_t action){
 				if(distance(pos,temp) > radius)
 					continue;
 
-				if(mapCheckTileCoords(temp.z,temp.x,temp.y,0,0,TILE_ROCK) == 1)
+				if(mapGetTileType(temp) == TILE_ROCK)
 					mapEditPoint(temp,TILE_EMPTY);
 
 				mapEditColorPoint(temp,TERM_COLOR_YELLOW);

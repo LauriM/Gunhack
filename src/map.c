@@ -596,3 +596,8 @@ void mapDebugClearColor(int z){
 		}
 	}
 }
+
+tiletype_t mapGetTileType(pos_t pos){
+	ASSERT_POS_T(pos);
+	return room[pos.z].mapData[pos.x][pos.y];
+}

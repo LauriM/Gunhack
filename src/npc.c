@@ -140,13 +140,23 @@ bool npcApplyDamagePos(pos_t pos,int damage){
 
 		npcData[i].hp = npcData[i].hp - damage;
 
+		int goreCount = 1;
+
+		if(damage > 25)
+			goreCount = 8;
+
+		if(damage > 45)
+			goreCount = 25;
+
 		//blood
 		pos_t bloodPos;
-		bloodPos = npcData[i].pos;
-		bloodPos.x = bloodPos.x + randomRange(-1,1);
-		bloodPos.y = bloodPos.y + randomRange(-1,1);
+		for(int count = 0; count < goreCount;count++){
+			bloodPos = npcData[i].pos;
+			bloodPos.x = bloodPos.x + randomRange(-2,2);
+			bloodPos.y = bloodPos.y + randomRange(-2,2);
+			mapEditColorPoint(bloodPos,TERM_COLOR_RED);
+		}
 
-		mapEditColorPoint(bloodPos,TERM_COLOR_RED);
 		
 		MSG_ADD("you hit %s! (-%i)",TERM_COLOR_DEFAULT,npcInfo[npcData[i].name].name,damage);
 

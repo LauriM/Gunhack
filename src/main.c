@@ -100,9 +100,9 @@ int main(int argc, const char *argv[]){
 	switch(playerGetInfo()->endGame){
 		case ENDGAME_REASON_NOTENDED:
 			printw("Error!");
+		case ENDGAME_REASON_SAVE:
 			LOG_ERROR("Ending game when game should not end!");
 			break;
-		case ENDGAME_REASON_SAVE:
 			printw("Game saved, see you soon!");
 			break;
 		case ENDGAME_REASON_GAMEOVER:
