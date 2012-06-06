@@ -2,8 +2,10 @@
 #define INPUT_H
 #include "globals.h"
 
-extern void inputHandle();
-extern dir_t inputGetDirection();
+void inputInit();
+void inputHandle();
 
+typedef void (*inputcall_t)(void);
 
+dir_t inputGetDirection();
 #endif

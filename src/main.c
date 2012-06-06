@@ -20,6 +20,7 @@ int main(int argc, const char *argv[]){
 
 	mathInit();
 	logInit();
+	inputInit();
 	worldInit();
 	renderInit();
 	playerInit();
@@ -30,7 +31,7 @@ int main(int argc, const char *argv[]){
 	LOG_INFO("Game starting...");
 	LOG_INFO("Build time: " __DATE__ " " __TIME__);
 
-	msgAdd("Welcome to "TO_STRING(__GAME_NAME__),TERM_COLOR_RED);
+	msgAdd("Welcome to " TO_STRING(__GAME_NAME__),TERM_COLOR_RED);
 
 	getmaxyx(stdscr,maxy,maxx);
 
@@ -40,7 +41,6 @@ int main(int argc, const char *argv[]){
 		return 0;
 	}
 
-
 	/*
 	int key;
 	while(1){
@@ -49,7 +49,6 @@ int main(int argc, const char *argv[]){
 		printf("%i",key);
 	}
 	*/
-
 
 	//TODO: Better management for the save files
 	if(hudPrompt("Load a save from disk? (y/n)") == 1){
