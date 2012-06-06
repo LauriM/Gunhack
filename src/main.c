@@ -105,9 +105,11 @@ int main(int argc, const char *argv[]){
 			printw("Game saved, see you soon!");
 			break;
 		case ENDGAME_REASON_GAMEOVER:
+			playerAddPoints(itemCountEndBonus());
 			printw("Game over! Points: %i", playerGetInfo()->points);
 			break;
 		case ENDGAME_REASON_WIN:
+			playerAddPoints(itemCountEndBonus());
 			printw("Victory! Points: %i", playerGetInfo()->points);
 			break;
 	}

@@ -7,7 +7,6 @@ Major todo
 todo
 ====
 * shotgun + ak
-* more score based on eq wielded
 
 Minor todo
 ==========

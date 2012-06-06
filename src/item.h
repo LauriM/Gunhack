@@ -116,6 +116,7 @@ extern void itemDebugDumpInv();
 
 int itemGiveCurrentWpnId();
 int itemCountTotalDef();
+int itemCountEndBonus();
 
 typedef void (*itemcall_t)(int itemId,itemaction_t action);
 void itemCall_null(int itemId,itemaction_t action);

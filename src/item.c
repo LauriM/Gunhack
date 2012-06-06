@@ -514,3 +514,16 @@ int itemCountTotalDef(){
 
 	return def;
 }
+
+int itemCountEndBonus(){
+	int amount = 0;
+
+	for(int i = 0;i < itemDataSize;i++){
+		if(itemData[i].state != ITEMSTATE_EQ)
+			continue;
+
+		amount += itemInfo[itemData[i].itemId].itemRarity;
+	}
+
+	return amount;
+}
