@@ -21,17 +21,6 @@ void itemCall_law(int itemId,itemaction_t action){
 			pos.y = pos.y + movement.y;
 
 			printxy(pos.x,pos.y,"|");
-
-			if(mapGetTileByPos(pos)->block == 1){
-				mapEditColorPoint(pos,TERM_COLOR_GREY);
-				msgAdd("You shot the wall.",TERM_COLOR_DEFAULT);
-				break;
-			}
-
-			if(npcApplyDamagePos(pos,10) == true){
-				msgAdd("You shot an npc.",TERM_COLOR_GREEN);
-				break;
-			}
 		}
 
 		//pos
@@ -73,7 +62,7 @@ void itemCall_law(int itemId,itemaction_t action){
 				playerGetInfo()->wpnAmmo = 0;
 			}
 		}
-		msgAdd("You shot Law! (Law is now useless)",TERM_COLOR_GREEN);
+		msgAdd("Light antitank weapon is now used!",TERM_COLOR_GREEN);
 	}
 
 	if(action == ITEMACTION_WIELD){//Make sure law always has one bullet in before shooting.

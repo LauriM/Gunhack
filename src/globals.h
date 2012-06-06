@@ -54,10 +54,7 @@ typedef enum{
 #define GEN_MAX_TRIES 200
 
 #define GEN_ITEM_COUNT_MIN 5
-#define GEN_ITEM_COUNT_MAX 25
-
-#define GEN_NPC_COUNT_MIN 5
-#define GEN_NPC_COUNT_MAX 25
+#define GEN_ITEM_COUNT_MAX 35
 
 //Hud
 #define STATUSLINE_MAX_CHARS 100

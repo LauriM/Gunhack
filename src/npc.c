@@ -35,7 +35,7 @@ void npcSpawnRandom(int z){
 
 	//LOG_DEBUG_INT("depth: %i",z);
 
-	int npcCount = randomRange(GEN_NPC_COUNT_MIN,GEN_NPC_COUNT_MAX);
+	int npcCount = randomRange(5,10 + abs(playerGetInfo()->level * 0.5));
 
 	while(npcCount > 0){
 		int done = false;
@@ -47,7 +47,7 @@ void npcSpawnRandom(int z){
 
 			if(mapGetTileByPos(pos)->block == 0){
 				//TODO: Implement random npc type
-				npcSpawn(pos,randomMax(NPC_COUNT-1));
+				npcSpawn(pos,randomMax(MAX(playerGetInfo()->level,NPC_COUNT-1)));
 				done = true;
 			}
 		}

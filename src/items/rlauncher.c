@@ -8,6 +8,11 @@
 
 void itemCall_rLauncher(int itemId,itemaction_t action){
 	if(action == ITEMACTION_USE){
+		if(playerGetInfo()->wpnAmmo == 1){
+			msgAdd("Weapon already loaded!",TERM_COLOR_DEFAULT);
+			return;
+		}
+
 		playerGetInfo()->ammo_rockets += playerGetInfo()->wpnAmmo;
 
 		if(playerGetInfo()->ammo_rockets>= 1){
@@ -39,17 +44,6 @@ void itemCall_rLauncher(int itemId,itemaction_t action){
 			pos.y = pos.y + movement.y;
 
 			printxy(pos.x,pos.y,"|");
-
-			if(mapGetTileByPos(pos)->block == 1){
-				mapEditColorPoint(pos,TERM_COLOR_GREY);
-				msgAdd("You shot the wall.",TERM_COLOR_DEFAULT);
-				break;
-			}
-
-			if(npcApplyDamagePos(pos,10) == true){
-				msgAdd("You shot an npc.",TERM_COLOR_GREEN);
-				break;
-			}
 		}
 
 		//pos

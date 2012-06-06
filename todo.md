@@ -7,6 +7,7 @@ Major todo
 todo
 ====
 * shotgun + ak
+* fix melee wpn bonus
 
 Minor todo
 ==========
