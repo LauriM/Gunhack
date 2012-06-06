@@ -35,7 +35,8 @@ CREATE_ITEM('=' , ITEM_9mm_BOX     , 10     , ITEM_TYPE_AMMO   , "9mm Ammunition
 CREATE_ITEM('=' , ITEM_39mm_BOX    , 20     , ITEM_TYPE_AMMO   , "39mm Ammunition"      , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0,0);
 CREATE_ITEM('=' , ITEM_shells_BOX  , 30     , ITEM_TYPE_AMMO   , "Shotgun shells"       , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0,0);
 CREATE_ITEM('=' , ITEM_rockets_BOX , 40     , ITEM_TYPE_AMMO   , "Rockets"              , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0,0);
-CREATE_ITEM('(' , ITEM_PISTOL      , 60     , ITEM_TYPE_GUN    , "9mm Pistol"           , TERM_COLOR_DEFAULT , &itemCall_pistol            , true    , SLOT_WPN  , 12,0);
+CREATE_ITEM('(' , ITEM_PISTOL      , 30     , ITEM_TYPE_GUN    , "9mm Pistol"           , TERM_COLOR_DEFAULT , &itemCall_pistol            , true    , SLOT_WPN  , 12,0);
+CREATE_ITEM(')',ITEM_AK47,40,ITEM_TYPE_GUN,"AK-47",TERM_COLOR_DEFAULT,&itemCall_ak47,true,SLOT_WPN,30,0);
 CREATE_ITEM('[',ITEM_ROCKET_LAUNCHER,10,ITEM_TYPE_GUN, "Rocket Launcher", TERM_COLOR_GREEN,&itemCall_rLauncher,true,SLOT_WPN,1,0);
 CREATE_ITEM('{',ITEM_LAW,10,ITEM_TYPE_GUN, "Light AntiTank weapon",TERM_COLOR_GREEN,&itemCall_law,true,SLOT_WPN,1,0);
 CREATE_ITEM('^',ITEM_WOOD_HELMET,10,ITEM_TYPE_ARMOR,"Wooden Helmet (lvl 1)",TERM_COLOR_DEFAULT,&itemCall_null,true,SLOT_HEAD,0,2);

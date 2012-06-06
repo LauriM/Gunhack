@@ -34,6 +34,8 @@ typedef enum{
 	ITEM_CORPSE,
 	ITEM_LVL_POTION,
 	ITEM_PISTOL,
+	ITEM_AK47,
+	ITEM_SHOTGUN,
 	ITEM_ROCKET_LAUNCHER,
 	ITEM_LAW,
 	ITEM_9mm_BOX,
@@ -126,5 +128,6 @@ void itemCall_potion_gain_level(int itemId,itemaction_t action);
 void itemCall_pistol(int itemId,itemaction_t action);
 void itemCall_rLauncher(int itemId,itemaction_t action);
 void itemCall_law(int itemId,itemaction_t action);
+void itemCall_ak47(int itemId,itemaction_t action);
 
 #endif

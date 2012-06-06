@@ -8,6 +8,11 @@
 
 void itemCall_pistol(int itemId,itemaction_t action){
 	if(action == ITEMACTION_USE){
+		if(playerGetInfo()->wpnAmmo == 1){
+			msgAdd("Weapon already loaded!",TERM_COLOR_DEFAULT);
+			return;
+		}
+
 		playerGetInfo()->ammo_9mm += playerGetInfo()->wpnAmmo;
 
 		if(playerGetInfo()->ammo_9mm >= 12){
