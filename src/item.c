@@ -37,6 +37,7 @@ CREATE_ITEM('=' , ITEM_shells_BOX  , 30     , ITEM_TYPE_AMMO   , "Shotgun shells
 CREATE_ITEM('=' , ITEM_rockets_BOX , 40     , ITEM_TYPE_AMMO   , "Rockets"              , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0);
 CREATE_ITEM('(' , ITEM_PISTOL      , 60     , ITEM_TYPE_GUN    , "9mm Pistol"           , TERM_COLOR_DEFAULT , &itemCall_pistol            , true    , SLOT_WPN  , 12);
 CREATE_ITEM('[',ITEM_ROCKET_LAUNCHER,10,ITEM_TYPE_GUN, "Rocket Launcher", TERM_COLOR_GREEN,&itemCall_rLauncher,true,SLOT_WPN,1);
+CREATE_ITEM('{',ITEM_LAW,10,ITEM_TYPE_GUN, "Light AntiTank weapon",TERM_COLOR_GREEN,&itemCall_law,true,SLOT_WPN,1);
 }
 
 void itemClearFromLevel(int z){
