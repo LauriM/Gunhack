@@ -13,7 +13,7 @@ void itemCall_pistol(int itemId,itemaction_t action){
 			return;
 		}
 
-		if(playerGetInfo()->ammo_9mm){
+		if(playerGetInfo()->ammo_9mm == 0){
 			msgAdd("You don't have any ammo for that weapon!",TERM_COLOR_DEFAULT);
 			return;
 		}
