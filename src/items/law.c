@@ -8,7 +8,7 @@
 
 void itemCall_law(int itemId,itemaction_t action){
 	if(action == ITEMACTION_USE){
-		msgAdd("Light AntiTank weapon is singleshot and cannot be reloaded!",TERM_COLOR_DEFAULT);
+		msgAdd("Light AntiTank weapon is a singleshot weapon and cannot be reloaded!",TERM_COLOR_DEFAULT);
 		return;
 	}
 

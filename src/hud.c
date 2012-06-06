@@ -43,7 +43,7 @@ void hudRender(){
 	move(21,0);
 	printw(statusLine);
 
-	snprintf(statusLine,STATUSLINE_MAX_CHARS,"Ammo: %i/%i Weight: %i/%i Turns: %i Points: %i",playerGetInfo()->wpnAmmo,itemInfo[itemData[itemGiveCurrentWpnId()].itemId].maxAmmo,itemGetCarriedCount(),PLAYER_MAX_CARRY,playerGetInfo()->turn,playerGetInfo()->points);
+	snprintf(statusLine,STATUSLINE_MAX_CHARS,"Ammo: %i/%i Weight: %i/%i Turns: %i",playerGetInfo()->wpnAmmo,itemInfo[itemData[itemGiveCurrentWpnId()].itemId].maxAmmo,itemGetCarriedCount(),PLAYER_MAX_CARRY,playerGetInfo()->turn);
 
 	move(22,0);
 	printw(statusLine);
