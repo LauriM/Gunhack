@@ -1,15 +1,13 @@
 Major todo
 ==========
-* better world generation (?)
 * End game screen + dump to file
-* Crashes on rocket launcher (!!)
-* More gore when overkill (!!)
+* Points
+* balance
 
 Gameplay
 ========
 * inc turn/process ai only when player does an action
 * Implement armor with defense bonuses (!)
-* wpn ammo status
 
 Minor todo
 ==========

@@ -72,4 +72,9 @@ void itemCall_law(int itemId,itemaction_t action){
 		}
 		msgAdd("You shot Law! (Law is now useless)",TERM_COLOR_GREEN);
 	}
+
+	if(action == ITEMACTION_WIELD){//Make sure law always has one bullet in before shooting.
+		playerGetInfo()->wpnAmmo = 1;
+		return;
+	}
 }

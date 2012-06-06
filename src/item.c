@@ -397,6 +397,7 @@ void itemWield(int id){
 	if(itemData[id].state == ITEMSTATE_INV){
 		itemRemoveSlot(itemInfo[itemData[id].itemId].slot);
 		itemData[id].state = ITEMSTATE_EQ;
+		(*itemInfo[itemData[id].itemId].itemCall)(id,ITEMACTION_WIELD);
 		MSG_ADD("You wield %s.",TERM_COLOR_DEFAULT,itemInfo[itemData[id].itemId].name);
 	}
 }

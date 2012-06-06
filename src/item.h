@@ -6,7 +6,8 @@
 
 typedef enum{
 	ITEMACTION_USE = 0,
-	ITEMACTION_ATTACK
+	ITEMACTION_ATTACK,
+	ITEMACTION_WIELD,
 } itemaction_t;
 
 typedef enum{
