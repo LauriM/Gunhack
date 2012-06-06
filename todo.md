@@ -1,7 +1,6 @@
 Major todo
 ==========
 * End game screen + dump to file
-* Points
 * balance
 
 Gameplay
@@ -15,3 +14,4 @@ Minor todo
 * ColorData does not respect visdata
 * hudMenuWrite may temporary black out parts of the map
 * text may not always be cleared before displaying a user prompt on top of the screen
+* some messages wont work at all (end gamescreen)

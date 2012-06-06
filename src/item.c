@@ -242,18 +242,22 @@ void itemPickup(){
 			if(itemData[i].itemId == ITEM_9mm_BOX){
 				playerGetInfo()->ammo_9mm = playerGetInfo()->ammo_9mm + 12;
 				msgAdd("Found 9mm rounds. (+12)",TERM_COLOR_GREEN);
+				playerAddPoints(1);
 			}
 			if(itemData[i].itemId == ITEM_39mm_BOX){
 				playerGetInfo()->ammo_39mm = playerGetInfo()->ammo_39mm + 30;
 				msgAdd("Found 39mm rounds. (+30)",TERM_COLOR_GREEN);
+				playerAddPoints(3);
 			}
 			if(itemData[i].itemId == ITEM_shells_BOX){
 				playerGetInfo()->ammo_shell = playerGetInfo()->ammo_shell + 8;
 				msgAdd("Found shotgun shells. (+8)",TERM_COLOR_GREEN);
+				playerAddPoints(5);
 			}
 			if(itemData[i].itemId == ITEM_rockets_BOX){
 				playerGetInfo()->ammo_rockets = playerGetInfo()->ammo_rockets + 3;
 				msgAdd("Found rockets. (+3)",TERM_COLOR_GREEN);
+				playerAddPoints(15);
 			}
 			itemData[i].state = ITEMSTATE_EMPTY;
 		}else{
@@ -261,8 +265,6 @@ void itemPickup(){
 			MSG_ADD("Picked up %s",TERM_COLOR_DEFAULT,itemInfo[itemData[i].itemId].name);
 			itemData[i].state = ITEMSTATE_INV;
 		}
-
-
 	}
 }
 

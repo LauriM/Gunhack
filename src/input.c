@@ -64,6 +64,8 @@ void input_move_up(void){
 			playerGetInfo()->pos.x = pos.x;
 			playerGetInfo()->pos.y = pos.y;
 			mapScanFov();
+
+			playerAddPoints(150);
 		}
 	}
 }
