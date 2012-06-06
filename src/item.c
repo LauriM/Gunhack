@@ -38,8 +38,11 @@ CREATE_ITEM('=' , ITEM_rockets_BOX , 40     , ITEM_TYPE_AMMO   , "Rockets"      
 CREATE_ITEM('(' , ITEM_PISTOL      , 60     , ITEM_TYPE_GUN    , "9mm Pistol"           , TERM_COLOR_DEFAULT , &itemCall_pistol            , true    , SLOT_WPN  , 12,0);
 CREATE_ITEM('[',ITEM_ROCKET_LAUNCHER,10,ITEM_TYPE_GUN, "Rocket Launcher", TERM_COLOR_GREEN,&itemCall_rLauncher,true,SLOT_WPN,1,0);
 CREATE_ITEM('{',ITEM_LAW,10,ITEM_TYPE_GUN, "Light AntiTank weapon",TERM_COLOR_GREEN,&itemCall_law,true,SLOT_WPN,1,0);
-CREATE_ITEM('^',ITEM_WOOD_HELMET,10,ITEM_TYPE_ARMOR,"Wooden Helmet",TERM_COLOR_DEFAULT,&itemCall_null,true,SLOT_HEAD,0,2);
-CREATE_ITEM('^',ITEM_WOOD_HELMET,30,ITEM_TYPE_ARMOR,"Iron Helmet",TERM_COLOR_DEFAULT,&itemCall_null,true,SLOT_HEAD,0,8);
+CREATE_ITEM('^',ITEM_WOOD_HELMET,10,ITEM_TYPE_ARMOR,"Wooden Helmet (lvl 1)",TERM_COLOR_DEFAULT,&itemCall_null,true,SLOT_HEAD,0,2);
+CREATE_ITEM('^',ITEM_IRON_HELMET,30,ITEM_TYPE_ARMOR,"Iron Helmet (lvl 2)",TERM_COLOR_DEFAULT,&itemCall_null,true,SLOT_HEAD,0,8);
+CREATE_ITEM('^',ITEM_PLATINUM_HELMET,50,ITEM_TYPE_ARMOR,"Platinum Helmet (lvl 3)",TERM_COLOR_DEFAULT,&itemCall_null,true,SLOT_HEAD,0,15);
+CREATE_ITEM('^',ITEM_TITAN_HELMET,70,ITEM_TYPE_ARMOR,"Titan Helmet (lvl 4)",TERM_COLOR_DEFAULT,&itemCall_null,true,SLOT_HEAD,0,25);
+CREATE_ITEM('^',ITEM_DIAMOND_HELMET,90,ITEM_TYPE_ARMOR,"Diamond Helmet (lvl 5)",TERM_COLOR_DEFAULT,&itemCall_null,true,SLOT_HEAD,0,40);
 }
 
 void itemClearFromLevel(int z){
