@@ -68,6 +68,9 @@ void itemCall_law(int itemId,itemaction_t action){
 
 				//SingleShot so destroy the item!
 				itemData[itemId].state = ITEMSTATE_EMPTY;
+
+				//Won't stay for the next wpn
+				playerGetInfo()->wpnAmmo = 0;
 			}
 		}
 		msgAdd("You shot Law! (Law is now useless)",TERM_COLOR_GREEN);
