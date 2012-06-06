@@ -14,6 +14,11 @@ void itemCall_ak47(int itemId,itemaction_t action){
 			return;
 		}
 
+		if(playerGetInfo()->ammo_9mm){
+			msgAdd("You don't have any ammo for that weapon!",TERM_COLOR_DEFAULT);
+			return;
+		}
+
 		playerGetInfo()->ammo_39mm += playerGetInfo()->wpnAmmo;
 
 		if(playerGetInfo()->ammo_39mm >= 30){

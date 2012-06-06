@@ -13,6 +13,11 @@ void itemCall_rLauncher(int itemId,itemaction_t action){
 			return;
 		}
 
+		if(playerGetInfo()->ammo_rockets){
+			msgAdd("You don't have any ammo for that weapon!",TERM_COLOR_DEFAULT);
+			return;
+		}
+
 		playerGetInfo()->ammo_rockets += playerGetInfo()->wpnAmmo;
 
 		if(playerGetInfo()->ammo_rockets>= 1){
