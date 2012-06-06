@@ -30,7 +30,7 @@ int main(int argc, const char *argv[]){
 	LOG_INFO("Game starting...");
 	LOG_INFO("Build time: " __DATE__ " " __TIME__);
 
-	msgAdd("Welcome to __GAME_NAME_",TERM_COLOR_RED);
+	msgAdd("Welcome to "TO_STRING(__GAME_NAME__),TERM_COLOR_RED);
 
 	getmaxyx(stdscr,maxy,maxx);
 
