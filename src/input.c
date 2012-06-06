@@ -175,8 +175,15 @@ void inputInit(){
 }
 
 void inputHandle(){
-	int key = getch();
-	(*keyBinds[key])();
+	while(1){
+		int key = getch();
+		(*keyBinds[key])();
+
+		if(*keyBinds[key] != &input_null){
+			playerIncTurn();
+			return;
+		}
+	}
 }
 
 dir_t inputGetDirection(){

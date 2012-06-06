@@ -34,6 +34,7 @@ int main(int argc, const char *argv[]){
 	msgAdd("Welcome to " TO_STRING(__GAME_NAME__),TERM_COLOR_RED);
 
 	getmaxyx(stdscr,maxy,maxx);
+	noecho();
 
 	if(maxx < 80 || maxy < 24){
 		renderUnInit();
@@ -70,7 +71,6 @@ int main(int argc, const char *argv[]){
 	while(playerGetInfo()->endGame == ENDGAME_REASON_NOTENDED){
 		inputHandle();
 		npcAiTick();
-		playerIncTurn();
 
 		clear();
 
