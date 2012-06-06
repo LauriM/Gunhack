@@ -40,6 +40,7 @@ typedef enum{
 	ITEM_39mm_BOX,
 	ITEM_rockets_BOX,
 	ITEM_shells_BOX,
+	ITEM_WOOD_HELMET,
 	ITEM_COUNT
 } itemname_t;
 
@@ -59,6 +60,7 @@ typedef struct item_s{
 	color_t itemColor;
 	bool canDrop;
 	int maxAmmo;
+	int defense;
 	slot_t slot;
 	void(*itemCall)(int itemId, itemaction_t action);
 } item_t;
@@ -109,6 +111,7 @@ extern int itemGiveRandomDropId();
 extern void itemDebugDumpInv();
 
 int itemGiveCurrentWpnId();
+int itemCountTotalDef();
 
 typedef void (*itemcall_t)(int itemId,itemaction_t action);
 void itemCall_null(int itemId,itemaction_t action);

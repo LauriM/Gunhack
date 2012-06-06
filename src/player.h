@@ -49,4 +49,6 @@ void playerIncTurn(void);
 void playerAddPoints(int amount);
 void playerAddExp(int amount);
 
+void playerApplyDmg(int amount);
+
 #endif

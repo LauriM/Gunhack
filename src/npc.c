@@ -269,7 +269,7 @@ void npcMoveToPos(int id,pos_t pos,bool allowAttack){
 			return;
 
 		int dmg = randomRange(npcInfo[npcData[id].name].meleeDmgMin,npcInfo[npcData[id].name].meleeDmgMax);
-		playerGetInfo()->hp = playerGetInfo()->hp - dmg;
+		playerApplyDmg(dmg);
 
 		//blood
 		pos_t bloodPos;
@@ -279,7 +279,7 @@ void npcMoveToPos(int id,pos_t pos,bool allowAttack){
 
 		mapEditColorPoint(bloodPos,TERM_COLOR_RED);
 
-		MSG_ADD("%s hits you! (-%i)",TERM_COLOR_DEFAULT,npcInfo[npcData[id].name].name,dmg);
+		MSG_ADD("%s hits you!",TERM_COLOR_DEFAULT,npcInfo[npcData[id].name].name);
 
 		return;
 	}

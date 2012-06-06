@@ -5,6 +5,7 @@
 #include "math.h"
 #include "npc.h"
 #include "msg.h"
+#include "item.h"
 
 player_t playerInfo;
 
@@ -112,4 +113,8 @@ void playerAddExp(int amount){
 		playerInfo.maxhp += 10;
 		MSG_ADD("Welcome to level %i!",TERM_COLOR_GREEN,playerInfo.level);
 	}
+}
+
+void playerApplyDmg(int amount){
+	playerGetInfo()->hp -= MAX(1,(amount-itemCountTotalDef()));
 }
