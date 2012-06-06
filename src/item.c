@@ -425,18 +425,20 @@ void itemRemoveSlot(slot_t slot){
 
 		if(itemData[i].itemId == ITEM_PISTOL){
 			playerGetInfo()->ammo_9mm += playerGetInfo()->wpnAmmo;
+			playerGetInfo()->wpnAmmo = 0;
 		}
 		if(itemData[i].itemId == ITEM_AK47){
 			playerGetInfo()->ammo_39mm += playerGetInfo()->wpnAmmo;
+			playerGetInfo()->wpnAmmo = 0;
 		}
 		if(itemData[i].itemId == ITEM_SHOTGUN){
 			playerGetInfo()->ammo_shell += playerGetInfo()->wpnAmmo;
+			playerGetInfo()->wpnAmmo = 0;
 		}
 		if(itemData[i].itemId == ITEM_ROCKET_LAUNCHER){
 			playerGetInfo()->ammo_rockets += playerGetInfo()->wpnAmmo;
+			playerGetInfo()->wpnAmmo = 0;
 		}
-
-		playerGetInfo()->wpnAmmo = 0;
 
 		return;
 	}
