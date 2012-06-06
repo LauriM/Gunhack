@@ -423,16 +423,16 @@ void itemRemoveSlot(slot_t slot){
 
 		MSG_ADD("You remove %s.",TERM_COLOR_DEFAULT,itemInfo[itemData[i].itemId].name);
 
-		if(itemData[i].itemId == ITEM_9mm_BOX){
+		if(itemData[i].itemId == ITEM_PISTOL){
 			playerGetInfo()->ammo_9mm += playerGetInfo()->wpnAmmo;
 		}
-		if(itemData[i].itemId == ITEM_39mm_BOX){
+		if(itemData[i].itemId == ITEM_AK47){
 			playerGetInfo()->ammo_39mm += playerGetInfo()->wpnAmmo;
 		}
-		if(itemData[i].itemId == ITEM_shells_BOX){
+		if(itemData[i].itemId == ITEM_SHOTGUN){
 			playerGetInfo()->ammo_shell += playerGetInfo()->wpnAmmo;
 		}
-		if(itemData[i].itemId == ITEM_rockets_BOX){
+		if(itemData[i].itemId == ITEM_ROCKET_LAUNCHER){
 			playerGetInfo()->ammo_rockets += playerGetInfo()->wpnAmmo;
 		}
 
