@@ -47,7 +47,7 @@ void npcSpawnRandom(int z){
 
 			if(mapGetTileByPos(pos)->block == 0){
 				//TODO: Implement random npc type
-				npcSpawn(pos,randomMax(MAX(playerGetInfo()->level,NPC_COUNT-1)));
+				npcSpawn(pos,randomMax(MIN(playerGetInfo()->level,NPC_COUNT-1)));
 				done = true;
 			}
 		}

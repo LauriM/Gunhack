@@ -43,7 +43,11 @@ void itemCall_rLauncher(int itemId,itemaction_t action){
 			pos.x = pos.x + movement.x;
 			pos.y = pos.y + movement.y;
 
-			printxy(pos.x,pos.y,"|");
+			if(mapGetTileByPos(pos)->block == 1)
+				break;
+
+			if(npcApplyDamagePos(pos,10) == true)
+				break;
 		}
 
 		//pos

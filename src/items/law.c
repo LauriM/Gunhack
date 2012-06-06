@@ -20,7 +20,11 @@ void itemCall_law(int itemId,itemaction_t action){
 			pos.x = pos.x + movement.x;
 			pos.y = pos.y + movement.y;
 
-			printxy(pos.x,pos.y,"|");
+			if(mapGetTileByPos(pos)->block == 1)
+				break;
+						
+			if(npcApplyDamagePos(pos,10) == true)
+				break;
 		}
 
 		//pos
@@ -54,15 +58,17 @@ void itemCall_law(int itemId,itemaction_t action){
 				if(playerGetInfo()->pos.x == temp.x && playerGetInfo()->pos.y == temp.y){
 					playerGetInfo()->hp -= 150;
 				}
-
-				//SingleShot so destroy the item!
-				itemData[itemId].state = ITEMSTATE_EMPTY;
-
-				//Won't stay for the next wpn
-				playerGetInfo()->wpnAmmo = 0;
 			}
 		}
 		msgAdd("Light antitank weapon is now used!",TERM_COLOR_GREEN);
+
+		//SingleShot so destroy the item!
+		itemData[itemId].state = ITEMSTATE_EMPTY;
+		itemRemoveSlot(SLOT_WPN);
+
+		//Won't stay for the next wpn
+		playerGetInfo()->wpnAmmo = 0;
+		return;
 	}
 
 	if(action == ITEMACTION_WIELD){//Make sure law always has one bullet in before shooting.

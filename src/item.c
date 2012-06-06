@@ -30,11 +30,11 @@ CREATE_ITEM('*' , ITEM_HP_SMALL    , 7     , ITEM_TYPE_USABLE , "Small health pa
 CREATE_ITEM('+' , ITEM_HP_BIG      , 10     , ITEM_TYPE_USABLE , "Large health pack"    , TERM_COLOR_DEFAULT , &itemCall_hp_large          , true    , SLOT_NULL , 0,0);
 CREATE_ITEM('/' , ITEM_MELEE_KNIFE , 30     , ITEM_TYPE_MELEE  , "Knife"                , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_WPN  , 0,0);
 CREATE_ITEM('%' , ITEM_CORPSE      , 0      , ITEM_TYPE_USABLE , "Corpse"               , TERM_COLOR_RED     , &itemCall_null              , false   , SLOT_NULL , 0,0);
-CREATE_ITEM('!' , ITEM_LVL_POTION  , 95     , ITEM_TYPE_USABLE , "Potion of gain level" , TERM_COLOR_GREEN   , &itemCall_potion_gain_level , true    , SLOT_NULL , 0,0);
+CREATE_ITEM('!' , ITEM_LVL_POTION  , 90     , ITEM_TYPE_USABLE , "Potion of gain level" , TERM_COLOR_GREEN   , &itemCall_potion_gain_level , true    , SLOT_NULL , 0,0);
 CREATE_ITEM('=' , ITEM_9mm_BOX     , 10     , ITEM_TYPE_AMMO   , "9mm Ammunition"       , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0,0);
 CREATE_ITEM('=' , ITEM_39mm_BOX    , 20     , ITEM_TYPE_AMMO   , "39mm Ammunition"      , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0,0);
 CREATE_ITEM('=' , ITEM_shells_BOX  , 30     , ITEM_TYPE_AMMO   , "Shotgun shells"       , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0,0);
-CREATE_ITEM('=' , ITEM_rockets_BOX , 40     , ITEM_TYPE_AMMO   , "Rockets"              , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0,0);
+CREATE_ITEM('=' , ITEM_rockets_BOX , 30     , ITEM_TYPE_AMMO   , "Rockets"              , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0,0);
 CREATE_ITEM('(' , ITEM_PISTOL      , 30     , ITEM_TYPE_GUN    , "9mm Pistol"           , TERM_COLOR_DEFAULT , &itemCall_pistol            , true    , SLOT_WPN  , 12,0);
 CREATE_ITEM(')',ITEM_AK47,40,ITEM_TYPE_GUN,"AK-47",TERM_COLOR_DEFAULT,&itemCall_ak47,true,SLOT_WPN,30,0);
 CREATE_ITEM('[',ITEM_ROCKET_LAUNCHER,10,ITEM_TYPE_GUN, "Rocket Launcher", TERM_COLOR_GREEN,&itemCall_rLauncher,true,SLOT_WPN,1,0);

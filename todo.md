@@ -8,6 +8,8 @@ todo
 ====
 * shotgun + ak
 * fix melee wpn bonus
+* better way to choose the current item
+* BUG!: LAW CAN BE RESHOT
 
 Minor todo
 ==========
