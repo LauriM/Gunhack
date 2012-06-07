@@ -96,6 +96,14 @@ void playerIncTurn(void){
 		playerInfo.endGame = ENDGAME_REASON_GAMEOVER;
 	}
 	*/
+
+	if(playerInfo.turn % 2){
+		playerInfo.hp += 1;
+
+		if(playerInfo.hp > playerInfo.maxhp)
+			playerInfo.hp = playerInfo.maxhp;
+	}
+
 	playerInfo.turn++;
 }
 

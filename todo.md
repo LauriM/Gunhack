@@ -16,7 +16,6 @@ todo
 * Show current weapon name on statusbar !
 * apply directly from ground if USABLE
 * don't pickup the fucking corpse
-* regen (!)
 * levelup should buff hp 
 * more weapons!
 
