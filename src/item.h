@@ -35,7 +35,7 @@ typedef enum{
 	ITEM_LVL_POTION,
 	ITEM_PISTOL,
 	ITEM_AK47,
-	ITEM_SHOTGUN,
+	//ITEM_SHOTGUN, ALSO uncomment ITEM.c itemRemoveSlot line 440
 	ITEM_ROCKET_LAUNCHER,
 	ITEM_LAW,
 	ITEM_9mm_BOX,

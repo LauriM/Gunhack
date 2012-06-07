@@ -11,7 +11,6 @@ todo
 * better way to choose the current item
 * Add cutter weapon to dig
 * You see here msgs
-* Some item (NULL) appears ingame
 * wpn repairs etc(?)
 * Show current weapon name on statusbar !
 * apply directly from ground if USABLE

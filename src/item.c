@@ -243,6 +243,9 @@ void itemPickup(){
 		if(itemData[i].pos.x != playerGetInfo()->pos.x || itemData[i].pos.y != playerGetInfo()->pos.y || itemData[i].pos.z != playerGetInfo()->pos.z)
 			continue;
 
+		if(itemData[i].itemId == ITEM_CORPSE)
+			continue; //Don't pickup corpses
+
 		if(itemInfo[itemData[i].itemId].itemType == ITEM_TYPE_AMMO){
 			//Its ammunition..
 			if(itemData[i].itemId == ITEM_9mm_BOX){
@@ -269,6 +272,7 @@ void itemPickup(){
 		}else{
 			//normal pickup happens!
 			MSG_ADD("Picked up %s",TERM_COLOR_DEFAULT,itemInfo[itemData[i].itemId].name);
+			LOG_INFO_F("PICKING UP %s",itemInfo[itemData[i].itemId].name);
 			itemData[i].state = ITEMSTATE_INV;
 		}
 	}
@@ -382,6 +386,7 @@ int itemGiveRandomDropId(){
 	for(int i = 0;i < ITEM_COUNT;i++){
 		if(itemInfo[i].itemRarity < rarity){
 			if(count == toBeChosen){
+				LOG_INFO_F("RANDOM GIVES NAME:%i/%s",i,itemInfo[i].name);
 				return i;
 			}
 
@@ -431,10 +436,12 @@ void itemRemoveSlot(slot_t slot){
 			playerGetInfo()->ammo_39mm += playerGetInfo()->wpnAmmo;
 			playerGetInfo()->wpnAmmo = 0;
 		}
+		/*
 		if(itemData[i].itemId == ITEM_SHOTGUN){
 			playerGetInfo()->ammo_shell += playerGetInfo()->wpnAmmo;
 			playerGetInfo()->wpnAmmo = 0;
 		}
+		*/
 		if(itemData[i].itemId == ITEM_ROCKET_LAUNCHER){
 			playerGetInfo()->ammo_rockets += playerGetInfo()->wpnAmmo;
 			playerGetInfo()->wpnAmmo = 0;
