@@ -7,6 +7,7 @@ Major todo
 todo
 ====
 * shotgun + ak
+* save prompt to automatically check for save and then loads it
 * fix melee wpn bonus
 * better way to choose the current item
 * Add cutter weapon to dig
