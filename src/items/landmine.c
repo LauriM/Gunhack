@@ -5,18 +5,20 @@
 #include "../map.h"
 #include "../npc.h"
 
-void itemCall_dynamite(int itemId,itemaction_t action){
+void itemCall_landmine(int itemId,itemaction_t action){
 	if(action == ITEMACTION_USE){
-		msgAdd("Dynamite is on fire! You drop it to floor. (10 turns before explosion)",TERM_COLOR_GREEN);
+		msgAdd("You arm the landmine! You drop it to floor.",TERM_COLOR_GREEN);
 
-		itemData[itemId].var1  = 10;
-		itemData[itemId].state = ITEMSTATE_GROUND; //Drop it
+		itemData[itemId].var1  = 1;
 		itemData[itemId].pos   = playerGetInfo()->pos;
+		itemData[itemId].state = ITEMSTATE_GROUND; //Drop it
 	}
 
 	if(action == ITEMACTION_TICK){
-		if(itemData[itemId].var1 > 0){
-			--itemData[itemId].var1;
+		if(itemData[itemId].var1 != 1)//1 for armed
+			return;
+
+		if(npcExistsInPos(itemData[itemId].pos)){
 
 			if(itemData[itemId].var1 == 1 || itemData[itemId].var1 < 0){
 				int width  = 7;
@@ -51,7 +53,7 @@ void itemCall_dynamite(int itemId,itemaction_t action){
 					}
 				}
 
-				msgAdd("Dynamite explodes!",TERM_COLOR_RED);
+				msgAdd("Landmine explodes!",TERM_COLOR_RED);
 				itemData[itemId].state = ITEMSTATE_EMPTY;
 			}
 

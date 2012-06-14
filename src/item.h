@@ -33,6 +33,7 @@ typedef enum{
 	ITEM_HP_BIG,
 	ITEM_MELEE_KNIFE,//TODO: doesn't actually work
 	ITEM_DYNAMITE,
+	ITEM_LANDMINE,
 	ITEM_CORPSE,
 	ITEM_LVL_POTION,
 	ITEM_PISTOL,
@@ -134,5 +135,6 @@ void itemCall_rLauncher(int itemId,itemaction_t action);
 void itemCall_law(int itemId,itemaction_t action);
 void itemCall_ak47(int itemId,itemaction_t action);
 void itemCall_dynamite(int itemId,itemaction_t action);
+void itemCall_landmine(int itemId,itemaction_t action);
 
 #endif
