@@ -71,6 +71,7 @@ int main(int argc, const char *argv[]){
 	while(playerGetInfo()->endGame == ENDGAME_REASON_NOTENDED){
 		inputHandle();
 		npcAiTick();
+		itemTick();
 
 		clear();
 

@@ -3,6 +3,8 @@
 #include "../item.h"
 
 void itemCall_null(int itemId,itemaction_t action){
-	msgAdd("You can't use this item!",TERM_COLOR_DEFAULT);
+	if(action != ITEMACTION_TICK){
+		msgAdd("You can't use this item!",TERM_COLOR_DEFAULT);
+	}
 	return;
 }

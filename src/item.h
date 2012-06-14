@@ -8,6 +8,7 @@ typedef enum{
 	ITEMACTION_USE = 0,
 	ITEMACTION_ATTACK,
 	ITEMACTION_WIELD,
+	ITEMACTION_TICK,
 } itemaction_t;
 
 typedef enum{
@@ -30,7 +31,8 @@ typedef enum{
 typedef enum{
 	ITEM_HP_SMALL = 0,
 	ITEM_HP_BIG,
-	ITEM_MELEE_KNIFE,
+	ITEM_MELEE_KNIFE,//TODO: doesn't actually work
+	ITEM_DYNAMITE,
 	ITEM_CORPSE,
 	ITEM_LVL_POTION,
 	ITEM_PISTOL,
@@ -75,6 +77,7 @@ typedef struct itemdata_s{
 	itemname_t itemId;//Links to the item_s in the itemInfo
 	itemstate_t state;
 	pos_t pos;
+	int var1;
 } itemdata_t;
 
 extern size_t itemVisSize;   
@@ -103,6 +106,7 @@ void itemDisplayInv();
 void itemDisplayEq();
 int itemInvChooseItem();
 
+void itemTick();
 void itemFireWpn();
 void itemPickup();
 void itemDrop(int id);
@@ -129,5 +133,6 @@ void itemCall_pistol(int itemId,itemaction_t action);
 void itemCall_rLauncher(int itemId,itemaction_t action);
 void itemCall_law(int itemId,itemaction_t action);
 void itemCall_ak47(int itemId,itemaction_t action);
+void itemCall_dynamite(int itemId,itemaction_t action);
 
 #endif

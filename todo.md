@@ -6,6 +6,7 @@ Major todo
 
 todo
 ====
+* move guns to use *var1*
 * shotgun + ak
 * save prompt to automatically check for save and then loads it
 * fix melee wpn bonus

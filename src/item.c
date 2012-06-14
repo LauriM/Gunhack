@@ -44,6 +44,7 @@ CREATE_ITEM('^',ITEM_IRON_HELMET,30,ITEM_TYPE_ARMOR,"Iron Helmet (lvl 2)",TERM_C
 CREATE_ITEM('^',ITEM_PLATINUM_HELMET,50,ITEM_TYPE_ARMOR,"Platinum Helmet (lvl 3)",TERM_COLOR_DEFAULT,&itemCall_null,true,SLOT_HEAD,0,15);
 CREATE_ITEM('^',ITEM_TITAN_HELMET,70,ITEM_TYPE_ARMOR,"Titan Helmet (lvl 4)",TERM_COLOR_DEFAULT,&itemCall_null,true,SLOT_HEAD,0,25);
 CREATE_ITEM('^',ITEM_DIAMOND_HELMET,90,ITEM_TYPE_ARMOR,"Diamond Helmet (lvl 5)",TERM_COLOR_DEFAULT,&itemCall_null,true,SLOT_HEAD,0,40);
+CREATE_ITEM('|',ITEM_DYNAMITE,10,ITEM_TYPE_USABLE,"Dynamite",TERM_COLOR_RED,&itemCall_dynamite,true,SLOT_NULL,0,0);
 }
 
 void itemClearFromLevel(int z){
@@ -94,6 +95,7 @@ visSpawnReturn:
 	itemVis[i].state  = ITEMSTATE_GROUND;
 	itemVis[i].itemId = type;
 	itemVis[i].pos    = pos;
+	itemVis[i].var1   = 0;
 	return;
 }
 
@@ -123,6 +125,7 @@ itemSpawnReturn:
 	itemData[i].pos.x  = pos.x;
 	itemData[i].pos.y  = pos.y;
 	itemData[i].pos.z  = pos.z;
+	itemData[i].var1   = 0;
 }
 
 void itemSpawnRandom(int z){
@@ -536,4 +539,14 @@ int itemCountEndBonus(){
 	}
 
 	return amount;
+}
+
+
+void itemTick(){
+	for(int i = 0;i < itemDataSize;i++){
+		if(itemData[i].state == ITEMSTATE_EMPTY)
+			continue;
+
+		(*itemInfo[itemData[i].itemId].itemCall)(i,ITEMACTION_TICK);
+	}
 }
