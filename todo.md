@@ -6,19 +6,16 @@ Major todo
 
 todo
 ====
-* move guns to use *var1*
+* move guns to use *var1* for ammunition
 * shotgun + ak
 * save prompt to automatically check for save and then loads it
-* fix melee wpn bonus
+* fix melee wpn bonus *or* drop the melee weapons
 * better way to choose the current item
 * Add cutter weapon to dig
 * You see here msgs
 * wpn repairs etc(?)
 * Show current weapon name on statusbar !
 * apply directly from ground if USABLE
-* don't pickup the fucking corpse
-* levelup should buff hp 
-* more weapons!
 
 Minor todo
 ==========

@@ -62,6 +62,15 @@ int main(int argc, const char *argv[]){
 		playerGetInfo()->pos.x = pos.x;
 		playerGetInfo()->pos.y = pos.y;
 
+		//give the starting itemset
+		itemSpawn(playerGetInfo()->pos,ITEM_PISTOL);
+		itemSpawn(playerGetInfo()->pos,ITEM_DYNAMITE);
+		itemSpawn(playerGetInfo()->pos,ITEM_DYNAMITE);
+		itemSpawn(playerGetInfo()->pos,ITEM_DYNAMITE);
+		itemSpawn(playerGetInfo()->pos,ITEM_DYNAMITE);
+		itemSpawn(playerGetInfo()->pos,ITEM_DYNAMITE);
+		itemPickup();
+
 		mapScanFov();
 	}
 
