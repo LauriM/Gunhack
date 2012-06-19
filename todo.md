@@ -7,13 +7,9 @@ Major todo
 
 todo
 ====
-* add unreloading of weapons
-* shotgun + ak
+* shotgun
 * save prompt to automatically check for save and then loads it
-* You see here msgs
-* wpn repairs etc(?)
-* Show current weapon name on statusbar !
-* apply directly from ground if USABLE
+* drop save files?
 
 Minor todo
 ==========

@@ -118,6 +118,8 @@ int itemGetCarriedCount();
 int itemGetCurrentAmmoOnWeapon();
 int itemGiveCurrentWpnId();
 
+void itemYouSeePos(pos_t pos);
+
 extern int itemGiveRandomDropId();
 
 extern void itemDebugDumpInv();
