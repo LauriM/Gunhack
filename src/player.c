@@ -89,12 +89,9 @@ void playerIncTurn(void){
 	//Also check the hp
 	
 	//TODO: ENALBE THIS on final
-	/*
-	 *
 	if(playerInfo.hp < 1){
 		playerInfo.endGame = ENDGAME_REASON_GAMEOVER;
 	}
-	*/
 
 	if(playerInfo.turn % 2){
 		playerInfo.hp += 1;
@@ -124,4 +121,35 @@ void playerAddExp(int amount){
 
 void playerApplyDmg(int amount){
 	playerGetInfo()->hp -= MAX(1,(amount-itemCountTotalDef()));
+}
+
+void playerDumpToFile(){
+	FILE* file = fopen("dump.txt","w");//TODO: date+time to the file
+
+	fprintf(file,"Player stats\n");
+	fprintf(file, "* HP: %i/%i\n",playerInfo.hp,playerInfo.maxhp);
+	fprintf(file, "* Exp/Level: %i/%i\n",playerInfo.exp,playerInfo.level);
+	fprintf(file, "* Turn: %i\n",playerInfo.turn);
+	fprintf(file, "* Dungeon level: %i\n",playerInfo.pos.z);
+
+	fprintf(file,"\n");
+
+	fprintf(file,"Ammo count\n");
+	fprintf(file, "* 9mm %i\n",playerInfo.ammo_9mm);
+	fprintf(file, "* 39mm %i\n",playerInfo.ammo_39mm);
+	fprintf(file, "* shells %i\n",playerInfo.ammo_shell);
+	fprintf(file, "* rockets %i\n",playerInfo.ammo_rockets);
+
+	fprintf(file,"\n");
+	fprintf(file,"\n");
+
+	mapRenderToFile(file);
+
+	fprintf(file,"\n");
+	fprintf(file,"\n");
+
+	fprintf(file,"Last log messages:\n");
+	fprintf(file,"\n");
+	msgWriteToFile(file);
+	fclose(file);
 }

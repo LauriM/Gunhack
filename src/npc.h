@@ -67,26 +67,27 @@ typedef struct npcdata_s{
 	void(*aiState)(int,int);
 } npcdata_t;
 
-extern size_t npcDataCapacity;
-extern size_t npcDataSize;
+size_t npcDataCapacity;
+size_t npcDataSize;
 
-extern npcdata_t *npcData;
-extern npc_t     npcInfo[NPC_COUNT];
+npcdata_t *npcData;
+npc_t     npcInfo[NPC_COUNT];
 
-extern void npcInit(void);
-extern void npcSpawnRandom(int z);
-extern void npcSpawn(pos_t pos,npcname_t id);
-extern void npcClearFromLevel(int z);
-extern void npcMoveToPos(int id,pos_t pos,bool allowAttack);
+void npcInit(void);
+void npcSpawnRandom(int z);
+void npcSpawn(pos_t pos,npcname_t id);
+void npcClearFromLevel(int z);
+void npcMoveToPos(int id,pos_t pos,bool allowAttack);
 
-extern bool npcExistsInPos(pos_t pos);
+bool npcExistsInPos(pos_t pos);
+int npcGetCharOnPos(pos_t pos);
 
-extern void npcRender();
-extern void npcAiTick();
+void npcRender();
+void npcAiTick();
 
-extern bool npcApplyDamagePos(pos_t pos,int damage);
-extern void npcKillById(int id);
-extern void npcDumpState();
+bool npcApplyDamagePos(pos_t pos,int damage);
+void npcKillById(int id);
+void npcDumpState();
 
 #define NPC_UPDATE_LAST_KNOWN_POSITION npcData[i].playerLastKnownPosition.x = playerGetInfo()->pos.x; npcData[i].playerLastKnownPosition.y = playerGetInfo()->pos.y; npcData[i].playerLastKnownPosition.z = playerGetInfo()->pos.z;
 

@@ -15,3 +15,5 @@ roguelike.sln
 roguelike.sdf
 roguelike.opensdf
 game.vcxproj*
+
+dump.txt

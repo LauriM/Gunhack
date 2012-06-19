@@ -12,15 +12,16 @@ typedef struct msg_s{
 	char msg[];
 } msg_t;
 
-extern void msgInit();
-extern void msgAdd(char *msg,color_t color);
-extern void msgShowWindow();
-extern void msgDropHead();
-extern msg_t* msgGetLastMsg();
-extern int msgGetMsgCount();
-extern void msgRenderSideView();
+void msgInit();
+void msgAdd(char *msg,color_t color);
+void msgShowWindow();
+void msgWriteToFile(FILE* file);
+void msgDropHead();
+msg_t* msgGetLastMsg();
+int msgGetMsgCount();
+void msgRenderSideView();
 
-extern void msgPrintDebugInfo();
+void msgPrintDebugInfo();
 
 extern msg_t *head;
 extern msg_t *end;

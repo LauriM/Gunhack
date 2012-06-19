@@ -305,3 +305,19 @@ void npcDumpState(){
 		LOG_DEBUG(output);
 	}
 }
+
+int npcGetCharOnPos(pos_t pos){
+	if(!npcExistsInPos(pos))
+		return 0;
+
+	for(int i = 0;i < npcDataSize;i++){
+		if(npcData[i].state != NPCSTATE_ALIVE)
+			continue;
+
+		if(npcData[i].pos.x == pos.x && npcData[i].pos.y == pos.y && npcData[i].pos.z == pos.z)
+			return npcInfo[npcData[i].name].symbol;
+	}
+
+	LOG_ERROR("This should never happen! The npcData is corrupted.");
+	return 0;
+}

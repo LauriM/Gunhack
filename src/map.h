@@ -42,6 +42,7 @@ void mapDebugClearColor(int z);
 void mapDebugRenderFill(int fillData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT]);
 
 void mapRender(void);
+void mapRenderToFile(FILE* file);
 void mapCreateRoom(int z);
 void mapScanFov(void);
 

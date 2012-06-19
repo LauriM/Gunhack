@@ -115,7 +115,9 @@ void itemRemoveSlot(slot_t slot);
 void itemApplyWpn();//Used to reload active eq
 
 int itemGetCarriedCount();
+int itemGetCharOnPos(pos_t pos);
 int itemGetCurrentAmmoOnWeapon();
+int itemGetCurrentMaxAmmoOnWeapon();
 int itemGiveCurrentWpnId();
 
 void itemYouSeePos(pos_t pos);

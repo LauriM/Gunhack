@@ -1,6 +1,5 @@
 Major todo
 ==========
-* End game screen + dump to file
 * balance
 * more items
 * readme/guide

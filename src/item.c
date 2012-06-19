@@ -568,6 +568,20 @@ int itemGetCurrentAmmoOnWeapon(){
 	return 0;
 }
 
+int itemGetCurrentMaxAmmoOnWeapon(){
+	for(int i = 0;i < itemDataSize;i++){
+		if(itemData[i].state != ITEMSTATE_EQ)
+			continue;
+
+		if(itemInfo[itemData[i].itemId].slot != SLOT_WPN)
+			continue;
+
+		return itemInfo[itemData[i].itemId].maxAmmo;
+	}
+
+	return 0;
+}
+
 void itemYouSeePos(pos_t pos){
 	for(int i = 0;i < itemDataSize;i++){
 		if(itemData[i].state != ITEMSTATE_GROUND)
@@ -582,4 +596,21 @@ void itemYouSeePos(pos_t pos){
 
 		MSG_ADD("You see %s here.",TERM_COLOR_DEFAULT,itemInfo[itemData[i].itemId].name);
 	}
+}
+
+int itemGetCharOnPos(pos_t pos){
+	for(int i = itemDataSize;i > 0;--i){
+		if(itemData[i].state != ITEMSTATE_GROUND)
+			continue;
+
+		if(itemData[i].pos.z != pos.z)
+			continue;
+		if(itemData[i].pos.y != pos.y)
+			continue;
+		if(itemData[i].pos.x != pos.x)
+			continue;
+
+		return itemInfo[itemData[i].itemId].symbol;
+	}
+	return 0;
 }

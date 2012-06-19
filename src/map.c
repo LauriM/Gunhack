@@ -49,6 +49,37 @@ void roomInit(int id){
 	}
 }
 
+void mapRenderToFile(FILE* file){
+	int x,y;
+
+	for(y = 0;y < MAP_MAX_HEIGHT;y++){
+		for(x = 0;x < MAP_MAX_WIDTH;x++){
+			pos_t pos;
+			pos.z = playerGetInfo()->pos.z;
+			pos.x = x;
+			pos.y = y;
+            int value = mapGetVisByPos(pos)->symbol;
+
+			if(itemGetCharOnPos(pos) != 0){
+				if(mapLosCheckByPos(playerGetInfo()->pos,pos))
+					value = itemGetCharOnPos(pos);
+			}
+
+			if(npcGetCharOnPos(pos) != 0){
+				if(mapLosCheckByPos(playerGetInfo()->pos,pos))
+					value = npcGetCharOnPos(pos);
+			}
+
+			if(pos.x == playerGetInfo()->pos.x && pos.y == playerGetInfo()->pos.y){
+				value = 'X';
+			}
+
+			fprintf(file,"%c",value);
+		}
+		fprintf(file,"\n");
+	}
+}
+
 void mapRender(void){
 	int x,y;
 

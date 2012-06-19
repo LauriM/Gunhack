@@ -118,6 +118,23 @@ void msgShowWindow(){
 	hudMenuFinish();
 }
 
+void msgWriteToFile(FILE* file){
+	msg_t *curr;
+
+	curr = end;
+
+	int hits = 0;
+	while(curr != NULL){
+		fprintf(file,"Turn %i -> %s\n",curr->turn,curr->msg);
+		curr = curr->prev;
+		++hits;
+
+		if(hits > 15){
+			return;
+		}
+	}
+}
+
 extern msg_t* msgGetLastMsg(){
 	return end;
 }

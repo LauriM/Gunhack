@@ -49,4 +49,6 @@ void playerAddExp(int amount);
 
 void playerApplyDmg(int amount);
 
+void playerDumpToFile();
+
 #endif

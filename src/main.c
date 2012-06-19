@@ -51,28 +51,23 @@ int main(int argc, const char *argv[]){
 	}
 	*/
 
-	//TODO: Better management for the save files
-	if(hudPrompt("Load a save from disk? (y/n)") == 1){
-		loadGame();
-	}else{
-		mapCreateRoom(0);
-		playerGetInfo()->pos.z = 0;
+	mapCreateRoom(0);
+	playerGetInfo()->pos.z = 0;
 
-		struct pos_s pos =  mapFindTilePos(playerGetInfo()->pos.z,TILE_STAIRS_UP);
-		playerGetInfo()->pos.x = pos.x;
-		playerGetInfo()->pos.y = pos.y;
+	struct pos_s pos =  mapFindTilePos(playerGetInfo()->pos.z,TILE_STAIRS_UP);
+	playerGetInfo()->pos.x = pos.x;
+	playerGetInfo()->pos.y = pos.y;
 
-		//give the starting itemset
-		itemSpawn(playerGetInfo()->pos,ITEM_PISTOL);
-		itemSpawn(playerGetInfo()->pos,ITEM_DYNAMITE);
-		itemSpawn(playerGetInfo()->pos,ITEM_DYNAMITE);
-		itemSpawn(playerGetInfo()->pos,ITEM_DYNAMITE);
-		itemSpawn(playerGetInfo()->pos,ITEM_DYNAMITE);
-		itemSpawn(playerGetInfo()->pos,ITEM_DYNAMITE);
-		itemPickup();
+	//give the starting itemset
+	itemSpawn(playerGetInfo()->pos,ITEM_PISTOL);
+	itemSpawn(playerGetInfo()->pos,ITEM_DYNAMITE);
+	itemSpawn(playerGetInfo()->pos,ITEM_DYNAMITE);
+	itemSpawn(playerGetInfo()->pos,ITEM_DYNAMITE);
+	itemSpawn(playerGetInfo()->pos,ITEM_DYNAMITE);
+	itemSpawn(playerGetInfo()->pos,ITEM_DYNAMITE);
+	itemPickup();
 
-		mapScanFov();
-	}
+	mapScanFov();
 
 	//==========================================================//
 	//  Main loop
@@ -116,7 +111,22 @@ int main(int argc, const char *argv[]){
 			break;
 		case ENDGAME_REASON_GAMEOVER:
 			playerAddPoints(itemCountEndBonus());
-			printw("Game over! Points: %i", playerGetInfo()->points);
+			msgAdd("You are dead.",TERM_COLOR_RED);
+
+			printw("    _____\n");
+			printw("   /     \\ \n");
+			printw("  /       \\ \n");
+			printw("  | R.I.P  | \n");
+			printw("  |        | \n");
+			printw("  |        | \n");
+			printw("  |        | \n");
+			printw("  |________| \n");
+
+			printw("Turns: %i Points: %i\n",playerGetInfo()->turn, playerGetInfo()->points);
+			printw("\n");
+			printw("\n");
+			printw("\n");
+			playerDumpToFile();
 			break;
 		case ENDGAME_REASON_WIN:
 			playerAddPoints(itemCountEndBonus());
@@ -124,6 +134,7 @@ int main(int argc, const char *argv[]){
 			break;
 	}
 
+	printw("Press any key to continue...");
 	getch();//Wait for input before quitting
 
 	LOG_INFO("Closing game...");
