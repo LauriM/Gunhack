@@ -343,10 +343,14 @@ int itemInvChooseItem(){
 	hudMenuInit();
 
 	hudMenuWrite("Inventory:");
+
+	int hits = 0;
+
 	for(int i = 0;i < itemDataSize;i++){
 		if(itemData[i].state == ITEMSTATE_INV){
 			char output[100];
-			snprintf(output,100,"Id: %i Symbol: %c Name: %s",i,itemInfo[itemData[i].itemId].symbol,itemInfo[itemData[i].itemId].name);
+			snprintf(output,100,"%i Symbol: %c Name: %s",hits,itemInfo[itemData[i].itemId].symbol,itemInfo[itemData[i].itemId].name);
+			++hits;
 
 			hudMenuWrite(output);
 		}
@@ -356,7 +360,18 @@ int itemInvChooseItem(){
 
 	char str[80];
 	getstr(str);
-	return atoi(str);
+	int id = atoi(str);
+
+	hits = 0;
+	for(int i = 0;i < itemDataSize;i++){
+		if(itemData[i].state == ITEMSTATE_INV){
+			if(hits == id)
+				return i;
+			++hits;
+		}
+	}
+
+	return 0;
 }
 
 void itemDebugDumpInv(){

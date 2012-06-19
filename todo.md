@@ -3,6 +3,7 @@ Major todo
 * End game screen + dump to file
 * balance
 * more items
+* readme/guide
 
 todo
 ====
@@ -10,7 +11,6 @@ todo
 * shotgun + ak
 * save prompt to automatically check for save and then loads it
 * fix melee wpn bonus *or* drop the melee weapons
-* better way to choose the current item
 * You see here msgs
 * wpn repairs etc(?)
 * Show current weapon name on statusbar !

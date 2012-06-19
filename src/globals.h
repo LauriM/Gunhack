@@ -33,6 +33,7 @@ typedef enum{
 	DIR_NW,
 	DIR_COUNT
 } dir_t;
+
 #endif
 
 //Game settings
