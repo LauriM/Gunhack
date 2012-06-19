@@ -6,6 +6,7 @@
 #include "npc.h"
 #include "msg.h"
 #include "item.h"
+#include <time.h>
 
 player_t playerInfo;
 
@@ -127,6 +128,7 @@ void playerDumpToFile(){
 	FILE* file = fopen("dump.txt","w");//TODO: date+time to the file
 
 	fprintf(file,"Player stats\n");
+	fprintf(file, "* Points: %i\n",playerInfo.points);
 	fprintf(file, "* HP: %i/%i\n",playerInfo.hp,playerInfo.maxhp);
 	fprintf(file, "* Exp/Level: %i/%i\n",playerInfo.exp,playerInfo.level);
 	fprintf(file, "* Turn: %i\n",playerInfo.turn);
@@ -155,5 +157,13 @@ void playerDumpToFile(){
 	fprintf(file,"\n");
 
 	msgWriteToFile(file);
+	fclose(file);
+
+	file = fopen("rawscores.txt","a");
+	fprintf(file,"%ld|%i|%i|%i|%i \n",time(NULL),playerInfo.points,playerInfo.turn,playerInfo.level,playerInfo.pos.z);
+	fclose(file);
+
+	file = fopen("scores.txt","a");
+	fprintf(file,"Unixtime: %ld Points: %i Turn: %i Level: %i Dungeon level:%i \n",time(NULL),playerInfo.points,playerInfo.turn,playerInfo.level,playerInfo.pos.z);
 	fclose(file);
 }

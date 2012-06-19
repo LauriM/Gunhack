@@ -17,3 +17,6 @@ roguelike.opensdf
 game.vcxproj*
 
 dump.txt
+
+rawscores.txt
+scores.txt
