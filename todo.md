@@ -10,7 +10,6 @@ todo
 * add unreloading of weapons
 * shotgun + ak
 * save prompt to automatically check for save and then loads it
-* fix melee wpn bonus *or* drop the melee weapons
 * You see here msgs
 * wpn repairs etc(?)
 * Show current weapon name on statusbar !

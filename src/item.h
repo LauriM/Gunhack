@@ -31,7 +31,6 @@ typedef enum{
 typedef enum{
 	ITEM_HP_SMALL = 0,
 	ITEM_HP_BIG,
-	ITEM_MELEE_KNIFE,//TODO: doesn't actually work
 	ITEM_DYNAMITE,
 	ITEM_LANDMINE,
 	ITEM_CORPSE,
