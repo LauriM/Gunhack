@@ -34,6 +34,22 @@ void input_move_w(void){
 	playerMove(DIR_W);
 }
 
+void input_move_nw(void){
+	playerMove(DIR_NW);
+}
+
+void input_move_ne(void){
+	playerMove(DIR_NE);
+}
+
+void input_move_sw(void){
+	playerMove(DIR_SW);
+}
+
+void input_move_se(void){
+	playerMove(DIR_SE);
+}
+
 void input_applyitem(void){
 	int itemIdentifier = itemInvChooseItem();
 
@@ -172,6 +188,15 @@ void inputInit(){
 	keyBinds['h'] = &input_move_w;
 	keyBinds['k'] = &input_move_n;
 	keyBinds['j'] = &input_move_s;
+
+	keyBinds[55] = &input_move_nw;
+	keyBinds[56] = &input_move_n;
+	keyBinds[57] = &input_move_ne;
+	keyBinds[52] = &input_move_w;
+	keyBinds[54] = &input_move_e;
+	keyBinds[49] = &input_move_sw;
+	keyBinds[50] = &input_move_s;
+	keyBinds[51] = &input_move_se;
 }
 
 void inputHandle(){

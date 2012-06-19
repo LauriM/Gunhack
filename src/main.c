@@ -47,7 +47,7 @@ int main(int argc, const char *argv[]){
 	while(1){
 		key = getch();
 
-		printf("%i",key);
+		printw("Key %i",key);
 	}
 	*/
 

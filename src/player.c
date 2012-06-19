@@ -50,6 +50,22 @@ void playerMove(int direction){
 		case DIR_E:
 			newX = playerInfo.pos.x + 1;
 			break;
+		case DIR_NW:
+			newY = playerInfo.pos.y - 1;
+			newX = playerInfo.pos.x - 1;
+			break;
+		case DIR_NE:
+			newX = playerInfo.pos.x + 1;
+			newY = playerInfo.pos.y - 1;
+			break;
+		case DIR_SW:
+			newX = playerInfo.pos.x - 1;
+			newY = playerInfo.pos.y + 1;
+			break;
+		case DIR_SE:
+			newY = playerInfo.pos.y + 1;
+			newX = playerInfo.pos.x + 1;
+			break;
 	}
 
 	//Check if the new position is ok
