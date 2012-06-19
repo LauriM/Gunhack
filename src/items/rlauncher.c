@@ -8,7 +8,7 @@
 
 void itemCall_rLauncher(int itemId,itemaction_t action){
 	if(action == ITEMACTION_USE){
-		if(playerGetInfo()->wpnAmmo == 1){
+		if(itemData[itemId].var1 == 1){
 			msgAdd("Weapon already loaded!",TERM_COLOR_DEFAULT);
 			return;
 		}
@@ -18,13 +18,13 @@ void itemCall_rLauncher(int itemId,itemaction_t action){
 			return;
 		}
 
-		playerGetInfo()->ammo_rockets += playerGetInfo()->wpnAmmo;
+		playerGetInfo()->ammo_rockets += itemData[itemId].var1;
 
 		if(playerGetInfo()->ammo_rockets>= 1){
-			playerGetInfo()->wpnAmmo   = 1;
+			itemData[itemId].var1      = 1;
 			playerGetInfo()->ammo_rockets -= 1;
 		}else{
-			playerGetInfo()->wpnAmmo  = playerGetInfo()->ammo_rockets;
+			itemData[itemId].var1         = playerGetInfo()->ammo_rockets;
 			playerGetInfo()->ammo_rockets = 0;
 		}
 		msgAdd("You reloaded your rocket launcher.",TERM_COLOR_GREEN);
@@ -32,7 +32,7 @@ void itemCall_rLauncher(int itemId,itemaction_t action){
 	}
 
 	if(action == ITEMACTION_ATTACK){
-		if(playerGetInfo()->wpnAmmo < 1){
+		if(itemData[itemId].var1 < 1){
             msgAdd("Click.",TERM_COLOR_RED);
 			return;
 		}
@@ -40,7 +40,7 @@ void itemCall_rLauncher(int itemId,itemaction_t action){
 		pos_t movement = dirToPos(inputGetDirection());
 		pos_t pos      = playerGetInfo()->pos;
 
-		--playerGetInfo()->wpnAmmo;
+		--itemData[itemId].var1;
 
 		//Move one tile at the time
 

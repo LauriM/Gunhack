@@ -24,8 +24,6 @@ void playerInit(){
 	playerInfo.ammo_shell   = 0;
 	playerInfo.ammo_39mm    = 30;
 	playerInfo.ammo_9mm     = 24;
-
-	playerInfo.wpnAmmo = 0;
 }
 
 void playerRender(){

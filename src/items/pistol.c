@@ -8,7 +8,7 @@
 
 void itemCall_pistol(int itemId,itemaction_t action){
 	if(action == ITEMACTION_USE){
-		if(playerGetInfo()->wpnAmmo == 1){
+		if(itemData[itemId].var1 == 1){
 			msgAdd("Weapon already loaded!",TERM_COLOR_DEFAULT);
 			return;
 		}
@@ -18,13 +18,13 @@ void itemCall_pistol(int itemId,itemaction_t action){
 			return;
 		}
 
-		playerGetInfo()->ammo_9mm += playerGetInfo()->wpnAmmo;
+		playerGetInfo()->ammo_9mm += itemData[itemId].var1;
 
 		if(playerGetInfo()->ammo_9mm >= 12){
-			playerGetInfo()->wpnAmmo   = 12;
+			itemData[itemId].var1      = 12;
 			playerGetInfo()->ammo_9mm -= 12;
 		}else{
-			playerGetInfo()->wpnAmmo  = playerGetInfo()->ammo_9mm;
+			itemData[itemId].var1     = playerGetInfo()->ammo_9mm;
 			playerGetInfo()->ammo_9mm = 0;
 		}
 		msgAdd("You reloaded your pistol with 9mm bullets.",TERM_COLOR_GREEN);
@@ -32,7 +32,7 @@ void itemCall_pistol(int itemId,itemaction_t action){
 	}
 
 	if(action == ITEMACTION_ATTACK){
-		if(playerGetInfo()->wpnAmmo < 1){
+		if(itemData[itemId].var1 < 1){
             msgAdd("Click.",TERM_COLOR_RED);
 			return;
 		}
@@ -40,7 +40,7 @@ void itemCall_pistol(int itemId,itemaction_t action){
 		pos_t movement = dirToPos(inputGetDirection());
 		pos_t pos = playerGetInfo()->pos;
 
-		--playerGetInfo()->wpnAmmo;
+		--itemData[itemId].var1;
 
 		//Move one tile at the time
 

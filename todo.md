@@ -6,12 +6,11 @@ Major todo
 
 todo
 ====
-* move guns to use *var1* for ammunition
+* add unreloading of weapons
 * shotgun + ak
 * save prompt to automatically check for save and then loads it
 * fix melee wpn bonus *or* drop the melee weapons
 * better way to choose the current item
-* Add cutter weapon to dig
 * You see here msgs
 * wpn repairs etc(?)
 * Show current weapon name on statusbar !
@@ -20,7 +19,7 @@ todo
 Minor todo
 ==========
 * Save system is not portable
-* ColorData does not respect visdata
+* ColorData does not respect visdata (!)
 * hudMenuWrite may temporary black out parts of the map
 * text may not always be cleared before displaying a user prompt on top of the screen
 * some messages wont work at all (end gamescreen)

@@ -9,7 +9,7 @@
 
 void itemCall_ak47(int itemId,itemaction_t action){
 	if(action == ITEMACTION_USE){
-		if(playerGetInfo()->wpnAmmo == 1){
+		if(itemData[itemId].var1 == 1){
 			msgAdd("Weapon already loaded!",TERM_COLOR_DEFAULT);
 			return;
 		}
@@ -19,13 +19,13 @@ void itemCall_ak47(int itemId,itemaction_t action){
 			return;
 		}
 
-		playerGetInfo()->ammo_39mm += playerGetInfo()->wpnAmmo;
+		playerGetInfo()->ammo_39mm += itemData[itemId].var1;
 
 		if(playerGetInfo()->ammo_39mm >= 30){
-			playerGetInfo()->wpnAmmo   = 30;
+			itemData[itemId].var1       = 30;
 			playerGetInfo()->ammo_39mm -= 30;
 		}else{
-			playerGetInfo()->wpnAmmo  = playerGetInfo()->ammo_39mm;
+			itemData[itemId].var1      = playerGetInfo()->ammo_39mm;
 			playerGetInfo()->ammo_39mm = 0;
 		}
 		msgAdd("You reloaded your ak with 39mm bullets.",TERM_COLOR_GREEN);
@@ -40,14 +40,14 @@ void itemCall_ak47(int itemId,itemaction_t action){
 start:
 		while(shots > 0){
 			--shots;
-			if(playerGetInfo()->wpnAmmo < 1){
+			if(itemData[itemId].var1 < 1){
 				msgAdd("Click.",TERM_COLOR_RED);
 				continue;
 			}
 
 			pos_t pos = playerGetInfo()->pos;
 
-			--playerGetInfo()->wpnAmmo;
+			--itemData[itemId].var1;
 
 			//Move one tile at the time
 

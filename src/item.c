@@ -25,27 +25,27 @@ item_t     itemInfo[ITEM_COUNT];
 #define CREATE_ITEM(p_symbol,p_id,p_rarity,p_type,p_name,p_color,p_call,p_drop,p_slot,p_maxAmmo,p_def) itemInfo[p_id].symbol = p_symbol; itemInfo[p_id].itemRarity = p_rarity;itemInfo[p_id].itemType = p_type; itemInfo[p_id].name = TO_STRING(p_name); itemInfo[p_id].itemColor = p_color; itemInfo[p_id].itemCall = p_call; itemInfo[p_id].canDrop = p_drop; itemInfo[p_id].slot = p_slot; itemInfo[p_id].maxAmmo = p_maxAmmo; itemInfo[p_id].defense = p_def;
 
 void itemInit(void){
-//symbol        , id               , rarity , type             , name                   , color              , action                      , candrop , slot      , maxAmmo,def
-CREATE_ITEM('*' , ITEM_HP_SMALL    , 7     , ITEM_TYPE_USABLE , "Small health pack"    , TERM_COLOR_DEFAULT , &itemCall_hp_small          , true    , SLOT_NULL , 0,0);
-CREATE_ITEM('+' , ITEM_HP_BIG      , 10     , ITEM_TYPE_USABLE , "Large health pack"    , TERM_COLOR_DEFAULT , &itemCall_hp_large          , true    , SLOT_NULL , 0,0);
-CREATE_ITEM('/' , ITEM_MELEE_KNIFE , 30     , ITEM_TYPE_MELEE  , "Knife"                , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_WPN  , 0,0);
-CREATE_ITEM('%' , ITEM_CORPSE      , 0      , ITEM_TYPE_USABLE , "Corpse"               , TERM_COLOR_RED     , &itemCall_null              , false   , SLOT_NULL , 0,0);
-CREATE_ITEM('!' , ITEM_LVL_POTION  , 90     , ITEM_TYPE_USABLE , "Potion of gain level" , TERM_COLOR_GREEN   , &itemCall_potion_gain_level , true    , SLOT_NULL , 0,0);
-CREATE_ITEM('=' , ITEM_9mm_BOX     , 10     , ITEM_TYPE_AMMO   , "9mm Ammunition"       , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0,0);
-CREATE_ITEM('=' , ITEM_39mm_BOX    , 20     , ITEM_TYPE_AMMO   , "39mm Ammunition"      , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0,0);
-CREATE_ITEM('=' , ITEM_shells_BOX  , 30     , ITEM_TYPE_AMMO   , "Shotgun shells"       , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0,0);
-CREATE_ITEM('=' , ITEM_rockets_BOX , 30     , ITEM_TYPE_AMMO   , "Rockets"              , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0,0);
-CREATE_ITEM('(' , ITEM_PISTOL      , 30     , ITEM_TYPE_GUN    , "9mm Pistol"           , TERM_COLOR_DEFAULT , &itemCall_pistol            , true    , SLOT_WPN  , 12,0);
-CREATE_ITEM(')',ITEM_AK47,40,ITEM_TYPE_GUN,"AK-47",TERM_COLOR_DEFAULT,&itemCall_ak47,true,SLOT_WPN,30,0);
-CREATE_ITEM('[',ITEM_ROCKET_LAUNCHER,10,ITEM_TYPE_GUN, "Rocket Launcher", TERM_COLOR_GREEN,&itemCall_rLauncher,true,SLOT_WPN,1,0);
-CREATE_ITEM('{',ITEM_LAW,10,ITEM_TYPE_GUN, "Light AntiTank weapon",TERM_COLOR_GREEN,&itemCall_law,true,SLOT_WPN,1,0);
-CREATE_ITEM('^',ITEM_WOOD_HELMET,10,ITEM_TYPE_ARMOR,"Wooden Helmet (lvl 1)",TERM_COLOR_DEFAULT,&itemCall_null,true,SLOT_HEAD,0,2);
-CREATE_ITEM('^',ITEM_IRON_HELMET,30,ITEM_TYPE_ARMOR,"Iron Helmet (lvl 2)",TERM_COLOR_DEFAULT,&itemCall_null,true,SLOT_HEAD,0,8);
-CREATE_ITEM('^',ITEM_PLATINUM_HELMET,50,ITEM_TYPE_ARMOR,"Platinum Helmet (lvl 3)",TERM_COLOR_DEFAULT,&itemCall_null,true,SLOT_HEAD,0,15);
-CREATE_ITEM('^',ITEM_TITAN_HELMET,70,ITEM_TYPE_ARMOR,"Titan Helmet (lvl 4)",TERM_COLOR_DEFAULT,&itemCall_null,true,SLOT_HEAD,0,25);
-CREATE_ITEM('^',ITEM_DIAMOND_HELMET,90,ITEM_TYPE_ARMOR,"Diamond Helmet (lvl 5)",TERM_COLOR_DEFAULT,&itemCall_null,true,SLOT_HEAD,0,40);
-CREATE_ITEM('|',ITEM_DYNAMITE,10,ITEM_TYPE_USABLE,"Dynamite",TERM_COLOR_RED,&itemCall_dynamite,true,SLOT_NULL,0,0);
-CREATE_ITEM('_',ITEM_LANDMINE,25,ITEM_TYPE_USABLE,"Landmine",TERM_COLOR_GREEN,&itemCall_landmine,true,SLOT_NULL,0,0);
+	//symbol        , id                   , rarity , type             , name                      , color              , action                      , candrop , slot      , maxAmmo , def
+	CREATE_ITEM('*' , ITEM_HP_SMALL        , 7      , ITEM_TYPE_USABLE , "Small health pack"       , TERM_COLOR_DEFAULT , &itemCall_hp_small          , true    , SLOT_NULL , 0       , 0);
+	CREATE_ITEM('+' , ITEM_HP_BIG          , 10     , ITEM_TYPE_USABLE , "Large health pack"       , TERM_COLOR_DEFAULT , &itemCall_hp_large          , true    , SLOT_NULL , 0       , 0);
+	CREATE_ITEM('/' , ITEM_MELEE_KNIFE     , 30     , ITEM_TYPE_MELEE  , "Knife"                   , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_WPN  , 0       , 0);
+	CREATE_ITEM('%' , ITEM_CORPSE          , 0      , ITEM_TYPE_USABLE , "Corpse"                  , TERM_COLOR_RED     , &itemCall_null              , false   , SLOT_NULL , 0       , 0);
+	CREATE_ITEM('!' , ITEM_LVL_POTION      , 90     , ITEM_TYPE_USABLE , "Potion of gain level"    , TERM_COLOR_GREEN   , &itemCall_potion_gain_level , true    , SLOT_NULL , 0       , 0);
+	CREATE_ITEM('=' , ITEM_9mm_BOX         , 10     , ITEM_TYPE_AMMO   , "9mm Ammunition"          , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0       , 0);
+	CREATE_ITEM('=' , ITEM_39mm_BOX        , 20     , ITEM_TYPE_AMMO   , "39mm Ammunition"         , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0       , 0);
+	CREATE_ITEM('=' , ITEM_shells_BOX      , 30     , ITEM_TYPE_AMMO   , "Shotgun shells"          , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0       , 0);
+	CREATE_ITEM('=' , ITEM_rockets_BOX     , 30     , ITEM_TYPE_AMMO   , "Rockets"                 , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0       , 0);
+	CREATE_ITEM('(' , ITEM_PISTOL          , 30     , ITEM_TYPE_GUN    , "9mm Pistol"              , TERM_COLOR_DEFAULT , &itemCall_pistol            , true    , SLOT_WPN  , 12      , 0);
+	CREATE_ITEM(')' , ITEM_AK47            , 40     , ITEM_TYPE_GUN    , "AK-47"                   , TERM_COLOR_DEFAULT , &itemCall_ak47              , true    , SLOT_WPN  , 30      , 0);
+	CREATE_ITEM('[' , ITEM_ROCKET_LAUNCHER , 10     , ITEM_TYPE_GUN    , "Rocket Launcher"         , TERM_COLOR_GREEN   , &itemCall_rLauncher         , true    , SLOT_WPN  , 1       , 0);
+	CREATE_ITEM('{' , ITEM_LAW             , 10     , ITEM_TYPE_GUN    , "Light AntiTank weapon"   , TERM_COLOR_GREEN   , &itemCall_law               , true    , SLOT_WPN  , 1       , 0);
+	CREATE_ITEM('^' , ITEM_WOOD_HELMET     , 10     , ITEM_TYPE_ARMOR  , "Wooden Helmet (lvl 1)"   , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HEAD , 0       , 2);
+	CREATE_ITEM('^' , ITEM_IRON_HELMET     , 30     , ITEM_TYPE_ARMOR  , "Iron Helmet (lvl 2)"     , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HEAD , 0       , 8);
+	CREATE_ITEM('^' , ITEM_PLATINUM_HELMET , 50     , ITEM_TYPE_ARMOR  , "Platinum Helmet (lvl 3)" , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HEAD , 0       , 15);
+	CREATE_ITEM('^' , ITEM_TITAN_HELMET    , 70     , ITEM_TYPE_ARMOR  , "Titan Helmet (lvl 4)"    , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HEAD , 0       , 25);
+	CREATE_ITEM('^' , ITEM_DIAMOND_HELMET  , 90     , ITEM_TYPE_ARMOR  , "Diamond Helmet (lvl 5)"  , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HEAD , 0       , 40);
+	CREATE_ITEM('|' , ITEM_DYNAMITE        , 10     , ITEM_TYPE_USABLE , "Dynamite"                , TERM_COLOR_RED     , &itemCall_dynamite          , true    , SLOT_NULL , 0       , 0);
+	CREATE_ITEM('_' , ITEM_LANDMINE        , 25     , ITEM_TYPE_USABLE , "Landmine"                , TERM_COLOR_GREEN   , &itemCall_landmine          , true    , SLOT_NULL , 0       , 0);
 }
 
 void itemClearFromLevel(int z){
@@ -411,6 +411,11 @@ void itemDrop(int id){
 }
 
 void itemWield(int id){
+	if(itemInfo[itemData[id].itemId].slot == SLOT_NULL){
+		msgAdd("You cannot wield that item!",TERM_COLOR_RED);
+		return;
+	}
+
 	if(itemData[id].state == ITEMSTATE_INV){
 		itemRemoveSlot(itemInfo[itemData[id].itemId].slot);
 		itemData[id].state = ITEMSTATE_EQ;
@@ -431,25 +436,6 @@ void itemRemoveSlot(slot_t slot){
 		itemData[i].state = ITEMSTATE_INV;
 
 		MSG_ADD("You remove %s.",TERM_COLOR_DEFAULT,itemInfo[itemData[i].itemId].name);
-
-		if(itemData[i].itemId == ITEM_PISTOL){
-			playerGetInfo()->ammo_9mm += playerGetInfo()->wpnAmmo;
-			playerGetInfo()->wpnAmmo = 0;
-		}
-		if(itemData[i].itemId == ITEM_AK47){
-			playerGetInfo()->ammo_39mm += playerGetInfo()->wpnAmmo;
-			playerGetInfo()->wpnAmmo = 0;
-		}
-		/*
-		if(itemData[i].itemId == ITEM_SHOTGUN){
-			playerGetInfo()->ammo_shell += playerGetInfo()->wpnAmmo;
-			playerGetInfo()->wpnAmmo = 0;
-		}
-		*/
-		if(itemData[i].itemId == ITEM_ROCKET_LAUNCHER){
-			playerGetInfo()->ammo_rockets += playerGetInfo()->wpnAmmo;
-			playerGetInfo()->wpnAmmo = 0;
-		}
 
 		return;
 	}
@@ -550,4 +536,18 @@ void itemTick(){
 
 		(*itemInfo[itemData[i].itemId].itemCall)(i,ITEMACTION_TICK);
 	}
+}
+
+int itemGetCurrentAmmoOnWeapon(){
+	for(int i = 0;i < itemDataSize;i++){
+		if(itemData[i].state != ITEMSTATE_EQ)
+			continue;
+
+		if(itemInfo[itemData[i].itemId].slot != SLOT_WPN)
+			continue;
+
+		return itemData[i].var1;
+	}
+
+	return 0;
 }

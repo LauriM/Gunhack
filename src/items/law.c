@@ -66,13 +66,11 @@ void itemCall_law(int itemId,itemaction_t action){
 		itemData[itemId].state = ITEMSTATE_EMPTY;
 		itemRemoveSlot(SLOT_WPN);
 
-		//Won't stay for the next wpn
-		playerGetInfo()->wpnAmmo = 0;
 		return;
 	}
 
 	if(action == ITEMACTION_WIELD){//Make sure law always has one bullet in before shooting.
-		playerGetInfo()->wpnAmmo = 1;
+		itemData[itemId].var1 = 1;
 		return;
 	}
 }
