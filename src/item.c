@@ -375,6 +375,56 @@ int itemInvChooseItem(){
 	return 0;
 }
 
+void itemDumpInvToFile(FILE* file){
+	for(int i = 0;i < itemDataSize;i++){
+		if(itemData[i].state == ITEMSTATE_INV){
+			char output[100];
+
+			snprintf(output,100,"%s\n",itemInfo[itemData[i].itemId].name);
+
+			fprintf(file,"%s",output);
+		}
+	}
+
+	fprintf(file,"\nEquipment:\n");
+
+	for(int i = 0;i < itemDataSize;i++){
+		if(itemData[i].state == ITEMSTATE_EQ){
+			char output[100];
+			char *slot;
+
+			switch(itemInfo[itemData[i].itemId].slot){
+				case SLOT_HEAD:
+					slot = "Head:";
+					break;
+				case SLOT_WPN:
+					slot = "Weapon:";
+					break;
+				case SLOT_BODY:
+					slot = "Body:";
+					break;
+				case SLOT_AMULET:
+					slot = "Amulet:";
+					break;
+				case SLOT_HANDS:
+					slot = "Hands";
+					break;
+				case SLOT_LEG:
+					slot = "Legs:";
+					break;
+				case SLOT_NULL:
+					LOG_ERROR("INVALID EQ SLOT TYPE!");
+					slot ="Invalid!";
+					break;
+			}
+
+			snprintf(output,100,"%s %s\n",slot,itemInfo[itemData[i].itemId].name);
+
+			fprintf(file,"%s",output);
+		}
+	}
+}
+
 void itemDebugDumpInv(){
 	LOG_INFO("Dumping full inventory");
 

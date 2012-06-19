@@ -141,15 +141,19 @@ void playerDumpToFile(){
 	fprintf(file, "* rockets %i\n",playerInfo.ammo_rockets);
 
 	fprintf(file,"\n");
-	fprintf(file,"\n");
 
 	mapRenderToFile(file);
 
 	fprintf(file,"\n");
+	fprintf(file,"Inventory:\n");
 	fprintf(file,"\n");
 
+	itemDumpInvToFile(file);
+
+	fprintf(file,"\n");
 	fprintf(file,"Last log messages:\n");
 	fprintf(file,"\n");
+
 	msgWriteToFile(file);
 	fclose(file);
 }

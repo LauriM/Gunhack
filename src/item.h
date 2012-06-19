@@ -122,9 +122,10 @@ int itemGiveCurrentWpnId();
 
 void itemYouSeePos(pos_t pos);
 
-extern int itemGiveRandomDropId();
+int itemGiveRandomDropId();
 
-extern void itemDebugDumpInv();
+void itemDebugDumpInv();
+void itemDumpInvToFile(FILE* file);
 
 int itemCountTotalDef();
 int itemCountEndBonus();
