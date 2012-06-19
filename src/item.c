@@ -512,7 +512,7 @@ int itemGiveCurrentWpnId(){
 		return i;
 	}
 
-	return 0;
+	return -1;
 }
 
 int itemCountTotalDef(){

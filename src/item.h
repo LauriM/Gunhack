@@ -116,12 +116,12 @@ void itemApplyWpn();//Used to reload active eq
 
 int itemGetCarriedCount();
 int itemGetCurrentAmmoOnWeapon();
+int itemGiveCurrentWpnId();
 
 extern int itemGiveRandomDropId();
 
 extern void itemDebugDumpInv();
 
-int itemGiveCurrentWpnId();
 int itemCountTotalDef();
 int itemCountEndBonus();
 

@@ -43,7 +43,14 @@ void hudRender(){
 	move(21,0);
 	printw(statusLine);
 
-	snprintf(statusLine,STATUSLINE_MAX_CHARS,"Ammo: %i/%i Weight: %i/%i Turns: %i",itemGetCurrentAmmoOnWeapon(),itemInfo[itemData[itemGiveCurrentWpnId()].itemId].maxAmmo,itemGetCarriedCount(),PLAYER_MAX_CARRY,playerGetInfo()->turn);
+	char* weaponName = "null";
+
+	weaponName = itemInfo[itemData[itemGiveCurrentWpnId()].itemId].name;
+	if(itemGiveCurrentWpnId() == -1){
+		weaponName = "\"Unarmed\"";
+	}
+
+	snprintf(statusLine,STATUSLINE_MAX_CHARS,"%s Ammo: %i/%i Weight: %i/%i Turns: %i",weaponName,itemGetCurrentAmmoOnWeapon(),itemInfo[itemData[itemGiveCurrentWpnId()].itemId].maxAmmo,itemGetCarriedCount(),PLAYER_MAX_CARRY,playerGetInfo()->turn);
 
 	move(22,0);
 	printw(statusLine);
