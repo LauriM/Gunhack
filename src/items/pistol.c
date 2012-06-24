@@ -8,7 +8,7 @@
 
 void itemCall_pistol(int itemId,itemaction_t action){
 	if(action == ITEMACTION_USE){
-		if(itemData[itemId].var1 == 1){
+		if(itemData[itemId].var1 == 12){
 			msgAdd("Weapon already loaded!",TERM_COLOR_DEFAULT);
 			return;
 		}

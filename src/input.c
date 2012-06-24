@@ -215,18 +215,31 @@ dir_t inputGetDirection(){
 	printw("Give a direction: \n");
 	int key = getch();
 
+	//Yes, its stupid that these are coded in like this... Whatever
 	switch(key){
-		case 106:  
+		case 50:  
 			return DIR_S;
 			break;
-		case 107:
-			return DIR_N;
+		case 49:
+			return DIR_SW;
 			break;
-		case 108:
+		case 51:
+			return DIR_SE;
+			break;
+		case 52:
+			return DIR_W;
+			break;
+		case 54:
 			return DIR_E;
 			break;
-		case 104:
-			return DIR_W;
+		case 55:
+			return DIR_NW;
+			break;
+		case 56:
+			return DIR_N;
+			break;
+		case 57:
+			return DIR_NE;
 			break;
 	}
 
