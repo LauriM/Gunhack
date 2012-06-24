@@ -151,6 +151,8 @@ void playerDumpToFile(){
 	fprintf(file, "* Exp/Level: %i/%i\n",playerInfo.exp,playerInfo.level);
 	fprintf(file, "* Turn: %i\n",playerInfo.turn);
 	fprintf(file, "* Dungeon level: %i\n",playerInfo.pos.z);
+	fprintf(file, "* Hostile npc killed: %i\n",playerInfo.hostile_kills);
+	fprintf(file, "* Innocent npc killed: %i\n",playerInfo.innocent_kills);
 
 	fprintf(file,"\n");
 
