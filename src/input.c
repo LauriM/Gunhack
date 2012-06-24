@@ -241,6 +241,18 @@ dir_t inputGetDirection(){
 		case 57:
 			return DIR_NE;
 			break;
+		case 106:
+			return DIR_S;
+			break;
+		case 107:
+			return DIR_N;
+			break;
+		case 108:
+			return DIR_E;
+			break;
+		case 104:
+			return DIR_W;
+			break;
 	}
 
 	return DIR_S; //Add random dir with msg to player about failure to choose direction
