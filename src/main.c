@@ -123,6 +123,7 @@ int main(int argc, const char *argv[]){
 			printw("  |________| \n");
 
 			printw("Turns: %i Points: %i\n",playerGetInfo()->turn, playerGetInfo()->points);
+			printw("Kills: %i (+ %i innocents)",playerGetInfo()->hostile_kills,playerGetInfo()->innocent_kills);
 			printw("\n");
 			printw("\n");
 			printw("\n");

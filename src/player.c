@@ -12,19 +12,21 @@ player_t playerInfo;
 
 void playerInit(){
 	//TODO: Why repeat player? why not x 
-	playerInfo.pos.x  = 10;
-	playerInfo.pos.y  = 10;
-	playerInfo.pos.z  = 0;
-	playerInfo.hp     = 10;
-	playerInfo.points = 0;
-	playerInfo.maxhp  = 10;
-	playerInfo.exp    = 0;
-	playerInfo.level  = 1;
+	playerInfo.pos.x          = 10;
+	playerInfo.pos.y          = 10;
+	playerInfo.pos.z          = 0;
+	playerInfo.hp             = 10;
+	playerInfo.points         = 0;
+	playerInfo.maxhp          = 10;
+	playerInfo.exp            = 0;
+	playerInfo.level          = 1;
+	playerInfo.innocent_kills = 0;
+	playerInfo.hostile_kills  = 0;
 
-	playerInfo.ammo_rockets = 0;
-	playerInfo.ammo_shell   = 0;
-	playerInfo.ammo_39mm    = 30;
-	playerInfo.ammo_9mm     = 24;
+	playerInfo.ammo_rockets   = 0;
+	playerInfo.ammo_shell     = 0;
+	playerInfo.ammo_39mm      = 30;
+	playerInfo.ammo_9mm       = 24;
 }
 
 void playerRender(){
@@ -176,10 +178,20 @@ void playerDumpToFile(){
 	fclose(file);
 
 	file = fopen("rawscores.txt","a");
-	fprintf(file,"%ld|%i|%i|%i|%i \n",time(NULL),playerInfo.points,playerInfo.turn,playerInfo.level,playerInfo.pos.z);
+	fprintf(file,"%ld|%i|%i|%i|%i|%i|%i \n",time(NULL),playerInfo.points,playerInfo.turn,playerInfo.level,playerInfo.pos.z,playerInfo.innocent_kills,playerInfo.hostile_kills);
 	fclose(file);
 
 	file = fopen("scores.txt","a");
-	fprintf(file,"Unixtime: %ld Points: %i Turn: %i Level: %i Dungeon level:%i \n",time(NULL),playerInfo.points,playerInfo.turn,playerInfo.level,playerInfo.pos.z);
+	fprintf(file,"Unixtime: %ld Points: %i Turn: %i Level: %i Dungeon level:%i Innocent kills: %i Hostile kills: %i\n",time(NULL),playerInfo.points,playerInfo.turn,playerInfo.level,playerInfo.pos.z,playerInfo.innocent_kills,playerInfo.hostile_kills);
 	fclose(file);
+}
+
+
+void playerAddKill(int relation){
+	if(relation == NPC_RELATION_HOSTILE){
+		++playerInfo.hostile_kills;
+		return;
+	}
+
+	++playerInfo.innocent_kills;
 }

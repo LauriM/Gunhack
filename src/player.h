@@ -13,6 +13,8 @@ typedef struct player_s{
 	pos_t pos;
 
 	int points;
+	int hostile_kills;
+	int innocent_kills;
 
 	int hp;
 	int maxhp;
@@ -46,6 +48,7 @@ void playerIncTurn(void);
 
 void playerAddPoints(int amount);
 void playerAddExp(int amount);
+void playerAddKill(int relation);
 
 void playerApplyDmg(int amount);
 

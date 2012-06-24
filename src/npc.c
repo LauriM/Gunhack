@@ -168,6 +168,7 @@ bool npcApplyDamagePos(pos_t pos,int damage){
 
 			playerAddPoints(npcInfo[npcData[i].name].maxHp);
 			playerAddExp(npcInfo[npcData[i].name].maxHp);
+			playerAddKill(npcInfo[npcData[i].name].relation);
 		}
 
 		return true;//Return true when hit
