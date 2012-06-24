@@ -7,7 +7,7 @@
 
 void itemCall_dynamite(int itemId,itemaction_t action){
 	if(action == ITEMACTION_USE){
-		msgAdd("Dynamite is on fire! You drop it to floor. (10 turns before explosion)",TERM_COLOR_GREEN);
+		msgAdd("Dynamite is on fire! You drop it to floor.",TERM_COLOR_GREEN);
 
 		itemData[itemId].var1  = 10;
 		itemData[itemId].state = ITEMSTATE_GROUND; //Drop it
