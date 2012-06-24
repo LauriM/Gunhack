@@ -71,7 +71,7 @@ void mapRenderToFile(FILE* file){
 			}
 
 			if(pos.x == playerGetInfo()->pos.x && pos.y == playerGetInfo()->pos.y){
-				value = 'X';
+				value = '@';
 			}
 
 			fprintf(file,"%c",value);
