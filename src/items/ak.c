@@ -1,4 +1,3 @@
-
 #include "../globals.h"
 #include "../item.h"
 #include "../msg.h"
@@ -54,8 +53,6 @@ start:
 			for(int i = 0;i < 100;i++){
 				pos.x = pos.x + movement.x;
 				pos.y = pos.y + movement.y;
-
-				printxy(pos.x,pos.y,"|");
 
 				if(mapGetTileByPos(pos)->block == 1){
 					mapEditColorPoint(pos,TERM_COLOR_GREY);

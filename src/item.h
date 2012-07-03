@@ -37,7 +37,7 @@ typedef enum{
 	ITEM_LVL_POTION,
 	ITEM_PISTOL,
 	ITEM_AK47,
-	//ITEM_SHOTGUN, ALSO uncomment ITEM.c itemRemoveSlot line 440
+	ITEM_SHOTGUN,
 	ITEM_ROCKET_LAUNCHER,
 	ITEM_LAW,
 	ITEM_9mm_BOX,
@@ -139,6 +139,7 @@ void itemCall_pistol(int itemId,itemaction_t action);
 void itemCall_rLauncher(int itemId,itemaction_t action);
 void itemCall_law(int itemId,itemaction_t action);
 void itemCall_ak47(int itemId,itemaction_t action);
+void itemCall_shotgun(int itemId,itemaction_t action);
 void itemCall_dynamite(int itemId,itemaction_t action);
 void itemCall_landmine(int itemId,itemaction_t action);
 
