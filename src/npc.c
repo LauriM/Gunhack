@@ -16,9 +16,11 @@ npc_t npcInfo[NPC_COUNT];
 #define CREATE_NPC(p_symbol,p_id,p_name,p_color,p_maxhp,p_rel,p_meleedmgmin,p_meleedmgmax) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color; npcInfo[p_id].maxHp = p_maxhp; npcInfo[p_id].relation = p_rel; npcInfo[p_id].meleeDmgMin = p_meleedmgmin; npcInfo[p_id].meleeDmgMax = p_meleedmgmax;
 
 void npcInit(void){
-	//--    symbol , id                , name            , color              , maxhp , relationship         , meleeDMGmin , meleeDMGmax
-	CREATE_NPC('D' , NPC_DUMMY         , "Dummy"         , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_NEUTRAL , 1           , 5);
-	CREATE_NPC('d' , NPC_DUMMY_HOSTILE , "Hostile Dummy" , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_HOSTILE , 1           , 3);
+	//--    symbol , id               , name           , color              , maxhp , relationship         , meleeDMGmin , meleeDMGmax
+	CREATE_NPC('x' , NPC_GRID_BUG     , "Grid bug"     , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_HOSTILE , 1           , 1);
+	CREATE_NPC('g' , NPC_GNOME        , "Gnome"        , TERM_COLOR_DEFAULT , 15    , NPC_RELATION_HOSTILE , 3           , 7);
+	CREATE_NPC('G' , NPC_GNOME_LORD   , "Gnome Lord"   , TERM_COLOR_DEFAULT , 20    , NPC_RELATION_HOSTILE , 5           , 7);
+	CREATE_NPC('g' , NPC_GNOME_SHAMAN , "Gnome Shaman" , TERM_COLOR_GREEN   , 10    , NPC_RELATION_HOSTILE , 10          , 12);
 
 	//Init the npcdata array
 	for(int i = 0;i < npcDataSize;i++){

@@ -37,6 +37,10 @@ typedef enum { /* TODO: Depracrated ? */
 typedef enum {
 	NPC_DUMMY = 0,
 	NPC_DUMMY_HOSTILE,
+	NPC_GRID_BUG,
+	NPC_GNOME,
+	NPC_GNOME_LORD,
+	NPC_GNOME_SHAMAN,
 	NPC_COUNT
 } npcname_t;
 

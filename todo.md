@@ -6,7 +6,6 @@ Major todo
 
 todo
 ====
-* shotgun
 * save prompt to automatically check for save and then loads it
 * drop save files?
 
