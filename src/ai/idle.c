@@ -10,7 +10,6 @@ void npcState_idle(int id,int flags){
 
 	//Neutral enemies attack only when hurt
 	if(flags & SEE_PLAYER && flags & IS_NEUTRAL && flags & IS_DAMAGED){
-
 		npcData[id].aiState = &npcState_attack;
 		LOG_DEBUG_F("[ai] %i attacking!",id);
 	}

@@ -35,12 +35,13 @@ typedef enum { /* TODO: Depracrated ? */
 } npc_ai_state_t;
 
 typedef enum {
-	NPC_DUMMY = 0,
-	NPC_DUMMY_HOSTILE,
-	NPC_GRID_BUG,
+	NPC_GRID_BUG = 0,
 	NPC_GNOME,
 	NPC_GNOME_LORD,
 	NPC_GNOME_SHAMAN,
+	NPC_KOBOLD,
+	NPC_KOBOLD_LORD,
+	NPC_KOBOLD_SHAMAN,
 	NPC_COUNT
 } npcname_t;
 
@@ -58,7 +59,7 @@ typedef struct npc_s{
 	int maxHp;
 	int meleeDmgMin;
 	int meleeDmgMax;
-	int dropCount;
+	int level;//Level when can be spawned
 	npcrelation_t relation;
 } npc_t;
 
@@ -80,6 +81,7 @@ npc_t     npcInfo[NPC_COUNT];
 void npcInit(void);
 void npcSpawnRandom(int z);
 void npcSpawn(pos_t pos,npcname_t id);
+npcname_t npcGiveRandomNpcByLevel(int level);
 void npcClearFromLevel(int z);
 void npcMoveToPos(int id,pos_t pos,bool allowAttack);
 
