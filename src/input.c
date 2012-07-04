@@ -67,7 +67,7 @@ void input_move_up(void){
 
 			if(hudPrompt("Do you want to escape the dungeon?") == 1){
 				LOG_INFO("Player left the dungeon!");
-				playerGetInfo()->endGame = 1;
+				playerGetInfo()->endGame = ENDGAME_REASON_GAMEOVER;
 			}
 
 		}else{
