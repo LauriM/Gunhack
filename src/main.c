@@ -69,6 +69,12 @@ int main(int argc, const char *argv[]){
 
 	mapScanFov();
 
+	mapRender();
+	itemRender();
+	npcRender();
+	playerRender();
+	hudRender();
+
 	//==========================================================//
 	//  Main loop
 	//==========================================================//          
