@@ -36,16 +36,21 @@ void itemInit(void){
 	CREATE_ITEM('=' , ITEM_rockets_BOX     , 30     , ITEM_TYPE_AMMO   , "Rockets"                 , TERM_COLOR_BLUE    , &itemCall_null              , true    , SLOT_NULL , 0       , 0);
 	CREATE_ITEM('(' , ITEM_PISTOL          , 30     , ITEM_TYPE_GUN    , "9mm Pistol"              , TERM_COLOR_DEFAULT , &itemCall_pistol            , true    , SLOT_WPN  , 12      , 0);
 	CREATE_ITEM(')' , ITEM_AK47            , 40     , ITEM_TYPE_GUN    , "AK-47"                   , TERM_COLOR_DEFAULT , &itemCall_ak47              , true    , SLOT_WPN  , 30      , 0);
-	CREATE_ITEM('/' , ITEM_SHOTGUN         , 30     , ITEM_TYPE_GUN    , "Shotgun"                 , TERM_COLOR_DEFAULT , &itemCall_shotgun           , true    , SLOT_WPN  , 8      , 0);
+	CREATE_ITEM('/' , ITEM_SHOTGUN         , 30     , ITEM_TYPE_GUN    , "Shotgun"                 , TERM_COLOR_DEFAULT , &itemCall_shotgun           , true    , SLOT_WPN  , 8       , 0);
 	CREATE_ITEM('[' , ITEM_ROCKET_LAUNCHER , 10     , ITEM_TYPE_GUN    , "Rocket Launcher"         , TERM_COLOR_GREEN   , &itemCall_rLauncher         , true    , SLOT_WPN  , 1       , 0);
 	CREATE_ITEM('{' , ITEM_LAW             , 10     , ITEM_TYPE_GUN    , "Light AntiTank weapon"   , TERM_COLOR_GREEN   , &itemCall_law               , true    , SLOT_WPN  , 1       , 0);
+	CREATE_ITEM('_' , ITEM_LANDMINE        , 25     , ITEM_TYPE_USABLE , "Landmine"                , TERM_COLOR_GREEN   , &itemCall_landmine          , true    , SLOT_NULL , 0       , 0);
+	CREATE_ITEM('|' , ITEM_DYNAMITE        , 10     , ITEM_TYPE_USABLE , "Dynamite"                , TERM_COLOR_RED     , &itemCall_dynamite          , true    , SLOT_NULL , 0       , 0);
 	CREATE_ITEM('^' , ITEM_WOOD_HELMET     , 10     , ITEM_TYPE_ARMOR  , "Wooden Helmet (lvl 1)"   , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HEAD , 0       , 2);
 	CREATE_ITEM('^' , ITEM_IRON_HELMET     , 30     , ITEM_TYPE_ARMOR  , "Iron Helmet (lvl 2)"     , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HEAD , 0       , 8);
 	CREATE_ITEM('^' , ITEM_PLATINUM_HELMET , 50     , ITEM_TYPE_ARMOR  , "Platinum Helmet (lvl 3)" , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HEAD , 0       , 15);
 	CREATE_ITEM('^' , ITEM_TITAN_HELMET    , 70     , ITEM_TYPE_ARMOR  , "Titan Helmet (lvl 4)"    , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HEAD , 0       , 25);
 	CREATE_ITEM('^' , ITEM_DIAMOND_HELMET  , 90     , ITEM_TYPE_ARMOR  , "Diamond Helmet (lvl 5)"  , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HEAD , 0       , 40);
-	CREATE_ITEM('|' , ITEM_DYNAMITE        , 10     , ITEM_TYPE_USABLE , "Dynamite"                , TERM_COLOR_RED     , &itemCall_dynamite          , true    , SLOT_NULL , 0       , 0);
-	CREATE_ITEM('_' , ITEM_LANDMINE        , 25     , ITEM_TYPE_USABLE , "Landmine"                , TERM_COLOR_GREEN   , &itemCall_landmine          , true    , SLOT_NULL , 0       , 0);
+	CREATE_ITEM(']' , ITEM_WOOD_ARMOR      , 10     , ITEM_TYPE_ARMOR  , "Wood Armor (lvl 1)"      , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_BODY , 0       , 4);
+	CREATE_ITEM(']' , ITEM_IRON_ARMOR      , 10     , ITEM_TYPE_ARMOR  , "Iron Armor (lvl 2)"      , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_BODY , 0       , 8);
+	CREATE_ITEM(']' , ITEM_PLATINUM_ARMOR  , 30     , ITEM_TYPE_ARMOR  , "Platinum Armor (lvl 1)"  , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_BODY , 0       , 15);
+	CREATE_ITEM(']' , ITEM_TITAN_ARMOR     , 60     , ITEM_TYPE_ARMOR  , "Titan Armor (lvl 1)"     , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_BODY , 0       , 28);
+	CREATE_ITEM(']' , ITEM_DIAMOND_ARMOR   , 95     , ITEM_TYPE_ARMOR  , "Diamond Armor (lvl 1)"   , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_BODY , 0       , 65);
 }
 
 void itemClearFromLevel(int z){
