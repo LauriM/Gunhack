@@ -173,7 +173,8 @@ void inputInit(){
 	keyBinds['t'] = &input_cheat_regenlevel;
 	keyBinds['.'] = &input_cheat_debuginv;
 
-	keyBinds['S'] = &input_save;
+	//Saving disabled
+	//keyBinds['S'] = &input_save;
 
 	keyBinds[','] = &input_pickup;
 	keyBinds['i'] = &input_inv;
