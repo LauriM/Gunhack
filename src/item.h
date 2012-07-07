@@ -60,6 +60,8 @@ typedef enum{
 	ITEM_PLATINUM_GLOVES,
 	ITEM_TITAN_GLOVES,
 	ITEM_DIAMOND_GLOVES,
+	ITEM_REGEN_AMULET,
+	ITEM_DEF_AMULET,
 	ITEM_COUNT
 } itemname_t;
 
@@ -153,5 +155,6 @@ void itemCall_ak47(int itemId,itemaction_t action);
 void itemCall_shotgun(int itemId,itemaction_t action);
 void itemCall_dynamite(int itemId,itemaction_t action);
 void itemCall_landmine(int itemId,itemaction_t action);
+void itemCall_regen_amulet(int itemId,itemaction_t action);
 
 #endif
