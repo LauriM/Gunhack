@@ -25,8 +25,9 @@ typedef struct tile_s{
 
 typedef struct room_s{
 	int mapData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
-	color_t colorData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
 	int visData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];//Contains the data that player has seen
+	color_t colorData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
+	color_t colorVisData[MAP_MAX_WIDTH][MAP_MAX_HEIGHT];
 	roomtype_t roomType;
 } room_t;
 

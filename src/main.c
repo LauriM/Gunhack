@@ -85,6 +85,8 @@ int main(int argc, const char *argv[]){
 
 		clear();
 
+		mapScanFov();
+
 		mapRender();
 		itemRender();
 		npcRender();

@@ -92,7 +92,6 @@ void playerMove(int direction){
 	playerInfo.pos.x = newX;
 	playerInfo.pos.y = newY;
 	itemYouSeePos(playerInfo.pos);
-	mapScanFov();
 }
 
 void playerRandomPosition(void){

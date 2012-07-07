@@ -85,7 +85,7 @@ void mapRender(void){
 
 	for(x = 0;x < MAP_MAX_WIDTH;x++){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
-			setColor(room[playerGetInfo()->pos.z].colorData[x][y]);
+			setColor(room[playerGetInfo()->pos.z].colorVisData[x][y]);
 
 			pos_t pos;
 			pos.z = playerGetInfo()->pos.z;
@@ -93,7 +93,7 @@ void mapRender(void){
 			pos.y = y;
 
 			printIntxy(x,y,mapGetVisByPos(pos)->symbol);
-			setColorOff(room[playerGetInfo()->pos.z].colorData[x][y]);
+			setColorOff(room[playerGetInfo()->pos.z].colorVisData[x][y]);
 		}
 	}
 }
@@ -439,7 +439,8 @@ void mapScanFov(void){
 		for(y = 0;y < MAP_MAX_HEIGHT;y++){
 			if(mapLosCheck(playerGetInfo()->pos.x,playerGetInfo()->pos.y,x,y) == 1){
 				//Player can see, lets move the tile to the visualData table
-				room[playerGetInfo()->pos.z].visData[x][y] = room[playerGetInfo()->pos.z].mapData[x][y];
+				room[playerGetInfo()->pos.z].visData[x][y]      = room[playerGetInfo()->pos.z].mapData[x][y];
+				room[playerGetInfo()->pos.z].colorVisData[x][y] = room[playerGetInfo()->pos.z].colorData[x][y];
 			}
 		}
 	}
