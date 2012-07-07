@@ -28,6 +28,7 @@ void npcInit(void){
 	CREATE_NPC('d' , 6     , 20    , 15          , 30          , NPC_DWARF         , "Dwarf"         , TERM_COLOR_DEFAULT , NPC_RELATION_PEACEFUL);
 	CREATE_NPC('B' , 8     , 35    , 15          , 35          , NPC_BUGBEAR       , "Bugbear"       , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
 	CREATE_NPC('S' , 8     , 25    , 15          , 30          , NPC_SPIDER        , "Giant Spider"  , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
+	CREATE_NPC('I' , 10    , 45    , 25          , 40          , NPC_IMP           , "Imp"           , TERM_COLOR_RED     , NPC_RELATION_HOSTILE);
 	//CREATE_NPC(,,,,,,,TERM_COLOR_DEFAULT, NPC_RELATION_HOSTILE);
 
 	//Init the npcdata array
