@@ -318,7 +318,7 @@ void itemDisplayEq(){
 	for(int i = 0;i < itemDataSize;i++){
 		if(itemData[i].state == ITEMSTATE_EQ){
 			char output[100];
-			char *slot;
+			char *slot = "null";
 
 			switch(itemInfo[itemData[i].itemId].slot){
 				case SLOT_HEAD:
@@ -406,7 +406,7 @@ void itemDumpInvToFile(FILE* file){
 	for(int i = 0;i < itemDataSize;i++){
 		if(itemData[i].state == ITEMSTATE_EQ){
 			char output[100];
-			char *slot;
+			char *slot = "null";
 
 			switch(itemInfo[itemData[i].itemId].slot){
 				case SLOT_HEAD:
