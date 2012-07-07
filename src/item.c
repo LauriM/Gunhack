@@ -372,9 +372,11 @@ int itemInvChooseItem(){
 
 	hudMenuWrite("Write item id to use: ");
 
+	echo();
 	char str[80];
 	getstr(str);
 	int id = atoi(str);
+	noecho();
 
 	hits = 0;
 	for(int i = 0;i < itemDataSize;i++){
