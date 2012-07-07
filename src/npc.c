@@ -13,17 +13,22 @@ npcdata_t *npcData     = NULL;
 
 npc_t npcInfo[NPC_COUNT];
 
-#define CREATE_NPC(p_symbol,p_level,p_id,p_name,p_color,p_maxhp,p_rel,p_meleedmgmin,p_meleedmgmax) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color; npcInfo[p_id].maxHp = p_maxhp; npcInfo[p_id].relation = p_rel; npcInfo[p_id].meleeDmgMin = p_meleedmgmin; npcInfo[p_id].meleeDmgMax = p_meleedmgmax; npcInfo[p_id].level = p_level;
+#define CREATE_NPC(p_symbol,p_level,p_maxhp,p_meleedmgmin,p_meleedmgmax,p_id,p_name,p_color,p_rel) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color; npcInfo[p_id].maxHp = p_maxhp; npcInfo[p_id].relation = p_rel; npcInfo[p_id].meleeDmgMin = p_meleedmgmin; npcInfo[p_id].meleeDmgMax = p_meleedmgmax; npcInfo[p_id].level = p_level;
 
 void npcInit(void){
-	//--    symbol , level , id                , name            , color              , maxhp , relationship         , meleeDMGmin , meleeDMGmax
-	CREATE_NPC('x' , 0     , NPC_GRID_BUG      , "Grid bug"      , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_HOSTILE , 1           , 1);
-	CREATE_NPC('g' , 3     , NPC_GNOME         , "Gnome"         , TERM_COLOR_DEFAULT , 15    , NPC_RELATION_HOSTILE , 3           , 7);
-	CREATE_NPC('G' , 5     , NPC_GNOME_LORD    , "Gnome Lord"    , TERM_COLOR_DEFAULT , 20    , NPC_RELATION_HOSTILE , 5           , 7);
-	CREATE_NPC('g' , 5     , NPC_GNOME_SHAMAN  , "Gnome Shaman"  , TERM_COLOR_GREEN   , 10    , NPC_RELATION_HOSTILE , 10          , 12);
-	CREATE_NPC('k' , 3     , NPC_KOBOLD        , "Kobold"        , TERM_COLOR_DEFAULT , 10    , NPC_RELATION_NEUTRAL , 3           , 7);
-	CREATE_NPC('K' , 5     , NPC_KOBOLD_LORD   , "Kobold Lord"   , TERM_COLOR_DEFAULT , 15    , NPC_RELATION_NEUTRAL , 5           , 8);
-	CREATE_NPC('k' , 5     , NPC_KOBOLD_SHAMAN , "Kobold Shaman" , TERM_COLOR_GREEN   , 10    , NPC_RELATION_NEUTRAL , 10          , 12);
+	//--    symbol , level , maxhp , meleeDMGmin , meleeDMGmax , id                , name            , color              , relationship
+	CREATE_NPC('x' , 0     , 10    , 1           , 1           , NPC_GRID_BUG      , "Grid bug"      , TERM_COLOR_DEFAULT , NPC_RELATION_PEACEFUL);
+	CREATE_NPC('g' , 3     , 15    , 3           , 7           , NPC_GNOME         , "Gnome"         , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
+	CREATE_NPC('k' , 3     , 10    , 5           , 10          , NPC_KOBOLD        , "Kobold"        , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
+	CREATE_NPC('G' , 5     , 20    , 5           , 7           , NPC_GNOME_LORD    , "Gnome Lord"    , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
+	CREATE_NPC('g' , 5     , 10    , 10          , 12          , NPC_GNOME_SHAMAN  , "Gnome Shaman"  , TERM_COLOR_GREEN   , NPC_RELATION_HOSTILE);
+	CREATE_NPC('K' , 5     , 15    , 5           , 20          , NPC_KOBOLD_LORD   , "Kobold Lord"   , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
+	CREATE_NPC('k' , 5     , 10    , 10          , 29          , NPC_KOBOLD_SHAMAN , "Kobold Shaman" , TERM_COLOR_GREEN   , NPC_RELATION_HOSTILE);
+	CREATE_NPC('w' , 5     , 15    , 17          , 18          , NPC_WOLF          , "Wolf"          , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
+	CREATE_NPC('d' , 6     , 20    , 15          , 30          , NPC_DWARF         , "Dwarf"         , TERM_COLOR_DEFAULT , NPC_RELATION_PEACEFUL);
+	CREATE_NPC('B' , 8     , 35    , 15          , 35          , NPC_BUGBEAR       , "Bugbear"       , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
+	CREATE_NPC('S' , 8     , 25    , 15          , 30          , NPC_SPIDER        , "Giant Spider"  , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
+	//CREATE_NPC(,,,,,,,TERM_COLOR_DEFAULT, NPC_RELATION_HOSTILE);
 
 	//Init the npcdata array
 	for(int i = 0;i < npcDataSize;i++){
