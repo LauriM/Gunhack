@@ -145,7 +145,9 @@ void npcRender(){
 		if(mapLosCheckByPos(playerGetInfo()->pos,npcData[i].pos) == false)
 			continue;
 
+		setColor(npcInfo[npcData[i].name].color);
 		printIntxy(npcData[i].pos.x,npcData[i].pos.y,npcInfo[npcData[i].name].symbol);
+		setColorOff(npcInfo[npcData[i].name].color);
 	}
 }
 
