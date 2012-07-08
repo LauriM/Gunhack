@@ -2,6 +2,6 @@ todo
 ====
 
 * balance
-* more enemies
+* more enemy names
 * readme/guide
-* bullet hit effect is boring 
+* Final builds
