@@ -110,8 +110,8 @@ void npcSpawn(pos_t pos,npcname_t id){
 npcSpawnReturn:
 	npcData[i].maxHp = (playerGetInfo()->maxhp + randomRange(-10,10));
 	npcData[i].maxHp = MAX(10,npcData[i].maxHp);
-	npcData[i].meleeDmgMin = (playerGetInfo()->level * 5); 
-	npcData[i].meleeDmgMax = (playerGetInfo()->level * 10);
+	npcData[i].meleeDmgMin = (playerGetInfo()->level * randomRange(2,5)); 
+	npcData[i].meleeDmgMax = (playerGetInfo()->level * randomRange(5,9));
 
 	npcData[i].meleeDmgMin = MAX(5,npcData[i].meleeDmgMin);
 	npcData[i].meleeDmgMax = MAX(10,npcData[i].meleeDmgMax);
@@ -122,13 +122,13 @@ npcSpawnReturn:
 		npcData[i].relation = NPC_RELATION_HOSTILE;
 	}
 
-	LOG_DEBUG_F("hp: %i min: %i max: %i",npcData[i].maxHp,npcData[i].meleeDmgMin,npcData[i].meleeDmgMax);
-
 	npcData[i].state   = NPCSTATE_ALIVE;
 	npcData[i].pos     = pos;
-	npcData[i].aiState= &npcState_idle;
+	npcData[i].aiState = &npcState_idle;
 	npcData[i].name    = id;
-	npcData[i].hp      = npcData[id].maxHp;
+	npcData[i].hp      = npcData[i].maxHp;
+
+	LOG_INFO_F("hp: %i/%i min: %i max: %i",npcData[i].hp,npcData[i].maxHp,npcData[i].meleeDmgMin,npcData[i].meleeDmgMax);
 
 	static const pos_t empty = {0,0,0};
 	npcData[i].playerLastKnownPosition = empty;

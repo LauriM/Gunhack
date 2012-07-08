@@ -86,14 +86,13 @@ typedef struct npcdata_s{
 	npcname_t name;
 	npc_state_t state;
 	pos_t pos;
-	int hp;
 	pos_t playerLastKnownPosition;
-	void(*aiState)(int,int);
-
+	int hp;
 	int maxHp;
 	int meleeDmgMin;
 	int meleeDmgMax;
 	npcrelation_t relation;
+	void(*aiState)(int,int);
 } npcdata_t;
 
 size_t npcDataCapacity;

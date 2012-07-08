@@ -184,6 +184,7 @@ void inputInit(){
 	keyBinds['a'] = &input_applyitem;
 	keyBinds['f'] = &input_fire;
 	keyBinds['r'] = &input_reload;
+	keyBinds['p'] = &input_history;
 
 	keyBinds['l'] = &input_move_e;
 	keyBinds['h'] = &input_move_w;

@@ -17,6 +17,7 @@ Keys
 * a Apply item
 * f Fire weapon
 * r Reload weapon
+* h message history
 
 Movement is done with hjkl or numpad.
 
