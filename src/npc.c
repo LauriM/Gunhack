@@ -16,23 +16,28 @@ npc_t npcInfo[NPC_COUNT];
 #define CREATE_NPC(p_symbol,p_id,p_name,p_color) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color; 
 
 void npcInit(void){
-	//--    symbol , id                , name            , color              
-	CREATE_NPC('x' , NPC_GRID_BUG      , "Grid bug"      , TERM_COLOR_DEFAULT );
-	CREATE_NPC('g' , NPC_GNOME         , "Gnome"         , TERM_COLOR_DEFAULT );
-	CREATE_NPC('k' , NPC_KOBOLD        , "Kobold"        , TERM_COLOR_DEFAULT );
-	CREATE_NPC('G' , NPC_GNOME_LORD    , "Gnome Lord"    , TERM_COLOR_DEFAULT );
-	CREATE_NPC('g' , NPC_GNOME_SHAMAN  , "Gnome Shaman"  , TERM_COLOR_GREEN   );
-	CREATE_NPC('K' , NPC_KOBOLD_LORD   , "Kobold Lord"   , TERM_COLOR_DEFAULT );
-	CREATE_NPC('k' , NPC_KOBOLD_SHAMAN , "Kobold Shaman" , TERM_COLOR_GREEN   );
-	CREATE_NPC('w' , NPC_WOLF          , "Wolf"          , TERM_COLOR_DEFAULT );
-	CREATE_NPC('d' , NPC_DWARF         , "Dwarf"         , TERM_COLOR_DEFAULT );
-	CREATE_NPC('o' , NPC_ORC           , "Orc"           , TERM_COLOR_GREEN   );
-	CREATE_NPC('B' , NPC_BUGBEAR       , "Bugbear"       , TERM_COLOR_DEFAULT );
-	CREATE_NPC('S' , NPC_SPIDER        , "Giant Spider"  , TERM_COLOR_DEFAULT );
-	CREATE_NPC('I' , NPC_IMP           , "Imp"           , TERM_COLOR_RED     );
-	CREATE_NPC('O' , NPC_ORC_LORD      , "Orc Lord"      , TERM_COLOR_GREEN   );
-	CREATE_NPC('O' , NPC_OGRE          , "Ogre"          , TERM_COLOR_RED     );
-	CREATE_NPC('O' , NPC_OGRE_LORD     , "Ogre Lord"     , TERM_COLOR_RED     );
+	//--    symbol , id                 , name             , color
+	CREATE_NPC('x' , NPC_GRID_BUG       , "Grid bug"       , TERM_COLOR_DEFAULT );
+	CREATE_NPC('g' , NPC_GNOME          , "Gnome"          , TERM_COLOR_DEFAULT );
+	CREATE_NPC('k' , NPC_KOBOLD         , "Kobold"         , TERM_COLOR_DEFAULT );
+	CREATE_NPC('G' , NPC_GNOME_LORD     , "Gnome Lord"     , TERM_COLOR_DEFAULT );
+	CREATE_NPC('g' , NPC_GNOME_SHAMAN   , "Gnome Shaman"   , TERM_COLOR_GREEN   );
+	CREATE_NPC('K' , NPC_KOBOLD_LORD    , "Kobold Lord"    , TERM_COLOR_DEFAULT );
+	CREATE_NPC('k' , NPC_KOBOLD_SHAMAN  , "Kobold Shaman"  , TERM_COLOR_GREEN   );
+	CREATE_NPC('w' , NPC_WOLF           , "Wolf"           , TERM_COLOR_DEFAULT );
+	CREATE_NPC('d' , NPC_DWARF          , "Dwarf"          , TERM_COLOR_DEFAULT );
+	CREATE_NPC('o' , NPC_ORC            , "Orc"            , TERM_COLOR_GREEN   );
+	CREATE_NPC('B' , NPC_BUGBEAR        , "Bugbear"        , TERM_COLOR_DEFAULT );
+	CREATE_NPC('S' , NPC_SPIDER         , "Giant Spider"   , TERM_COLOR_DEFAULT );
+	CREATE_NPC('I' , NPC_IMP            , "Imp"            , TERM_COLOR_RED     );
+	CREATE_NPC('O' , NPC_ORC_LORD       , "Orc Lord"       , TERM_COLOR_GREEN   );
+	CREATE_NPC('O' , NPC_OGRE           , "Ogre"           , TERM_COLOR_RED     );
+	CREATE_NPC('O' , NPC_OGRE_LORD      , "Ogre Lord"      , TERM_COLOR_RED     );
+	CREATE_NPC('L' , NPC_THUNDER_LIZARD , "Thunder Lizard" , TERM_COLOR_BLUE    );
+	CREATE_NPC('G' , NPC_GARGOULE       , "Gargoule"       , TERM_COLOR_GREY    );
+	CREATE_NPC('S' , NPC_GIANT_SLIME    , "Giant Slime"    , TERM_COLOR_GREEN   );
+	CREATE_NPC('E' , NPC_EFREETI        , "Efreet"         , TERM_COLOR_RED     );
+	CREATE_NPC('G' , NPC_GIANT          , "Giant"          , TERM_COLOR_DEFAULT );
 	//CREATE_NPC(,,,,,,,TERM_COLOR_DEFAULT, NPC_RELATION_HOSTILE);
 
 	//Init the npcdata array
