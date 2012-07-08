@@ -47,6 +47,10 @@ typedef enum {
 	NPC_BUGBEAR,
 	NPC_SPIDER,
 	NPC_IMP,
+	NPC_ORC,
+	NPC_ORC_LORD,
+	NPC_OGRE,
+	NPC_OGRE_LORD,
 	NPC_COUNT
 } npcname_t;
 

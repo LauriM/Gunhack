@@ -26,9 +26,13 @@ void npcInit(void){
 	CREATE_NPC('k' , 5     , 10    , 10          , 29          , NPC_KOBOLD_SHAMAN , "Kobold Shaman" , TERM_COLOR_GREEN   , NPC_RELATION_HOSTILE);
 	CREATE_NPC('w' , 5     , 15    , 17          , 18          , NPC_WOLF          , "Wolf"          , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
 	CREATE_NPC('d' , 6     , 20    , 15          , 30          , NPC_DWARF         , "Dwarf"         , TERM_COLOR_DEFAULT , NPC_RELATION_PEACEFUL);
+	CREATE_NPC('o' , 7     , 17    , 10          , 20          , NPC_ORC           , "Orc"           , TERM_COLOR_GREEN   , NPC_RELATION_HOSTILE);
 	CREATE_NPC('B' , 8     , 35    , 15          , 35          , NPC_BUGBEAR       , "Bugbear"       , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
 	CREATE_NPC('S' , 8     , 25    , 15          , 30          , NPC_SPIDER        , "Giant Spider"  , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
 	CREATE_NPC('I' , 10    , 45    , 25          , 30          , NPC_IMP           , "Imp"           , TERM_COLOR_RED     , NPC_RELATION_HOSTILE);
+	CREATE_NPC('O' , 12    , 40    , 20          , 50          , NPC_ORC_LORD      , "Orc Lord"      , TERM_COLOR_GREEN   , NPC_RELATION_HOSTILE);
+	CREATE_NPC('O' , 13    , 30    , 30          , 40          , NPC_OGRE          , "Ogre"          , TERM_COLOR_RED     , NPC_RELATION_HOSTILE);
+	CREATE_NPC('O' , 14    , 50    , 35          , 35          , NPC_OGRE_LORD     , "Ogre Lord"     , TERM_COLOR_RED     , NPC_RELATION_HOSTILE);
 	//CREATE_NPC(,,,,,,,TERM_COLOR_DEFAULT, NPC_RELATION_HOSTILE);
 
 	//Init the npcdata array
