@@ -512,9 +512,11 @@ pos_t mapPathfindStep(pos_t pos_start,pos_t pos_end){
 			tempPos.x = x;
 			tempPos.y = y;
 
-			if(mapGetTileByPos(tempPos)->block == 1){
+			if(mapGetTileByPos(tempPos)->block)
 				fillData[x][y] = BLOCK;
-			}
+
+			if(npcExistsInPos(tempPos))
+				fillData[x][y] = BLOCK;
 		}
 	}
 
