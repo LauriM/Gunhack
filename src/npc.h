@@ -63,13 +63,8 @@ typedef enum {
 
 typedef struct npc_s{
 	char symbol;
-	char *name;
 	color_t color;
-	int maxHp;
-	int meleeDmgMin;
-	int meleeDmgMax;
-	int level;//Level when can be spawned
-	npcrelation_t relation;
+	char *name;
 } npc_t;
 
 typedef struct npcdata_s{
@@ -79,6 +74,11 @@ typedef struct npcdata_s{
 	int hp;
 	pos_t playerLastKnownPosition;
 	void(*aiState)(int,int);
+
+	int maxHp;
+	int meleeDmgMin;
+	int meleeDmgMax;
+	npcrelation_t relation;
 } npcdata_t;
 
 size_t npcDataCapacity;
@@ -90,7 +90,6 @@ npc_t     npcInfo[NPC_COUNT];
 void npcInit(void);
 void npcSpawnRandom(int z);
 void npcSpawn(pos_t pos,npcname_t id);
-npcname_t npcGiveRandomNpcByLevel(int level);
 void npcClearFromLevel(int z);
 void npcMoveToPos(int id,pos_t pos,bool allowAttack);
 

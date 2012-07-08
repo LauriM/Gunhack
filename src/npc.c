@@ -13,26 +13,26 @@ npcdata_t *npcData     = NULL;
 
 npc_t npcInfo[NPC_COUNT];
 
-#define CREATE_NPC(p_symbol,p_level,p_maxhp,p_meleedmgmin,p_meleedmgmax,p_id,p_name,p_color,p_rel) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color; npcInfo[p_id].maxHp = p_maxhp; npcInfo[p_id].relation = p_rel; npcInfo[p_id].meleeDmgMin = p_meleedmgmin; npcInfo[p_id].meleeDmgMax = p_meleedmgmax; npcInfo[p_id].level = p_level;
+#define CREATE_NPC(p_symbol,p_id,p_name,p_color) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color; 
 
 void npcInit(void){
-	//--    symbol , level , maxhp , meleeDMGmin , meleeDMGmax , id                , name            , color              , relationship
-	CREATE_NPC('x' , 0     , 10    , 1           , 1           , NPC_GRID_BUG      , "Grid bug"      , TERM_COLOR_DEFAULT , NPC_RELATION_PEACEFUL);
-	CREATE_NPC('g' , 3     , 15    , 3           , 7           , NPC_GNOME         , "Gnome"         , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
-	CREATE_NPC('k' , 3     , 10    , 5           , 10          , NPC_KOBOLD        , "Kobold"        , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
-	CREATE_NPC('G' , 5     , 20    , 5           , 7           , NPC_GNOME_LORD    , "Gnome Lord"    , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
-	CREATE_NPC('g' , 5     , 10    , 10          , 12          , NPC_GNOME_SHAMAN  , "Gnome Shaman"  , TERM_COLOR_GREEN   , NPC_RELATION_HOSTILE);
-	CREATE_NPC('K' , 5     , 15    , 5           , 20          , NPC_KOBOLD_LORD   , "Kobold Lord"   , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
-	CREATE_NPC('k' , 5     , 10    , 10          , 29          , NPC_KOBOLD_SHAMAN , "Kobold Shaman" , TERM_COLOR_GREEN   , NPC_RELATION_HOSTILE);
-	CREATE_NPC('w' , 5     , 15    , 17          , 18          , NPC_WOLF          , "Wolf"          , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
-	CREATE_NPC('d' , 6     , 20    , 15          , 30          , NPC_DWARF         , "Dwarf"         , TERM_COLOR_DEFAULT , NPC_RELATION_PEACEFUL);
-	CREATE_NPC('o' , 7     , 17    , 10          , 20          , NPC_ORC           , "Orc"           , TERM_COLOR_GREEN   , NPC_RELATION_HOSTILE);
-	CREATE_NPC('B' , 8     , 35    , 15          , 35          , NPC_BUGBEAR       , "Bugbear"       , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
-	CREATE_NPC('S' , 8     , 25    , 15          , 30          , NPC_SPIDER        , "Giant Spider"  , TERM_COLOR_DEFAULT , NPC_RELATION_HOSTILE);
-	CREATE_NPC('I' , 10    , 45    , 25          , 30          , NPC_IMP           , "Imp"           , TERM_COLOR_RED     , NPC_RELATION_HOSTILE);
-	CREATE_NPC('O' , 12    , 40    , 20          , 50          , NPC_ORC_LORD      , "Orc Lord"      , TERM_COLOR_GREEN   , NPC_RELATION_HOSTILE);
-	CREATE_NPC('O' , 13    , 30    , 30          , 40          , NPC_OGRE          , "Ogre"          , TERM_COLOR_RED     , NPC_RELATION_HOSTILE);
-	CREATE_NPC('O' , 14    , 50    , 35          , 35          , NPC_OGRE_LORD     , "Ogre Lord"     , TERM_COLOR_RED     , NPC_RELATION_HOSTILE);
+	//--    symbol , id                , name            , color              
+	CREATE_NPC('x' , NPC_GRID_BUG      , "Grid bug"      , TERM_COLOR_DEFAULT );
+	CREATE_NPC('g' , NPC_GNOME         , "Gnome"         , TERM_COLOR_DEFAULT );
+	CREATE_NPC('k' , NPC_KOBOLD        , "Kobold"        , TERM_COLOR_DEFAULT );
+	CREATE_NPC('G' , NPC_GNOME_LORD    , "Gnome Lord"    , TERM_COLOR_DEFAULT );
+	CREATE_NPC('g' , NPC_GNOME_SHAMAN  , "Gnome Shaman"  , TERM_COLOR_GREEN   );
+	CREATE_NPC('K' , NPC_KOBOLD_LORD   , "Kobold Lord"   , TERM_COLOR_DEFAULT );
+	CREATE_NPC('k' , NPC_KOBOLD_SHAMAN , "Kobold Shaman" , TERM_COLOR_GREEN   );
+	CREATE_NPC('w' , NPC_WOLF          , "Wolf"          , TERM_COLOR_DEFAULT );
+	CREATE_NPC('d' , NPC_DWARF         , "Dwarf"         , TERM_COLOR_DEFAULT );
+	CREATE_NPC('o' , NPC_ORC           , "Orc"           , TERM_COLOR_GREEN   );
+	CREATE_NPC('B' , NPC_BUGBEAR       , "Bugbear"       , TERM_COLOR_DEFAULT );
+	CREATE_NPC('S' , NPC_SPIDER        , "Giant Spider"  , TERM_COLOR_DEFAULT );
+	CREATE_NPC('I' , NPC_IMP           , "Imp"           , TERM_COLOR_RED     );
+	CREATE_NPC('O' , NPC_ORC_LORD      , "Orc Lord"      , TERM_COLOR_GREEN   );
+	CREATE_NPC('O' , NPC_OGRE          , "Ogre"          , TERM_COLOR_RED     );
+	CREATE_NPC('O' , NPC_OGRE_LORD     , "Ogre Lord"     , TERM_COLOR_RED     );
 	//CREATE_NPC(,,,,,,,TERM_COLOR_DEFAULT, NPC_RELATION_HOSTILE);
 
 	//Init the npcdata array
@@ -61,30 +61,12 @@ void npcSpawnRandom(int z){
 			pos.y = randomRange(1,MAP_MAX_HEIGHT-1);
 
 			if(mapGetTileByPos(pos)->block == 0){
-				//TODO: Implement random npc type
-				npcSpawn(pos,npcGiveRandomNpcByLevel(playerGetInfo()->level));
+				npcSpawn(pos,randomRange(0,NPC_COUNT-1));
 				done = true;
 			}
 		}
 		npcCount--;
 	}
-}
-
-npcname_t npcGiveRandomNpcByLevel(int level){
-	int target = randomRange((level - 2),level + 2); //-/+ 2 player level
-
-	int distance = 10000;
-	int id       = 0;
-
-	for(int i = 0;i < NPC_COUNT;i++){
-		if(npcInfo[i].level < distance){
-			//Found one closer!
-			distance = abs(i - target); 
-			id       = i;
-		}
-	}
-
-	return id;
 }
 
 void npcSpawn(pos_t pos,npcname_t id){
@@ -95,7 +77,7 @@ void npcSpawn(pos_t pos,npcname_t id){
 
 	for(i = 0;i < npcDataSize;i++){
 		if(npcData[i].state == NPCSTATE_DEAD)
-			goto itemSpawnReturn;
+			goto npcSpawnReturn;
 	}
 
 	if(npcDataSize >= npcDataCapacity){
@@ -109,12 +91,28 @@ void npcSpawn(pos_t pos,npcname_t id){
 
 	i = npcDataSize++;
 
-itemSpawnReturn:
+npcSpawnReturn:
+	npcData[i].maxHp = (playerGetInfo()->maxhp + randomRange(-10,10));
+	npcData[i].maxHp = MAX(10,npcData[i].maxHp);
+	npcData[i].meleeDmgMin = (playerGetInfo()->level * 5); 
+	npcData[i].meleeDmgMax = (playerGetInfo()->level * 10);
+
+	npcData[i].meleeDmgMin = MAX(5,npcData[i].meleeDmgMin);
+	npcData[i].meleeDmgMax = MAX(10,npcData[i].meleeDmgMax);
+
+	if(randomRange(1,100) > 80){
+		npcData[i].relation = NPC_RELATION_PEACEFUL;
+	}else{
+		npcData[i].relation = NPC_RELATION_HOSTILE;
+	}
+
+	LOG_DEBUG_F("hp: %i min: %i max: %i",npcData[i].maxHp,npcData[i].meleeDmgMin,npcData[i].meleeDmgMax);
+
 	npcData[i].state   = NPCSTATE_ALIVE;
 	npcData[i].pos     = pos;
-	npcData[i].aiState= &npcState_sleep;
+	npcData[i].aiState= &npcState_idle;
 	npcData[i].name    = id;
-	npcData[i].hp      = npcInfo[id].maxHp;
+	npcData[i].hp      = npcData[id].maxHp;
 
 	static const pos_t empty = {0,0,0};
 	npcData[i].playerLastKnownPosition = empty;
@@ -198,9 +196,9 @@ bool npcApplyDamagePos(pos_t pos,int damage){
 
 			MSG_ADD("%s is dead!",TERM_COLOR_RED,npcInfo[npcData[i].name].name);
 
-			playerAddPoints(npcInfo[npcData[i].name].maxHp);
-			playerAddExp(npcInfo[npcData[i].name].maxHp);
-			playerAddKill(npcInfo[npcData[i].name].relation);
+			playerAddPoints(npcData[i].maxHp);
+			playerAddExp(npcData[i].maxHp);
+			playerAddKill(npcData[i].relation);
 		}
 
 		return true;//Return true when hit
@@ -227,7 +225,7 @@ void npcAiTick(){
 
 		int flags = IS_NEUTRAL;//Just a default flag
 
-		switch(npcInfo[npcData[i].name].relation){
+		switch(npcData[i].relation){
 			case NPC_RELATION_HOSTILE:
 				flags = IS_HOSTILE;
 				break;
@@ -239,7 +237,7 @@ void npcAiTick(){
 				break;
 		}
 
-		if(npcData[i].hp < npcInfo[npcData[i].name].maxHp){
+		if(npcData[i].hp < npcData[i].maxHp){
 			flags = flags + IS_DAMAGED;
 		}
 
@@ -297,7 +295,7 @@ void npcMoveToPos(int id,pos_t pos,bool allowAttack){
 		if(allowAttack == false)//If attacking is not allowed, don't move at all.
 			return;
 
-		int dmg = randomRange(npcInfo[npcData[id].name].meleeDmgMin,npcInfo[npcData[id].name].meleeDmgMax);
+		int dmg = randomRange(npcData[id].meleeDmgMin,npcData[id].meleeDmgMax);
 		playerApplyDmg(dmg);
 
 		//blood
