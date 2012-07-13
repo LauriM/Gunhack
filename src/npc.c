@@ -291,7 +291,11 @@ void npcAiTick(){
 		}
 
 		if(npcData[i].aiState == *npcState_search){
-			pos_t tempPos = mapPathfindStep(npcData[i].pos,npcData[i].playerLastKnownPosition); //TODO: Manage situation where its not possible to get to the player
+			pos_t tempPos = mapPathfindStep(npcData[i].pos,npcData[i].playerLastKnownPosition);
+			if(tempPos.x == npcData[i].pos.x && tempPos.y == npcData[i].pos.y && tempPos.z == npcData[i].pos.z){
+				npcData[i].aiState = *npcState_idle; //failed to pathfind, go idle!
+				LOG_DEBUG("[ai] forcing idle (path failed)");
+			}
 			npcMoveToPos(i,tempPos,true);
 		}
 

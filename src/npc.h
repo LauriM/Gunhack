@@ -19,6 +19,7 @@ typedef enum{
 	IS_PEACEFUL     = 1 << 4,
 	IS_DAMAGED      = 1 << 5,
 	SEARCH_DONE     = 1 << 6,
+	SEARCH_FAILED   = 1 << 7,
 } npc_flags_t;
 
 typedef enum {
