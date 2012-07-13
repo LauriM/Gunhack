@@ -51,7 +51,7 @@ void playerAddExp(int amount);
 void playerAddKill(int relation);
 
 /*
- * hurts the palyer
+ * hurts the player
  * Returns: amount of damage done
  */
 int playerApplyDmg(int amount);

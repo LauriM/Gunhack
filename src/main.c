@@ -99,9 +99,11 @@ int main(int argc, const char *argv[]){
 			msgRenderSideView();
 		}
 
+#ifndef RELEASE_BUILD
 		if(maxy > 35){
 			debugShowAllocations();
 		}
+#endif
 	}
 
 	//ending game

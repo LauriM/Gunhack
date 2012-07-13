@@ -10,7 +10,12 @@
 FILE *logFile;
 
 void logInit(void){
+	//Release build only keeps logs from the last game
+#ifdef RELEASE_BUILD
+	logFile = fopen("log.txt","w");
+#else
 	logFile = fopen("log.txt","a+");
+#endif
 	LOG_INFO("Logger started");
 }
 
@@ -23,7 +28,7 @@ void insertLog(const char *prefix,const char *msg){
 	fprintf(logFile,"%s %s\n",prefix,msg);
 	fflush(logFile);
 
-#ifdef DEBUG_LOG_SHOW_INGAME
+#ifndef RELEASE_BUILD
 	MSG_ADD("%s %s",TERM_COLOR_GREEN,prefix,msg);
 #endif
 }

@@ -22,7 +22,7 @@ solution "roguelike"
         flags   { "Symbols" }
 
     configuration "Release"
-        defines { "NDEBUG" }
+        defines { "NDEBUG","RELEASE_BUILD" }
         flags   { "Optimize" }
 
     -- Client project

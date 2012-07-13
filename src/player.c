@@ -128,8 +128,8 @@ void playerAddPoints(int amount){
 void playerAddExp(int amount){
     playerInfo.exp += amount;
 
-	while(playerInfo.exp > (playerInfo.level * 15)){
-		playerInfo.exp -= (playerInfo.level * 15);
+	while(playerInfo.exp > (playerInfo.level * 25)){
+		playerInfo.exp -= (playerInfo.level * 25);
 		//TODO: Fix that player will lose the exp that goes over the levelup
 		++playerInfo.level;
 		playerInfo.maxhp += 10;
