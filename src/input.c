@@ -214,6 +214,7 @@ void inputHandle(){
 }
 
 dir_t inputGetDirection(){
+	move(0,0);
 	printw("Give a direction: \n");
 	int key = getch();
 
