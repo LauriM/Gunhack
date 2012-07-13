@@ -5,6 +5,17 @@ This is a quick start guide.
 
 Your goal is to kill as many bad guys as you can.
 
+Howto survive
+=============
+
+If you have played roguelikes before, this game should not be hard to learn. Keyboard layout is similiar to Nethack.
+
+This game focuses more on the ranged combat, on close combat you are usually losing, so try to keep distance.
+
+When you start the game you should (w)ield your gun, (r)reload it and then (f)ire it at a direction.
+
+If you cannot find the stairs down (>) you should try to clear the floor with dynamite or other explosives.
+
 Keys
 ====
 
