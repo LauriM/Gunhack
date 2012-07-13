@@ -19,6 +19,8 @@ void itemCall_dynamite(int itemId,itemaction_t action){
 			--itemData[itemId].var1;
 
 			if(itemData[itemId].var1 == 1 || itemData[itemId].var1 < 0){
+				msgAdd("Dynamite explodes!",TERM_COLOR_RED);
+
 				int width  = 7;
 				int radius = width / 2;
 
@@ -51,7 +53,6 @@ void itemCall_dynamite(int itemId,itemaction_t action){
 					}
 				}
 
-				msgAdd("Dynamite explodes!",TERM_COLOR_RED);
 				itemData[itemId].state = ITEMSTATE_EMPTY;
 			}
 
