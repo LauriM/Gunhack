@@ -54,10 +54,8 @@ void itemCall_pistol(int itemId,itemaction_t action){
 				return;
 			}
 
-			if(npcApplyDamagePos(pos,10) == true){
-				msgAdd("You shot an npc.",TERM_COLOR_GREEN);
+			if(npcApplyDamagePos(pos,10) == true)
 				return;
-			}
 		}
 	}
 }

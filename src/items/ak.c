@@ -56,14 +56,11 @@ start:
 
 				if(mapGetTileByPos(pos)->block == 1){
 					mapEditColorPoint(pos,TERM_COLOR_GREY);
-					msgAdd("You shot the wall.",TERM_COLOR_DEFAULT);
 					goto start;
 				}
 
-				if(npcApplyDamagePos(pos,10) == true){
-					msgAdd("You shot an npc.",TERM_COLOR_GREEN);
+				if(npcApplyDamagePos(pos,10) == true)
 					goto start;
-				}
 			}
 		}
 	}

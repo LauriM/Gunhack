@@ -52,10 +52,8 @@ void itemCall_shotgun(int itemId,itemaction_t action){
 
 			int damage = (55 - (distance(playerGetInfo()->pos,pos) * 4));
 
-			if(npcApplyDamagePos(pos,MAX(0,damage)) == true){
-				msgAdd("You shot an npc.",TERM_COLOR_GREEN);
+			if(npcApplyDamagePos(pos,MAX(0,damage)) == true)
 				return;
-			}
 		}
 	}
 }
