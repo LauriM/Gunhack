@@ -43,21 +43,21 @@ void itemInit(void){
 	CREATE_ITEM('|' , ITEM_DYNAMITE        , 5      , ITEM_TYPE_USABLE , "Dynamite"                , TERM_COLOR_RED     , &itemCall_dynamite          , true    , SLOT_NULL   , 0       , 0);
 	CREATE_ITEM('^' , ITEM_WOOD_HELMET     , 10     , ITEM_TYPE_ARMOR  , "Wooden Helmet (lvl 1)"   , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HEAD   , 0       , 2);
 	CREATE_ITEM('^' , ITEM_IRON_HELMET     , 30     , ITEM_TYPE_ARMOR  , "Iron Helmet (lvl 2)"     , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HEAD   , 0       , 8);
-	CREATE_ITEM('^' , ITEM_PLATINUM_HELMET , 50     , ITEM_TYPE_ARMOR  , "Platinum Helmet (lvl 3)" , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HEAD   , 0       , 15);
+	CREATE_ITEM('^' , ITEM_PLATINUM_HELMET , 60     , ITEM_TYPE_ARMOR  , "Platinum Helmet (lvl 3)" , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HEAD   , 0       , 15);
 	CREATE_ITEM('^' , ITEM_TITAN_HELMET    , 70     , ITEM_TYPE_ARMOR  , "Titan Helmet (lvl 4)"    , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HEAD   , 0       , 25);
 	CREATE_ITEM('^' , ITEM_DIAMOND_HELMET  , 90     , ITEM_TYPE_ARMOR  , "Diamond Helmet (lvl 5)"  , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HEAD   , 0       , 40);
 	CREATE_ITEM(']' , ITEM_WOOD_ARMOR      , 10     , ITEM_TYPE_ARMOR  , "Wood Armor (lvl 1)"      , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_BODY   , 0       , 4);
-	CREATE_ITEM(']' , ITEM_IRON_ARMOR      , 10     , ITEM_TYPE_ARMOR  , "Iron Armor (lvl 2)"      , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_BODY   , 0       , 8);
-	CREATE_ITEM(']' , ITEM_PLATINUM_ARMOR  , 30     , ITEM_TYPE_ARMOR  , "Platinum Armor (lvl 3)"  , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_BODY   , 0       , 15);
-	CREATE_ITEM(']' , ITEM_TITAN_ARMOR     , 60     , ITEM_TYPE_ARMOR  , "Titan Armor (lvl 4)"     , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_BODY   , 0       , 28);
+	CREATE_ITEM(']' , ITEM_IRON_ARMOR      , 44     , ITEM_TYPE_ARMOR  , "Iron Armor (lvl 2)"      , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_BODY   , 0       , 8);
+	CREATE_ITEM(']' , ITEM_PLATINUM_ARMOR  , 70     , ITEM_TYPE_ARMOR  , "Platinum Armor (lvl 3)"  , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_BODY   , 0       , 15);
+	CREATE_ITEM(']' , ITEM_TITAN_ARMOR     , 80     , ITEM_TYPE_ARMOR  , "Titan Armor (lvl 4)"     , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_BODY   , 0       , 28);
 	CREATE_ITEM(']' , ITEM_DIAMOND_ARMOR   , 95     , ITEM_TYPE_ARMOR  , "Diamond Armor (lvl 5)"   , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_BODY   , 0       , 65);
-	CREATE_ITEM('-' , ITEM_WOOD_GLOVES     , 10     , ITEM_TYPE_ARMOR  , "Wood Gloves (lvl 1)"     , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HANDS  , 0       , 8);
-	CREATE_ITEM('-' , ITEM_IRON_GLOVES     , 20     , ITEM_TYPE_ARMOR  , "Iron Gloves (lvl 2)"     , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HANDS  , 0       , 15);
-	CREATE_ITEM('-' , ITEM_PLATINUM_GLOVES , 40     , ITEM_TYPE_ARMOR  , "Platinum Gloves (lvl 3)" , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HANDS  , 0       , 25);
-	CREATE_ITEM('-' , ITEM_TITAN_GLOVES    , 60     , ITEM_TYPE_ARMOR  , "Titan Gloves (lvl 4)"    , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HANDS  , 0       , 35);
-	CREATE_ITEM('-' , ITEM_DIAMOND_GLOVES  , 80     , ITEM_TYPE_ARMOR  , "Diamond Gloves (lvl 5)"  , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HANDS  , 0       , 55);
-	CREATE_ITEM('*' , ITEM_REGEN_AMULET    , 50     , ITEM_TYPE_ARMOR  , "Amulet of Regeneration"  , TERM_COLOR_GREEN   , &itemCall_regen_amulet      , true    , SLOT_AMULET , 0       , 5);
-	CREATE_ITEM('*' , ITEM_DEF_AMULET      , 50     , ITEM_TYPE_ARMOR  , "Amulet of Defense"       , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_AMULET , 0       , 25);
+	CREATE_ITEM('-' , ITEM_WOOD_GLOVES     , 20     , ITEM_TYPE_ARMOR  , "Wood Gloves (lvl 1)"     , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HANDS  , 0       , 8);
+	CREATE_ITEM('-' , ITEM_IRON_GLOVES     , 40     , ITEM_TYPE_ARMOR  , "Iron Gloves (lvl 2)"     , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HANDS  , 0       , 15);
+	CREATE_ITEM('-' , ITEM_PLATINUM_GLOVES , 70     , ITEM_TYPE_ARMOR  , "Platinum Gloves (lvl 3)" , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HANDS  , 0       , 25);
+	CREATE_ITEM('-' , ITEM_TITAN_GLOVES    , 80     , ITEM_TYPE_ARMOR  , "Titan Gloves (lvl 4)"    , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HANDS  , 0       , 35);
+	CREATE_ITEM('-' , ITEM_DIAMOND_GLOVES  , 90     , ITEM_TYPE_ARMOR  , "Diamond Gloves (lvl 5)"  , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_HANDS  , 0       , 55);
+	CREATE_ITEM('*' , ITEM_REGEN_AMULET    , 90     , ITEM_TYPE_ARMOR  , "Amulet of Regeneration"  , TERM_COLOR_GREEN   , &itemCall_regen_amulet      , true    , SLOT_AMULET , 0       , 5);
+	CREATE_ITEM('*' , ITEM_DEF_AMULET      , 70     , ITEM_TYPE_ARMOR  , "Amulet of Defense"       , TERM_COLOR_DEFAULT , &itemCall_null              , true    , SLOT_AMULET , 0       , 25);
 }
 
 void itemClearFromLevel(int z){
