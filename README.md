@@ -14,3 +14,10 @@ Build Notes
 
 Windows version is build using MinGW. Ncurses is replaced with pdcurses. Line 92 on curses.h needs to be commented out. stdbool.h is used for the boolean types instead.
 Also add #include <stdbool.h> in that file. 
+
+Author
+======
+
+Lauri Makinen
+http://laurimakinen.net
+lauri.sakari.makinen@gmail.com
