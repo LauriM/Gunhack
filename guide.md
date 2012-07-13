@@ -9,7 +9,7 @@ Your goal is to kill as many bad guys as you can.
 
 It is a coffeebreak roguelike, so don't expect to find complex in depth gameplay.
 
-Howto survive
+Gameplay tips
 =============
 
 If you have played roguelikes before, this game should not be hard to learn. Keyboard layout is similiar to Nethack.

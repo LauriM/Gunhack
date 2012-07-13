@@ -66,7 +66,10 @@ void npcSpawnRandom(int z){
 
 	//LOG_DEBUG_INT("depth: %i",z);
 
-	int npcCount = randomRange(10,10 + abs(playerGetInfo()->level * 5));
+	int npcCount = randomRange(10,10 + abs(playerGetInfo()->level * 10));
+
+	if(z == 0) //First level should always be easy
+		npcCount = 5;
 
 	while(npcCount > 0){
 		int done = false;
@@ -110,8 +113,8 @@ void npcSpawn(pos_t pos,npcname_t id){
 npcSpawnReturn:
 	npcData[i].maxHp = (playerGetInfo()->maxhp + randomRange(-10,10));
 	npcData[i].maxHp = MAX(10,npcData[i].maxHp);
-	npcData[i].meleeDmgMin = (playerGetInfo()->level * randomRange(2,5)); 
-	npcData[i].meleeDmgMax = (playerGetInfo()->level * randomRange(5,9));
+	npcData[i].meleeDmgMin = (playerGetInfo()->level * randomRange(5,9)); 
+	npcData[i].meleeDmgMax = (playerGetInfo()->level * randomRange(10,20));
 
 	npcData[i].meleeDmgMin = MAX(5,npcData[i].meleeDmgMin);
 	npcData[i].meleeDmgMax = MAX(10,npcData[i].meleeDmgMax);
