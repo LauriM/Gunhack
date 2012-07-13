@@ -169,9 +169,11 @@ void inputInit(){
 	keyBinds['<'] = &input_move_up;
 	keyBinds['>'] = &input_move_down;
 
+#ifndef RELEASE_BUILD
 	keyBinds['y'] = &input_cheat_seeall;
 	keyBinds['t'] = &input_cheat_regenlevel;
 	keyBinds['.'] = &input_cheat_debuginv;
+#endif
 
 	//Saving disabled
 	//keyBinds['S'] = &input_save;
