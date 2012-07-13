@@ -50,7 +50,11 @@ void playerAddPoints(int amount);
 void playerAddExp(int amount);
 void playerAddKill(int relation);
 
-void playerApplyDmg(int amount);
+/*
+ * hurts the palyer
+ * Returns: amount of damage done
+ */
+int playerApplyDmg(int amount);
 
 void playerDumpToFile();
 

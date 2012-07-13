@@ -313,8 +313,8 @@ void npcMoveToPos(int id,pos_t pos,bool allowAttack){
 		if(allowAttack == false)//If attacking is not allowed, don't move at all.
 			return;
 
-		int dmg = randomRange(npcData[id].meleeDmgMin,npcData[id].meleeDmgMax);
-		playerApplyDmg(dmg);
+		int dmg    = randomRange(npcData[id].meleeDmgMin,npcData[id].meleeDmgMax);
+		int amount = playerApplyDmg(dmg);
 
 		//blood
 		pos_t bloodPos;
@@ -324,7 +324,7 @@ void npcMoveToPos(int id,pos_t pos,bool allowAttack){
 
 		mapEditColorPoint(bloodPos,TERM_COLOR_RED);
 
-		MSG_ADD("%s hits you!",TERM_COLOR_DEFAULT,npcInfo[npcData[id].name].name);
+		MSG_ADD("%s hits you (-%i)!",TERM_COLOR_DEFAULT,npcInfo[npcData[id].name].name,amount);
 
 		return;
 	}

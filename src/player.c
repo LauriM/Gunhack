@@ -138,8 +138,11 @@ void playerAddExp(int amount){
 	}
 }
 
-void playerApplyDmg(int amount){
-	playerGetInfo()->hp -= MAX(1,(amount-itemCountTotalDef()));
+int playerApplyDmg(int amount){
+	int dmg = MAX(1,(amount-itemCountTotalDef())); 
+	playerGetInfo()->hp -= dmg;
+
+	return dmg;
 }
 
 void playerDumpToFile(){
