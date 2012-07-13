@@ -7,7 +7,7 @@
 #include "debug.h"
 #include "math.h"
 
-#define __GAME_NAME__ "Roguelike 1.0"
+#define __GAME_NAME__ "Gunhack 1.0"
 //Global macros
 #define _TO_STRING(value) #value
 #define TO_STRING(value) _TO_STRING(value)

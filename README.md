@@ -3,7 +3,7 @@ Roguelike
 
 Goal for this project is to make simple and clean roguelike-style game using C.
 
-Gameplay is going to be rapid and more focused on a short-term combat.
+It is a coffeebreak roguelike, so don't expect to find complex in depth gameplay.
 
 Build Notes
 ===========

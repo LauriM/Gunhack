@@ -1,9 +1,13 @@
-GAME_NAME
-=========
+Gunhack
+=======
+
+**like Nethack, but with guns**
 
 This is a quick start guide.
 
 Your goal is to kill as many bad guys as you can.
+
+It is a coffeebreak roguelike, so don't expect to find complex in depth gameplay.
 
 Howto survive
 =============
