@@ -146,7 +146,18 @@ int playerApplyDmg(int amount){
 }
 
 void playerDumpToFile(){
-	FILE* file = fopen("dump.txt","w");//TODO: date+time to the file
+	struct tm * timeinfo;
+
+	time_t rawtime;
+	time(&rawtime);
+
+	timeinfo = localtime( &rawtime );
+
+	char fileName[100];
+
+	strftime(fileName,100,"./dump_%Y_%B_%d_%H_%M.txt",timeinfo);
+
+	FILE* file = fopen(fileName,"w");
 
 	fprintf(file,"Player stats\n");
 	fprintf(file, "* Points: %i\n",playerInfo.points);
