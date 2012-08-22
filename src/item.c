@@ -422,7 +422,7 @@ void itemDumpInvToFile(FILE* file){
 					slot = "Amulet:";
 					break;
 				case SLOT_HANDS:
-					slot = "Hands";
+					slot = "Hands:";
 					break;
 				case SLOT_LEG:
 					slot = "Legs:";
