@@ -5,6 +5,8 @@ Goal for this project is to make simple and clean roguelike-style game using C.
 
 It is a coffeebreak roguelike, so don't expect to find complex in depth gameplay.
 
+Project page with binaries and screenshots is on my [website](http://www.laurimakinen.net/projects/gunhack.html).
+
 Build Notes
 ===========
 
@@ -18,6 +20,6 @@ Also add #include <stdbool.h> in that file.
 Author
 ======
 
-Lauri Makinen
-http://laurimakinen.net
-lauri.sakari.makinen@gmail.com
+* Lauri Makinen
+* http://laurimakinen.net
+* lauri.sakari.makinen@gmail.com
