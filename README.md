@@ -30,6 +30,6 @@ See the LICENSE.txt for full license.
 Author
 ======
 
-* Lauri Makinen
+* Lauri Mäkinen
 * http://laurimakinen.net
 * lauri.sakari.makinen@gmail.com
