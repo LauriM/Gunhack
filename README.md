@@ -33,3 +33,7 @@ Author
 * Lauri Mäkinen
 * http://laurimakinen.net
 * lauri.sakari.makinen@gmail.com
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/LauriM/gunhack/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
