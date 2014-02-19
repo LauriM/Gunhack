@@ -77,7 +77,7 @@ int main(int argc, const char *argv[]){
 
 	//==========================================================//
 	//  Main loop
-	//==========================================================//          
+	//==========================================================//
 	while(playerGetInfo()->endGame == ENDGAME_REASON_NOTENDED){
 		inputHandle();
 		npcAiTick();
@@ -109,48 +109,47 @@ int main(int argc, const char *argv[]){
 	//ending game
 	clear();
 
+	renderUnInit();
+
 	LOG_INFO("Game over has been triggered.");
 
 	switch(playerGetInfo()->endGame){
 		case ENDGAME_REASON_NOTENDED:
-			printw("Error!");
+			printf("Error!");
 			LOG_ERROR("Ending game when game should not end!");
 			break;
 		case ENDGAME_REASON_SAVE:
-			printw("Game saved, see you soon!");
+			printf("Game saved, see you soon!");
 			break;
 		case ENDGAME_REASON_GAMEOVER:
 			playerAddPoints(itemCountEndBonus());
+			playerDumpToFile();
+
 			msgAdd("You are dead.",TERM_COLOR_RED);
 
-			printw("    _____\n");
-			printw("   /     \\ \n");
-			printw("  /       \\ \n");
-			printw("  | R.I.P  | \n");
-			printw("  |        | \n");
-			printw("  |        | \n");
-			printw("  |        | \n");
-			printw("  |________| \n");
+			printf("    _____\n");
+			printf("   /     \\ \n");
+			printf("  /       \\ \n");
+			printf("  | R.I.P  | \n");
+			printf("  |        | \n");
+			printf("  |        | \n");
+			printf("  |        | \n");
+			printf("  |________| \n");
 
-			printw("Turns: %i Points: %i\n",playerGetInfo()->turn, playerGetInfo()->points);
-			printw("Kills: %i (+ %i innocents)",playerGetInfo()->hostile_kills,playerGetInfo()->innocent_kills);
-			printw("\n");
-			printw("\n");
-			printw("\n");
-			playerDumpToFile();
+			printf("Turns: %i Points: %i\n",playerGetInfo()->turn, playerGetInfo()->points);
+			printf("Kills: %i (+ %i innocents)",playerGetInfo()->hostile_kills,playerGetInfo()->innocent_kills);
+			printf("\n");
+			printf("\n");
+			printf("\n");
 			break;
 		case ENDGAME_REASON_WIN:
 			playerAddPoints(itemCountEndBonus());
-			printw("Victory! Points: %i", playerGetInfo()->points);
+			printf("Victory! Points: %i", playerGetInfo()->points);
 			break;
 	}
 
-	printw("Press any key to continue...");
-	getch();//Wait for input before quitting
-
 	LOG_INFO("Closing game...");
 
-	renderUnInit();
 	logUnInit();
 	return 0;
 }
