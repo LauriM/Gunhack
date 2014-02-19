@@ -173,7 +173,7 @@ struct itemdata_s* itemGetData(int id){
 	return &itemData[id];
 }
 
-/* Returns item visual info */ 
+/* Returns item visual info */
 struct itemdata_s* itemGetVis(int id){
 	return &itemVis[id];
 }
@@ -189,7 +189,7 @@ void itemRender(void){
 	//1) scan all visData, if seen, remove
 	//2) scan all itemData, if seen, add to visData
 	//3) render from visData
-	
+
 	int playerX,playerY,playerZ;
 	playerX = playerGetInfo()->pos.x;
 	playerY = playerGetInfo()->pos.y;
@@ -236,7 +236,7 @@ void itemRender(void){
 
 		if(itemVis[i].pos.z != playerZ)
 			continue;
-		
+
 		int symbol = itemGetInfo(itemGetVis(i)->itemId)->symbol;
 
 		setColor(itemGetInfo(itemGetVis(i)->itemId)->itemColor);
@@ -370,7 +370,7 @@ int itemInvChooseItem(){
 		}
 	}
 
-	hudMenuWrite("Write item id to use: ");
+	hudMenuWrite("Write item id to use/wield/wear: ");
 
 	echo();
 	char str[80];
@@ -501,7 +501,13 @@ void itemWield(int id){
 		itemRemoveSlot(itemInfo[itemData[id].itemId].slot);
 		itemData[id].state = ITEMSTATE_EQ;
 		(*itemInfo[itemData[id].itemId].itemCall)(id,ITEMACTION_WIELD);
-		MSG_ADD("You wield %s.",TERM_COLOR_DEFAULT,itemInfo[itemData[id].itemId].name);
+
+		if(itemInfo[itemData[id].itemId].itemType == ITEM_TYPE_ARMOR) {
+			MSG_ADD("You wear %s.",TERM_COLOR_DEFAULT,itemInfo[itemData[id].itemId].name);
+		} else {
+			MSG_ADD("You wield %s.",TERM_COLOR_DEFAULT,itemInfo[itemData[id].itemId].name);
+		}
+
 	}
 }
 

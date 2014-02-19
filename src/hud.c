@@ -38,8 +38,8 @@ void hudRender(){
 
 	char statusLine[STATUSLINE_MAX_CHARS] = "";
 
-	snprintf(statusLine,STATUSLINE_MAX_CHARS,"LV: %i Hp: %i/%i Exp: %i/%i 9mm: %i 7.62×39mm: %i Shells: %i RPGs: %i",playerGetInfo()->pos.z,playerGetInfo()->hp,playerGetInfo()->maxhp,playerGetInfo()->exp,playerGetInfo()->level,playerGetInfo()->ammo_9mm,playerGetInfo()->ammo_39mm,playerGetInfo()->ammo_shell,playerGetInfo()->ammo_rockets);
-	
+	snprintf(statusLine,STATUSLINE_MAX_CHARS,"LV: %i Hp: %i/%i Exp: %i/%i 9mm: %i 7.62x39mm: %i Shells: %i RPGs: %i",playerGetInfo()->pos.z,playerGetInfo()->hp,playerGetInfo()->maxhp,playerGetInfo()->exp,playerGetInfo()->level,playerGetInfo()->ammo_9mm,playerGetInfo()->ammo_39mm,playerGetInfo()->ammo_shell,playerGetInfo()->ammo_rockets);
+
 	move(21,0);
 	printw(statusLine);
 
@@ -61,7 +61,7 @@ int hudMenu(const char* title,char** options,const char* prompt){
 	move(0,0);//TODO: check if this call is needed
     printw(title);
 	printw("\n");
-	
+
 
 	while(*options != NULL){
 		printw(*options);
@@ -69,7 +69,7 @@ int hudMenu(const char* title,char** options,const char* prompt){
 		++options;
 	}
 	printw("\n");
-	
+
 	printw(prompt);
 
 	return getch();
