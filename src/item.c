@@ -271,7 +271,7 @@ void itemPickup(){
 			}
 			if(itemData[i].itemId == ITEM_39mm_BOX){
 				playerGetInfo()->ammo_39mm = playerGetInfo()->ammo_39mm + 30;
-				msgAdd("Found 39mm rounds. (+30)",TERM_COLOR_GREEN);
+				msgAdd("Found 7.62x39mm rounds. (+30)",TERM_COLOR_GREEN);
 				playerAddPoints(3);
 			}
 			if(itemData[i].itemId == ITEM_shells_BOX){
