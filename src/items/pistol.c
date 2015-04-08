@@ -40,6 +40,9 @@ void itemCall_pistol(int itemId,itemaction_t action){
 		pos_t movement = dirToPos(inputGetDirection());
 		pos_t pos = playerGetInfo()->pos;
 
+		//apply sound
+		npcApplyNoiseToPos(pos, 50);
+
 		--itemData[itemId].var1;
 
 		//Move one tile at the time

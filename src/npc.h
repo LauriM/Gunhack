@@ -19,6 +19,7 @@ typedef enum{
 	IS_PEACEFUL     = 1 << 4,
 	IS_DAMAGED      = 1 << 5,
 	SEARCH_DONE     = 1 << 6,
+	HEARS_PLAYER    = 1 << 7,
 } npc_flags_t;
 
 typedef enum {
@@ -92,6 +93,7 @@ typedef struct npcdata_s{
 	int meleeDmgMin;
 	int meleeDmgMax;
 	npcrelation_t relation;
+	bool heardPlayer;
 	void(*aiState)(int,int);
 } npcdata_t;
 
@@ -116,6 +118,8 @@ void npcAiTick();
 bool npcApplyDamagePos(pos_t pos,int damage);
 void npcKillById(int id);
 void npcDumpState();
+
+void npcApplyNoiseToPos(pos_t pos, int power);
 
 #define NPC_UPDATE_LAST_KNOWN_POSITION npcData[i].playerLastKnownPosition.x = playerGetInfo()->pos.x; npcData[i].playerLastKnownPosition.y = playerGetInfo()->pos.y; npcData[i].playerLastKnownPosition.z = playerGetInfo()->pos.z;
 

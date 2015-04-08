@@ -11,4 +11,9 @@ void npcState_sleep(int id,int flags){
 			LOG_DEBUG_F("[ai] %i idling!",id);
 		}
 	}
+
+	// heard the player, wake up from sleep
+	if(flags & HEARS_PLAYER){
+		npcData[id].aiState = &npcState_search;
+	}
 }

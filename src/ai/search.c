@@ -10,4 +10,6 @@ void npcState_search(int id,int flags){
 		LOG_DEBUG_F("[ai] %i Attacking",id);
 		npcData[id].aiState = &npcState_attack;
 	}
+
+	// no need to update information for hearing the player, the position is changed when noise is detected.
 }

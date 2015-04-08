@@ -14,9 +14,19 @@ void npcState_idle(int id,int flags){
 		LOG_DEBUG_F("[ai] %i attacking!",id);
 	}
 
-	//Peceful enemies flee
+	//Peaceful enemies flee
 	if(flags & IS_DAMAGED && flags & SEE_PLAYER && flags & IS_DAMAGED){
 		npcData[id].aiState = &npcState_flee;
 		LOG_DEBUG_F("[ai] %i flee!",id);
+	}
+
+	//If the player makes noise, search it, but only when not damaged
+
+	if(flags & HEARS_PLAYER && flags & CANT_SEE_PLAYER){
+		if(!(flags & IS_DAMAGED))
+		{
+			// only search if not damaged
+			npcData[id].aiState = &npcState_search;
+		}
 	}
 }

@@ -13,7 +13,7 @@ npcdata_t *npcData     = NULL;
 
 npc_t npcInfo[NPC_COUNT];
 
-#define CREATE_NPC(p_symbol,p_id,p_name,p_color) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color; 
+#define CREATE_NPC(p_symbol,p_id,p_name,p_color) npcInfo[p_id].symbol = p_symbol; npcInfo[p_id].name = TO_STRING(p_name); npcInfo[p_id].color = p_color;
 
 void npcInit(void){
 	//--    symbol , id                 , name             , color
@@ -113,7 +113,7 @@ void npcSpawn(pos_t pos,npcname_t id){
 npcSpawnReturn:
 	npcData[i].maxHp = (playerGetInfo()->maxhp + randomRange(-10,10));
 	npcData[i].maxHp = MAX(10,npcData[i].maxHp);
-	npcData[i].meleeDmgMin = (playerGetInfo()->level * randomRange(5,9)); 
+	npcData[i].meleeDmgMin = (playerGetInfo()->level * randomRange(5,9));
 	npcData[i].meleeDmgMax = (playerGetInfo()->level * randomRange(10,20));
 
 	npcData[i].meleeDmgMin = MAX(5,npcData[i].meleeDmgMin);
@@ -125,11 +125,12 @@ npcSpawnReturn:
 		npcData[i].relation = NPC_RELATION_HOSTILE;
 	}
 
-	npcData[i].state   = NPCSTATE_ALIVE;
-	npcData[i].pos     = pos;
-	npcData[i].aiState = &npcState_idle;
-	npcData[i].name    = id;
-	npcData[i].hp      = npcData[i].maxHp;
+	npcData[i].state       = NPCSTATE_ALIVE;
+	npcData[i].pos         = pos;
+	npcData[i].aiState     = &npcState_idle;
+	npcData[i].name        = id;
+	npcData[i].hp          = npcData[i].maxHp;
+	npcData[i].heardPlayer = false;
 
 	LOG_INFO_F("hp: %i/%i min: %i max: %i",npcData[i].hp,npcData[i].maxHp,npcData[i].meleeDmgMin,npcData[i].meleeDmgMax);
 
@@ -208,7 +209,7 @@ bool npcApplyDamagePos(pos_t pos,int damage){
 			mapEditColorPoint(bloodPos,TERM_COLOR_RED);
 		}
 
-		
+
 		MSG_ADD("you hit %s! (-%i)",TERM_COLOR_DEFAULT,npcInfo[npcData[i].name].name,damage);
 
 		if(npcData[i].hp < 0){
@@ -258,22 +259,34 @@ void npcAiTick(){
 				break;
 		}
 
+		if(npcData[i].heardPlayer == true){
+			flags = flags + HEARS_PLAYER;
+		}
+		npcData[i].heardPlayer = false; // checked once per tick, reset it
+
 		if(npcData[i].hp < npcData[i].maxHp){
 			flags = flags + IS_DAMAGED;
 		}
 
 		if(npcData[i].pos.x == npcData[i].playerLastKnownPosition.x && npcData[i].pos.y == npcData[i].playerLastKnownPosition.y){
-			flags = flags + SEARCH_DONE; 
+			flags = flags + SEARCH_DONE;
 			LOG_DEBUG_F("[ai] %i Search done!",i);
 		}
 
 		if(mapLosCheckByPos(playerGetInfo()->pos,npcData[i].pos) == true){
 			flags = flags + SEE_PLAYER;
+
+			// updating last known position, overrides possible "noise" locations
+			// making it sure enemies won't go after the noise when they hear the player.
+			npcData[i].playerLastKnownPosition = playerGetInfo()->pos;
+		} else {
+			flags = flags + CANT_SEE_PLAYER;
 		}
 
 		//==========================================================//
 			(*npcData[i].aiState)(i,flags);
-		//==========================================================//          
+		//==========================================================//
+
 		if(npcData[i].aiState == *npcState_attack){
 			npcMoveToPos(i,mapPathfindStep(npcData[i].pos,playerGetInfo()->pos),true);
 		}
@@ -304,6 +317,23 @@ void npcAiTick(){
 
 		if(flags & SEE_PLAYER){
 			NPC_UPDATE_LAST_KNOWN_POSITION;
+		}
+	}
+}
+
+void npcApplyNoiseToPos(pos_t pos, int power)
+{
+	for(int i = 0;i < npcDataSize;i++){
+		if(npcData[i].pos.z != playerGetInfo()->pos.z)
+			continue; // not on the same level, ignore
+
+		float d = distance(npcData[i].pos, npcData[i].pos);
+
+		if(d < power)
+		{
+			// Set the flag indicating that the enemy has heard the player
+			npcData[i].heardPlayer = true;
+			npcData[i].playerLastKnownPosition = playerGetInfo()->pos;
 		}
 	}
 }
