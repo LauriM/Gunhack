@@ -5,8 +5,6 @@ Goal for this project is to make simple and clean roguelike-style game using C.
 
 It is a coffeebreak roguelike, so don't expect to find complex in depth gameplay.
 
-Project page with binaries and screenshots is on my [website](http://www.laurimakinen.net/projects/gunhack.html).
-
 This game is "finished". Meaning that I will not actively develop it. However, if you make a patch, I am happy to include it if its good.
 
 Build Notes
@@ -33,7 +31,3 @@ Author
 * Lauri Mäkinen
 * http://laurimakinen.net
 * lauri.sakari.makinen@gmail.com
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/LauriM/gunhack/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
